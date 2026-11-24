@@ -1,0 +1,121 @@
+import React, { useMemo, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import {
+  ArrowRight, BookMarked, CircleCheck, Filter, ListChecks, Search, Sparkles, Target,
+} from 'lucide-react';
+import { Button, Card, Chip, Empty, PageHead, Progress, Segmented } from '../components/ui.jsx';
+import { useStore } from '../store.jsx';
+import { areaStats, dueReviews, normalize, topicProgress, topicStatus } from '../utils.js';
+
+const STATUS = [
+  { value: 'todos', label: 'Todos' },
+  { value: 'prioridade', label: 'Prioridade' },
+  { value: 'novo', label: 'Não iniciados' },
+  { value: 'estudando', label: 'Em estudo' },
+  { value: 'dominado', label: 'Dominados' },
+  { value: 'revisao', label: 'Para revisar' },
+];
+
+export default function Conteudos() {
+  const { user, curriculum } = useStore();
+  const [params, setParams] = useSearchParams();
+  const [query, setQuery] = useState('');
+  const [status, setStatus] = useState(params.get('status') || 'todos');
+  const [areaFilter, setAreaFilter] = useState('todas');
+  const due = useMemo(() => new Set(dueReviews(curriculum, user.progress).map((d) => d.topic.id)), [curriculum, user.progress]);
+
+  const setStatusAndParams = (v) => {
+    setStatus(v);
+    if (v === 'todos') params.delete('status');
+    else params.set('status', v);
+    setParams(params, { replace: true });
+  };
+
+  const allTopics = curriculum.areas.flatMap((a) => a.topics.map((t) => ({ t, a })));
+  const filtered = useMemo(() => {
+    const q = normalize(query);
+    return allTopics
+      .filter(({ t, a }) => {
+        if (areaFilter !== 'todas' && a.id !== areaFilter) return false;
+        const st = topicStatus(user.progress[t.id], t.checklist.length);
+        if (status === 'revisao' && !due.has(t.id)) return false;
+        if (['novo', 'estudando', 'dominado'].includes(status) && st !== status) return false;
+        if (status === 'prioridade' && t.weight < 4) return false;
+        if (q && !normalize(`${t.title} ${t.summary} ${a.name} ${t.keyPoints.join(' ')}`).includes(q)) return false;
+        return true;
+      })
+      .sort((x, y) => (status === 'prioridade' ? y.t.weight - x.t.weight : 0) || x.t.title.localeCompare(y.t.title));
+  }, [allTopics, areaFilter, status, query, user.progress, due]);
+
+  return (
+    <>
+      <PageHead
+        eyebrow="Mapa do edital"
+        title={<>Checklist por <em>subtópico.</em></>}
+        subtitle="Cada tema tem um roteiro de 7 etapas e peso por incidência. Progresso pessoal, não vaidade: marque apenas o que realmente dominou."
+        actions={<Button variant="soft" onClick={() => setStatusAndParams('prioridade')} icon={Target}>Só alta prioridade</Button>}
+      />
+
+      <div className="area-overview">
+        {curriculum.areas.map((a) => {
+          const s = areaStats(a, user.progress);
+          return (
+            <button key={a.id} className={`area-mini ${areaFilter === a.id ? 'active' : ''}`} onClick={() => setAreaFilter(areaFilter === a.id ? 'todas' : a.id)}>
+              <span className="area-mini-top"><i style={{ background: a.color }} /> {a.short} <b>{a.weight}% da prova</b></span>
+              <strong>{a.name}</strong>
+              <span className="area-mini-numbers">{s.mastered} dominados · {s.started} iniciados</span>
+              <Progress value={s.pct} tone="green" />
+            </button>
+          );
+        })}
+      </div>
+
+      <Card className="filter-bar">
+        <div className="filter-search"><Search size={17} /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Buscar subtópico, palavra-chave…" /></div>
+        <div className="filter-scroll"><Segmented options={STATUS} value={status} onChange={setStatusAndParams} label="Filtrar por status" /></div>
+        {areaFilter !== 'todas' && <Chip tone="accent"><Filter size={12} /> {curriculum.areas.find((a) => a.id === areaFilter)?.short}</Chip>}
+        <span className="filter-count">{filtered.length} temas</span>
+      </Card>
+
+      {!filtered.length ? (
+        <Card><Empty icon={ListChecks} title="Nenhum subtópico com esses filtros" text="Limpe a busca ou troque o status para ver mais temas." action={<Button variant="ghost" onClick={() => { setQuery(''); setStatusAndParams('todos'); setAreaFilter('todas'); }}>Limpar filtros</Button>} /></Card>
+      ) : (
+        <div className="topic-table">
+          {filtered.map(({ t, a }) => {
+            const st = topicStatus(user.progress[t.id], t.checklist.length);
+            const p = topicProgress(user.progress[t.id], t.checklist.length);
+            return (
+              <Link to={`/conteudos/${t.id}`} key={t.id} className="topic-row">
+                <span className="topic-area-bar" style={{ background: a.color }} />
+                <div className="topic-main">
+                  <div className="topic-line">
+                    <strong>{t.title}</strong>
+                    {due.has(t.id) && <Chip tone="danger">revisar</Chip>}
+                    {st === 'dominado' && <Chip tone="success"><CircleCheck size={12} /> dominado</Chip>}
+                    {st === 'estudando' && <Chip tone="warning">em estudo</Chip>}
+                  </div>
+                  <p>{t.summary}</p>
+                  <div className="topic-meta"><span>{a.name}</span><span>incidência {t.incidence}%</span><span>{t.checklist.length} etapas</span></div>
+                </div>
+                <div className="topic-weight">
+                  <span>peso</span>
+                  <div className="weight-dots">{[1,2,3,4,5].map((i) => <i key={i} className={i <= t.weight ? 'on' : ''} />)}</div>
+                </div>
+                <div className="topic-progress">
+                  <Progress value={p} tone={st === 'dominado' ? 'green' : 'accent'} />
+                  <span>{p}%</span>
+                </div>
+                <ArrowRight size={17} />
+              </Link>
+            );
+          })}
+        </div>
+      )}
+
+      <div className="content-note">
+        <BookMarked size={18} />
+        <p><strong>Como usar:</strong> estude a teoria, crie o resumo e os flashcards, resolva questões e refaça os erros. Ao concluir as 7 etapas, registre sua confiança. O tema entra na fila de revisão espaçada.</p>
+      </div>
+    </>
+  );
+}

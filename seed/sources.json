@@ -1,0 +1,54 @@
+{
+ "version": 1,
+ "sources": [
+  {
+   "id": "fgv-2024-ad-1",
+   "label": "ENARE 2024/2025 · Acesso Direto · Tipo 1",
+   "institution": "EBSERH/FGV",
+   "year": 2024,
+   "url": "https://mapa-vagas-enare-ebserh.conhecimento.fgv.br/provas-gabaritos/medica/acesso-direto/ACESSO%20DIRETO%20(ADACEDIRT01)%20-%20Tipo%201.pdf",
+   "answerUrl": "https://mapa-vagas-enare-ebserh.conhecimento.fgv.br/provas-gabaritos/medica/ENARE%202024%20Gabarito%20Definitivo%20-%20Medica.pdf",
+   "answerType": "1",
+   "note": "Prova oficial de 100 questões, já pré-carregada."
+  },
+  {
+   "id": "gov-2022-ad-1",
+   "label": "ENARE 2022/2023 · Acesso Direto · Tipo 1",
+   "institution": "EBSERH/AOCP",
+   "year": 2022,
+   "url": "https://www.gov.br/hubrasil/pt-br/ensino-e-pesquisa/exame-nacional-de-residencia-enare/edicoes-anteriores/2022-2023/provas/area-medica/prm-acesso-direto-todas-as-areas-t361-tipo-1.pdf",
+   "answerUrl": "https://www.gov.br/hubrasil/pt-br/ensino-e-pesquisa/exame-nacional-de-residencia-enare/edicoes-anteriores/2022-2023/provas/area-medica/enare2022-medicos-gabaritos.pdf",
+   "answerType": "1",
+   "note": "Prova oficial de 100 questões, já pré-carregada."
+  },
+  {
+   "id": "gov-2023-ad-1",
+   "label": "ENARE 2023/2024 · Acesso Direto · Tipo 1",
+   "institution": "EBSERH/AOCP",
+   "year": 2023,
+   "url": "https://www.gov.br/hubrasil/pt-br/ensino-e-pesquisa/exame-nacional-de-residencia-enare/edicoes-anteriores/2023-2024/provas/area-medica/programa-de-residencia-com-acesso-direto-todos-os-programas-t361-tipo-1.pdf",
+   "answerUrl": "https://www.gov.br/hubrasil/pt-br/ensino-e-pesquisa/exame-nacional-de-residencia-enare/edicoes-anteriores/2023-2024/provas/area-medica/gabarito-pre-requisito-ano-adicional-area-de-atuacao-e-acesso-direto.pdf",
+   "answerType": "1",
+   "note": "Prova oficial de 100 questões, já pré-carregada."
+  },
+  {
+   "id": "gov-2022-ad-2",
+   "label": "ENARE 2022/2023 · Acesso Direto · Tipo 2",
+   "institution": "EBSERH/AOCP",
+   "year": 2022,
+   "url": "https://www.gov.br/hubrasil/pt-br/ensino-e-pesquisa/exame-nacional-de-residencia-enare/edicoes-anteriores/2022-2023/provas/area-medica/prm-acesso-direto-todas-as-areas-t361-tipo-2.pdf",
+   "answerUrl": "https://www.gov.br/hubrasil/pt-br/ensino-e-pesquisa/exame-nacional-de-residencia-enare/edicoes-anteriores/2022-2023/provas/area-medica/enare2022-medicos-gabaritos.pdf",
+   "answerType": "2",
+   "note": "Mesmas questões em ordem embaralhada."
+  },
+  {
+   "id": "gov-pagina",
+   "label": "Página oficial de provas anteriores",
+   "institution": "HU Brasil",
+   "year": 2022,
+   "url": "https://www.gov.br/hubrasil/pt-br/ensino-e-pesquisa/exame-nacional-de-residencia-enare/edicoes-anteriores/2022-2023/provas/area-medica",
+   "answerUrl": "",
+   "note": "Referência para baixar cadernos e gabaritos."
+  }
+ ]
+}

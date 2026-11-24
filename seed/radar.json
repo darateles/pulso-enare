@@ -1,0 +1,17 @@
+{
+ "version": 1,
+ "items": [
+  { "id": "radar-enare", "exam": "ENARE 2027/2028", "institution": "HU Brasil / FGV", "uf": "Nacional", "date": "2027-03-15", "status": "previsao", "url": "https://www.gov.br/hubrasil/pt-br/ensino-e-pesquisa/exame-nacional-de-residencia-enare", "note": "Acompanhe edital, cronograma e taxa. Previsão baseada nas edições anteriores." },
+  { "id": "radar-enamed", "exam": "ENAMED 2027", "institution": "INEP", "uf": "Nacional", "date": "2027-09-12", "status": "previsao", "url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enamed", "note": "Prova objetiva do acesso direto ao ENARE." },
+  { "id": "radar-usp", "exam": "Residência USP 2027", "institution": "FUVEST / USP", "uf": "SP", "date": "2027-01-20", "status": "previsao", "url": "https://www.fuvest.br/residencia-medica/", "note": "Editais e cronograma costumam sair no segundo semestre." },
+  { "id": "radar-unifesp", "exam": "Residência UNIFESP 2027", "institution": "UNIFESP", "uf": "SP", "date": "2027-02-15", "status": "previsao", "url": "https://www.unifesp.br/ensino/residencia", "note": "Verifique edital e condições específicas." },
+  { "id": "radar-sus-sp", "exam": "SUS-SP 2027", "institution": "FAMERP / SES-SP", "uf": "SP", "date": "2027-03-01", "status": "previsao", "url": "https://www.famerp.br/", "note": "Processo estadual com cronograma próprio." },
+  { "id": "radar-amrigs", "exam": "AMRIGS 2027", "institution": "AMRIGS", "uf": "RS", "date": "2027-04-10", "status": "previsao", "url": "https://www.amrigs.org.br/", "note": "Acompanhe comunicados oficiais." },
+  { "id": "radar-psu-mg", "exam": "PSU-MG 2027", "institution": "UFMG / SES-MG", "uf": "MG", "date": "2027-03-20", "status": "previsao", "url": "https://www.ufmg.br/", "note": "Cronograma e vagas variam por instituição." },
+  { "id": "radar-ses-df", "exam": "SES-DF 2027", "institution": "SES-DF", "uf": "DF", "date": "2027-02-20", "status": "previsao", "url": "https://www.saude.df.gov.br/", "note": "Avisos no site oficial da Secretaria." },
+  { "id": "radar-ufpr", "exam": "Residência UFPR 2027", "institution": "NC/UFPR", "uf": "PR", "date": "2027-02-01", "status": "previsao", "url": "https://www.nc.ufpr.br/", "note": "Editais de residência publicados pelo NC." },
+  { "id": "radar-ses-pe", "exam": "SES-PE 2027", "institution": "SES-PE", "uf": "PE", "date": "2027-03-10", "status": "previsao", "url": "https://portal.saude.pe.gov.br/", "note": "Verifique cronograma da secretaria." },
+  { "id": "radar-ufrj", "exam": "Residência UFRJ 2027", "institution": "UFRJ", "uf": "RJ", "date": "2027-02-10", "status": "previsao", "url": "https://www.residencia.ufrj.br/", "note": "Edital e provas pela própria universidade." },
+  { "id": "radar-unicamp", "exam": "Residência UNICAMP 2027", "institution": "UNICAMP", "uf": "SP", "date": "2027-01-25", "status": "previsao", "url": "https://www.unicamp.br/", "note": "Acompanhe o portal de residência." }
+ ]
+}

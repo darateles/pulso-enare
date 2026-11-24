@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: pulso
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    healthCheckPath: /api/health
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 4175
+      - key: PULSO_DATA_DIR
+        value: /data
+      - key: APP_USER
+        value: pulso
+      - key: APP_PASSWORD
+        generateValue: true
+      - key: TRUST_PROXY
+        value: 1
+    disk:
+      name: pulso-data
+      mountPath: /data
+      sizeGB: 1

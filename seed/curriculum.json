@@ -1,0 +1,1947 @@
+{
+ "version": 1,
+ "exam": "ENARE",
+ "areas": [
+  {
+   "id": "clinica",
+   "name": "Clínica Médica",
+   "short": "CM",
+   "color": "#0f6b5c",
+   "weight": 33,
+   "description": "A maior fatia da prova. Priorize cardiologia, infectologia, endocrinologia e gastro.",
+   "icon": "stethoscope",
+   "topics": [
+    {
+     "id": "cm-endo-dm",
+     "area": "clinica",
+     "title": "Diabetes mellitus e emergências metabólicas",
+     "weight": 5,
+     "incidence": 9.0,
+     "summary": "Diagnóstico, tratamento, cetoacidose e estado hiperosmolar.",
+     "focus": "critérios diagnósticos, CAD/EHH e complicações crônicas",
+     "keyPoints": [
+      "Critérios diagnósticos e rastreio de complicações",
+      "CAD e EHH: hidratação, potássio e insulina",
+      "Pé diabético e manejo de infecções"
+     ],
+     "checklist": [
+      "Estudar a teoria de critérios diagnósticos, CAD/EHH e complicações crônicas",
+      "Dominar: Critérios diagnósticos e rastreio de complicações",
+      "Dominar: CAD e EHH: hidratação, potássio e insulina",
+      "Dominar: Pé diabético e manejo de infecções",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-gastro",
+     "area": "clinica",
+     "title": "Gastroenterologia e hepatologia",
+     "weight": 5,
+     "incidence": 9.0,
+     "summary": "Cirrose, ascite, doença diverticular, DRGE e diarreias.",
+     "focus": "cirrose, ascite, PBE e diarreia aguda",
+     "keyPoints": [
+      "Child-Pugh, MELD e complicações da cirrose",
+      "Paracentese diagnóstica e PBE",
+      "Diarreia aguda e crônica: investigação"
+     ],
+     "checklist": [
+      "Estudar a teoria de cirrose, ascite, PBE e diarreia aguda",
+      "Dominar: Child-Pugh, MELD e complicações da cirrose",
+      "Dominar: Paracentese diagnóstica e PBE",
+      "Dominar: Diarreia aguda e crônica: investigação",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-infecto-hiv",
+     "area": "clinica",
+     "title": "HIV, ISTs e infecções oportunistas",
+     "weight": 5,
+     "incidence": 8.0,
+     "summary": "Diagnóstico, TARV, IRIS, profilaxias e ISTs.",
+     "focus": "TARV inicial, CD4, profilaxias e síndrome inflamatória de reconstituição imune",
+     "keyPoints": [
+      "Fluxo diagnóstico e aconselhamento",
+      "Esquema inicial de TARV e interações",
+      "Profilaxias por CD4 e manejo da IRIS"
+     ],
+     "checklist": [
+      "Estudar a teoria de TARV inicial, CD4, profilaxias e síndrome inflamatória de reconstituição imune",
+      "Dominar: Fluxo diagnóstico e aconselhamento",
+      "Dominar: Esquema inicial de TARV e interações",
+      "Dominar: Profilaxias por CD4 e manejo da IRIS",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-cardio-has",
+     "area": "clinica",
+     "title": "Hipertensão arterial e crises hipertensivas",
+     "weight": 5,
+     "incidence": 8.0,
+     "summary": "Diagnóstico, estratificação, tratamento e emergências hipertensivas.",
+     "focus": "metas, lesão de órgão-alvo e escolha de anti-hipertensivos",
+     "keyPoints": [
+      "Confirmar o diagnóstico com MAPA/MRPA e afastar hipertensão do jaleco branco",
+      "Metas por perfil de risco e combinação inicial de anti-hipertensivos",
+      "Diferenciar urgência de emergência hipertensiva e drogas por cenário"
+     ],
+     "checklist": [
+      "Estudar a teoria de metas, lesão de órgão-alvo e escolha de anti-hipertensivos",
+      "Dominar: Confirmar o diagnóstico com MAPA/MRPA e afastar hipertensão do jaleco branco",
+      "Dominar: Metas por perfil de risco e combinação inicial de anti-hipertensivos",
+      "Dominar: Diferenciar urgência de emergência hipertensiva e drogas por cenário",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-cardio-ic",
+     "area": "clinica",
+     "title": "Insuficiência cardíaca e choque cardiogênico",
+     "weight": 5,
+     "incidence": 7.5,
+     "summary": "IC de fração de ejeção reduzida, preservada e descompensação.",
+     "focus": "congestão, perfusão, quarteto farmacológico e descompensação",
+     "keyPoints": [
+      "Identificar congestão e baixo débito no exame",
+      "Quarteto de drogas com benefício de mortalidade e titulação",
+      "Diurético EV, inotrópico e suporte no choque cardiogênico"
+     ],
+     "checklist": [
+      "Estudar a teoria de congestão, perfusão, quarteto farmacológico e descompensação",
+      "Dominar: Identificar congestão e baixo débito no exame",
+      "Dominar: Quarteto de drogas com benefício de mortalidade e titulação",
+      "Dominar: Diurético EV, inotrópico e suporte no choque cardiogênico",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-cardio-sca",
+     "area": "clinica",
+     "title": "SCA, dor torácica e arritmias",
+     "weight": 5,
+     "incidence": 8.5,
+     "summary": "Síndromes coronarianas, ECG, reperfusão e distúrbios de ritmo.",
+     "focus": "dor torácica, ECG em 10 minutos, SCA e arritmias instáveis",
+     "keyPoints": [
+      "ECG em até 10 minutos e critérios de SCA com/sem supra",
+      "Dupla antiagregação, anticoagulação e tempo porta-balão",
+      "Taquiarritmias e bradiarritmias com instabilidade: cardioversão e marcapasso"
+     ],
+     "checklist": [
+      "Estudar a teoria de dor torácica, ECG em 10 minutos, SCA e arritmias instáveis",
+      "Dominar: ECG em até 10 minutos e critérios de SCA com/sem supra",
+      "Dominar: Dupla antiagregação, anticoagulação e tempo porta-balão",
+      "Dominar: Taquiarritmias e bradiarritmias com instabilidade: cardioversão e marcapasso",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-infecto-sepse",
+     "area": "clinica",
+     "title": "Sepse, choque séptico e antibióticos",
+     "weight": 5,
+     "incidence": 8.0,
+     "summary": "Reconhecimento precoce, pacote da primeira hora e antimicrobianos.",
+     "focus": "sepse, ressuscitação, vasopressor e foco infeccioso",
+     "keyPoints": [
+      "Critérios de sepse e qSOFA",
+      "Pacote da 1ª hora: culturas, lactato e antibiótico",
+      "Noradrenalina, metas de PAM e controle do foco"
+     ],
+     "checklist": [
+      "Estudar a teoria de sepse, ressuscitação, vasopressor e foco infeccioso",
+      "Dominar: Critérios de sepse e qSOFA",
+      "Dominar: Pacote da 1ª hora: culturas, lactato e antibiótico",
+      "Dominar: Noradrenalina, metas de PAM e controle do foco",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-hemato",
+     "area": "clinica",
+     "title": "Anemias, coagulopatias e transfusão",
+     "weight": 4,
+     "incidence": 6.5,
+     "summary": "Investigação das anemias, plaquetopenias e hemoterapia.",
+     "focus": "anemias carenciais/hemolíticas, CIVD e reações transfusionais",
+     "keyPoints": [
+      "Algoritmo de anemia microcítica e macrocítica",
+      "Plaquetopenia, CIVD e PTT",
+      "Indicação e reações transfusionais"
+     ],
+     "checklist": [
+      "Estudar a teoria de anemias carenciais/hemolíticas, CIVD e reações transfusionais",
+      "Dominar: Algoritmo de anemia microcítica e macrocítica",
+      "Dominar: Plaquetopenia, CIVD e PTT",
+      "Dominar: Indicação e reações transfusionais",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-infecto-arboviro",
+     "area": "clinica",
+     "title": "Arboviroses e zoonoses",
+     "weight": 4,
+     "incidence": 6.5,
+     "summary": "Dengue, leptospirose, febre amarela e outras zoonoses.",
+     "focus": "classificação da dengue, sinais de alarme e manejo de leptospirose",
+     "keyPoints": [
+      "Sinais de alarme e grupos de risco na dengue",
+      "Hidratação por peso e monitorização",
+      "Diagnóstico e tratamento precoce da leptospirose"
+     ],
+     "checklist": [
+      "Estudar a teoria de classificação da dengue, sinais de alarme e manejo de leptospirose",
+      "Dominar: Sinais de alarme e grupos de risco na dengue",
+      "Dominar: Hidratação por peso e monitorização",
+      "Dominar: Diagnóstico e tratamento precoce da leptospirose",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-infecto-hepatites",
+     "area": "clinica",
+     "title": "Hepatites virais",
+     "weight": 4,
+     "incidence": 5.5,
+     "summary": "Hepatites A-E, interpretação sorológica e tratamento.",
+     "focus": "sorologias, critérios de tratamento e hepatite fulminante",
+     "keyPoints": [
+      "Interpretar marcadores de hepatite B e C",
+      "Indicação de tratamento e avaliação de fibrose",
+      "Reconhecer hepatite fulminante"
+     ],
+     "checklist": [
+      "Estudar a teoria de sorologias, critérios de tratamento e hepatite fulminante",
+      "Dominar: Interpretar marcadores de hepatite B e C",
+      "Dominar: Indicação de tratamento e avaliação de fibrose",
+      "Dominar: Reconhecer hepatite fulminante",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-nefro",
+     "area": "clinica",
+     "title": "Nefrologia e distúrbios ácido-base",
+     "weight": 4,
+     "incidence": 6.0,
+     "summary": "Glomerulopatias, DRC, distúrbios eletrolíticos e gasometria.",
+     "focus": "síndrome nefrítica/nefrótica, DRC e interpretação gasométrica",
+     "keyPoints": [
+      "Diferenciar nefrítica de nefrótica",
+      "Estadiamento da DRC e indicação de diálise",
+      "Gasometria arterial passo a passo"
+     ],
+     "checklist": [
+      "Estudar a teoria de síndrome nefrítica/nefrótica, DRC e interpretação gasométrica",
+      "Dominar: Diferenciar nefrítica de nefrótica",
+      "Dominar: Estadiamento da DRC e indicação de diálise",
+      "Dominar: Gasometria arterial passo a passo",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-neuro",
+     "area": "clinica",
+     "title": "Neurologia e AVC",
+     "weight": 4,
+     "incidence": 6.5,
+     "summary": "AVC, cefaleias, epilepsia e síndromes neurológicas.",
+     "focus": "AVC, cefaleias de alarme e estado de mal epiléptico",
+     "keyPoints": [
+      "NIHSS, trombólise e trombectomia",
+      "Cefaleias de alarme e meningite",
+      "Estado de mal epiléptico e coma"
+     ],
+     "checklist": [
+      "Estudar a teoria de AVC, cefaleias de alarme e estado de mal epiléptico",
+      "Dominar: NIHSS, trombólise e trombectomia",
+      "Dominar: Cefaleias de alarme e meningite",
+      "Dominar: Estado de mal epiléptico e coma",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-onco",
+     "area": "clinica",
+     "title": "Oncologia clínica e urgências",
+     "weight": 4,
+     "incidence": 5.5,
+     "summary": "Neutropenia febril, compressões e síndromes paraneoplásicas.",
+     "focus": "urgências oncológicas e manejo inicial",
+     "keyPoints": [
+      "Neutropenia febril: antibiótico em 1 hora",
+      "Compressão medular e síndrome da veia cava superior",
+      "Hipercalcemia e síndrome de lise tumoral"
+     ],
+     "checklist": [
+      "Estudar a teoria de urgências oncológicas e manejo inicial",
+      "Dominar: Neutropenia febril: antibiótico em 1 hora",
+      "Dominar: Compressão medular e síndrome da veia cava superior",
+      "Dominar: Hipercalcemia e síndrome de lise tumoral",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-pneumo",
+     "area": "clinica",
+     "title": "Pneumologia: asma, DPOC, PAC e DPI",
+     "weight": 4,
+     "incidence": 6.5,
+     "summary": "Doenças obstrutivas, infecções respiratórias e intersticiais.",
+     "focus": "gravidade da asma/DPOC, PAC e padrões de DPI",
+     "keyPoints": [
+      "Classificação e tratamento de asma e DPOC",
+      "CURB-65 e antibiótico na PAC",
+      "Padrões tomográficos e diagnóstico de DPI"
+     ],
+     "checklist": [
+      "Estudar a teoria de gravidade da asma/DPOC, PAC e padrões de DPI",
+      "Dominar: Classificação e tratamento de asma e DPOC",
+      "Dominar: CURB-65 e antibiótico na PAC",
+      "Dominar: Padrões tomográficos e diagnóstico de DPI",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-reumato",
+     "area": "clinica",
+     "title": "Reumatologia",
+     "weight": 4,
+     "incidence": 5.5,
+     "summary": "Artrites, LES, espondiloartrites e vasculites.",
+     "focus": "padrões articulares, critérios de LES e arterite de células gigantes",
+     "keyPoints": [
+      "Monoartrite, oligoartrite e poliartrite",
+      "Critérios de LES e nefrite lúpica",
+      "Arterite de células gigantes e polimialgia"
+     ],
+     "checklist": [
+      "Estudar a teoria de padrões articulares, critérios de LES e arterite de células gigantes",
+      "Dominar: Monoartrite, oligoartrite e poliartrite",
+      "Dominar: Critérios de LES e nefrite lúpica",
+      "Dominar: Arterite de células gigantes e polimialgia",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-endo-tireo",
+     "area": "clinica",
+     "title": "Tireoide, adrenal e distúrbios hidroeletrolíticos",
+     "weight": 4,
+     "incidence": 6.0,
+     "summary": "Disfunções tireoidianas, crise adrenal e distúrbios do sódio.",
+     "focus": "hiper/hipotireoidismo, nódulo, crise adrenal e hiponatremia",
+     "keyPoints": [
+      "Quadro clínico e laboratorial de tireotoxicose e mixedema",
+      "Nódulo tireoidiano e PAAF",
+      "Crise adrenal e correção de hiponatremia"
+     ],
+     "checklist": [
+      "Estudar a teoria de hiper/hipotireoidismo, nódulo, crise adrenal e hiponatremia",
+      "Dominar: Quadro clínico e laboratorial de tireotoxicose e mixedema",
+      "Dominar: Nódulo tireoidiano e PAAF",
+      "Dominar: Crise adrenal e correção de hiponatremia",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-infecto-tb",
+     "area": "clinica",
+     "title": "Tuberculose e micobactérias",
+     "weight": 4,
+     "incidence": 6.0,
+     "summary": "TB pulmonar e extrapulmonar, testagem e tratamento.",
+     "focus": "diagnóstico bacteriológico, esquema básico e TB em situações especiais",
+     "keyPoints": [
+      "Teste rápido molecular, baciloscopia e cultura",
+      "Esquema básico e efeitos adversos",
+      "TB em HIV, gestação e resistência"
+     ],
+     "checklist": [
+      "Estudar a teoria de diagnóstico bacteriológico, esquema básico e TB em situações especiais",
+      "Dominar: Teste rápido molecular, baciloscopia e cultura",
+      "Dominar: Esquema básico e efeitos adversos",
+      "Dominar: TB em HIV, gestação e resistência",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-urgencias",
+     "area": "clinica",
+     "title": "Urgências clínicas e toxicologia",
+     "weight": 4,
+     "incidence": 6.0,
+     "summary": "PCR, intoxicações, delirium tremens e emergências clínicas.",
+     "focus": "reanimação, antídotos e instabilidade clínica",
+     "keyPoints": [
+      "RCP de alta qualidade e ritmos chocáveis",
+      "Delirium tremens e abstinência alcóolica",
+      "Toxicologia e antídotos"
+     ],
+     "checklist": [
+      "Estudar a teoria de reanimação, antídotos e instabilidade clínica",
+      "Dominar: RCP de alta qualidade e ritmos chocáveis",
+      "Dominar: Delirium tremens e abstinência alcóolica",
+      "Dominar: Toxicologia e antídotos",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-dermato",
+     "area": "clinica",
+     "title": "Dermatologia",
+     "weight": 3,
+     "incidence": 4.0,
+     "summary": "Farmacodermias, herpes-zóster e dermatoses frequentes.",
+     "focus": "SJS/NET, herpes-zóster e diagnósticos diferenciais",
+     "keyPoints": [
+      "Reconhecer SJS/NET e retirar a droga",
+      "Herpes-zóster e indicação de aciclovir EV",
+      "Dermatoses por morfologia e localização"
+     ],
+     "checklist": [
+      "Estudar a teoria de SJS/NET, herpes-zóster e diagnósticos diferenciais",
+      "Dominar: Reconhecer SJS/NET e retirar a droga",
+      "Dominar: Herpes-zóster e indicação de aciclovir EV",
+      "Dominar: Dermatoses por morfologia e localização",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-geri",
+     "area": "clinica",
+     "title": "Geriatria e síndromes geriátricas",
+     "weight": 3,
+     "incidence": 4.5,
+     "summary": "Fragilidade, delirium, demências e polifarmácia.",
+     "focus": "avaliação geriátrica ampla, delirium e critérios de Beers",
+     "keyPoints": [
+      "Delirium versus demência",
+      "Rastreio de fragilidade e quedas",
+      "Prescrição segura e desprescrição"
+     ],
+     "checklist": [
+      "Estudar a teoria de avaliação geriátrica ampla, delirium e critérios de Beers",
+      "Dominar: Delirium versus demência",
+      "Dominar: Rastreio de fragilidade e quedas",
+      "Dominar: Prescrição segura e desprescrição",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-cardio-valvo",
+     "area": "clinica",
+     "title": "Valvopatias e febre reumática",
+     "weight": 3,
+     "incidence": 4.0,
+     "summary": "Sopros, valvopatias e sequela reumática crônica.",
+     "focus": "sopros, critérios de Jones e indicações cirúrgicas",
+     "keyPoints": [
+      "Reconhecer sopros e manobras que os modificam",
+      "Critérios de Jones e profilaxia da febre reumática",
+      "Indicações de troca valvar e complicações"
+     ],
+     "checklist": [
+      "Estudar a teoria de sopros, critérios de Jones e indicações cirúrgicas",
+      "Dominar: Reconhecer sopros e manobras que os modificam",
+      "Dominar: Critérios de Jones e profilaxia da febre reumática",
+      "Dominar: Indicações de troca valvar e complicações",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cm-etica",
+     "area": "clinica",
+     "title": "Ética médica e profissionalismo",
+     "weight": 3,
+     "incidence": 4.0,
+     "summary": "Publicidade, consentimento e comunicação de más notícias.",
+     "focus": "publicidade médica, autonomia e relação médico-paciente",
+     "keyPoints": [
+      "Regras de publicidade médica",
+      "Consentimento e recusa de tratamento",
+      "Comunicação de más notícias"
+     ],
+     "checklist": [
+      "Estudar a teoria de publicidade médica, autonomia e relação médico-paciente",
+      "Dominar: Regras de publicidade médica",
+      "Dominar: Consentimento e recusa de tratamento",
+      "Dominar: Comunicação de más notícias",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cirurgia",
+   "name": "Cirurgia Geral",
+   "short": "CIR",
+   "color": "#c45a2b",
+   "weight": 19,
+   "description": "Trauma e abdome agudo concentram quase metade dos pontos da área.",
+   "icon": "scalpel",
+   "topics": [
+    {
+     "id": "cir-abdome-agudo",
+     "area": "cirurgia",
+     "title": "Abdome agudo",
+     "weight": 5,
+     "incidence": 18.4,
+     "summary": "Apendicite, colecistite, obstrução, perfuração e isquemia.",
+     "focus": "diagnóstico diferencial e indicação cirúrgica",
+     "keyPoints": [
+      "Apendicite: Alvarado e cirurgia",
+      "Obstrução intestinal e alça fechada",
+      "Peritonite e isquemia mesentérica"
+     ],
+     "checklist": [
+      "Estudar a teoria de diagnóstico diferencial e indicação cirúrgica",
+      "Dominar: Apendicite: Alvarado e cirurgia",
+      "Dominar: Obstrução intestinal e alça fechada",
+      "Dominar: Peritonite e isquemia mesentérica",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cir-trauma-abdominal",
+     "area": "cirurgia",
+     "title": "Trauma abdominal",
+     "weight": 5,
+     "incidence": 10.0,
+     "summary": "Trauma contuso e penetrante, FAST e laparotomia.",
+     "focus": "indicações de cirurgia e tratamento conservador",
+     "keyPoints": [
+      "FAST e instabilidade",
+      "Indicações de laparotomia",
+      "Lesões de vísceras maciças e ocos"
+     ],
+     "checklist": [
+      "Estudar a teoria de indicações de cirurgia e tratamento conservador",
+      "Dominar: FAST e instabilidade",
+      "Dominar: Indicações de laparotomia",
+      "Dominar: Lesões de vísceras maciças e ocos",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cir-trauma-atls",
+     "area": "cirurgia",
+     "title": "Trauma e ATLS",
+     "weight": 5,
+     "incidence": 22.8,
+     "summary": "Abordagem inicial, choque hemorrágico e controle de danos.",
+     "focus": "sequência do ATLS, choque e transfusão maciça",
+     "keyPoints": [
+      "ABCDE e exposição",
+      "Reconhecer choque hemorrágico",
+      "Protocolo de transfusão maciça e controle de danos"
+     ],
+     "checklist": [
+      "Estudar a teoria de sequência do ATLS, choque e transfusão maciça",
+      "Dominar: ABCDE e exposição",
+      "Dominar: Reconhecer choque hemorrágico",
+      "Dominar: Protocolo de transfusão maciça e controle de danos",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cir-trauma-toracico",
+     "area": "cirurgia",
+     "title": "Trauma torácico",
+     "weight": 5,
+     "incidence": 8.0,
+     "summary": "Pneumotórax, hemotórax, tamponamento e tórax instável.",
+     "focus": "lesões letais e descompressão imediata",
+     "keyPoints": [
+      "Pneumotórax hipertensivo e agulhada",
+      "Tamponamento cardíaco e janela pericárdica",
+      "Hemotórax maciço e toracotomia"
+     ],
+     "checklist": [
+      "Estudar a teoria de lesões letais e descompressão imediata",
+      "Dominar: Pneumotórax hipertensivo e agulhada",
+      "Dominar: Tamponamento cardíaco e janela pericárdica",
+      "Dominar: Hemotórax maciço e toracotomia",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cir-vias-biliares",
+     "area": "cirurgia",
+     "title": "Vias biliares e pancreatite",
+     "weight": 5,
+     "incidence": 12.0,
+     "summary": "Colelitíase, colangite, coledocolitíase e pancreatite.",
+     "focus": "colangite, CPRE e pancreatite biliar",
+     "keyPoints": [
+      "Colangite de Charcot e antibiótico",
+      "CPRE e cirurgia da via biliar",
+      "Pancreatite: critérios e manejo"
+     ],
+     "checklist": [
+      "Estudar a teoria de colangite, CPRE e pancreatite biliar",
+      "Dominar: Colangite de Charcot e antibiótico",
+      "Dominar: CPRE e cirurgia da via biliar",
+      "Dominar: Pancreatite: critérios e manejo",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cir-onco-cp",
+     "area": "cirurgia",
+     "title": "Cirurgia oncológica e cabeça-pescoço",
+     "weight": 4,
+     "incidence": 6.0,
+     "summary": "Lesões cutâneas, cavidade oral e manejo oncológico.",
+     "focus": "diagnóstico de lesões suspeitas e linfonodo sentinela",
+     "keyPoints": [
+      "Critérios de lesão cutânea suspeita",
+      "Úlcera oral que não cicatriza",
+      "Biópsia e estadiamento"
+     ],
+     "checklist": [
+      "Estudar a teoria de diagnóstico de lesões suspeitas e linfonodo sentinela",
+      "Dominar: Critérios de lesão cutânea suspeita",
+      "Dominar: Úlcera oral que não cicatriza",
+      "Dominar: Biópsia e estadiamento",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cir-coloprocto",
+     "area": "cirurgia",
+     "title": "Coloproctologia",
+     "weight": 4,
+     "incidence": 8.3,
+     "summary": "Hemorroidas, diverticulite, câncer colorretal e fissura.",
+     "focus": "doença diverticular, câncer e urgências anorretais",
+     "keyPoints": [
+      "Classificação de hemorroidas e trombose",
+      "Diverticulite Hinchey e antibiótico",
+      "Rastreio de câncer colorretal"
+     ],
+     "checklist": [
+      "Estudar a teoria de doença diverticular, câncer e urgências anorretais",
+      "Dominar: Classificação de hemorroidas e trombose",
+      "Dominar: Diverticulite Hinchey e antibiótico",
+      "Dominar: Rastreio de câncer colorretal",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cir-periop",
+     "area": "cirurgia",
+     "title": "Perioperatório e complicações",
+     "weight": 4,
+     "incidence": 16.5,
+     "summary": "Avaliação pré-operatória, anestesia e complicações pós-op.",
+     "focus": "risco cirúrgico, profilaxia e complicações",
+     "keyPoints": [
+      "Estratificação de risco cardiológico",
+      "Profilaxia antibiótica e tromboembólica",
+      "Íleo, dehiscência e infecção de sítio"
+     ],
+     "checklist": [
+      "Estudar a teoria de risco cirúrgico, profilaxia e complicações",
+      "Dominar: Estratificação de risco cardiológico",
+      "Dominar: Profilaxia antibiótica e tromboembólica",
+      "Dominar: Íleo, dehiscência e infecção de sítio",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cir-trauma-orto",
+     "area": "cirurgia",
+     "title": "Trauma ortopédico",
+     "weight": 4,
+     "incidence": 7.0,
+     "summary": "Fraturas, luxações e síndrome compartimental.",
+     "focus": "imobilização, redução e síndrome compartimental",
+     "keyPoints": [
+      "Avaliação neurovascular",
+      "Imobilização e redução",
+      "Síndrome compartimental e rabdomiólise"
+     ],
+     "checklist": [
+      "Estudar a teoria de imobilização, redução e síndrome compartimental",
+      "Dominar: Avaliação neurovascular",
+      "Dominar: Imobilização e redução",
+      "Dominar: Síndrome compartimental e rabdomiólise",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cir-hernia",
+     "area": "cirurgia",
+     "title": "Hérnias da parede abdominal",
+     "weight": 3,
+     "incidence": 5.0,
+     "summary": "Hérnia inguinal, femoral e encarceramento.",
+     "focus": "anatomia, complicações e reparo",
+     "keyPoints": [
+      "Diferenciar inguinal e femoral",
+      "Encarceramento e estrangulamento",
+      "Técnicas de reparo e recidiva"
+     ],
+     "checklist": [
+      "Estudar a teoria de anatomia, complicações e reparo",
+      "Dominar: Diferenciar inguinal e femoral",
+      "Dominar: Encarceramento e estrangulamento",
+      "Dominar: Técnicas de reparo e recidiva",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cir-queimados",
+     "area": "cirurgia",
+     "title": "Queimaduras",
+     "weight": 3,
+     "incidence": 4.0,
+     "summary": "Superfície corporal queimada, reposição volêmica e via aérea.",
+     "focus": "regra dos nove, Parkland e queimadura de via aérea",
+     "keyPoints": [
+      "Cálculo da SCQ e reposição",
+      "Indicação de intubação precoce",
+      "Curativos e infecção"
+     ],
+     "checklist": [
+      "Estudar a teoria de regra dos nove, Parkland e queimadura de via aérea",
+      "Dominar: Cálculo da SCQ e reposição",
+      "Dominar: Indicação de intubação precoce",
+      "Dominar: Curativos e infecção",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "cir-urologia",
+     "area": "cirurgia",
+     "title": "Urologia",
+     "weight": 3,
+     "incidence": 11.2,
+     "summary": "Cólica renal, retenção urinária e trauma urológico.",
+     "focus": "cólica renal, ITU complicada e trauma",
+     "keyPoints": [
+      "Analgesia e tamanho do cálculo",
+      "ITU complicada e obstrução",
+      "Trauma renal e uretral"
+     ],
+     "checklist": [
+      "Estudar a teoria de cólica renal, ITU complicada e trauma",
+      "Dominar: Analgesia e tamanho do cálculo",
+      "Dominar: ITU complicada e obstrução",
+      "Dominar: Trauma renal e uretral",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "go",
+   "name": "Ginecologia e Obstetrícia",
+   "short": "GO",
+   "color": "#a84368",
+   "weight": 18,
+   "description": "Pré-natal, síndromes hipertensivas e infecções ginecológicas são o núcleo.",
+   "icon": "flower",
+   "topics": [
+    {
+     "id": "go-contracepcao",
+     "area": "go",
+     "title": "Contracepção e planejamento familiar",
+     "weight": 5,
+     "incidence": 10.0,
+     "summary": "Métodos contraceptivos, eficácia e escolha individualizada.",
+     "focus": "eficácia, contraindicações e contracepção de emergência",
+     "keyPoints": [
+      "Tabela de eficácia dos métodos",
+      "Contraindicações absolutas",
+      "Contracepção de emergência e DIU"
+     ],
+     "checklist": [
+      "Estudar a teoria de eficácia, contraindicações e contracepção de emergência",
+      "Dominar: Tabela de eficácia dos métodos",
+      "Dominar: Contraindicações absolutas",
+      "Dominar: Contracepção de emergência e DIU",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-hemorragias",
+     "area": "go",
+     "title": "Hemorragias da gestação",
+     "weight": 5,
+     "incidence": 13.4,
+     "summary": "Placenta prévia, descolamento e abortamento.",
+     "focus": "sangramento vaginal na gestação",
+     "keyPoints": [
+      "Placenta prévia e acretismo",
+      "Descolamento prematuro",
+      "Abortamento e conduta"
+     ],
+     "checklist": [
+      "Estudar a teoria de sangramento vaginal na gestação",
+      "Dominar: Placenta prévia e acretismo",
+      "Dominar: Descolamento prematuro",
+      "Dominar: Abortamento e conduta",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-infeccoes",
+     "area": "go",
+     "title": "Infecções ginecológicas e ISTs",
+     "weight": 5,
+     "incidence": 20.0,
+     "summary": "Vulvovaginites, cervicites, DIP e úlceras genitais.",
+     "focus": "corrimento, úlceras e DIP",
+     "keyPoints": [
+      "Vaginose, candidíase e tricomoníase",
+      "Úlceras genitais e sífilis",
+      "DIP e critérios de internação"
+     ],
+     "checklist": [
+      "Estudar a teoria de corrimento, úlceras e DIP",
+      "Dominar: Vaginose, candidíase e tricomoníase",
+      "Dominar: Úlceras genitais e sífilis",
+      "Dominar: DIP e critérios de internação",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-infecto-gestacao",
+     "area": "go",
+     "title": "Infecções na gestação",
+     "weight": 5,
+     "incidence": 14.2,
+     "summary": "Sífilis, toxoplasmose, HIV, CMV, dengue e parvovírus.",
+     "focus": "rastreio e manejo das infecções congênitas",
+     "keyPoints": [
+      "Sífilis e tratamento por estágio",
+      "Toxoplasmose e CMV",
+      "Dengue e parvovírus na gestação"
+     ],
+     "checklist": [
+      "Estudar a teoria de rastreio e manejo das infecções congênitas",
+      "Dominar: Sífilis e tratamento por estágio",
+      "Dominar: Toxoplasmose e CMV",
+      "Dominar: Dengue e parvovírus na gestação",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-prenatal",
+     "area": "go",
+     "title": "Pré-natal e adaptações da gestação",
+     "weight": 5,
+     "incidence": 15.7,
+     "summary": "Consultas, exames, suplementação e sinais de alerta.",
+     "focus": "pré-natal de risco habitual e alto risco",
+     "keyPoints": [
+      "Calendário de consultas e exames",
+      "Ácido fólico, ferro e vacinas",
+      "Sinais de alarme e referência"
+     ],
+     "checklist": [
+      "Estudar a teoria de pré-natal de risco habitual e alto risco",
+      "Dominar: Calendário de consultas e exames",
+      "Dominar: Ácido fólico, ferro e vacinas",
+      "Dominar: Sinais de alarme e referência",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-hipertensivas",
+     "area": "go",
+     "title": "Síndromes hipertensivas da gestação",
+     "weight": 5,
+     "incidence": 11.2,
+     "summary": "Pré-eclâmpsia, eclâmpsia e HELLP.",
+     "focus": "critérios diagnósticos, sulfato de magnésio e via de parto",
+     "keyPoints": [
+      "Diagnóstico e proteinúria",
+      "Sulfato de magnésio e anti-hipertensivos",
+      "HELLP e momento do parto"
+     ],
+     "checklist": [
+      "Estudar a teoria de critérios diagnósticos, sulfato de magnésio e via de parto",
+      "Dominar: Diagnóstico e proteinúria",
+      "Dominar: Sulfato de magnésio e anti-hipertensivos",
+      "Dominar: HELLP e momento do parto",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-ciclo",
+     "area": "go",
+     "title": "Ciclo menstrual e amenorreias",
+     "weight": 4,
+     "incidence": 7.0,
+     "summary": "Fisiologia menstrual, amenorreia e puberdade.",
+     "focus": "amenorreia primária/secundária e Tanner",
+     "keyPoints": [
+      "Investigação de amenorreia",
+      "Puberdade precoce e atrasada",
+      "Síndrome dos ovários policísticos"
+     ],
+     "checklist": [
+      "Estudar a teoria de amenorreia primária/secundária e Tanner",
+      "Dominar: Investigação de amenorreia",
+      "Dominar: Puberdade precoce e atrasada",
+      "Dominar: Síndrome dos ovários policísticos",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-cancer-colo",
+     "area": "go",
+     "title": "Câncer de colo do útero",
+     "weight": 4,
+     "incidence": 10.0,
+     "summary": "HPV, citologia, colposcopia e estadiamento.",
+     "focus": "rastreio, citologia e conduta por lesão",
+     "keyPoints": [
+      "HPV e vacinação",
+      "Citologia e colposcopia",
+      "Estadiamento e tratamento"
+     ],
+     "checklist": [
+      "Estudar a teoria de rastreio, citologia e conduta por lesão",
+      "Dominar: HPV e vacinação",
+      "Dominar: Citologia e colposcopia",
+      "Dominar: Estadiamento e tratamento",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-cancer-mama",
+     "area": "go",
+     "title": "Câncer de mama",
+     "weight": 4,
+     "incidence": 10.0,
+     "summary": "Rastreio, diagnóstico, subtipos e tratamento.",
+     "focus": "BI-RADS, diagnóstico e terapia neoadjuvante",
+     "keyPoints": [
+      "Rastreio mamográfico",
+      "BI-RADS e punção",
+      "Subtipos moleculares e tratamento"
+     ],
+     "checklist": [
+      "Estudar a teoria de BI-RADS, diagnóstico e terapia neoadjuvante",
+      "Dominar: Rastreio mamográfico",
+      "Dominar: BI-RADS e punção",
+      "Dominar: Subtipos moleculares e tratamento",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-sangramento",
+     "area": "go",
+     "title": "Sangramento uterino anormal",
+     "weight": 4,
+     "incidence": 12.0,
+     "summary": "PALM-COEIN, sangramento na menacme e pós-menopausa.",
+     "focus": "classificação PALM-COEIN e investigação",
+     "keyPoints": [
+      "Sangramento pós-menopausa e câncer",
+      "Sangramento na menacme",
+      "Tratamento hormonal e cirúrgico"
+     ],
+     "checklist": [
+      "Estudar a teoria de classificação PALM-COEIN e investigação",
+      "Dominar: Sangramento pós-menopausa e câncer",
+      "Dominar: Sangramento na menacme",
+      "Dominar: Tratamento hormonal e cirúrgico",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-parto",
+     "area": "go",
+     "title": "Trabalho de parto e puerpério",
+     "weight": 4,
+     "incidence": 8.0,
+     "summary": "Partograma, distocias, puerpério e amamentação.",
+     "focus": "assistência ao parto e complicações puerperais",
+     "keyPoints": [
+      "Partograma e distocias",
+      "Hemorragia pós-parto",
+      "Infecção puerperal e aleitamento"
+     ],
+     "checklist": [
+      "Estudar a teoria de assistência ao parto e complicações puerperais",
+      "Dominar: Partograma e distocias",
+      "Dominar: Hemorragia pós-parto",
+      "Dominar: Infecção puerperal e aleitamento",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-urgencias",
+     "area": "go",
+     "title": "Urgências ginecológicas e violência sexual",
+     "weight": 4,
+     "incidence": 6.0,
+     "summary": "Ectópica, torção ovariana e atendimento à violência sexual.",
+     "focus": "abdome pélvico agudo e profilaxias pós-violência",
+     "keyPoints": [
+      "Gravidez ectópica e metotrexato",
+      "Torção ovariana",
+      "Profilaxia IST e contracepção de emergência"
+     ],
+     "checklist": [
+      "Estudar a teoria de abdome pélvico agudo e profilaxias pós-violência",
+      "Dominar: Gravidez ectópica e metotrexato",
+      "Dominar: Torção ovariana",
+      "Dominar: Profilaxia IST e contracepção de emergência",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-climaterio",
+     "area": "go",
+     "title": "Climatério e menopausa",
+     "weight": 3,
+     "incidence": 5.0,
+     "summary": "Sintomas vasomotores, terapia hormonal e osteoporose.",
+     "focus": "terapia hormonal e riscos",
+     "keyPoints": [
+      "Indicações e contraindicações da TH",
+      "Osteoporose e rastreio",
+      "Sangramento pós-menopausa"
+     ],
+     "checklist": [
+      "Estudar a teoria de terapia hormonal e riscos",
+      "Dominar: Indicações e contraindicações da TH",
+      "Dominar: Osteoporose e rastreio",
+      "Dominar: Sangramento pós-menopausa",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-onco-gine",
+     "area": "go",
+     "title": "Cânceres ginecológicos",
+     "weight": 3,
+     "incidence": 5.0,
+     "summary": "Câncer de ovário, endométrio, vulva e tumores anexiais.",
+     "focus": "massa anexial, câncer de endométrio e ovariano",
+     "keyPoints": [
+      "Avaliação de massa anexial",
+      "Câncer de endométrio e sangramento",
+      "Tumores ovarianos e marcadores"
+     ],
+     "checklist": [
+      "Estudar a teoria de massa anexial, câncer de endométrio e ovariano",
+      "Dominar: Avaliação de massa anexial",
+      "Dominar: Câncer de endométrio e sangramento",
+      "Dominar: Tumores ovarianos e marcadores",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-endometriose",
+     "area": "go",
+     "title": "Endometriose e infertilidade",
+     "weight": 3,
+     "incidence": 5.0,
+     "summary": "Dor pélvica crônica, endometriose e investigação do casal.",
+     "focus": "endometriose e infertilidade",
+     "keyPoints": [
+      "Diagnóstico de endometriose",
+      "Tratamento clínico e cirúrgico",
+      "Investigação da infertilidade"
+     ],
+     "checklist": [
+      "Estudar a teoria de endometriose e infertilidade",
+      "Dominar: Diagnóstico de endometriose",
+      "Dominar: Tratamento clínico e cirúrgico",
+      "Dominar: Investigação da infertilidade",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-intercorrencias",
+     "area": "go",
+     "title": "Intercorrências fetais e gestação múltipla",
+     "weight": 3,
+     "incidence": 5.0,
+     "summary": "Gemelaridade, polidrâmnio, RCF e líquido amniótico.",
+     "focus": "gemelar, polidrâmnio e restrição de crescimento",
+     "keyPoints": [
+      "Corionicidade e complicações",
+      "Polidrâmnio e oligodrâmnio",
+      "Restrição de crescimento fetal"
+     ],
+     "checklist": [
+      "Estudar a teoria de gemelar, polidrâmnio e restrição de crescimento",
+      "Dominar: Corionicidade e complicações",
+      "Dominar: Polidrâmnio e oligodrâmnio",
+      "Dominar: Restrição de crescimento fetal",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "go-urogine",
+     "area": "go",
+     "title": "Uroginecologia e assoalho pélvico",
+     "weight": 3,
+     "incidence": 4.0,
+     "summary": "Incontinência urinária, prolapso e bexiga hiperativa.",
+     "focus": "incontinência, prolapso e bexiga hiperativa",
+     "keyPoints": [
+      "Tipos de incontinência urinária",
+      "Prolapso de órgãos pélvicos",
+      "Bexiga hiperativa e tratamento"
+     ],
+     "checklist": [
+      "Estudar a teoria de incontinência, prolapso e bexiga hiperativa",
+      "Dominar: Tipos de incontinência urinária",
+      "Dominar: Prolapso de órgãos pélvicos",
+      "Dominar: Bexiga hiperativa e tratamento",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pediatria",
+   "name": "Pediatria",
+   "short": "PED",
+   "color": "#2c6b9e",
+   "weight": 16,
+   "description": "Puericultura, neonatologia e imunizações são os temas de maior retorno.",
+   "icon": "baby",
+   "topics": [
+    {
+     "id": "ped-imunizacoes",
+     "area": "pediatria",
+     "title": "Imunizações",
+     "weight": 5,
+     "incidence": 12.0,
+     "summary": "Calendário, contraindicações e eventos adversos.",
+     "focus": "calendário vacinal e situações especiais",
+     "keyPoints": [
+      "Calendário do PNI e faixas etárias",
+      "Contraindicações e falso contraindicações",
+      "Vacinas em prematuros e imunossuprimidos"
+     ],
+     "checklist": [
+      "Estudar a teoria de calendário vacinal e situações especiais",
+      "Dominar: Calendário do PNI e faixas etárias",
+      "Dominar: Contraindicações e falso contraindicações",
+      "Dominar: Vacinas em prematuros e imunossuprimidos",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "ped-puericultura",
+     "area": "pediatria",
+     "title": "Puericultura e desenvolvimento",
+     "weight": 5,
+     "incidence": 23.8,
+     "summary": "Crescimento, marcos, triagens e vínculo com a família.",
+     "focus": "curvas, marcos do desenvolvimento e triagens",
+     "keyPoints": [
+      "Curvas de crescimento e IMC",
+      "Marcos do desenvolvimento",
+      "M-CHAT e triagens neonatais"
+     ],
+     "checklist": [
+      "Estudar a teoria de curvas, marcos do desenvolvimento e triagens",
+      "Dominar: Curvas de crescimento e IMC",
+      "Dominar: Marcos do desenvolvimento",
+      "Dominar: M-CHAT e triagens neonatais",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "ped-neonatal",
+     "area": "pediatria",
+     "title": "Reanimação neonatal",
+     "weight": 5,
+     "incidence": 10.0,
+     "summary": "Atenção ao nascimento, APGAR e reanimação.",
+     "focus": "passos iniciais, VPP e massagem cardíaca",
+     "keyPoints": [
+      "Passos iniciais e estímulo",
+      "VPP e oxigênio",
+      "Massagem cardíaca e adrenalina"
+     ],
+     "checklist": [
+      "Estudar a teoria de passos iniciais, VPP e massagem cardíaca",
+      "Dominar: Passos iniciais e estímulo",
+      "Dominar: VPP e oxigênio",
+      "Dominar: Massagem cardíaca e adrenalina",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "ped-adolescencia",
+     "area": "pediatria",
+     "title": "Adolescência e saúde do adolescente",
+     "weight": 4,
+     "incidence": 6.0,
+     "summary": "Puberdade, saúde sexual e transtornos mentais.",
+     "focus": "Tanner, ISTs e saúde mental",
+     "keyPoints": [
+      "Estadiamento de Tanner",
+      "Contracepção e ISTs",
+      "Depressão e automutilação"
+     ],
+     "checklist": [
+      "Estudar a teoria de Tanner, ISTs e saúde mental",
+      "Dominar: Estadiamento de Tanner",
+      "Dominar: Contracepção e ISTs",
+      "Dominar: Depressão e automutilação",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "ped-aleitamento",
+     "area": "pediatria",
+     "title": "Aleitamento e alimentação",
+     "weight": 4,
+     "incidence": 7.0,
+     "summary": "Amamentação, introdução alimentar e deficiências nutricionais.",
+     "focus": "aleitamento materno e alimentação complementar",
+     "keyPoints": [
+      "Técnica e manejo de fissuras",
+      "Introdução alimentar aos 6 meses",
+      "Anemia ferropriva e vitamina D"
+     ],
+     "checklist": [
+      "Estudar a teoria de aleitamento materno e alimentação complementar",
+      "Dominar: Técnica e manejo de fissuras",
+      "Dominar: Introdução alimentar aos 6 meses",
+      "Dominar: Anemia ferropriva e vitamina D",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "ped-gastro",
+     "area": "pediatria",
+     "title": "Gastroenterologia pediátrica",
+     "weight": 4,
+     "incidence": 7.6,
+     "summary": "Diarreia, constipação e dor abdominal funcional.",
+     "focus": "diarreia aguda, constipação e Roma IV",
+     "keyPoints": [
+      "Classificação de desidratação",
+      "Constipação funcional",
+      "Síndrome do intestino irritável"
+     ],
+     "checklist": [
+      "Estudar a teoria de diarreia aguda, constipação e Roma IV",
+      "Dominar: Classificação de desidratação",
+      "Dominar: Constipação funcional",
+      "Dominar: Síndrome do intestino irritável",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "ped-ictericia",
+     "area": "pediatria",
+     "title": "Icterícia neonatal",
+     "weight": 4,
+     "incidence": 7.0,
+     "summary": "Icterícia fisiológica, patológica e fototerapia.",
+     "focus": "zonas de Kramer, bili total e fatores de risco",
+     "keyPoints": [
+      "Icterícia precoce e tardia",
+      "Fototerapia e exsanguineotransfusão",
+      "Colestase neonatal"
+     ],
+     "checklist": [
+      "Estudar a teoria de zonas de Kramer, bili total e fatores de risco",
+      "Dominar: Icterícia precoce e tardia",
+      "Dominar: Fototerapia e exsanguineotransfusão",
+      "Dominar: Colestase neonatal",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "ped-infecto",
+     "area": "pediatria",
+     "title": "Infectologia pediátrica",
+     "weight": 4,
+     "incidence": 14.6,
+     "summary": "Exantemas, diarreias, parasitoses e ISTs.",
+     "focus": "exantemas, diarreia e doenças tropicais",
+     "keyPoints": [
+      "Diagnóstico diferencial dos exantemas",
+      "Diarreia aguda e desidratação",
+      "Esquistossomose e parasitoses"
+     ],
+     "checklist": [
+      "Estudar a teoria de exantemas, diarreia e doenças tropicais",
+      "Dominar: Diagnóstico diferencial dos exantemas",
+      "Dominar: Diarreia aguda e desidratação",
+      "Dominar: Esquistossomose e parasitoses",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "ped-prematuridade",
+     "area": "pediatria",
+     "title": "Prematuridade e sepse neonatal",
+     "weight": 4,
+     "incidence": 8.0,
+     "summary": "Complicações do prematuro, sepse e enterocolite.",
+     "focus": "sepse neonatal, enterocolite e displasia broncopulmonar",
+     "keyPoints": [
+      "Fatores de risco e antibiótico na sepse",
+      "Enterocolite e conduta",
+      "Alimentação e crescimento do prematuro"
+     ],
+     "checklist": [
+      "Estudar a teoria de sepse neonatal, enterocolite e displasia broncopulmonar",
+      "Dominar: Fatores de risco e antibiótico na sepse",
+      "Dominar: Enterocolite e conduta",
+      "Dominar: Alimentação e crescimento do prematuro",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "ped-urgencias",
+     "area": "pediatria",
+     "title": "Urgências pediátricas",
+     "weight": 4,
+     "incidence": 8.0,
+     "summary": "Desidratação, convulsão, bronquiolite e trauma.",
+     "focus": "desidratação, crise convulsiva e choque",
+     "keyPoints": [
+      "Hidratação oral e venosa",
+      "Crise convulsiva e estado de mal",
+      "Choque pediátrico"
+     ],
+     "checklist": [
+      "Estudar a teoria de desidratação, crise convulsiva e choque",
+      "Dominar: Hidratação oral e venosa",
+      "Dominar: Crise convulsiva e estado de mal",
+      "Dominar: Choque pediátrico",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "ped-cardio",
+     "area": "pediatria",
+     "title": "Cardiologia pediátrica",
+     "weight": 3,
+     "incidence": 5.0,
+     "summary": "Cardiopatias congênitas e sopros inocentes.",
+     "focus": "sopros, cianose e insuficiência cardíaca",
+     "keyPoints": [
+      "Sopro inocente versus patológico",
+      "Cianose e teste do coraçãozinho",
+      "Cardiopatias ducto-dependentes"
+     ],
+     "checklist": [
+      "Estudar a teoria de sopros, cianose e insuficiência cardíaca",
+      "Dominar: Sopro inocente versus patológico",
+      "Dominar: Cianose e teste do coraçãozinho",
+      "Dominar: Cardiopatias ducto-dependentes",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "ped-endo",
+     "area": "pediatria",
+     "title": "Endocrinologia pediátrica",
+     "weight": 3,
+     "incidence": 4.0,
+     "summary": "Hipotireoidismo congênito, hiperplasia adrenal e distúrbios metabólicos.",
+     "focus": "triagens neonatais, hiperplasia adrenal e erros inatos",
+     "keyPoints": [
+      "Triagem neonatal e hipotireoidismo congênito",
+      "Hiperplasia adrenal congênita",
+      "Erros inatos do metabolismo"
+     ],
+     "checklist": [
+      "Estudar a teoria de triagens neonatais, hiperplasia adrenal e erros inatos",
+      "Dominar: Triagem neonatal e hipotireoidismo congênito",
+      "Dominar: Hiperplasia adrenal congênita",
+      "Dominar: Erros inatos do metabolismo",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "ped-hemato",
+     "area": "pediatria",
+     "title": "Hematologia e oncologia pediátrica",
+     "weight": 3,
+     "incidence": 5.0,
+     "summary": "Anemias, leucemias e síndrome hemolítico-urêmica.",
+     "focus": "palidez, linfadenopatia e SHU",
+     "keyPoints": [
+      "Anemia ferropriva",
+      "Leucemia linfoblástica aguda",
+      "SHU e diarreia sanguinolenta"
+     ],
+     "checklist": [
+      "Estudar a teoria de palidez, linfadenopatia e SHU",
+      "Dominar: Anemia ferropriva",
+      "Dominar: Leucemia linfoblástica aguda",
+      "Dominar: SHU e diarreia sanguinolenta",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "ped-neuro",
+     "area": "pediatria",
+     "title": "Neurologia pediátrica",
+     "weight": 3,
+     "incidence": 4.5,
+     "summary": "Convulsão febril, epilepsias e atraso do desenvolvimento.",
+     "focus": "crise convulsiva, epilepsia e marcos neurológicos",
+     "keyPoints": [
+      "Crise febril simples versus complexa",
+      "Estado de mal epiléptico",
+      "Atraso do desenvolvimento e investigação"
+     ],
+     "checklist": [
+      "Estudar a teoria de crise convulsiva, epilepsia e marcos neurológicos",
+      "Dominar: Crise febril simples versus complexa",
+      "Dominar: Estado de mal epiléptico",
+      "Dominar: Atraso do desenvolvimento e investigação",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "ped-pneumo",
+     "area": "pediatria",
+     "title": "Pneumologia pediátrica",
+     "weight": 3,
+     "incidence": 6.5,
+     "summary": "Asma, bronquiolite e pneumonia.",
+     "focus": "bronquiolite, asma e PAC",
+     "keyPoints": [
+      "Manejo da bronquiolite",
+      "Asma na infância",
+      "Antibiótico na pneumonia"
+     ],
+     "checklist": [
+      "Estudar a teoria de bronquiolite, asma e PAC",
+      "Dominar: Manejo da bronquiolite",
+      "Dominar: Asma na infância",
+      "Dominar: Antibiótico na pneumonia",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "preventiva",
+   "name": "Preventiva e Saúde Coletiva",
+   "short": "PREV",
+   "color": "#65762c",
+   "weight": 14,
+   "description": "SUS, APS, ética e epidemiologia: conteúdo previsível e de alto retorno.",
+   "icon": "heart-pulse",
+   "topics": [
+    {
+     "id": "prev-aps",
+     "area": "preventiva",
+     "title": "Atenção Primária à Saúde",
+     "weight": 5,
+     "incidence": 13.0,
+     "summary": "Atributos da APS, PNAB e acesso.",
+     "focus": "atributos essenciais da APS e organização da UBS",
+     "keyPoints": [
+      "Atributos da APS",
+      "PNAB e composição de equipe",
+      "Acesso e longitudinalidade"
+     ],
+     "checklist": [
+      "Estudar a teoria de atributos essenciais da APS e organização da UBS",
+      "Dominar: Atributos da APS",
+      "Dominar: PNAB e composição de equipe",
+      "Dominar: Acesso e longitudinalidade",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "prev-cronicas",
+     "area": "preventiva",
+     "title": "Doenças crônicas na APS",
+     "weight": 5,
+     "incidence": 12.0,
+     "summary": "HAS, diabetes, asma, DPOC e tabagismo na atenção primária.",
+     "focus": "rastreio, adesão e manejo na APS",
+     "keyPoints": [
+      "Linha de cuidado de HAS e DM",
+      "Asma e DPOC na APS",
+      "Tabagismo e cessação"
+     ],
+     "checklist": [
+      "Estudar a teoria de rastreio, adesão e manejo na APS",
+      "Dominar: Linha de cuidado de HAS e DM",
+      "Dominar: Asma e DPOC na APS",
+      "Dominar: Tabagismo e cessação",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "prev-imunizacao",
+     "area": "preventiva",
+     "title": "Imunizações no adulto e na APS",
+     "weight": 5,
+     "incidence": 12.0,
+     "summary": "Calendário do adulto, gestante e situações especiais.",
+     "focus": "calendário, contraindicações e hesitação vacinal",
+     "keyPoints": [
+      "Calendário do adulto e gestante",
+      "Vacinas em imunossuprimidos",
+      "Hesitação vacinal e comunicação"
+     ],
+     "checklist": [
+      "Estudar a teoria de calendário, contraindicações e hesitação vacinal",
+      "Dominar: Calendário do adulto e gestante",
+      "Dominar: Vacinas em imunossuprimidos",
+      "Dominar: Hesitação vacinal e comunicação",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "prev-epidemiologia",
+     "area": "preventiva",
+     "title": "Epidemiologia e medidas de associação",
+     "weight": 4,
+     "incidence": 15.2,
+     "summary": "Incidência, prevalência, risco relativo e estudos.",
+     "focus": "medidas de frequência e desenhos de estudo",
+     "keyPoints": [
+      "Incidência versus prevalência",
+      "Risco relativo e odds ratio",
+      "Viés e causalidade"
+     ],
+     "checklist": [
+      "Estudar a teoria de medidas de frequência e desenhos de estudo",
+      "Dominar: Incidência versus prevalência",
+      "Dominar: Risco relativo e odds ratio",
+      "Dominar: Viés e causalidade",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "prev-infecto",
+     "area": "preventiva",
+     "title": "Infectologia na APS",
+     "weight": 4,
+     "incidence": 8.0,
+     "summary": "Tuberculose, arboviroses e mpox no território.",
+     "focus": "busca ativa, notificação e manejo inicial",
+     "keyPoints": [
+      "Tuberculose na APS",
+      "Arboviroses e notificação",
+      "Mpox e isolamento"
+     ],
+     "checklist": [
+      "Estudar a teoria de busca ativa, notificação e manejo inicial",
+      "Dominar: Tuberculose na APS",
+      "Dominar: Arboviroses e notificação",
+      "Dominar: Mpox e isolamento",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "prev-mfc",
+     "area": "preventiva",
+     "title": "MFC e método clínico centrado na pessoa",
+     "weight": 4,
+     "incidence": 14.0,
+     "summary": "MCCP, entrevista e plano compartilhado.",
+     "focus": "MCCP e abordagem familiar",
+     "keyPoints": [
+      "Componentes do MCCP",
+      "Entrevista e escuta ativa",
+      "Plano de cuidado compartilhado"
+     ],
+     "checklist": [
+      "Estudar a teoria de MCCP e abordagem familiar",
+      "Dominar: Componentes do MCCP",
+      "Dominar: Entrevista e escuta ativa",
+      "Dominar: Plano de cuidado compartilhado",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "prev-sus",
+     "area": "preventiva",
+     "title": "SUS: princípios, financiamento e redes",
+     "weight": 4,
+     "incidence": 20.1,
+     "summary": "Base legal, princípios, financiamento e organização da rede.",
+     "focus": "Constituição, Lei 8.080 e financiamento",
+     "keyPoints": [
+      "Princípios doutrinários e organizativos",
+      "Lei 8.080 e participação social",
+      "Financiamento e regionalização"
+     ],
+     "checklist": [
+      "Estudar a teoria de Constituição, Lei 8.080 e financiamento",
+      "Dominar: Princípios doutrinários e organizativos",
+      "Dominar: Lei 8.080 e participação social",
+      "Dominar: Financiamento e regionalização",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "prev-saude-mulher",
+     "area": "preventiva",
+     "title": "Saúde da mulher na APS",
+     "weight": 4,
+     "incidence": 7.0,
+     "summary": "Pré-natal de risco habitual, planejamento e climatério na atenção primária.",
+     "focus": "pré-natal compartilhado, contracepção e climatério",
+     "keyPoints": [
+      "Pré-natal na APS e referência de risco",
+      "Contracepção e planejamento familiar",
+      "Climatério e rastreios"
+     ],
+     "checklist": [
+      "Estudar a teoria de pré-natal compartilhado, contracepção e climatério",
+      "Dominar: Pré-natal na APS e referência de risco",
+      "Dominar: Contracepção e planejamento familiar",
+      "Dominar: Climatério e rastreios",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "prev-vigilancia",
+     "area": "preventiva",
+     "title": "Vigilância em saúde",
+     "weight": 4,
+     "incidence": 7.3,
+     "summary": "Notificação, surtos e vigilância epidemiológica.",
+     "focus": "doenças de notificação compulsória e investigação de surto",
+     "keyPoints": [
+      "Lista de notificação compulsória",
+      "Investigação de surto",
+      "Vigilância de óbitos"
+     ],
+     "checklist": [
+      "Estudar a teoria de doenças de notificação compulsória e investigação de surto",
+      "Dominar: Lista de notificação compulsória",
+      "Dominar: Investigação de surto",
+      "Dominar: Vigilância de óbitos",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "prev-etica",
+     "area": "preventiva",
+     "title": "Ética médica e bioética",
+     "weight": 4,
+     "incidence": 15.9,
+     "summary": "Código de Ética, consentimento e fim de vida.",
+     "focus": "autonomia, confidencialidade e documentos",
+     "keyPoints": [
+      "Código de Ética Médica",
+      "Consentimento informado",
+      "Diretivas antecipadas e ortotanásia"
+     ],
+     "checklist": [
+      "Estudar a teoria de autonomia, confidencialidade e documentos",
+      "Dominar: Código de Ética Médica",
+      "Dominar: Consentimento informado",
+      "Dominar: Diretivas antecipadas e ortotanásia",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "prev-estatistica",
+     "area": "preventiva",
+     "title": "Bioestatística",
+     "weight": 3,
+     "incidence": 7.3,
+     "summary": "Sensibilidade, especificidade, VPP e testes.",
+     "focus": "acurácia de testes diagnósticos",
+     "keyPoints": [
+      "Sensibilidade e especificidade",
+      "Valores preditivos",
+      "Intervalo de confiança e p-valor"
+     ],
+     "checklist": [
+      "Estudar a teoria de acurácia de testes diagnósticos",
+      "Dominar: Sensibilidade e especificidade",
+      "Dominar: Valores preditivos",
+      "Dominar: Intervalo de confiança e p-valor",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "prev-determinantes",
+     "area": "preventiva",
+     "title": "Determinantes sociais da saúde",
+     "weight": 3,
+     "incidence": 5.0,
+     "summary": "Vulnerabilidade, equidade e abordagem comunitária.",
+     "focus": "determinantes sociais e equidade",
+     "keyPoints": [
+      "Modelo de Dahlgren e Whitehead",
+      "Vulnerabilidade social",
+      "Ações intersetoriais"
+     ],
+     "checklist": [
+      "Estudar a teoria de determinantes sociais e equidade",
+      "Dominar: Modelo de Dahlgren e Whitehead",
+      "Dominar: Vulnerabilidade social",
+      "Dominar: Ações intersetoriais",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "prev-idoso",
+     "area": "preventiva",
+     "title": "Saúde do idoso na APS",
+     "weight": 3,
+     "incidence": 6.0,
+     "summary": "Envelhecimento, funcionalidade e cuidado domiciliar.",
+     "focus": "avaliação funcional e rede de apoio",
+     "keyPoints": [
+      "Avaliação de funcionalidade",
+      "Cuidados paliativos",
+      "Rede de apoio e AD"
+     ],
+     "checklist": [
+      "Estudar a teoria de avaliação funcional e rede de apoio",
+      "Dominar: Avaliação de funcionalidade",
+      "Dominar: Cuidados paliativos",
+      "Dominar: Rede de apoio e AD",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "prev-trabalhador",
+     "area": "preventiva",
+     "title": "Saúde do trabalhador",
+     "weight": 3,
+     "incidence": 4.0,
+     "summary": "Acidentes, doenças ocupacionais e nexo causal.",
+     "focus": "CAT, notificação e prevenção",
+     "keyPoints": [
+      "Doenças ocupacionais",
+      "CAT e notificação",
+      "Prevenção e EPI"
+     ],
+     "checklist": [
+      "Estudar a teoria de CAT, notificação e prevenção",
+      "Dominar: Doenças ocupacionais",
+      "Dominar: CAT e notificação",
+      "Dominar: Prevenção e EPI",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "prev-saude-mental",
+     "area": "preventiva",
+     "title": "Saúde mental na APS",
+     "weight": 3,
+     "incidence": 6.0,
+     "summary": "Transtornos mentais comuns, CAPS e matriciamento.",
+     "focus": "rede de saúde mental e manejo inicial",
+     "keyPoints": [
+      "RAPS e CAPS",
+      "Transtorno mental comum",
+      "Matriciamento"
+     ],
+     "checklist": [
+      "Estudar a teoria de rede de saúde mental e manejo inicial",
+      "Dominar: RAPS e CAPS",
+      "Dominar: Transtorno mental comum",
+      "Dominar: Matriciamento",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    },
+    {
+     "id": "prev-urgencias",
+     "area": "preventiva",
+     "title": "Urgências na APS",
+     "weight": 3,
+     "incidence": 6.0,
+     "summary": "Cefaleia, lombalgia e crises agudas na UBS.",
+     "focus": "sinais de alarme e referência",
+     "keyPoints": [
+      "Cefaleia de alarme",
+      "Lombalgia e red flags",
+      "Crise asmática e anafilaxia"
+     ],
+     "checklist": [
+      "Estudar a teoria de sinais de alarme e referência",
+      "Dominar: Cefaleia de alarme",
+      "Dominar: Lombalgia e red flags",
+      "Dominar: Crise asmática e anafilaxia",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ]
+    }
+   ]
+  }
+ ]
+}

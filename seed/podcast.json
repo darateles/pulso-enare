@@ -1,0 +1,55 @@
+{
+ "version": 1,
+ "episodes": [
+  {"id":"pod-1","title":"HAS: diagnóstico sem pressa, conduta sem atraso","area":"Clínica Médica","minutes":9,"description":"Como confirmar, estratificar e não perder a emergência hipertensiva.","sections":[
+   {"h":"Por que a aferição importa","t":"O diagnóstico de hipertensão exige medidas persistentemente elevadas e técnica correta. Uma medida isolada no pronto-socorro não fecha o diagnóstico, mas pode indicar emergência quando há lesão aguda de órgão-alvo."},
+   {"h":"Confirmação e risco","t":"Use MAPA ou MRPA para confirmar e afastar efeito do jaleco branco. A escolha terapêutica considera risco cardiovascular, comorbidades e metas individualizadas."},
+   {"h":"Crises hipertensivas","t":"Sem lesão aguda, trate a urgência com queda gradual. Com encefalopatia, EAP, SCA ou dissecção, reduza a pressão de forma controlada e específica. Não derrube a PA rapidamente sem avaliar o órgão."},
+   {"h":"Ponto de prova","t":"Diferencie urgência de emergência e conheça as drogas por cenário: nitroprussiato, nitroglicerina, hidralazina, labetalol."}]},
+  {"id":"pod-2","title":"Dengue: o que muda a cada sinal de alarme","area":"Infectologia","minutes":10,"description":"Classificação, hidratação por peso e os erros que atrasam a conduta.","sections":[
+   {"h":"A doença e suas fases","t":"A dengue tem fase febril e fase crítica. A queda da febre pode marcar piora, com extravasamento plasmático e choque."},
+   {"h":"Sinais de alarme","t":"Dor abdominal intensa, vômitos persistentes, sangramento, letargia, hepatomegalia e acúmulo de líquidos exigem hospitalização e hidratação venosa."},
+   {"h":"Hidratação","t":"O tratamento segue o peso e o grupo clínico. Evite excesso em cardiopatas e renais crônicos. Monitore diurese, hematócrito e sinais de choque."},
+   {"h":"Ponto de prova","t":"Prova de laço, plaquetopenia e hemoconcentração não substituem a avaliação clínica. A hidratação precoce muda desfecho."}]},
+  {"id":"pod-3","title":"SCA: os primeiros 10 minutos","area":"Cardiologia","minutes":11,"description":"ECG, dupla antiagregação, reperfusão e armadilhas do infarto sem supra.","sections":[
+   {"h":"Reconheça e monitore","t":"Dor torácica com fatores de risco exige ECG em até 10 minutos, monitor e acesso venoso. O supradesnivelamento é tempo-dependente."},
+   {"h":"Terapia inicial","t":"AAS mastigável, anticoagulação e dupla antiagregação conforme estratégia. Evite betabloqueador na congestão ou choque."},
+   {"h":"Reperfusão","t":"STEMI: angioplastia em até 90 minutos do primeiro contato. Sem centros com hemodinâmica no tempo, trombólise se não houver contraindicação."},
+   {"h":"Ponto de prova","t":"Infarto sem supra também é emergência. Estratifique com escores e repetição de ECG. Não confunda dissecção com SCA."}]},
+  {"id":"pod-4","title":"Sepse: pacote da primeira hora sem decoreba","area":"Infectologia","minutes":8,"description":"Reconhecimento, culturas, antibiótico e ressuscitação guiada por perfusão.","sections":[
+   {"h":"Definição operacional","t":"Sepse é disfunção orgânica por resposta desregulada à infecção. Hipotensão e lactato elevado sinalizam gravidade."},
+   {"h":"Primeira hora","t":"Colha culturas, lactato, antibiótico de amplo espectro e cristaloide. O antibiótico não espera resultado."},
+   {"h":"Choque","t":"Noradrenalina é vasopressor de escolha. Controle o foco. Hidratação excessiva pode piorar congestão."},
+   {"h":"Ponto de prova","t":"Tempo até antibiótico e controle de foco são determinantes. Identifique o foco e ajuste cobertura."}]},
+  {"id":"pod-5","title":"Pré-eclâmpsia e HELLP: reconhecer para não atrasar","area":"Obstetrícia","minutes":10,"description":"Critérios, sulfato de magnésio e o momento do parto.","sections":[
+   {"h":"Diagnóstico","t":"Hipertensão após 20 semanas com proteinúria ou disfunção orgânica define pré-eclâmpsia. A ausência de proteinúria não exclui."},
+   {"h":"Gravidade e HELLP","t":"Plaquetopenia, enzimas hepáticas e hemólise compõem HELLP. Cefaleia refratária e dor em hipocôndrio direito são alertas."},
+   {"h":"Tratamento","t":"Sulfato de magnésio previne eclâmpsia. Anti-hipertensivos controlam a pressão. O parto é a resolução definitiva."},
+   {"h":"Ponto de prova","t":"Pré-eclâmpsia pode surgir no puerpério. Não suspenda vigilância após o parto."}]},
+  {"id":"pod-6","title":"Puericultura: crescimento e desenvolvimento com olhar amplo","area":"Pediatria","minutes":9,"description":"Curvas, marcos, vínculo e o que não pode passar na consulta.","sections":[
+   {"h":"Crescimento","t":"Pese, meça e plote nas curvas. Quedas de percentil importam mais que um ponto isolado."},
+   {"h":"Desenvolvimento","t":"Pergunte sobre marcos e brincadeira. Atraso motor ou de linguagem exige estímulo precoce e investigação."},
+   {"h":"Família","t":"Escuta da mãe, rede de apoio e sinais de depressão pós-parto fazem parte da consulta."},
+   {"h":"Ponto de prova","t":"M-CHAT aos 18 e 24 meses. Triagens visuais, auditivas e neonatais devem estar registradas."}]},
+  {"id":"pod-7","title":"SUS: princípios que realmente caem","area":"Preventiva","minutes":8,"description":"Doutrina, organização, financiamento e controle social sem confusão.","sections":[
+   {"h":"Base constitucional","t":"Saúde é direito de todos e dever do Estado. O SUS nasce da Reforma Sanitária e da Constituição de 1988."},
+   {"h":"Princípios","t":"Universalidade, integralidade e equidade são doutrinários. Descentralização, regionalização, hierarquização e participação social são organizativos."},
+   {"h":"Lei 8.080","t":"Dispõe sobre organização, financiamento e competências. Não confunda com a Lei 8.142, que trata de participação e transferências."},
+   {"h":"Ponto de prova","t":"Controle social ocorre por conselhos e conferências. O setor privado integra o SUS de forma complementar."}]},
+  {"id":"pod-8","title":"Ética: autonomia, consentimento e fim de vida","area":"Preventiva","minutes":8,"description":"Decisão compartilhada, diretivas antecipadas e comunicação de más notícias.","sections":[
+   {"h":"Autonomia","t":"O paciente capaz decide sobre seu corpo. Consentimento é processo, não assinatura."},
+   {"h":"Fim de vida","t":"Ortotanásia permite conforto sem obstinação. Diretivas antecipadas registram vontades quando o paciente perde capacidade."},
+   {"h":"Más notícias","t":"Use protocolo SPIKES, ambiente reservado e linguagem clara. Verifique o que o paciente já sabe."},
+   {"h":"Ponto de prova","t":"Sigilo tem exceções legais. Publicidade médica segue regras do CFM e não pode prometer resultado."}]},
+  {"id":"pod-9","title":"Trauma: ABCDE sem pular etapas","area":"Cirurgia","minutes":11,"description":"Choque hemorrágico, FAST e controle de danos.","sections":[
+   {"h":"Sequência","t":"O ATLS prioriza via aérea, ventilação, circulação, neurológico e exposição. Trate a ameaça antes de avançar."},
+   {"h":"Choque","t":"Hipotensão no trauma é hemorragia até prova contrária. Pare sangramentos compressíveis e acione protocolo de transfusão."},
+   {"h":"Imagem","t":"FAST e radiografias guiam o instável. Tomografia só no estável. Laparotomia na instabilidade com positividade."},
+   {"h":"Ponto de prova","t":"Hipotensão permissiva e controle de danos são pontes para a cirurgia. Aquecimento e correção de coagulopatia importam."}]},
+  {"id":"pod-10","title":"Puerpério e hemorragia pós-parto","area":"Obstetrícia","minutes":9,"description":"Causas, útero, tônus, tecido, trauma e trombina.","sections":[
+   {"h":"Reconhecimento","t":"Perda sanguínea e taquicardia podem ser subestimadas. Atonia é a causa mais comum."},
+   {"h":"Manejo","t":"Massagem uterina, ocitocina, ácido tranexâmico e reparo de lacerações. Em refratário, balão, sutura e histerectomia."},
+   {"h":"Puerpério","t":"Infecção puerperal e pré-eclâmpsia tardia são armadilhas. Aleitamento tem manejo próprio."},
+   {"h":"Ponto de prova","t":"A sequência dos 4 T guia a busca etiológica. Não espere coagulopatia para agir."}]}
+ ]
+}
