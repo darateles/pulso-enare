@@ -57,7 +57,7 @@ export default function Topico() {
     const existing = new Set(topicCards.map((c) => c.id));
     const cards = [
       { id: `tc-${t.id}-0`, front: `Quais são os pontos críticos e a conduta em ${t.title}?`, back: `${t.summary}\n\n${t.keyPoints.map((k) => `• ${k}`).join('\n')}`, deck: t.title, tags: [t.id, 'guia'], createdAt: new Date().toISOString() },
-      ...t.keyPoints.map((k, i) => ({ id: `tc-${t.id}-${i + 1}`, front: `Explique e aplique: ${k}`, back: `**${t.title}** — ${t.summary}\n\nFoco: ${t.focus}.\n\nPegadinha: ${guide.traps?.[i % (guide.traps?.length || 1)] || 'compare critérios antes de decidir.'}`, deck: t.title, tags: [t.id, 'guia'], createdAt: new Date().toISOString() })),
+      ...t.keyPoints.map((k, i) => ({ id: `tc-${t.id}-${i + 1}`, front: `Explique e aplique: ${k}`, back: `${t.title} — ${t.summary}\n\nFoco: ${t.focus}.\n\nPegadinha: ${guide.traps?.[i % (guide.traps?.length || 1)] || 'compare critérios antes de decidir.'}`, deck: t.title, tags: [t.id, 'guia'], createdAt: new Date().toISOString() })),
     ].filter((c) => !existing.has(c.id));
     if (!cards.length) { toast('Este baralho já está completo.'); return; }
     updateUser((prev) => ({ ...prev, flashcards: [...cards, ...prev.flashcards] }));

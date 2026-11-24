@@ -178,7 +178,7 @@ export default function QuestionPlayer({ pool, mode = 'treino', duration = 0, on
             {reporting && (
               <div className="report-box">
                 <input value={reportNote} onChange={(e) => setReportNote(e.target.value)} placeholder="Explique o erro de gabarito ou formatação" />
-                <Button size="sm" variant="soft" onClick={async () => { await api.reportQuestion(q.id, { chosen: picked, note: reportNote }); setReporting(false); setReportNote(''); toast('Obrigado. Questão reportada para revisão.'); }}>Enviar</Button>
+                <Button size="sm" variant="soft" onClick={async () => { try { await api.reportQuestion(q.id, { chosen: picked, note: reportNote }); setReporting(false); setReportNote(''); toast('Obrigado. Questão reportada para revisão.'); } catch { toast('Não foi possível reportar agora.', 'error'); }}>Enviar</Button>
               </div>
             )}
           </div>

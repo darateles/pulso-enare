@@ -135,8 +135,7 @@ app.post('/api/logout', (req, res) => {
 
 app.get('/api/session', (req, res) => {
   const user = readSession(req);
-  if (!user) return res.status(401).json({ error: 'Não autenticado.' });
-  ok(res, { account: user });
+  ok(res, { authenticated: Boolean(user), account: user || null });
 });
 
 if (ACCOUNTS.size) {
@@ -321,7 +320,7 @@ Sem markdown.`;
       topicId,
       stem: parsed.stem,
       options: parsed.options,
-      answer: parsed.answer,
+      answer: String(parsed.answer).toUpperCase(),
       status: 'active',
       explanation: parsed.explanation || '',
       difficulty: 4,
@@ -333,7 +332,7 @@ Sem markdown.`;
   } catch (err) { next(err); }
 });
 
-app.get('/api/export', async (_req, res, next) => {
+app.get('/api/export', async (req, res, next) => {
   try {
     const [user, questions] = await Promise.all([getUser(req.pulsoUser), getQuestions()]);
     res.setHeader('Content-Disposition', `attachment; filename="pulso-backup-${new Date().toISOString().slice(0, 10)}.json"`);
@@ -353,11 +352,11 @@ app.post('/api/import/backup', async (req, res, next) => {
   } catch (err) { next(err); }
 });
 
-app.post('/api/backup', async (_req, res, next) => {
+app.post('/api/backup', async (req, res, next) => {
   try { ok(res, { file: path.basename(await backupUser(req.pulsoUser, 'manual')) }); } catch (err) { next(err); }
 });
 
-app.post('/api/reset', async (_req, res, next) => {
+app.post('/api/reset', async (req, res, next) => {
   try { ok(res, await resetUser(req.pulsoUser)); } catch (err) { next(err); }
 });
 
@@ -416,7 +415,10 @@ app.post('/api/battles/:id/start', async (req, res, next) => {
 
 app.post('/api/battles/:id/answer', async (req, res, next) => {
   try {
-    const p = await answerBattle(req.params.id, req.body?.playerId, req.body || {});
+    const q = (await getQuestions()).find((x) => x.id === req.body?.questionId);
+    if (!q) return res.status(404).json({ error: 'Questão não encontrada.' });
+    const correct = q.answer && String(req.body?.chosen).toUpperCase() === String(q.answer).toUpperCase();
+    const p = await answerBattle(req.params.id, req.body?.playerId, { ...req.body, correct });
     ok(res, { player: { id: p.id, score: p.score, answered: p.answers.length } });
   } catch (err) { res.status(400).json({ error: err.message }); }
 });

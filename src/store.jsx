@@ -117,10 +117,12 @@ export function StoreProvider({ children }) {
     let alive = true;
     (async () => {
       try {
-        const cached = localStorage.getItem(CACHE);
-        if (cached) {
-          const parsed = JSON.parse(cached);
-          if (parsed.user) setUser((u) => ({ ...u, ...parsed.user }));
+        const sess = await api.session();
+        if (!alive) return;
+        if (!sess.authenticated) {
+          setNeedLogin(true);
+          setLoading(false);
+          return;
         }
         await hydrate();
       } catch (err) {

@@ -178,7 +178,7 @@ export function buildQuestions(blocks, { answerMap, areaDefault, curriculum, sou
   for (const block of blocks) {
     const area = block.area || areaDefault;
     if (!area) continue;
-    const answer = answerMap?.get(block.number) || null;
+    const answer = answerMap?.get(block.number)?.toUpperCase() || null;
     const topicId = guessTopic(area, `${block.stem} ${block.options.map((o) => o.text).join(' ')}`, curriculum);
     out.push({
       area,

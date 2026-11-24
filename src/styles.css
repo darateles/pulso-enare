@@ -1132,3 +1132,10 @@ code { background: var(--surface-2); border: 1px solid var(--line); border-radiu
 .page-error { max-width: 560px; margin: 14vh auto; text-align: center; display: grid; justify-items: center; gap: 9px; }
 .report-box { display: flex; gap: 6px; align-items: center; }
 .report-box input { font-size: .76rem; padding: 7px 9px; }
+.question-layout > *, .trainer-config, .question-side { min-width: 0; }
+.trainer-config select, .config-grid, .field { min-width: 0; }
+.trainer-config .segmented { max-width: 100%; }
+.mini-row span:nth-child(2) { min-width: 0; }
+.question-side, .side-card, .shortcut-list, .shortcut-list a { min-width: 0; }
+.side-card { grid-template-columns: minmax(0, 1fr); }
+.mini-row { width: 100%; min-width: 0; }

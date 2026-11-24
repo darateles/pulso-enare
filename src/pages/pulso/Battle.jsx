@@ -92,6 +92,7 @@ export default function Battle() {
   };
 
   const q = questions[index];
+  const qAnswer = q?.answer ? String(q.answer).trim().toUpperCase() : null;
   const topic = q ? curriculum.areas.flatMap((a) => a.topics).find((t) => t.id === q.topicId) : null;
 
   const submit = async () => {
@@ -186,12 +187,12 @@ export default function Battle() {
             <div className="q-options">
               {q.options.map((o) => {
                 let cls = selected === o.key ? 'selected' : '';
-                if (answered && o.key === q.answer) cls = 'correct';
+                if (answered && o.key === qAnswer) cls = 'correct';
                 else if (answered && o.key === selected) cls = 'wrong';
-                return <button key={o.key} className={`q-option ${cls}`} disabled={answered} onClick={() => setSelected(o.key)}><span className="q-key">{o.key}</span><span>{o.text}</span>{answered && o.key === q.answer && <CheckCircle2 size={18} />}{answered && o.key === selected && o.key !== q.answer && <XCircle size={18} />}</button>;
+                return <button key={o.key} className={`q-option ${cls}`} disabled={answered} onClick={() => setSelected(o.key)}><span className="q-key">{o.key}</span><span>{o.text}</span>{answered && o.key === qAnswer && <CheckCircle2 size={18} />}{answered && o.key === selected && o.key !== qAnswer && <XCircle size={18} />}</button>;
               })}
             </div>
-            {answered && <div className={`q-feedback ${q.answer === selected ? 'ok' : 'bad'}`}><div className="q-feedback-head">{q.answer === selected ? 'Acertou' : `Correta: ${q.answer}`}</div><p className="muted-note">{q.explanation}</p></div>}
+            {answered && <div className={`q-feedback ${qAnswer === selected ? 'ok' : 'bad'}`}><div className="q-feedback-head">{qAnswer === selected ? 'Acertou' : `Correta: ${qAnswer}`}</div><p className="muted-note">{q.explanation}</p></div>}
             <div className="q-submit">{!answered ? <Button onClick={submit} disabled={selected == null} icon={Send}>Confirmar</Button> : <Button onClick={next} icon={ArrowRight}>{index + 1 >= questions.length ? 'Ver resultado' : 'Próxima'}</Button>}</div>
           </Card>
           <Card className="battle-ranking">

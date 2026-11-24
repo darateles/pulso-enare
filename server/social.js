@@ -113,6 +113,7 @@ export async function answerBattle(id, playerId, { questionId, chosen, correct, 
   const p = b.players.find((x) => x.id === playerId);
   if (!p) throw new Error('Jogador não encontrado.');
   if (b.status !== 'playing') throw new Error('Batalha não iniciada.');
+  if (!b.questionIds.includes(questionId)) throw new Error('Questão não pertence a esta batalha.');
   if (p.answers.some((a) => a.questionId === questionId)) return p;
   const sec = Math.min(120, Math.max(1, Number(seconds) || 30));
   const points = correct ? 100 + Math.max(0, 50 - sec) : 0;
