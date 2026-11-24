@@ -1,4 +1,4 @@
-const CACHE = 'pulso-shell-v4';
+const CACHE = 'pulso-shell-v5';
 const ENTRY = ['/', '/index.html', '/favicon.svg', '/manifest.webmanifest'];
 
 self.addEventListener('install', (event) => {
