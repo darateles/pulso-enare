@@ -12,7 +12,14 @@ O Pulso é um app Node com **estado em arquivo**. Para hospedar, use um provedor
 
 > Importante: a versão atual é **single-user**. Todas as pessoas que tiverem a senha veem o mesmo progresso. Para vender para vários alunos, o próximo passo é adicionar autenticação individual e banco (Postgres/Supabase).
 
-## Railway (recomendado para teste rápido)
+## Arquitetura recomendada (grátis, 24/7)
+
+- App: Render Free (Docker)
+- Dados: Turso Free (libSQL)
+
+O Render dorme após 15 min de inatividade e acorda na primeira visita. Os dados continuam no Turso. Configure `TURSO_DATABASE_URL` e `TURSO_AUTH_TOKEN` no serviço.
+
+## Railway
 
 1. Crie um projeto e envie a pasta `enare/` para um repositório GitHub, ou use `railway up`.
 2. Em **Variables**, defina:

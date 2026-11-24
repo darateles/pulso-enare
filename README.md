@@ -52,7 +52,7 @@ npm start
 
 ## Hospedagem
 
-Sim, dá para publicar — desde que com **disco persistente** e `APP_PASSWORD`. O guia para Railway, Render, Fly.io e VPS está em [`DEPLOY.md`](./DEPLOY.md). Railway/Render/Fly são recomendados; Vercel/Netlify não são ideais para esta arquitetura em arquivos.
+Sim, dá para publicar — desde que com **disco persistente** e `APP_PASSWORD`. A arquitetura publicada usa **Render Free + Turso Free** (banco libSQL). Guia e alternativas em [`DEPLOY.md`](./DEPLOY.md).
 
 ## Dados e backup
 
