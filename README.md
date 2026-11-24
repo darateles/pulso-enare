@@ -1,5 +1,9 @@
 # Pulso · plataforma de estudos para o ENARE
 
+**Produção:** https://pulso-6cr9.onrender.com
+
+Persistência em Turso (libSQL). Render Free pode levar alguns segundos no primeiro acesso após inatividade.
+
 Plataforma local, sem login, para organizar a preparação ao ENARE com foco no que mais cai. Inclui:
 
 - **Mapa do edital** com 5 áreas, 82 subtópicos e peso por incidência real em provas de residência.
