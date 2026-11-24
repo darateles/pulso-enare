@@ -43,6 +43,16 @@ const app = express();
 const PORT = Number(process.env.PORT) || 4175;
 const HOST = process.env.HOST || '127.0.0.1';
 const APP_PASSWORD = process.env.APP_PASSWORD || '';
+const ACCOUNTS = new Map(
+  (process.env.APP_USERS || (APP_PASSWORD ? `${process.env.APP_USER || 'pulso'}:${APP_PASSWORD}` : ''))
+    .split(',').map((pair) => pair.trim()).filter(Boolean)
+    .map((pair) => {
+      const i = pair.indexOf(':');
+      const user = pair.slice(0, i).trim();
+      const pass = pair.slice(i + 1);
+      return [user, crypto.createHash('sha256').update(`${user}:${pass}`).digest()];
+    }).filter(([u]) => u),
+);
 app.disable('x-powered-by');
 app.use(compression({ threshold: 512 }));
 if (process.env.TRUST_PROXY) app.set('trust proxy', 1);
@@ -53,15 +63,22 @@ app.use((req, res, next) => {
   next();
 });
 
-if (APP_PASSWORD) {
-  const expected = crypto.createHash('sha256').update(`${process.env.APP_USER || 'pulso'}:${APP_PASSWORD}`).digest();
+if (ACCOUNTS.size) {
   app.use((req, res, next) => {
     if (req.path === '/api/health') return next();
     const header = req.headers.authorization || '';
     if (header.startsWith('Basic ')) {
       const pair = Buffer.from(header.slice(6), 'base64').toString('utf8');
-      const got = crypto.createHash('sha256').update(pair).digest();
-      if (got.length === expected.length && crypto.timingSafeEqual(got, expected)) return next();
+      const i = pair.indexOf(':');
+      const user = pair.slice(0, i);
+      const expected = ACCOUNTS.get(user);
+      if (expected) {
+        const got = crypto.createHash('sha256').update(pair).digest();
+        if (got.length === expected.length && crypto.timingSafeEqual(got, expected)) {
+          req.pulsoUser = user;
+          return next();
+        }
+      }
     }
     res.set('WWW-Authenticate', 'Basic realm="Pulso", charset="UTF-8"');
     return res.status(401).send('Acesso protegido. Informe usuário e senha.');
@@ -75,14 +92,14 @@ function ok(res, data) {
   res.json(data);
 }
 
-app.get('/api/bootstrap', async (_req, res, next) => {
+app.get('/api/bootstrap', async (req, res, next) => {
   try {
-    const [user, sources, count] = await Promise.all([getUser(), getSources(), getQuestions()]);
+    const [user, sources, count] = await Promise.all([getUser(req.pulsoUser), getSources(), getQuestions()]);
     ok(res, {
       user,
       sources,
       curriculum: { exam: curriculum.exam, areas: curriculum.areas },
-      meta: { totalQuestions: count.length },
+      meta: { totalQuestions: count.length, account: req.pulsoUser },
     });
   } catch (err) { next(err); }
 });
@@ -93,13 +110,13 @@ app.get('/api/questions', async (_req, res, next) => {
 
 app.put('/api/state', async (req, res, next) => {
   try {
-    ok(res, await saveUser(req.body || {}));
+    ok(res, await saveUser(req.pulsoUser, req.body || {}));
   } catch (err) { next(err); }
 });
 
 app.post('/api/attempts', async (req, res, next) => {
   try {
-    const user = await getUser();
+    const user = await getUser(req.pulsoUser);
     const { questionId } = req.body || {};
     const question = (await getQuestions()).find((q) => q.id === questionId);
     if (!question) return res.status(404).json({ error: 'Questão não encontrada.' });
@@ -119,14 +136,14 @@ app.post('/api/attempts', async (req, res, next) => {
     user.activity = user.activity || {};
     user.activity[day] = user.activity[day] || { minutes: 0, questions: 0, checklist: 0 };
     user.activity[day].questions += 1;
-    await saveUser(user);
+    await saveUser(req.pulsoUser, user);
     ok(res, attempt);
   } catch (err) { next(err); }
 });
 
 app.post('/api/topics/:topicId/review', async (req, res, next) => {
   try {
-    const user = await getUser();
+    const user = await getUser(req.pulsoUser);
     const { recall } = req.body || {};
     const progress = user.progress[req.params.topicId] || {};
     const intervals = { 1: 1, 2: 3, 3: 7, 4: 15, 5: 30 };
@@ -139,7 +156,7 @@ app.post('/api/topics/:topicId/review', async (req, res, next) => {
       lastReview: new Date().toISOString(),
       nextReview: base.toISOString().slice(0, 10),
     };
-    await saveUser(user);
+    await saveUser(req.pulsoUser, user);
     ok(res, user.progress[req.params.topicId]);
   } catch (err) { next(err); }
 });
@@ -243,7 +260,7 @@ Sem markdown.`;
 
 app.get('/api/export', async (_req, res, next) => {
   try {
-    const [user, questions] = await Promise.all([getUser(), getQuestions()]);
+    const [user, questions] = await Promise.all([getUser(req.pulsoUser), getQuestions()]);
     res.setHeader('Content-Disposition', `attachment; filename="pulso-backup-${new Date().toISOString().slice(0, 10)}.json"`);
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({ app: 'pulso', version: 1, exportedAt: new Date().toISOString(), user, questions }, null, 2));
@@ -254,19 +271,19 @@ app.post('/api/import/backup', async (req, res, next) => {
   try {
     const { user, questions } = req.body || {};
     if (!user || typeof user !== 'object') return res.status(400).json({ error: 'Backup inválido.' });
-    await backupUser('antes-import');
-    await saveUser(user);
+    await backupUser(req.pulsoUser, 'antes-import');
+    await saveUser(req.pulsoUser, user);
     if (Array.isArray(questions) && questions.length) await addQuestions(questions);
     ok(res, { restored: true });
   } catch (err) { next(err); }
 });
 
 app.post('/api/backup', async (_req, res, next) => {
-  try { ok(res, { file: path.basename(await backupUser('manual')) }); } catch (err) { next(err); }
+  try { ok(res, { file: path.basename(await backupUser(req.pulsoUser, 'manual')) }); } catch (err) { next(err); }
 });
 
 app.post('/api/reset', async (_req, res, next) => {
-  try { ok(res, await resetUser()); } catch (err) { next(err); }
+  try { ok(res, await resetUser(req.pulsoUser)); } catch (err) { next(err); }
 });
 
 /* ---------------- Batalhas ---------------- */
@@ -433,7 +450,7 @@ app.post('/api/radar/check', async (_req, res, next) => {
 /* ---------------- Calendário ---------------- */
 app.get('/api/calendar.ics', async (req, res, next) => {
   try {
-    const user = await getUser();
+    const user = await getUser(req.pulsoUser);
     const fmt = (s) => String(s).replace(/-/g, '');
     const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Pulso//Planner ENARE//PT-BR', 'CALSCALE:GREGORIAN', 'X-WR-CALNAME:Pulso ENARE'];
     for (const w of user.plan.weeks || []) {

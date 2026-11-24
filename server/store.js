@@ -53,9 +53,28 @@ async function readJSON(file, fallback) {
   }
 }
 
+function accountNames() {
+  const raw = process.env.APP_USERS || '';
+  const names = raw.split(',').map((pair) => pair.split(':')[0].trim()).filter(Boolean);
+  const single = (process.env.APP_USER || '').trim();
+  if (single && !names.includes(single)) names.push(single);
+  if (!names.length) names.push('davi');
+  return [...new Set(names)];
+}
+
 export async function initStore() {
   await fs.mkdir(BACKUP_DIR, { recursive: true });
-  if (!(await hasKV('user'))) await writeKV('user', defaultUser());
+  if ((await hasKV('user')) && !(await hasKV('user:davi'))) {
+    await writeKV('user:davi', await readKV('user', defaultUser()));
+  }
+  for (const name of accountNames()) {
+    if (!(await hasKV(`user:${name}`))) {
+      const u = defaultUser();
+      if (name !== 'davi') u.name = name.charAt(0).toUpperCase() + name.slice(1);
+      u.onboardingDone = true;
+      await writeKV(`user:${name}`, u);
+    }
+  }
   if (!(await hasKV('questions'))) {
     const seed = await readJSON(path.join(SEED_DIR, 'questions.json'), { version: 1, questions: [] });
     await writeKV('questions', seed);
@@ -66,13 +85,13 @@ export async function initStore() {
   }
 }
 
-export async function getUser() {
-  const raw = await readKV('user', defaultUser());
+export async function getUser(account = 'davi') {
+  const raw = await readKV(`user:${account}`, defaultUser());
   return { ...defaultUser(), ...raw };
 }
 
-export async function saveUser(incoming) {
-  const current = await getUser();
+export async function saveUser(account, incoming) {
+  const current = await getUser(account);
   const base = defaultUser();
   const next = {
     ...base,
@@ -94,15 +113,15 @@ export async function saveUser(incoming) {
   if (!next.progress || typeof next.progress !== 'object') next.progress = {};
   if (!next.activity || typeof next.activity !== 'object') next.activity = {};
   if (!next.questionNotes || typeof next.questionNotes !== 'object') next.questionNotes = {};
-  await writeKV('user', next);
+  await writeKV(`user:${account}`, next);
   return next;
 }
 
-export async function backupUser(label = 'manual') {
-  const user = await getUser();
+export async function backupUser(account = 'davi', label = 'manual') {
+  const user = await getUser(account);
   await fs.mkdir(BACKUP_DIR, { recursive: true });
   const stamp = new Date().toISOString().replace(/[:.]/g, '-');
-  const file = path.join(BACKUP_DIR, `pulso-${label}-${stamp}.json`);
+  const file = path.join(BACKUP_DIR, `pulso-${account}-${label}-${stamp}.json`);
   await fs.writeFile(file, JSON.stringify(user, null, 1));
   const entries = (await fs.readdir(BACKUP_DIR)).sort();
   while (entries.length > 30) await fs.unlink(path.join(BACKUP_DIR, entries.shift())).catch(() => {});
@@ -152,10 +171,10 @@ export function hashStem(stem = '') {
   return crypto.createHash('sha1').update(normalized).digest('hex');
 }
 
-export async function resetUser() {
-  await backupUser('antes-reset');
-  await writeKV('user', defaultUser());
-  return getUser();
+export async function resetUser(account = 'davi') {
+  await backupUser(account, 'antes-reset');
+  await writeKV(`user:${account}`, defaultUser());
+  return getUser(account);
 }
 
 export { DATA_DIR };
