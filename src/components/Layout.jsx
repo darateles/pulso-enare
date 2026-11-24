@@ -62,7 +62,7 @@ export default function Layout() {
     <div className="app-shell">
       <aside className="sidebar">
         <NavLink to="/" className="side-logo"><Logo /></NavLink>
-        <p className="side-tagline">Seu estudo em ritmo.<br />Não em caos.</p>
+        <p className="side-tagline">Sua preparação,<br />com foco no que importa.</p>
         <div className="side-rhythm" aria-hidden="true">
           <svg viewBox="0 0 190 24" preserveAspectRatio="none"><path d="M0 13h48l7-8 8 15 8-11 6 4h105" /></svg>
           <span>RITMO</span>

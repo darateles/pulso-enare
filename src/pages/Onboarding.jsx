@@ -39,23 +39,23 @@ export default function Onboarding() {
       <div className="onboard-art">
         <Logo />
         <div className="onboard-copy">
-          <span className="eyebrow light">Sistema cardíaco · ENARE</span>
-          <h1>Seu estudo no<br /><em>ritmo certo.</em></h1>
-          <p>Um plano que monitora o que mais cai, o que você domina e o que precisa voltar à circulação.</p>
+          <span className="eyebrow light">Preparação para o ENARE</span>
+          <h1>Sua preparação,<br /><em>com foco no que importa.</em></h1>
+          <p>Um plano para priorizar os temas, acompanhar seu progresso e revisar com confiança.</p>
         </div>
         <div className="onboard-points">
           <div><Target size={18} /> 90 subtópicos priorizados por incidência real</div>
           <div><ShieldCheck size={18} /> 300 questões oficiais com comentários</div>
           <div><Compass size={18} /> Checklists, revisões e monitor de ritmo</div>
         </div>
-        <div className="onboard-quote">“Constância não é correr. É manter o pulso.”</div>
+        <div className="onboard-quote">“Planeje com clareza. Evolua com consistência.”</div>
       </div>
 
       <div className="onboard-panel">
         {step === 0 ? (
           <div className="onboard-welcome">
             <span className="onboard-step">Passo 1 de 2</span>
-            <h2>Vamos calibrar seu ritmo.</h2>
+            <h2>Vamos organizar sua preparação.</h2>
             <p>Em 30 segundos você define data, rotina e objetivo. O sistema monta o plano a partir do seu pulso de estudo — e você ajusta quando precisar.</p>
             <ul className="check-list-static">
               <li><Check size={16} /> Progresso salvo localmente, como um prontuário</li>
@@ -68,7 +68,7 @@ export default function Onboarding() {
         ) : (
           <div className="onboard-form">
             <span className="onboard-step">Passo 2 de 2</span>
-            <h2>Seu pulso basal.</h2>
+            <h2>Seu ponto de partida.</h2>
             <p>Use dados realistas. O plano distribui carga por área e prioridade — não por perfeição.</p>
             <Field label="Como quer ser chamado(a)?">
               <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Seu primeiro nome" autoFocus />

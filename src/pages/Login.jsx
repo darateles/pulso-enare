@@ -23,8 +23,8 @@ export default function Login() {
       <div className="login-art">
         <Logo />
         <div className="login-copy">
-          <span className="eyebrow light">Sistema cardíaco de estudos</span>
-          <h1>Seu estudo no <em>ritmo certo.</em></h1>
+          <span className="eyebrow light">Preparação para a residência</span>
+          <h1>Sua preparação, <em>com foco no que importa.</em></h1>
           <p>Planner, banco de questões, suíte clínica e monitor de constância. Entre para retomar de onde parou.</p>
           <div className="login-monitor">
             <HeartPulse size={17} />
@@ -33,7 +33,7 @@ export default function Login() {
             <span>perfusão estável</span>
           </div>
         </div>
-        <div className="login-quote">“Constância não é correr. É manter o pulso.”</div>
+        <div className="login-quote">“Planeje com clareza. Evolua com consistência.”</div>
       </div>
       <div className="login-panel">
         <form className="login-box" onSubmit={submit}>

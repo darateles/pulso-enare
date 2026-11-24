@@ -18,7 +18,7 @@ export default function Pulso() {
     <>
       <PageHead
         eyebrow="Pulso Pro · suíte integrada"
-        title={<>O estudo deixa de ser <em>planilha.</em></>}
+        title={<>Suas ferramentas, <em>em um só lugar.</em></>}
         subtitle="18 ferramentas conectadas ao seu progresso, ao banco de questões e ao planner. Esta é uma demonstração completa do plano Pro."
         actions={<Chip tone={isPro ? 'accent' : 'neutral'}><Crown size={13} /> {isPro ? 'Pro liberado' : 'Plano Essencial'}</Chip>}
       />
@@ -26,7 +26,7 @@ export default function Pulso() {
       <Card className="pro-hero">
         <div>
           <span className="eyebrow light">Pulso Pro</span>
-          <h2>Uma assinatura, todo o ecossistema.</h2>
+          <h2>Ferramentas conectadas para sua evolução.</h2>
           <p>Foco, simulados coletivos, biblioteca clínica, atlas, ECG, importação Anki, offline e retrospectiva. Tudo sem sair do seu plano de estudos.</p>
           <div className="pro-points">
             <span><Check size={14} /> Sem anúncios</span>

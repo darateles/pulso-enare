@@ -72,8 +72,8 @@ export default function Focus() {
   }, [running, mode, task, sound]);
 
   useEffect(() => {
-    document.title = running ? `${String(Math.floor(left / 60)).padStart(2, '0')}:${String(left % 60).padStart(2, '0')} · ${mode.label} · Pulso` : 'Pulso · Seu estudo em ritmo';
-    return () => { document.title = 'Pulso · Seu estudo em ritmo'; };
+    document.title = running ? `${String(Math.floor(left / 60)).padStart(2, '0')}:${String(left % 60).padStart(2, '0')} · ${mode.label} · Pulso` : 'Pulso · Preparação para a residência';
+    return () => { document.title = 'Pulso · Preparação para a residência'; };
   }, [left, running, mode]);
 
   const changeMode = (m) => {

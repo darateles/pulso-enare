@@ -64,7 +64,7 @@ export default function Planner() {
     <>
       <PageHead
         eyebrow="Plano de estudo"
-        title={<>Direção, não <em>coragem aleatória.</em></>}
+        title={<>Um plano claro <em>para cada etapa.</em></>}
         subtitle="O planner distribui suas horas conforme peso, incidência, confiança e erros recentes. Sessões curtas, com revisão espaçada."
         actions={<Button onClick={() => (counts.total ? setConfirm(true) : build())} icon={Sparkles}>{counts.total ? 'Regerar plano' : 'Gerar plano'}</Button>}
       />

@@ -70,9 +70,9 @@ export default function Dashboard() {
   return (
     <>
       <PageHead
-        eyebrow={`Painel de ritmo · ${greeting()}, ${firstName}`}
-        title={<>Ritmo estável. <em>Direção mantida.</em></>}
-        subtitle={<>Faltam <strong>{count} dias</strong> para a prova de {fmtDate(user.examDate, { day: '2-digit', month: 'long', year: 'numeric' })}. O restante é executar o que importa.</>}
+        eyebrow={`Painel de estudos · ${greeting()}, ${firstName}`}
+        title={<>Seu plano. <em>Seu progresso.</em></>}
+        subtitle={<>Faltam <strong>{count} dias</strong> para a prova de {fmtDate(user.examDate, { day: '2-digit', month: 'long', year: 'numeric' })}. Organize seus próximos passos e acompanhe sua evolução.</>}
         actions={<Button onClick={() => navigate('/questoes/treino?modo=rapido')} icon={Play}>Treino rápido</Button>}
       />
 
@@ -87,7 +87,7 @@ export default function Dashboard() {
           <div className="hero-top">
             <div>
               <Chip tone="accent"><HeartPulse size={13} /> em ritmo · {streak(user)} dias</Chip>
-              <h2>Seu ritmo está <em>virando cobertura.</em></h2>
+              <h2>Seu progresso, <em>mais claro a cada dia.</em></h2>
               <div className="monitor-strip"><span><HeartPulse size={13} /> {bpm} bpm</span><span>PA de estudo {Math.min(140, 90 + stats.pct)}/{Math.min(90, 60 + stats.started)}</span><span>perfusão {stats.pct}%</span></div>
               <p>Você já iniciou {stats.started} subtópicos e domina {stats.mastered}. O plano usa o peso real de cada área para decidir o próximo passo.</p>
               <div className="hero-actions">
@@ -203,7 +203,7 @@ export default function Dashboard() {
 
           <Card className="side-card warm">
             <NotebookPen size={19} />
-            <h3>Errar faz parte do método.</h3>
+            <h3>Transforme erros em aprendizado.</h3>
             <p>Seus erros ficam no caderno com a explicação da alternativa correta. Revise antes que virem lacunas.</p>
             <Button size="sm" variant="light" onClick={() => navigate('/caderno-erros')}>Abrir caderno</Button>
           </Card>
