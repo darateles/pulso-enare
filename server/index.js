@@ -43,6 +43,8 @@ const app = express();
 const PORT = Number(process.env.PORT) || 4175;
 const HOST = process.env.HOST || '127.0.0.1';
 const APP_PASSWORD = process.env.APP_PASSWORD || '';
+const SESSION_SECRET = process.env.SESSION_SECRET || '';
+const SESSION_COOKIE = 'pulso_session';
 const ACCOUNTS = new Map(
   (process.env.APP_USERS || (APP_PASSWORD ? `${process.env.APP_USER || 'pulso'}:${APP_PASSWORD}` : ''))
     .split(',').map((pair) => pair.trim()).filter(Boolean)
@@ -63,29 +65,89 @@ app.use((req, res, next) => {
   next();
 });
 
-if (ACCOUNTS.size) {
-  app.use((req, res, next) => {
-    if (req.path === '/api/health') return next();
-    const header = req.headers.authorization || '';
-    if (header.startsWith('Basic ')) {
-      const pair = Buffer.from(header.slice(6), 'base64').toString('utf8');
-      const i = pair.indexOf(':');
-      const user = pair.slice(0, i);
-      const expected = ACCOUNTS.get(user);
-      if (expected) {
-        const got = crypto.createHash('sha256').update(pair).digest();
-        if (got.length === expected.length && crypto.timingSafeEqual(got, expected)) {
-          req.pulsoUser = user;
-          return next();
-        }
-      }
-    }
-    res.set('WWW-Authenticate', 'Basic realm="Pulso", charset="UTF-8"');
-    return res.status(401).send('Acesso protegido. Informe usuário e senha.');
-  });
+app.use(express.json({ limit: '30mb' }));
+
+const loginAttempts = new Map();
+
+function cookieValue(req, name) {
+  const raw = req.headers.cookie || '';
+  for (const part of raw.split(';')) {
+    const i = part.indexOf('=');
+    if (part.slice(0, i).trim() === name) return decodeURIComponent(part.slice(i + 1));
+  }
+  return null;
 }
 
-app.use(express.json({ limit: '30mb' }));
+function signSession(user, exp) {
+  return crypto.createHmac('sha256', SESSION_SECRET).update(`${user}.${exp}`).digest('base64url');
+}
+
+function readSession(req) {
+  if (!SESSION_SECRET) return null;
+  const raw = cookieValue(req, SESSION_COOKIE);
+  if (!raw) return null;
+  const [encoded, expRaw, sig] = raw.split('.');
+  const exp = Number(expRaw);
+  if (!encoded || !sig || !exp || exp < Date.now()) return null;
+  const user = Buffer.from(encoded, 'base64url').toString('utf8');
+  if (!ACCOUNTS.has(user)) return null;
+  const expected = signSession(user, exp);
+  if (sig.length !== expected.length || !crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected))) return null;
+  return user;
+}
+
+function setSession(req, res, user) {
+  const exp = Date.now() + 30 * 86400000;
+  const value = `${Buffer.from(user).toString('base64url')}.${exp}.${signSession(user, exp)}`;
+  const secure = req.secure || String(req.headers['x-forwarded-proto'] || '').includes('https');
+  res.setHeader('Set-Cookie', `${SESSION_COOKIE}=${encodeURIComponent(value)}; HttpOnly; Path=/; SameSite=Lax; Max-Age=2592000${secure ? '; Secure' : ''}`);
+}
+
+function validCredentials(user, pass) {
+  const expected = ACCOUNTS.get(user);
+  if (!expected) return false;
+  const got = crypto.createHash('sha256').update(`${user}:${pass}`).digest();
+  return got.length === expected.length && crypto.timingSafeEqual(got, expected);
+}
+
+app.post('/api/login', (req, res) => {
+  const ip = req.ip || 'local';
+  const now = Date.now();
+  const record = loginAttempts.get(ip) || { count: 0, start: now };
+  if (now - record.start > 10 * 60 * 1000) { record.count = 0; record.start = now; }
+  if (record.count >= 10) return res.status(429).json({ error: 'Muitas tentativas. Aguarde alguns minutos.' });
+  const { username = '', password = '' } = req.body || {};
+  const user = String(username).trim().toLowerCase();
+  if (!validCredentials(user, String(password))) {
+    record.count += 1;
+    loginAttempts.set(ip, record);
+    return res.status(401).json({ error: 'Usuário ou senha incorretos.' });
+  }
+  loginAttempts.delete(ip);
+  setSession(req, res, user);
+  ok(res, { account: user });
+});
+
+app.post('/api/logout', (req, res) => {
+  res.setHeader('Set-Cookie', `${SESSION_COOKIE}=; HttpOnly; Path=/; SameSite=Lax; Max-Age=0`);
+  ok(res, { ok: true });
+});
+
+app.get('/api/session', (req, res) => {
+  const user = readSession(req);
+  if (!user) return res.status(401).json({ error: 'Não autenticado.' });
+  ok(res, { account: user });
+});
+
+if (ACCOUNTS.size) {
+  app.use('/api', (req, res, next) => {
+    if (['/health', '/login', '/logout', '/session'].includes(req.path)) return next();
+    const user = readSession(req);
+    if (!user) return res.status(401).json({ error: 'Sessão expirada.' });
+    req.pulsoUser = user;
+    next();
+  });
+}
 
 function ok(res, data) {
   res.set('Cache-Control', 'no-store');

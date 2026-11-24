@@ -4,11 +4,17 @@ async function request(path, opts = {}) {
     ...opts,
   });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.error || `Falha na requisição (${res.status}).`);
+  if (!res.ok) {
+    const err = new Error(data.error || `Falha na requisição (${res.status}).`);
+    err.status = res.status;
+    throw err;
+  }
   return data;
 }
 
 export const api = {
+  login: (username, password) => request('/api/login', { method: 'POST', body: JSON.stringify({ username, password }) }),
+  logout: () => request('/api/logout', { method: 'POST', body: '{}' }),
   bootstrap: () => request('/api/bootstrap'),
   questions: () => request('/api/questions'),
   saveState: (state) => request('/api/state', { method: 'PUT', body: JSON.stringify(state) }),

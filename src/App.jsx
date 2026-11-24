@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { useStore } from './store.jsx';
 import Layout from './components/Layout.jsx';
 import Onboarding from './pages/Onboarding.jsx';
+import Login from './pages/Login.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import { Logo, Spinner } from './components/ui.jsx';
 
@@ -58,7 +59,7 @@ function LoadingPage() {
 }
 
 export default function App() {
-  const { user, loading } = useStore();
+  const { user, loading, needLogin } = useStore();
 
   if (loading) {
     return (
@@ -69,6 +70,8 @@ export default function App() {
       </div>
     );
   }
+
+  if (needLogin) return <Login />;
 
   if (!user.onboardingDone) return <Onboarding />;
 

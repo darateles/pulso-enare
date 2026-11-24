@@ -58,6 +58,8 @@ export function StoreProvider({ children }) {
   const [sources, setSources] = useState(fallbackSources.sources);
   const [curriculum] = useState(fallbackCurriculum);
   const [loading, setLoading] = useState(true);
+  const [needLogin, setNeedLogin] = useState(false);
+  const [account, setAccount] = useState('');
   const [offline, setOffline] = useState(false);
   const [saveState, setSaveState] = useState('idle');
   const [outbox, setOutbox] = useState(0);
@@ -75,6 +77,42 @@ export function StoreProvider({ children }) {
     setTimeout(() => setToasts((t) => t.filter((x) => x.id !== id)), 4200);
   }, []);
 
+  const hydrate = useCallback(async () => {
+    const data = await api.bootstrap();
+    setUser({ ...blankUser(), ...data.user });
+    setSources(data.sources?.length ? data.sources : fallbackSources.sources);
+    setAccount(data.meta?.account || '');
+    setOffline(false);
+    setNeedLogin(false);
+    localStorage.setItem(CACHE, JSON.stringify({ user: data.user, questions: [] }));
+    const qd = await api.questions().catch(() => ({ questions: [] }));
+    setQuestions(qd.questions || []);
+    localStorage.setItem(CACHE, JSON.stringify({ user: data.user, questions: qd.questions || [] }));
+    return data;
+  }, []);
+
+  const login = useCallback(async (username, password) => {
+    await api.login(username, password);
+    localStorage.removeItem(CACHE);
+    localStorage.removeItem('pulso.outbox');
+    setOutbox(0);
+    await hydrate();
+    loadedRef.current = true;
+    setLoading(false);
+  }, [hydrate]);
+
+  const logout = useCallback(async () => {
+    clearTimeout(timerRef.current);
+    await api.logout().catch(() => {});
+    localStorage.removeItem(CACHE);
+    localStorage.removeItem('pulso.outbox');
+    setOutbox(0);
+    setUser(blankUser());
+    setQuestions([]);
+    setNeedLogin(true);
+    setAccount('');
+  }, []);
+
   useEffect(() => {
     let alive = true;
     (async () => {
@@ -84,19 +122,14 @@ export function StoreProvider({ children }) {
           const parsed = JSON.parse(cached);
           if (parsed.user) setUser((u) => ({ ...u, ...parsed.user }));
         }
-        const data = await api.bootstrap();
+        await hydrate();
+      } catch (err) {
         if (!alive) return;
-        setUser({ ...blankUser(), ...data.user });
-        setSources(data.sources?.length ? data.sources : fallbackSources.sources);
-        setOffline(false);
-        localStorage.setItem(CACHE, JSON.stringify({ user: data.user, questions: [] }));
-        api.questions().then((qd) => {
-          if (!alive) return;
-          setQuestions(qd.questions || []);
-          localStorage.setItem(CACHE, JSON.stringify({ user: data.user, questions: qd.questions || [] }));
-        }).catch(() => {});
-      } catch {
-        if (!alive) return;
+        if (err.status === 401) {
+          setNeedLogin(true);
+          setLoading(false);
+          return;
+        }
         setOffline(true);
         try {
           const cached = localStorage.getItem(CACHE);
@@ -123,7 +156,11 @@ export function StoreProvider({ children }) {
       await api.saveState(nextUser);
       setSaveState('saved');
       setTimeout(() => setSaveState((s) => (s === 'saved' ? 'idle' : s)), 1300);
-    } catch {
+    } catch (err) {
+      if (err.status === 401) {
+        setNeedLogin(true);
+        return;
+      }
       setSaveState('offline');
       setOffline(true);
       try {
@@ -322,7 +359,7 @@ export function StoreProvider({ children }) {
 
   const value = {
     user, questions, setQuestions, sources, setSources, curriculum,
-    loading, offline, saveState, updateUser, bumpActivity, addAttempt,
+    loading, offline, saveState, needLogin, account, login, logout, updateUser, bumpActivity, addAttempt,
     toggleChecklist, setConfidence, setTopicNote, scheduleReview,
     toggleBookmark, setQuestionNote, dismissError, setTheme, toast, refreshData, cancelPending, outbox, syncOutbox,
   };

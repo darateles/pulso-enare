@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Database, Download, HardDrive, Moon, RotateCcw, Save, Shield, Sun, Upload, UserRound,
+  Database, Download, HardDrive, LogOut, Moon, RotateCcw, Save, Shield, Sun, Upload, UserRound,
 } from 'lucide-react';
 import { api, downloadBackup } from '../api.js';
 import { Button, Card, Field, InlineError, PageHead, Segmented } from '../components/ui.jsx';
@@ -9,7 +9,7 @@ import { useStore } from '../store.jsx';
 import { WEEKDAYS } from '../utils.js';
 
 export default function Ajustes() {
-  const { user, updateUser, setTheme, toast, refreshData, cancelPending } = useStore();
+  const { user, account, updateUser, setTheme, toast, refreshData, cancelPending, logout } = useStore();
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: user.name, examDate: user.examDate, dailyHours: user.dailyHours, studyDays: user.studyDays, goalQuestions: user.goalQuestions });
   const [error, setError] = useState('');
@@ -67,6 +67,7 @@ export default function Ajustes() {
           <Field label="Horas por dia"><select value={form.dailyHours} onChange={(e) => setForm({ ...form, dailyHours: Number(e.target.value) })}>{[1,2,3,4,5,6].map((h) => <option key={h} value={h}>{h}h</option>)}</select></Field>
           <Field label="Dias de estudo"><div className="day-picker compact">{WEEKDAYS.map((d, i) => <button key={d} type="button" className={form.studyDays.includes(i) ? 'active' : ''} onClick={() => toggleDay(i)}>{d}</button>)}</div></Field>
           <Button onClick={save} icon={Save}>Salvar ajustes</Button>
+          <div className="account-row"><span>Conta: <strong>{account}</strong></span><Button variant="ghost" size="sm" onClick={logout} icon={LogOut}>Sair</Button></div>
         </Card>
 
         <div>
