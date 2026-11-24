@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
   House, CalendarDays, ListChecks, Library, ChartNoAxesColumnIncreasing, NotebookPen,
-  Settings, Search, Moon, Sun, Flame, Menu, X, MoreHorizontal, ArrowRight, Layers, HeartPulse,
+  Settings, Search, Moon, Sun, Flame, Menu, X, ArrowRight, Layers, HeartPulse,
 } from 'lucide-react';
 import { Logo, Ring, Progress } from './ui.jsx';
 import { useStore } from '../store.jsx';
@@ -23,12 +23,20 @@ export default function Layout() {
   const { user, curriculum, questions, saveState, setTheme } = useStore();
   const [palette, setPalette] = useState(false);
   const [query, setQuery] = useState('');
-  const [more, setMore] = useState(false);
+  const [drawer, setDrawer] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
   const stats = useMemo(() => globalStats(curriculum, user.progress), [curriculum, user.progress]);
   const count = daysUntil(user.examDate);
   const streakDays = streak(user);
   const bpm = 58 + Math.min(34, streakDays * 2 + Math.min(8, Math.round((user.activity?.[new Date().toISOString().slice(0, 10)]?.minutes || 0) / 15)));
+
+  useEffect(() => { setDrawer(false); }, [location.pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = drawer ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [drawer]);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -36,6 +44,7 @@ export default function Layout() {
         e.preventDefault();
         setPalette((p) => !p);
       }
+      if (e.key === 'Escape') setDrawer(false);
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
@@ -60,8 +69,9 @@ export default function Layout() {
 
   return (
     <div className="app-shell">
-      <aside className="sidebar">
-        <NavLink to="/" className="side-logo"><Logo /></NavLink>
+      <aside className={`sidebar ${drawer ? 'drawer-open' : ''}`}>
+        <button className="drawer-close icon-btn" onClick={() => setDrawer(false)} aria-label="Fechar menu"><X size={19} /></button>
+        <NavLink to="/" className="side-logo" onClick={() => setDrawer(false)}><Logo /></NavLink>
         <p className="side-tagline">Sua preparação,<br />com foco no que importa.</p>
         <div className="side-rhythm" aria-hidden="true">
           <svg viewBox="0 0 190 24" preserveAspectRatio="none"><path d="M0 13h48l7-8 8 15 8-11 6 4h105" /></svg>
@@ -72,7 +82,7 @@ export default function Layout() {
 
         <nav className="side-nav" aria-label="Navegação principal">
           {NAV.map(({ to, label, icon: Icon, end }) => (
-            <NavLink key={to} to={to} end={end} className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+            <NavLink key={to} to={to} end={end} onClick={() => setDrawer(false)} className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
               <Icon size={18} />
               <span>{label}</span>
             </NavLink>
@@ -88,7 +98,7 @@ export default function Layout() {
           <small>{stats.mastered} de {stats.totalTopics} dominados</small>
         </div>
 
-        <NavLink to="/ajustes" className="side-user">
+        <NavLink to="/ajustes" className="side-user" onClick={() => setDrawer(false)}>
           <span className="avatar">{initials(user.name)}</span>
           <span className="side-user-name">{user.name || 'Seu perfil'}</span>
         </NavLink>
@@ -96,6 +106,7 @@ export default function Layout() {
 
       <div className="main-shell">
         <header className="topbar">
+          <button className="mobile-menu-btn icon-btn" onClick={() => setDrawer(true)} aria-label="Abrir menu" aria-expanded={drawer}><Menu size={21} /></button>
           <NavLink to="/" className="mobile-logo"><Logo compact /></NavLink>
           <button className="search-trigger" onClick={() => setPalette(true)}>
             <Search size={17} />
@@ -119,26 +130,7 @@ export default function Layout() {
         </main>
       </div>
 
-      <nav className="bottom-nav" aria-label="Navegação móvel">
-        {[NAV[0], NAV[2], NAV[3], NAV[4]].map(({ to, label, icon: Icon, end }) => (
-          <NavLink key={to} to={to} end={end} className={({ isActive }) => `bottom-item ${isActive ? 'active' : ''}`}>
-            <Icon size={21} />
-            <span>{label}</span>
-          </NavLink>
-        ))}
-        <button className="bottom-item" onClick={() => setMore(true)}><MoreHorizontal size={21} /><span>Mais</span></button>
-      </nav>
-
-      {more && (
-        <div className="sheet-overlay" onClick={() => setMore(false)}>
-          <div className="sheet" onClick={(e) => e.stopPropagation()}>
-            <div className="sheet-head"><span>Mais</span><button className="icon-btn" onClick={() => setMore(false)} aria-label="Fechar"><X size={18} /></button></div>
-            {[NAV[1], ...NAV.slice(5)].map(({ to, label, icon: Icon }) => (
-              <NavLink key={to} to={to} className="sheet-link" onClick={() => setMore(false)}><Icon size={19} /> {label} <ArrowRight size={16} /></NavLink>
-            ))}
-          </div>
-        </div>
-      )}
+      {drawer && <div className="drawer-overlay" onClick={() => setDrawer(false)} />}
 
       {palette && (
         <div className="overlay palette-overlay" onMouseDown={(e) => { if (e.target === e.currentTarget) setPalette(false); }}>
