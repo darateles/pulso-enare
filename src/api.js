@@ -17,6 +17,7 @@ export const api = {
   logout: () => request('/api/logout', { method: 'POST', body: '{}' }),
   bootstrap: () => request('/api/bootstrap'),
   questions: () => request('/api/questions'),
+  reportQuestion: (id, payload) => request(`/api/questions/${id}/report`, { method: 'POST', body: JSON.stringify(payload) }),
   saveState: (state) => request('/api/state', { method: 'PUT', body: JSON.stringify(state) }),
   generateQuestion: (topicId) => request('/api/ai/question', { method: 'POST', body: JSON.stringify({ topicId }) }),
   importQuestions: (payload) => request('/api/import/questions', { method: 'POST', body: JSON.stringify(payload) }),

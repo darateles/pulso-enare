@@ -1129,3 +1129,6 @@ code { background: var(--surface-2); border: 1px solid var(--line); border-radiu
 .guide-sources { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 10px; font-size: .68rem; color: var(--muted); }
 .guide-sources a { color: var(--accent); font-weight: 700; }
 @media (max-width: 580px) { .guide-cols { grid-template-columns: 1fr; } }
+.page-error { max-width: 560px; margin: 14vh auto; text-align: center; display: grid; justify-items: center; gap: 9px; }
+.report-box { display: flex; gap: 6px; align-items: center; }
+.report-box input { font-size: .76rem; padding: 7px 9px; }

@@ -5,6 +5,7 @@ import {
   Clock3, Crown, Flag, Lightbulb, RotateCcw, Send, XCircle,
 } from 'lucide-react';
 import { Button, Card, Chip, Progress } from './ui.jsx';
+import { api } from '../api.js';
 import { useStore } from '../store.jsx';
 import { fmtDate, minutesLabel } from '../utils.js';
 
@@ -23,6 +24,8 @@ export default function QuestionPlayer({ pool, mode = 'treino', duration = 0, on
   const [done, setDone] = useState(single);
   const [left, setLeft] = useState(duration * 60);
   const [showNote, setShowNote] = useState(false);
+  const [reporting, setReporting] = useState(false);
+  const [reportNote, setReportNote] = useState('');
   const start = useRef(Date.now());
   const qStart = useRef(Date.now());
   const submitted = useRef(new Set());
@@ -164,12 +167,19 @@ export default function QuestionPlayer({ pool, mode = 'treino', duration = 0, on
             </div>
             <div className="q-explanation"><Lightbulb size={17} /><p>{q.explanation || 'Sem comentário disponível.'}</p></div>
             <div className="q-feedback-actions">
+              <Button variant="ghost" size="sm" onClick={() => setReporting((n) => !n)} icon={Flag}>Reportar</Button>
               <Button variant="ghost" size="sm" onClick={() => setShowNote((n) => !n)} icon={Bookmark}>Anotar</Button>
               {!single && <Button onClick={next} icon={ArrowRight}>Próxima</Button>}
               {single && <Button variant="ghost" onClick={() => { setRevealed(false); setSelected(null); }} icon={RotateCcw}>Refazer</Button>}
             </div>
             {showNote && (
               <textarea rows={3} className="q-note" value={user.questionNotes?.[q.id] || ''} onChange={(e) => setQuestionNote(q.id, e.target.value)} placeholder="O que você errou e não pode esquecer?" />
+            )}
+            {reporting && (
+              <div className="report-box">
+                <input value={reportNote} onChange={(e) => setReportNote(e.target.value)} placeholder="Explique o erro de gabarito ou formatação" />
+                <Button size="sm" variant="soft" onClick={async () => { await api.reportQuestion(q.id, { chosen: picked, note: reportNote }); setReporting(false); setReportNote(''); toast('Obrigado. Questão reportada para revisão.'); }}>Enviar</Button>
+              </div>
             )}
           </div>
         )}

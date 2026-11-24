@@ -6,6 +6,7 @@ import Onboarding from './pages/Onboarding.jsx';
 import Login from './pages/Login.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import { Logo, Spinner } from './components/ui.jsx';
+import ErrorBoundary from './components/ErrorBoundary.jsx';
 
 const Planner = lazy(() => import('./pages/Planner.jsx'));
 const Conteudos = lazy(() => import('./pages/Conteudos.jsx'));
@@ -78,6 +79,7 @@ export default function App() {
   return (
     <>
       <ScrollTop />
+      <ErrorBoundary>
       <Suspense fallback={<LoadingPage />}>
         <Routes>
           <Route element={<Layout />}>
@@ -117,6 +119,7 @@ export default function App() {
           <Route path="/onboarding" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
+      </ErrorBoundary>
     </>
   );
 }

@@ -166,6 +166,19 @@ app.get('/api/bootstrap', async (req, res, next) => {
   } catch (err) { next(err); }
 });
 
+app.post('/api/questions/:id/report', async (req, res, next) => {
+  try {
+    const data = await readKV('question_reports', { reports: [] });
+    data.reports.push({
+      id: crypto.randomUUID(), questionId: req.params.id, account: req.pulsoUser,
+      chosen: req.body?.chosen || null, note: String(req.body?.note || '').slice(0, 500),
+      at: new Date().toISOString(),
+    });
+    await writeKV('question_reports', { reports: data.reports.slice(-2000) });
+    ok(res, { ok: true });
+  } catch (err) { next(err); }
+});
+
 app.get('/api/questions', async (_req, res, next) => {
   try { ok(res, { questions: await getQuestions() }); } catch (err) { next(err); }
 });
