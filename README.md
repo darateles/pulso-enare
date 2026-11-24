@@ -15,6 +15,12 @@ Plataforma local, sem login, para organizar a preparação ao ENARE com foco no 
 - **Simulado cronometrado**, caderno de erros, anotações, revisão espaçada e relatórios.
 - Dados **local-first**: servidor escuta só em `127.0.0.1`; backup em JSON.
 
+## Contas de demonstração
+
+O login é próprio do app e usa sessão em cookie. Contas atuais: `davi` e `teste` (senhas no arquivo local `data/acesso.txt` ou no painel do Render em `APP_USERS`).
+
+Para testar duas contas simultaneamente, use uma janela anônima.
+
 ## Pulso Pro
 
 Suíte de 18 módulos com camada comercial demonstrativa:
