@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { CheckCircle2, Eye, Layers, RotateCcw, Sparkles, ThumbsDown, ThumbsUp } from 'lucide-react';
 import { Button, Card, Chip, Empty, PageHead, Segmented } from '../../components/ui.jsx';
 import { useStore } from '../../store.jsx';
@@ -7,14 +7,15 @@ import { addDays, iso } from '../../utils.js';
 
 export default function Flashcards() {
   const { user, updateUser, curriculum, toast } = useStore();
-  const [deck, setDeck] = useState('todos');
+  const [params] = useSearchParams();
+  const [deck, setDeck] = useState(params.get('deck') || 'todos');
   const [revealed, setRevealed] = useState(false);
   const [i, setI] = useState(0);
   const [session, setSession] = useState(false);
   const [queue, setQueue] = useState([]);
   const reviews = user.flashReviews || {};
   const today = iso();
-  const decks = [...new Set(user.flashcards.map((c) => c.deck))];
+  const decks = [...new Set([...(params.get('deck') ? [params.get('deck')] : []), ...user.flashcards.map((c) => c.deck)])];
   const due = useMemo(() => user.flashcards.filter((c) => (deck === 'todos' || c.deck === deck) && (!reviews[c.id] || reviews[c.id].due <= today)), [user.flashcards, deck, reviews, today]);
   const card = queue[i];
 

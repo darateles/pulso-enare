@@ -6,7 +6,7 @@ Persistência em Turso (libSQL). Render Free pode levar alguns segundos no prime
 
 Plataforma local, sem login, para organizar a preparação ao ENARE com foco no que mais cai. Inclui:
 
-- **Mapa do edital** com 5 áreas, 82 subtópicos e peso por incidência real em provas de residência.
+- **Mapa do edital** com 7 áreas, 90 subtópicos e peso por incidência real em provas de residência.
 - **Checklist de 7 etapas por subtópico** (teoria, domínio, resumo, flashcards, questões, revisão D+7 e D+30).
 - **Planner** de 8 semanas que distribui carga por peso, confiança e erros recentes.
 - **Banco com 300 questões oficiais** do ENARE 2022, 2023 e 2024, com gabarito oficial, comentário e fonte.

@@ -3443,7 +3443,7 @@
   },
   {
    "id": "enare2024-081",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "Alice, 30 anos, chega à unidade básica de saúde com tosse seca, chiado no peito e dispneia aos grandes esforços, com piora à noite. Não tem história de febre, não apresenta perda de peso e a mucosa nasal está sem alterações. Piora com a fumaça de cigarro do marido. Ao exame pulmonar, apresenta tosse, murmúrio vesicular e sibilos difusos, especialmente na expiração forçada. Não apresenta outras alterações. Pesa 60 kg, tem 1,60 m de altura, seu IMC é 21,5 kg/m², a FC está em 77 bpm e a FR, em 15 irpm. O exame cardiovascular indica ritmo regular em 2 tempos, sem sopro e sem alteração de ictus. O abdômen está normotenso, depressível, sem organomegalias ou ruídos hidroaéreos presentes. O diagnóstico provável é:",
    "options": [
@@ -3486,7 +3486,7 @@
   },
   {
    "id": "enare2024-082",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-infecto",
    "stem": "Carlos, 27 anos, vai à consulta médica com febre, exantema, gânglios retroauriculares aumentados, conjuntivite, artralgia e tosse. Em seu prontuário, não há registro de vacinação contra a rubéola. Ele declara não ter viajado recentemente, nem ter tido contato com pessoas confirmadas para rubéola. Contudo, sua região encontra-se no estado que registrou um surto da doença há 4 meses. Trata-se de um caso suspeito de rubéola. O melhor método para fazer a confirmação desse caso é:",
    "options": [
@@ -3529,7 +3529,7 @@
   },
   {
    "id": "enare2024-083",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-imunizacao",
    "stem": "Letícia está na 10ª semana de gestação. Diante do aumento de casos de gripe entre familiares e conhecidos, ela foi à unidade básica de saúde para saber se precisava tomar a vacina contra influenza. Na análise em seu prontuário, verificou-se que sua última vacina havia sido no ano anterior. Em relação a esse caso, é correto afirmar que:",
    "options": [
@@ -3572,7 +3572,7 @@
   },
   {
    "id": "enare2024-084",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-aps",
    "stem": "Em uma atenção primária de qualidade, é papel da APS integrar verticalmente os serviços. A APS, como parte integrante da rede de atenção à saúde, estrutura-se segundo atributos e funções. Além da resolubilidade, são funções da APS:",
    "options": [
@@ -3615,7 +3615,7 @@
   },
   {
    "id": "enare2024-085",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-infecto",
    "stem": "Milton teve o diagnóstico de monkeypox confirmado por meio de PCR positivo. Ele se enquadra no grupo de indivíduos com alto risco de desenvolver formas graves. Seu monitoramento deve acontecer:",
    "options": [
@@ -3658,7 +3658,7 @@
   },
   {
    "id": "enare2024-086",
-   "area": "preventiva",
+   "area": "sm",
    "topicId": "prev-saude-mental",
    "stem": "Geraldo, 37 anos, adscrito à unidade básica de saúde, chega para consulta apresentando sintomas psicóticos. Como parte de seu delírio persecutório, recusa-se a ser medicado e não aceita ser encaminhado para o CAPS. Nesse caso, a conduta correta é:",
    "options": [
@@ -3701,7 +3701,7 @@
   },
   {
    "id": "enare2024-087",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-idoso",
    "stem": "Apolinário, 86 anos, perfil 3 de funcionalidade, com Alzheimer em estágio avançado, hipertenso, diabético e com imobilidade grau IV, em uso de medicação para as doenças de base, é levado à consulta médica. Sobre seu quadro clínico, é correto afirmar que:",
    "options": [
@@ -3744,7 +3744,7 @@
   },
   {
    "id": "enare2024-088",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "Mylena, 42 anos, fuma 50 cigarros/dia desde os 16 anos. Seu Fagerström é igual a 10. Na escala de razões para fumar, declara que fuma para controlar o peso, para mediar situações de estresse e ansiedade e porque o cigarro é uma companhia. Diz que não consegue nem imaginar tentar parar de fumar e que, por isso, nunca tentou fazê-lo. Declara não se ver sem o cigarro. Recentemente, Mylena foi diagnosticada com neoplasia de pulmão. Nesse caso, a abordagem a essa fumante deve considerar:",
    "options": [
@@ -3787,7 +3787,7 @@
   },
   {
    "id": "enare2024-089",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "Rodrigo, 48 anos, casado, autônomo, vem à unidade básica de saúde se queixando de dores de cabeça de repetição e apresentando PA = 165 x 90 mmHg. Em seu prontuário, identifica-se que, nas últimas 5 consultas, no último ano, por motivos diversos, sua pressão arterial foi, respectivamente, de 147 x 99 mmHg; 180 x 100 mmHg; 152 x 90 mmHg; 160 x 95 mmHg e 170 x 92 mmHg. Rodrigo tem história familiar de hipertensão e é sedentário. O fato que permite o diagnóstico de hipertensão arterial sistêmica é:",
    "options": [
@@ -3830,7 +3830,7 @@
   },
   {
    "id": "enare2024-090",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "Foram atendidas 5 irmãs na unidade básica de saúde. A única que tem características que permitem o diagnóstico de diabetes mellitus é:",
    "options": [
@@ -3873,7 +3873,7 @@
   },
   {
    "id": "enare2024-091",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "José, 55 anos, hipertenso há 3 anos, em uso regular de medicação, vem para consulta de rotina apresentando PA = 130 x 80 mmHg. Após exame clínico, conclui-se que tem baixo risco cardiovascular. Nesse caso, a conduta é:",
    "options": [
@@ -3916,7 +3916,7 @@
   },
   {
    "id": "enare2024-092",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "Leonora, 60 anos, com diabetes mellitus diagnosticada há 5 anos, em acompanhamento contínuo na unidade básica de saúde, vem para a consulta de rotina. Após avaliação dos pés, identificamos: sensibilidade presente, deformidade ausente e úlceras ou cicatrizes de úlceras ausentes. Segundo o exame clínico do pé diabético, conclui-se que a categoria de risco e o melhor manejo para Leonora são, respectivamente:",
    "options": [
@@ -3959,7 +3959,7 @@
   },
   {
    "id": "enare2024-093",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-idoso",
    "stem": "Vanda, 92 anos, hipertensa, com diagnóstico de Alzheimer há 16 anos, acamada, estável, sem lesões por pressão, sem histórico recente de internação, tem uma filha, Joana, de 68 anos, que faz o manejo diário: banho no leito, administração de medicação, dieta enteral, mudança de decúbito. A filha está bem orientada e procura se informar sobre o quadro e as melhores condutas. Nesse caso, o plano terapêutico singular deve:",
    "options": [
@@ -4002,7 +4002,7 @@
   },
   {
    "id": "enare2024-094",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-urgencias",
    "stem": "Com queixa de dor de cabeça, Jéssica, 37 anos, diarista, vai pela primeira vez à unidade básica de saúde. Ela reporta: “Doutor, sinto essa dor há mais de 2 meses, desde que precisamos sair da nossa casa porque não dava mais para pagar o aluguel depois que meu marido foi demitido do emprego. Na minha casa somos eu, meu marido e três filhas de 4, 6 e 14 anos”. É exemplo de crise acidental do ciclo de vida familiar da família de Jéssica:",
    "options": [
@@ -4045,7 +4045,7 @@
   },
   {
    "id": "enare2024-095",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "Mônica, 29 anos, professora, vem para a consulta na unidade básica de saúde preocupada com seu sobrepeso. Diz que anda muito estressada, que os cuidados com o filho mais novo têm tomado muito seu tempo e que o marido não ajuda e anda bebendo demais. Sua sogra Maria foi morar com eles e dá muito trabalho em virtude do quadro depressivo, que não melhora. O sogro, Mário, faleceu aos 53 anos, e isso a preocupa em relação a Mário Luís, seu marido, que também fuma e bebe demais. Eles têm ainda um filho de 12 anos, que não dá trabalho nenhum. Considere o genograma a seguir. O genograma de Mônica mostra que:",
    "options": [
@@ -4088,7 +4088,7 @@
   },
   {
    "id": "enare2024-096",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-urgencias",
    "stem": "Tatiana vem à consulta médica com queixa de dor lombar. Em sua consulta anterior, apresentou pressão arterial de 120 x 65 mmHg, FC normal, peso 59 kg, altura 1,60 m e FR normal. Ela declara ter alergia a dipirona. De acordo com seu prontuário, seu último Papanicolau foi há 3 anos. Tatiana relata se sentir sem energia e ter medo de essas dores serem alguma doença ruim. Diz que não tem conseguido mais dormir de preocupação. Em relação ao registro das informações fornecidas por Tatiana no Registro Clínico Orientado por Problemas (RCOP), é correto afirmar que:",
    "options": [
@@ -4131,7 +4131,7 @@
   },
   {
    "id": "enare2024-097",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-idoso",
    "stem": "Um senhor de 82 anos comparece à consulta queixando-se de uma cefaleia de início recente. HAS controlada com IECA. Exame físico sem particularidades, exceto por espessamento da artéria temporal à palpação. Nesse contexto:",
    "options": [
@@ -4174,7 +4174,7 @@
   },
   {
    "id": "enare2024-098",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-infecto",
    "stem": "Segundo o Manual de Recomendações e Controle da Tuberculose no Brasil 2ª ed., atualizado em 29/05/2024, a transmissão e adoecimento por TB são influenciados por fatores demográficos, sociais e econômicos. Dentre os fatores que contribuem para a manutenção e propagação da doença, destacam-se: urbanização crescente e desordenada, desigualdade na distribuição de renda, moradias precárias e superlotação, insegurança alimentar e baixa escolaridade, bem como dificuldade de acesso aos serviços e bens públicos. Dessa maneira, no Brasil, assim como em outros países que têm condições de vida semelhantes, alguns grupos populacionais apresentam maior vulnerabilidade para a TB. Pelo exposto acima, em comparação com a população em geral, o risco de adoecimento por tuberculose é maior no seguinte grupo:",
    "options": [
@@ -4217,7 +4217,7 @@
   },
   {
    "id": "enare2024-099",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-vigilancia",
    "stem": "De acordo com parâmetros do Ministério da Saúde, a definição utilizada na vigilância da influenza e da covid-19 para determinar casos de síndrome respiratória aguda grave (SRAG) é:",
    "options": [
@@ -4260,7 +4260,7 @@
   },
   {
    "id": "enare2024-100",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-imunizacao",
    "stem": "Os movimentos antivacina, causados por um sistema de desinformação, trazem muitos danos para as pessoas não vacinadas, pois já está mais que provado pela ciência que vacinas são muito efetivas e salvam vidas. Uma dessas doenças preveníveis por vacinas tem como manifestação clínica típica a presença de placas pseudomembranosas branco-acinzentadas, aderentes, que se instalam nas amígdalas e invadem estruturas vizinhas. Essas placas podem se localizar na faringe, na laringe e nas fossas nasais; e, com menos frequência, também são observadas na conjuntiva, na pele, no conduto auditivo, na vulva, no pênis (pós- circuncisão) e no cordão umbilical. A doença manifesta-se clinicamente por comprometimento do estado geral do paciente, que pode se apresentar prostrado e pálido. A dor de garganta é discreta, independentemente da localização ou da quantidade de placas existentes, e a febre normalmente não é muito elevada, variando de 37,5 °C a 38,5 °C, embora temperaturas mais altas não afastem o diagnóstico. Nos casos mais graves, há intenso edema do pescoço, com grande aumento dos gânglios linfáticos dessa área (pescoço taurino) e edema periganglionar nas cadeias cervicais e submandibulares. Dependendo do tamanho e da localização da placa pseudomembranosa, pode ocorrer asfixia mecânica aguda no paciente, o que muitas vezes exige imediata traqueostomia para evitar a morte. A descrição acima é característica de:",
    "options": [
@@ -7743,7 +7743,7 @@
   },
   {
    "id": "enare2022-081",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-epidemiologia",
    "stem": "Relacione as colunas e assinale a alternativa com a sequência correta. 1. Endemia. 2. Epidemia. 3. Pandemia. 4. Surto epidêmico. 5. Incidência. 6. Prevalência. ( ) Medida de frequência dos novos casos de doença na população ao longo de um período de tempo. ( ) Ocorrência mais do que o esperado de número de casos de determinada doença ou uma condição crônica em uma grande área de abrangência (países ou continentes). ( ) Doença ou condição crônica relativamente constante em uma área geográfica, dentro dos limites esperados, por um período de tempo ilimitado. ( ) Frequência de casos existentes de determinada doença, em determinada população, em um dado momento. ( ) Concentração de casos de uma mesma doença em determinado local e época, claramente em excesso ao que seria esperado. ( ) Ocorrência epidêmica restrita a um espaço extremamente delimitado, como uma escola, quartel, edifício ou bairro.",
    "options": [
@@ -7786,7 +7786,7 @@
   },
   {
    "id": "enare2022-082",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-epidemiologia",
    "stem": "Um grupo de pesquisadores pretende avaliar a associação entre tabagismo e episódios de pneumonia bacteriana entre adultos em certa comunidade. Para isso, decidem acompanhar toda a população adulta de uma pequena cidade e registrar todos os casos de pneumonia bacteriana ao longo de um ano. A informação sobre a exposição ao tabaco será obtida através de um questionário, o qual será enviado por correio antes do início do estudo, aos seis meses de acompanhamento e logo após o final do estudo. Com base no exposto, é correto afirmar que se trata de um estudo",
    "options": [
@@ -7829,7 +7829,7 @@
   },
   {
    "id": "enare2022-083",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "José, 55 anos, retorna à UBS para mostrar exames solicitados pelo seu médico da família após queixar-se de cansaço há alguns meses. Dentre os resultados, tem-se: ferro sérico 45 mcg/dl (VR 60-150 mcg/dl), ferritina 170 ng/ml (VR 10-150 ng/ml), TBIC 200 mcg/dl (VR 250-360 mcg/dl) e saturação de transferrina 28% (VR 30- 40%). Dessa forma, o diagnóstico mais provável é",
    "options": [
@@ -7872,7 +7872,7 @@
   },
   {
    "id": "enare2022-084",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "Dona Marli queixa-se de edema de membros inferiores após iniciar uso de medicamento para controlar sua pressão arterial e procura atendimento para realizar a troca do remédio, pois sente-se muito incomodada. O fármaco em questão deve ser",
    "options": [
@@ -7915,7 +7915,7 @@
   },
   {
    "id": "enare2022-085",
-   "area": "preventiva",
+   "area": "sm",
    "topicId": "prev-saude-mental",
    "stem": "Dona Elisa, 50 anos, portadora de transtorno bipolar, retornou para consulta na UBS com exames laboratoriais relacionados à tireoide alterados após iniciar uso de medicamento. Nesse caso, o médico da família deve então reavaliar o uso de",
    "options": [
@@ -7958,7 +7958,7 @@
   },
   {
    "id": "enare2022-086",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "Dr. Antônio atende na UBS uma paciente de 34 anos com queixa de poliartralgias a qual traz resultado de exames que demonstram anemia, linfopenia e fator antinuclear positivo em títulos altos. Ao fim da consulta, o médico prescreve hidroxicloroquina para ela. Devido a essa prescrição, Dr. Antônio deve encaminhá-la para avaliação do",
    "options": [
@@ -8001,7 +8001,7 @@
   },
   {
    "id": "enare2022-087",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-infecto",
    "stem": "Jovem de 22 anos apresenta quadro de dores no corpo, febre alta e astenia há 3 dias e seu exame confirma o diagnóstico de dengue. O médico da UBS, mantendo uma boa comunicação com o paciente, deve orientá-lo sobre sinais de alerta para dengue hemorrágica. Assinale a alternativa que contempla tais sinais.",
    "options": [
@@ -8044,7 +8044,7 @@
   },
   {
    "id": "enare2022-088",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "Homem de 44 anos chega para consulta acompanhado da esposa, a qual reclama que ele ronca muito à noite. Ao final da avaliação, o médico explica que o diagnóstico provável é de apneia obstrutiva do sono. A orientação do profissional deve ser de que tal condição é fator de risco para",
    "options": [
@@ -8087,7 +8087,7 @@
   },
   {
    "id": "enare2022-089",
-   "area": "preventiva",
+   "area": "sm",
    "topicId": "prev-saude-mental",
    "stem": "Os pais levam Miguel de 8 anos para consulta, pois a diretora da escola disse que ele é desatento e tem dificuldade em aprender. A conduta inicial do médico da Atenção Primária nessa situação deve ser",
    "options": [
@@ -8130,7 +8130,7 @@
   },
   {
    "id": "enare2022-090",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "Paulo foi encaminhado ao dermatologista pelo médico da família com suspeita de carcinoma basocelular. Nessa patologia, a forma clínica mais comum apresenta qual das seguintes características?",
    "options": [
@@ -8173,7 +8173,7 @@
   },
   {
    "id": "enare2022-091",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-aps",
    "stem": "Paciente, 50 anos, procura atendimento em UBS próxima a sua residência com queixa de mal-estar e é acolhido pela equipe de enfermagem, sendo aferida pressão arterial de 160x100mmHg. Nesse caso, o médico da unidade deve",
    "options": [
@@ -8216,7 +8216,7 @@
   },
   {
    "id": "enare2022-092",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-trabalhador",
    "stem": "J.N.S., 37 anos, trabalhador da construção civil, sofreu queda de andaime a 2 metros de altura, resultando em fratura fechada de tíbia direita. Sobre o caso, assinale a alternativa correta.",
    "options": [
@@ -8259,7 +8259,7 @@
   },
   {
    "id": "enare2022-093",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-infecto",
    "stem": "M.J.F., 42 anos, procura UBS com queixa de febre, mialgia, cefaleia e dor retrorbital há 2 dias. Relata que, na sua rua, ocorreram vários casos semelhantes nesta semana. Após diagnosticar o caso de dengue e propor tratamento, cabe aos profissionais da UBS",
    "options": [
@@ -8302,7 +8302,7 @@
   },
   {
    "id": "enare2022-094",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-trabalhador",
    "stem": "M.F.J., 49 anos, procura atendimento por queixa de dispneia progressiva e nega tabagismo. Trabalha em vidraçaria desde os 30 anos de idade. O exame de imagem do tórax apresenta infiltrado micronodular bilateral com predomínio nas zonas pulmonares superiores, poupando os seios costofrênicos. Qual é o diagnóstico mais provável para esse caso?",
    "options": [
@@ -8345,7 +8345,7 @@
   },
   {
    "id": "enare2022-095",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-trabalhador",
    "stem": "L.B.C., 53 anos, sexo feminino, casada, trabalha há anos em fábrica de lâmpadas fluorescentes, procura UPA com queixa de fadiga, perda de peso, perda de apetite, sialorreia, afrouxamento dos dentes, irritabilidade e tremores. Diante do exposto, pode-se afirmar que se trata de intoxicação exógena por",
    "options": [
@@ -8388,7 +8388,7 @@
   },
   {
    "id": "enare2022-096",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-estatistica",
    "stem": "Marcos, 22 anos, HIV positivo, participou de um estudo sobre testes rápidos para HIV e seu resultado foi o único negativo entre as 50 pessoas soropositivas do estudo, com um total de 100 participantes. Nesse caso, qual foi a sensibilidade do teste?",
    "options": [
@@ -8431,7 +8431,7 @@
   },
   {
    "id": "enare2022-097",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "Paulo, 67 anos, engenheiro civil, casado e previamente hígido, recebeu diagnóstico de adenocarcinoma de cólon e, após toda adequada explicação do médico assistente sobre o caso, opta por não realizar o tratamento. Qual princípio ético deve ser respeitado nesse caso?",
    "options": [
@@ -8474,7 +8474,7 @@
   },
   {
    "id": "enare2022-098",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "Paciente, sexo feminino, casada, 53 anos e obesa, procura atendimento médico em UBS pela primeira vez e relata nunca ter realizado exames de rotina. Sobre o caso, qual conduta NÃO deve ser tomada?",
    "options": [
@@ -8517,7 +8517,7 @@
   },
   {
    "id": "enare2022-099",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-trabalhador",
    "stem": "Paulo, 41 anos, é trabalhador rural e procura atendimento com queixa de sudorese, sialorreia e vômitos. Relata ter trabalhado aplicando Folidol na sua lavoura. Ao exame, apresenta miose e confusão mental. Qual é o provável diagnóstico e o órgão a ser notificado?",
    "options": [
@@ -8560,7 +8560,7 @@
   },
   {
    "id": "enare2022-100",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-infecto",
    "stem": "Gestante, 27 anos, com parto prematuro de 34 semanas gestacionais. Após alta para casa, evolui com infecção uterina, sepse e tem óbito confirmado 60 dias após o parto. Diante do exposto, qual é o tipo de morte?",
    "options": [
@@ -12043,7 +12043,7 @@
   },
   {
    "id": "enare2023-081",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-epidemiologia",
    "stem": "A imagem a seguir foi publicada em um artigo de 1961, no jornal Americano de Saúde Pública. Nesse estudo histórico, usando a vacina inativada da pólio foi observado um efeito protetor da vacinação além do efeito previsto. Esse efeito é conhecido como",
    "options": [
@@ -12086,7 +12086,7 @@
   },
   {
    "id": "enare2023-082",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-infecto",
    "stem": "Um surto de casos de hepatite A foi identificado nas populações de 3 estados brasileiros em 2022. Esses casos ocorreram no período de abril a junho e um grupo de epidemiologistas foi chamado para identificar a fonte da contaminação, tendo sido observado que 52 casos ocorreram nessa janela de tempo; foi, então, selecionado um grupo controle de 104 pacientes para comparação com os pacientes que desenvolveram hepatite A. Após entrevistas e coletas de dados, observou-se que 97% dos pacientes que desenvolveram hepatite A nesse período havia consumido água engarrafada da mesma fonte, enquanto apenas 10% dos controles haviam consumido a água engarrafa dessa fonte. A metodologia de estudo realizada para a investigação desse surto foi",
    "options": [
@@ -12129,7 +12129,7 @@
   },
   {
    "id": "enare2023-083",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "Diabetes Mellitus (DM) é uma das doenças crônicas não transmissíveis mais importantes do mundo, sendo o conhecimento a seu respeito fundamental para o médico e para outros profissionais da saúde. Em relação à fisiopatologia da DM tipo 2, assinale a alternativa correta.",
    "options": [
@@ -12172,7 +12172,7 @@
   },
   {
    "id": "enare2023-084",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-infecto",
    "stem": "Entre os anos de 2015 a 2017, houve Emergência em Saúde Pública devido ao aumento na ocorrência de nascidos vivos com microcefalia no Brasil associada à epidemia do vírus Zika, época em que foram registrados 4.595 nascidos vivos com essa malformação congênita. A partir desse episódio, foi possível confirmar a associação entre o vírus Zika e a microcefalia. Assinale a alternativa que define corretamente a microcefalia grave.",
    "options": [
@@ -12215,7 +12215,7 @@
   },
   {
    "id": "enare2023-085",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-infecto",
    "stem": "A meningite é uma das doenças infectocontagiosas com maior letalidade entre crianças, sendo, portanto, questão de saúde pública. Sua incidência vem diminuindo desde os anos 2000 no Brasil, sendo que, dentro do calendário de imunização, há vacinas responsáveis pela redução da incidência da meningite em crianças. É importante salientar que, nos últimos 20 anos, um dos principais agentes etiológicos da meningite teve uma redução significativa devido aos esforços do programa nacional de imunização. Esse agente, além da meningite, provoca frequentemente infecções de vias aéreas. Nesse sentido, assinale a alternativa que apresenta a vacina que protege contra o agente etiológico citado.",
    "options": [
@@ -12258,7 +12258,7 @@
   },
   {
    "id": "enare2023-086",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-infecto",
    "stem": "Um jovem de 25 anos, apresentou-se ao pronto-socorro com febre, mialgia, artralgia e rash com lesões maculopapulares. Refere que os sintomas começaram há 48h e que esteve em região de mata virgem no norte de Minas Gerais na semana que antecedeu o início dos sintomas, não tendo observado carrapatos em seu corpo nesse período de viagem. O jovem está vacinado adequadamente para febre amarela. Ao exame clínico, apresenta dados vitais normais e não apresenta sinais sugestivos de gravidade. A médica responsável pelo atendimento preocupou-se com a possibilidade de febre maculosa. Considerando essa possibilidade, qual seria a conduta mais adequada da profissional diante do aspecto clínico e considerando a notificação da febre maculosa como agravo?",
    "options": [
@@ -12301,7 +12301,7 @@
   },
   {
    "id": "enare2023-087",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-saude-mulher",
    "stem": "Uma das competências da Atenção Primária à Saúde (APS) é o cuidado da gestante de risco habitual de forma integral. Durante o ciclo gravídico, é natural e esperado que a mulher apresente ganho de peso. Sabe-se, no entanto, que o ganho de peso excessivo nesse período é prejudicial à saúde, aumentando o risco de diabetes mellitus gestacional. Em relação a esse tema, assinale a alternativa que apresenta o valor adequado de ganho de peso para uma mulher com IMC entre 25 e 30 durante toda a gestação.",
    "options": [
@@ -12344,7 +12344,7 @@
   },
   {
    "id": "enare2023-088",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-vigilancia",
    "stem": "O seguinte gráfico demonstra a redução da taxa de mortalidade da tuberculose ao longo do tempo, considerando estimativas traçadas desde 1860 até 1960: Considerando esse gráfico, é correto afirmar que",
    "options": [
@@ -12387,7 +12387,7 @@
   },
   {
    "id": "enare2023-089",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-idoso",
    "stem": "A avaliação que considera múltiplas dimensões é denominada avaliação multidimensional a qual estrutura e organiza o cuidado às pessoas idosas. Em outras palavras, a avaliação multidimensional permite a compreensão ampliada e integral do estado de saúde de um determinado indivíduo, buscando identificar e intervir nas áreas mais comprometidas e que podem afetar sua funcionalidade: doenças agudas ou crônicas, agravos como quedas e outros acidentes, questões relativas a processos psicológicos/subjetivos ou, ainda, situações sociais, econômicas e culturais que podem trazer limitações para o exercício da autonomia e/ou independência. Tal avaliação permite o direcionamento de intervenções oportunas, que respondam às reais necessidades de cada pessoa, o que possibilita prognósticos mais favoráveis em sua trajetória de envelhecimento. Referente à avaliação multidimensional do idoso, assinale a alternativa correta.",
    "options": [
@@ -12430,7 +12430,7 @@
   },
   {
    "id": "enare2023-090",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-infecto",
    "stem": "Uma menina de 8 anos é levada pela mãe à Unidade Básica de Saúde, apresentando febre, odinofagia e hiporexia. Ao exame clínico, são constatados exsudato orofaríngeo e linfadenopatia cervical palpável, e a médica responsável pelo atendimento determina que se trata de uma amigdalite bacteriana. Considerando o agente mais comum causador da amigdalite bacteriana, qual fármaco deve ser prescrito para o tratamento e qual é o principal objetivo do seu uso?",
    "options": [
@@ -12473,7 +12473,7 @@
   },
   {
    "id": "enare2023-091",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-mfc",
    "stem": "Um senhor de 58 anos comparece à consulta em unidade básica de saúde e queixa-se, para seu médico de família e comunidade, de dores nos joelhos. O paciente relata que “as dores o preocupam muito, pois o atrapalham a trabalhar diariamente”. O médico, além de fazer perguntas, realiza o exame físico e conclui que se trata de caso de artrose dos joelhos, bilateralmente. Diante da preocupação do paciente, qual é a atitude esperada desse profissional de saúde?",
    "options": [
@@ -12516,7 +12516,7 @@
   },
   {
    "id": "enare2023-092",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "Um senhor de 62 anos, portador de HAS e tabagista, comparece à UBS para trazer os resultados de seus exames de rotina. Ele faz uso de losartana 50 mg BID e anlodipino 5 mg MID e apresenta bom controle de pressão arterial. A seguir estão os resultados dos exames desse paciente: Hemoglobina: 14,3 mg/dl / Leucócitos: 7200/mm3 / Plaquetas: 230.000/mm3 / Potássio: 5,6 mEq/L / Sódio: 143 mEq/L / Ácido Úrico: 4,3 mg/dl / Glicose: 93 mg/dl / HbA1c – 5,4% / Creatinina: 0,8 mg/dl. Sangue oculto nas fezes (imunohistoquímica): positivo / Colesterol total: 122 / Col. HDL: 46 / Col. LDL: 68 / Relação albumina-creatinina: 3,2 mg/g. Diante desse quadro, qual é a conduta mais adequada?",
    "options": [
@@ -12559,7 +12559,7 @@
   },
   {
    "id": "enare2023-093",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-saude-mulher",
    "stem": "Uma jovem de 24 anos comparece à consulta na Unidade Básica de Saúde devido a atraso menstrual. Ao consultá-la, o médico solicita um teste rápido urinário que mostra resultado positivo para gravidez. Ao dar a notícia, a paciente começa a chorar copiosamente. Após um certo tempo, ela relata que a gravidez foi fruto de uma única relação com um parceiro ocasional e que não a deseja, afirmando que isso atrapalhará seu curso universitário e demonstrando preocupação em relação à reação de seus pais. Diante dessa situação, qual é a postura considerada adequada?",
    "options": [
@@ -12602,7 +12602,7 @@
   },
   {
    "id": "enare2023-094",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-etica",
    "stem": "Quase 55 mil pessoas morrem por ano no Brasil devido a erros médicos. Isso é o que aponta o Estudo de Saúde Suplementar, que analisou 182 hospitais nos anos anteriores à pandemia da Covid-19. Devido a esse número elevado, a preocupação com a segurança do paciente e em minimizar o número de erros é fundamental para qualquer profissional de saúde. Dentre os possíveis erros do profissional médico, está o erro do diagnóstico. Assinale a alternativa que apresenta uma atitude que melhora a segurança do paciente e a qualidade do diagnóstico médico.",
    "options": [
@@ -12645,7 +12645,7 @@
   },
   {
    "id": "enare2023-095",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "Um homem saudável de 48 anos comparece à UBS para realizar o PSA, pois viu, em um anúncio, que deve realizar tal exame para se proteger do câncer de próstata. Ele consultou-se com o médico da família e comunidade e relatou que vinha fazendo o PSA todos os anos, parou na pandemia e, agora, gostaria de fazer novamente. Considerando que o PSA é um exame que apresenta elevado risco ao paciente devido ao seu baixo valor preditivo positivo, em relação ao desejo desse paciente em realizar o PSA, assinale a conduta correta.",
    "options": [
@@ -12688,7 +12688,7 @@
   },
   {
    "id": "enare2023-096",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-urgencias",
    "stem": "Uma criança de 4 anos é levada pelos pais à UBS após queda da própria altura enquanto brincava com os primos. Ao examiná-la, o médico observa um pequeno corte no queixo e, após limpeza da lesão e exame clínico, determina a necessidade de sutura. Sabendo que a criança pesa cerca de 15 kg, assinale a conduta adequada para a preparação desse procedimento.",
    "options": [
@@ -12731,7 +12731,7 @@
   },
   {
    "id": "enare2023-097",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-cronicas",
    "stem": "A boa prática médica está associada à promoção da saúde, além de práticas terapêuticas e diagnósticas. A atividade física vem se tornando o centro da promoção à saúde em decorrência de seus inúmeros benefícios de curto, médio e longo prazo. Assinale a alternativa que apresenta a quantidade recomendada de atividade física para pessoas entre 6 e 17 anos.",
    "options": [
@@ -12774,7 +12774,7 @@
   },
   {
    "id": "enare2023-098",
-   "area": "preventiva",
+   "area": "mfc",
    "topicId": "prev-imunizacao",
    "stem": "Durante uma consulta de rotina, observa-se que um menino de 4 anos está com cartão vacinal incompleto. Ele compareceu à consulta acompanhado de sua mãe, que relata para o profissional que tem medo de vacinar o filho, pois frequentemente vê na mídia ou em grupos de mensagens que as vacinas podem causar autismo. Ela mesma não se vacina há mais de 10 anos. Diante dessa mãe – que tem um comportamento denominado hesitação vacinal – qual deve ser a postura do profissional de saúde?",
    "options": [
@@ -12817,7 +12817,7 @@
   },
   {
    "id": "enare2023-099",
-   "area": "preventiva",
+   "area": "sc",
    "topicId": "prev-infecto",
    "stem": "Um jovem de 25 anos comparece à UBS com quadro de tosse há cerca de 3 semanas, com relato de dispneia progressiva. Ele vive com HIV (PVHIV), porém abandonou o tratamento há cerca de dois anos. Ao exame clínico, não há alterações na ausculta respiratória, porém ele apresenta uma FR de 26 irpm e uma Sat O2 em ar ambiente de 93%, também apresenta febre de 38,2ºC ao exame clínico. Considerando o agente etiológico mais provável nesse paciente, qual é o achado radiológico esperado na radiografia de tórax?",
    "options": [
@@ -12860,7 +12860,7 @@
   },
   {
    "id": "enare2023-100",
-   "area": "preventiva",
+   "area": "sm",
    "topicId": "prev-saude-mental",
    "stem": "Uma mulher de 35 anos, PCD (paralisia dos membros inferiores após trauma), com quadro depressivo, compulsão alimentar e insuficiência familiar, mora com a mãe, que tem 70 anos e está apresentando alguns sinais de demência em fase inicial. O médico de família está apreensivo na reunião de equipe, preocupado com a filha PCD, pois esta tem dores crônicas e responde mal às intervenções médicas propostas (analgesia e antidepressivos). Durante a reunião de equipe, estão presentes os ACSs (Agentes Comunitários de Saúde), bem como profissionais de psicologia, nutrição e fisioterapia. Diante dessas informações, assinale a alternativa que melhor apresenta uma intervenção multiprofissional e interdisciplinar.",
    "options": [

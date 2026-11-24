@@ -52,7 +52,7 @@ export default function Arena() {
     } catch (e) { setError(e.message); } finally { setBusy(false); }
   };
 
-  const submitOne = (key) => setAnswers((a) => ({ ...a, [q.id]: { chosen: key, correct: key === q.answer, seconds: 60 } }));
+  const submitOne = (key) => setAnswers((a) => ({ ...a, [q.id]: { chosen: key, correct: String(key).toUpperCase() === String(q.answer).toUpperCase(), seconds: 60 } }));
 
   const finish = async () => {
     if (!player) return;

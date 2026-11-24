@@ -32,7 +32,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Endocrinologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir critérios diagnósticos, CAD/EHH e complicações crônicas, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de critérios diagnósticos, CAD/EHH e complicações crônicas",
+       "Dominar: Critérios diagnósticos e rastreio de complicações",
+       "Dominar: CAD e EHH: hidratação, potássio e insulina",
+       "Dominar: Pé diabético e manejo de infecções",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Critérios diagnósticos e rastreio de complicações sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Critérios diagnósticos e rastreio de complicações sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-gastro",
@@ -55,7 +83,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Gastroenterologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir cirrose, ascite, PBE e diarreia aguda, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de cirrose, ascite, PBE e diarreia aguda",
+       "Dominar: Child-Pugh, MELD e complicações da cirrose",
+       "Dominar: Paracentese diagnóstica e PBE",
+       "Dominar: Diarreia aguda e crônica: investigação",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Child-Pugh, MELD e complicações da cirrose sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Child-Pugh, MELD e complicações da cirrose sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-infecto-hiv",
@@ -78,7 +134,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Infectologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir TARV inicial, CD4, profilaxias e síndrome inflamatória de reconstituição imune, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de TARV inicial, CD4, profilaxias e síndrome inflamatória de reconstituição imune",
+       "Dominar: Fluxo diagnóstico e aconselhamento",
+       "Dominar: Esquema inicial de TARV e interações",
+       "Dominar: Profilaxias por CD4 e manejo da IRIS",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Fluxo diagnóstico e aconselhamento sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Fluxo diagnóstico e aconselhamento sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-cardio-has",
@@ -101,7 +185,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Cardiologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir metas, lesão de órgão-alvo e escolha de anti-hipertensivos, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de metas, lesão de órgão-alvo e escolha de anti-hipertensivos",
+       "Dominar: Confirmar o diagnóstico com MAPA/MRPA e afastar hipertensão do jaleco branco",
+       "Dominar: Metas por perfil de risco e combinação inicial de anti-hipertensivos",
+       "Dominar: Diferenciar urgência de emergência hipertensiva e drogas por cenário",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Confirmar o diagnóstico com MAPA/MRPA e afastar hipertensão do jaleco branco sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Confirmar o diagnóstico com MAPA/MRPA e afastar hipertensão do jaleco branco sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-cardio-ic",
@@ -124,7 +236,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Cardiologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir congestão, perfusão, quarteto farmacológico e descompensação, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de congestão, perfusão, quarteto farmacológico e descompensação",
+       "Dominar: Identificar congestão e baixo débito no exame",
+       "Dominar: Quarteto de drogas com benefício de mortalidade e titulação",
+       "Dominar: Diurético EV, inotrópico e suporte no choque cardiogênico",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Identificar congestão e baixo débito no exame sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Identificar congestão e baixo débito no exame sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-cardio-sca",
@@ -147,7 +287,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Cardiologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir dor torácica, ECG em 10 minutos, SCA e arritmias instáveis, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de dor torácica, ECG em 10 minutos, SCA e arritmias instáveis",
+       "Dominar: ECG em até 10 minutos e critérios de SCA com/sem supra",
+       "Dominar: Dupla antiagregação, anticoagulação e tempo porta-balão",
+       "Dominar: Taquiarritmias e bradiarritmias com instabilidade: cardioversão e marcapasso",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar ECG em até 10 minutos e critérios de SCA com/sem supra sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar ECG em até 10 minutos e critérios de SCA com/sem supra sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-infecto-sepse",
@@ -170,7 +338,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Infectologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir sepse, ressuscitação, vasopressor e foco infeccioso, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de sepse, ressuscitação, vasopressor e foco infeccioso",
+       "Dominar: Critérios de sepse e qSOFA",
+       "Dominar: Pacote da 1ª hora: culturas, lactato e antibiótico",
+       "Dominar: Noradrenalina, metas de PAM e controle do foco",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Critérios de sepse e qSOFA sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Critérios de sepse e qSOFA sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-hemato",
@@ -193,7 +389,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Hematologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir anemias carenciais/hemolíticas, CIVD e reações transfusionais, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de anemias carenciais/hemolíticas, CIVD e reações transfusionais",
+       "Dominar: Algoritmo de anemia microcítica e macrocítica",
+       "Dominar: Plaquetopenia, CIVD e PTT",
+       "Dominar: Indicação e reações transfusionais",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Algoritmo de anemia microcítica e macrocítica sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Algoritmo de anemia microcítica e macrocítica sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-infecto-arboviro",
@@ -216,7 +440,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Infectologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir classificação da dengue, sinais de alarme e manejo de leptospirose, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de classificação da dengue, sinais de alarme e manejo de leptospirose",
+       "Dominar: Sinais de alarme e grupos de risco na dengue",
+       "Dominar: Hidratação por peso e monitorização",
+       "Dominar: Diagnóstico e tratamento precoce da leptospirose",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Sinais de alarme e grupos de risco na dengue sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Sinais de alarme e grupos de risco na dengue sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-infecto-hepatites",
@@ -239,7 +491,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Infectologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir sorologias, critérios de tratamento e hepatite fulminante, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de sorologias, critérios de tratamento e hepatite fulminante",
+       "Dominar: Interpretar marcadores de hepatite B e C",
+       "Dominar: Indicação de tratamento e avaliação de fibrose",
+       "Dominar: Reconhecer hepatite fulminante",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Interpretar marcadores de hepatite B e C sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Interpretar marcadores de hepatite B e C sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-nefro",
@@ -262,7 +542,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Infectologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir síndrome nefrítica/nefrótica, DRC e interpretação gasométrica, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de síndrome nefrítica/nefrótica, DRC e interpretação gasométrica",
+       "Dominar: Diferenciar nefrítica de nefrótica",
+       "Dominar: Estadiamento da DRC e indicação de diálise",
+       "Dominar: Gasometria arterial passo a passo",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Diferenciar nefrítica de nefrótica sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Diferenciar nefrítica de nefrótica sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-neuro",
@@ -285,7 +593,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Neurologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir AVC, cefaleias de alarme e estado de mal epiléptico, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de AVC, cefaleias de alarme e estado de mal epiléptico",
+       "Dominar: NIHSS, trombólise e trombectomia",
+       "Dominar: Cefaleias de alarme e meningite",
+       "Dominar: Estado de mal epiléptico e coma",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar NIHSS, trombólise e trombectomia sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar NIHSS, trombólise e trombectomia sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-onco",
@@ -308,7 +644,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Oncologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir urgências oncológicas e manejo inicial, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de urgências oncológicas e manejo inicial",
+       "Dominar: Neutropenia febril: antibiótico em 1 hora",
+       "Dominar: Compressão medular e síndrome da veia cava superior",
+       "Dominar: Hipercalcemia e síndrome de lise tumoral",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Neutropenia febril: antibiótico em 1 hora sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Neutropenia febril: antibiótico em 1 hora sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-pneumo",
@@ -331,7 +695,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Pneumologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir gravidade da asma/DPOC, PAC e padrões de DPI, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de gravidade da asma/DPOC, PAC e padrões de DPI",
+       "Dominar: Classificação e tratamento de asma e DPOC",
+       "Dominar: CURB-65 e antibiótico na PAC",
+       "Dominar: Padrões tomográficos e diagnóstico de DPI",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Classificação e tratamento de asma e DPOC sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Classificação e tratamento de asma e DPOC sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-reumato",
@@ -354,7 +746,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Reumatologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir padrões articulares, critérios de LES e arterite de células gigantes, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de padrões articulares, critérios de LES e arterite de células gigantes",
+       "Dominar: Monoartrite, oligoartrite e poliartrite",
+       "Dominar: Critérios de LES e nefrite lúpica",
+       "Dominar: Arterite de células gigantes e polimialgia",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Monoartrite, oligoartrite e poliartrite sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Monoartrite, oligoartrite e poliartrite sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-endo-tireo",
@@ -377,7 +797,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Endocrinologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir hiper/hipotireoidismo, nódulo, crise adrenal e hiponatremia, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de hiper/hipotireoidismo, nódulo, crise adrenal e hiponatremia",
+       "Dominar: Quadro clínico e laboratorial de tireotoxicose e mixedema",
+       "Dominar: Nódulo tireoidiano e PAAF",
+       "Dominar: Crise adrenal e correção de hiponatremia",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Quadro clínico e laboratorial de tireotoxicose e mixedema sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Quadro clínico e laboratorial de tireotoxicose e mixedema sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-infecto-tb",
@@ -400,7 +848,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Infectologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir diagnóstico bacteriológico, esquema básico e TB em situações especiais, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de diagnóstico bacteriológico, esquema básico e TB em situações especiais",
+       "Dominar: Teste rápido molecular, baciloscopia e cultura",
+       "Dominar: Esquema básico e efeitos adversos",
+       "Dominar: TB em HIV, gestação e resistência",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Teste rápido molecular, baciloscopia e cultura sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Teste rápido molecular, baciloscopia e cultura sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-urgencias",
@@ -423,7 +899,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Urgências",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir reanimação, antídotos e instabilidade clínica, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de reanimação, antídotos e instabilidade clínica",
+       "Dominar: RCP de alta qualidade e ritmos chocáveis",
+       "Dominar: Delirium tremens e abstinência alcóolica",
+       "Dominar: Toxicologia e antídotos",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar RCP de alta qualidade e ritmos chocáveis sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar RCP de alta qualidade e ritmos chocáveis sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-dermato",
@@ -446,7 +950,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Dermatologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir SJS/NET, herpes-zóster e diagnósticos diferenciais, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de SJS/NET, herpes-zóster e diagnósticos diferenciais",
+       "Dominar: Reconhecer SJS/NET e retirar a droga",
+       "Dominar: Herpes-zóster e indicação de aciclovir EV",
+       "Dominar: Dermatoses por morfologia e localização",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Reconhecer SJS/NET e retirar a droga sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Reconhecer SJS/NET e retirar a droga sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-geri",
@@ -469,7 +1001,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Geriatria",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir avaliação geriátrica ampla, delirium e critérios de Beers, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de avaliação geriátrica ampla, delirium e critérios de Beers",
+       "Dominar: Delirium versus demência",
+       "Dominar: Rastreio de fragilidade e quedas",
+       "Dominar: Prescrição segura e desprescrição",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Delirium versus demência sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Delirium versus demência sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-cardio-valvo",
@@ -492,7 +1052,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Cardiologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir sopros, critérios de Jones e indicações cirúrgicas, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de sopros, critérios de Jones e indicações cirúrgicas",
+       "Dominar: Reconhecer sopros e manobras que os modificam",
+       "Dominar: Critérios de Jones e profilaxia da febre reumática",
+       "Dominar: Indicações de troca valvar e complicações",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Reconhecer sopros e manobras que os modificam sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Reconhecer sopros e manobras que os modificam sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cm-etica",
@@ -515,7 +1103,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Ética e profissionalismo",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir publicidade médica, autonomia e relação médico-paciente, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de publicidade médica, autonomia e relação médico-paciente",
+       "Dominar: Regras de publicidade médica",
+       "Dominar: Consentimento e recusa de tratamento",
+       "Dominar: Comunicação de más notícias",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Regras de publicidade médica sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Regras de publicidade médica sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     }
    ]
   },
@@ -549,7 +1165,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Abdome agudo",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir diagnóstico diferencial e indicação cirúrgica, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de diagnóstico diferencial e indicação cirúrgica",
+       "Dominar: Apendicite: Alvarado e cirurgia",
+       "Dominar: Obstrução intestinal e alça fechada",
+       "Dominar: Peritonite e isquemia mesentérica",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Apendicite: Alvarado e cirurgia sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Apendicite: Alvarado e cirurgia sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cir-trauma-abdominal",
@@ -572,7 +1216,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Trauma",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir indicações de cirurgia e tratamento conservador, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de indicações de cirurgia e tratamento conservador",
+       "Dominar: FAST e instabilidade",
+       "Dominar: Indicações de laparotomia",
+       "Dominar: Lesões de vísceras maciças e ocos",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar FAST e instabilidade sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar FAST e instabilidade sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cir-trauma-atls",
@@ -595,7 +1267,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Trauma",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir sequência do ATLS, choque e transfusão maciça, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de sequência do ATLS, choque e transfusão maciça",
+       "Dominar: ABCDE e exposição",
+       "Dominar: Reconhecer choque hemorrágico",
+       "Dominar: Protocolo de transfusão maciça e controle de danos",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar ABCDE e exposição sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar ABCDE e exposição sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cir-trauma-toracico",
@@ -618,7 +1318,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Trauma",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir lesões letais e descompressão imediata, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de lesões letais e descompressão imediata",
+       "Dominar: Pneumotórax hipertensivo e agulhada",
+       "Dominar: Tamponamento cardíaco e janela pericárdica",
+       "Dominar: Hemotórax maciço e toracotomia",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Pneumotórax hipertensivo e agulhada sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Pneumotórax hipertensivo e agulhada sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cir-vias-biliares",
@@ -641,7 +1369,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Vias biliares e pâncreas",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir colangite, CPRE e pancreatite biliar, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de colangite, CPRE e pancreatite biliar",
+       "Dominar: Colangite de Charcot e antibiótico",
+       "Dominar: CPRE e cirurgia da via biliar",
+       "Dominar: Pancreatite: critérios e manejo",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Colangite de Charcot e antibiótico sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Colangite de Charcot e antibiótico sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cir-onco-cp",
@@ -664,7 +1420,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Oncologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir diagnóstico de lesões suspeitas e linfonodo sentinela, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de diagnóstico de lesões suspeitas e linfonodo sentinela",
+       "Dominar: Critérios de lesão cutânea suspeita",
+       "Dominar: Úlcera oral que não cicatriza",
+       "Dominar: Biópsia e estadiamento",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Critérios de lesão cutânea suspeita sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Critérios de lesão cutânea suspeita sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cir-coloprocto",
@@ -687,7 +1471,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Coloproctologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir doença diverticular, câncer e urgências anorretais, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de doença diverticular, câncer e urgências anorretais",
+       "Dominar: Classificação de hemorroidas e trombose",
+       "Dominar: Diverticulite Hinchey e antibiótico",
+       "Dominar: Rastreio de câncer colorretal",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Classificação de hemorroidas e trombose sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Classificação de hemorroidas e trombose sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cir-periop",
@@ -710,7 +1522,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Perioperatório",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir risco cirúrgico, profilaxia e complicações, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de risco cirúrgico, profilaxia e complicações",
+       "Dominar: Estratificação de risco cardiológico",
+       "Dominar: Profilaxia antibiótica e tromboembólica",
+       "Dominar: Íleo, dehiscência e infecção de sítio",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Estratificação de risco cardiológico sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Estratificação de risco cardiológico sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cir-trauma-orto",
@@ -733,7 +1573,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Trauma",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir imobilização, redução e síndrome compartimental, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de imobilização, redução e síndrome compartimental",
+       "Dominar: Avaliação neurovascular",
+       "Dominar: Imobilização e redução",
+       "Dominar: Síndrome compartimental e rabdomiólise",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Avaliação neurovascular sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Avaliação neurovascular sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cir-hernia",
@@ -756,7 +1624,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Parede abdominal",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir anatomia, complicações e reparo, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de anatomia, complicações e reparo",
+       "Dominar: Diferenciar inguinal e femoral",
+       "Dominar: Encarceramento e estrangulamento",
+       "Dominar: Técnicas de reparo e recidiva",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Diferenciar inguinal e femoral sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Diferenciar inguinal e femoral sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cir-queimados",
@@ -779,7 +1675,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Trauma",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir regra dos nove, Parkland e queimadura de via aérea, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de regra dos nove, Parkland e queimadura de via aérea",
+       "Dominar: Cálculo da SCQ e reposição",
+       "Dominar: Indicação de intubação precoce",
+       "Dominar: Curativos e infecção",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Cálculo da SCQ e reposição sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Cálculo da SCQ e reposição sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "cir-urologia",
@@ -802,7 +1726,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Urologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir cólica renal, ITU complicada e trauma, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de cólica renal, ITU complicada e trauma",
+       "Dominar: Analgesia e tamanho do cálculo",
+       "Dominar: ITU complicada e obstrução",
+       "Dominar: Trauma renal e uretral",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Analgesia e tamanho do cálculo sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Analgesia e tamanho do cálculo sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     }
    ]
   },
@@ -836,7 +1788,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Ginecologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir eficácia, contraindicações e contracepção de emergência, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de eficácia, contraindicações e contracepção de emergência",
+       "Dominar: Tabela de eficácia dos métodos",
+       "Dominar: Contraindicações absolutas",
+       "Dominar: Contracepção de emergência e DIU",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Tabela de eficácia dos métodos sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Tabela de eficácia dos métodos sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-hemorragias",
@@ -859,7 +1839,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Pré-natal",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir sangramento vaginal na gestação, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de sangramento vaginal na gestação",
+       "Dominar: Placenta prévia e acretismo",
+       "Dominar: Descolamento prematuro",
+       "Dominar: Abortamento e conduta",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Placenta prévia e acretismo sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Placenta prévia e acretismo sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-infeccoes",
@@ -882,7 +1890,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Infectologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir corrimento, úlceras e DIP, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de corrimento, úlceras e DIP",
+       "Dominar: Vaginose, candidíase e tricomoníase",
+       "Dominar: Úlceras genitais e sífilis",
+       "Dominar: DIP e critérios de internação",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Vaginose, candidíase e tricomoníase sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Vaginose, candidíase e tricomoníase sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-infecto-gestacao",
@@ -905,7 +1941,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Infectologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir rastreio e manejo das infecções congênitas, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de rastreio e manejo das infecções congênitas",
+       "Dominar: Sífilis e tratamento por estágio",
+       "Dominar: Toxoplasmose e CMV",
+       "Dominar: Dengue e parvovírus na gestação",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Sífilis e tratamento por estágio sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Sífilis e tratamento por estágio sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-prenatal",
@@ -928,7 +1992,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Pré-natal",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir pré-natal de risco habitual e alto risco, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de pré-natal de risco habitual e alto risco",
+       "Dominar: Calendário de consultas e exames",
+       "Dominar: Ácido fólico, ferro e vacinas",
+       "Dominar: Sinais de alarme e referência",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Calendário de consultas e exames sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Calendário de consultas e exames sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-hipertensivas",
@@ -951,7 +2043,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Cardiologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir critérios diagnósticos, sulfato de magnésio e via de parto, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de critérios diagnósticos, sulfato de magnésio e via de parto",
+       "Dominar: Diagnóstico e proteinúria",
+       "Dominar: Sulfato de magnésio e anti-hipertensivos",
+       "Dominar: HELLP e momento do parto",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Diagnóstico e proteinúria sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Diagnóstico e proteinúria sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-ciclo",
@@ -974,7 +2094,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Ginecologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir amenorreia primária/secundária e Tanner, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de amenorreia primária/secundária e Tanner",
+       "Dominar: Investigação de amenorreia",
+       "Dominar: Puberdade precoce e atrasada",
+       "Dominar: Síndrome dos ovários policísticos",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Investigação de amenorreia sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Investigação de amenorreia sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-cancer-colo",
@@ -997,7 +2145,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Oncologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir rastreio, citologia e conduta por lesão, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de rastreio, citologia e conduta por lesão",
+       "Dominar: HPV e vacinação",
+       "Dominar: Citologia e colposcopia",
+       "Dominar: Estadiamento e tratamento",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar HPV e vacinação sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar HPV e vacinação sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-cancer-mama",
@@ -1020,7 +2196,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Oncologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir BI-RADS, diagnóstico e terapia neoadjuvante, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de BI-RADS, diagnóstico e terapia neoadjuvante",
+       "Dominar: Rastreio mamográfico",
+       "Dominar: BI-RADS e punção",
+       "Dominar: Subtipos moleculares e tratamento",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Rastreio mamográfico sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Rastreio mamográfico sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-sangramento",
@@ -1043,7 +2247,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Ginecologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir classificação PALM-COEIN e investigação, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de classificação PALM-COEIN e investigação",
+       "Dominar: Sangramento pós-menopausa e câncer",
+       "Dominar: Sangramento na menacme",
+       "Dominar: Tratamento hormonal e cirúrgico",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Sangramento pós-menopausa e câncer sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Sangramento pós-menopausa e câncer sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-parto",
@@ -1066,7 +2298,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Obstetrícia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir assistência ao parto e complicações puerperais, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de assistência ao parto e complicações puerperais",
+       "Dominar: Partograma e distocias",
+       "Dominar: Hemorragia pós-parto",
+       "Dominar: Infecção puerperal e aleitamento",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Partograma e distocias sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Partograma e distocias sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-urgencias",
@@ -1089,7 +2349,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Urgências",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir abdome pélvico agudo e profilaxias pós-violência, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de abdome pélvico agudo e profilaxias pós-violência",
+       "Dominar: Gravidez ectópica e metotrexato",
+       "Dominar: Torção ovariana",
+       "Dominar: Profilaxia IST e contracepção de emergência",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Gravidez ectópica e metotrexato sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Gravidez ectópica e metotrexato sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-climaterio",
@@ -1112,7 +2400,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Ginecologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir terapia hormonal e riscos, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de terapia hormonal e riscos",
+       "Dominar: Indicações e contraindicações da TH",
+       "Dominar: Osteoporose e rastreio",
+       "Dominar: Sangramento pós-menopausa",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Indicações e contraindicações da TH sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Indicações e contraindicações da TH sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-onco-gine",
@@ -1135,7 +2451,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Oncologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir massa anexial, câncer de endométrio e ovariano, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de massa anexial, câncer de endométrio e ovariano",
+       "Dominar: Avaliação de massa anexial",
+       "Dominar: Câncer de endométrio e sangramento",
+       "Dominar: Tumores ovarianos e marcadores",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Avaliação de massa anexial sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Avaliação de massa anexial sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-endometriose",
@@ -1158,7 +2502,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Ginecologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir endometriose e infertilidade, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de endometriose e infertilidade",
+       "Dominar: Diagnóstico de endometriose",
+       "Dominar: Tratamento clínico e cirúrgico",
+       "Dominar: Investigação da infertilidade",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Diagnóstico de endometriose sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Diagnóstico de endometriose sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-intercorrencias",
@@ -1181,7 +2553,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Pré-natal",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir gemelar, polidrâmnio e restrição de crescimento, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de gemelar, polidrâmnio e restrição de crescimento",
+       "Dominar: Corionicidade e complicações",
+       "Dominar: Polidrâmnio e oligodrâmnio",
+       "Dominar: Restrição de crescimento fetal",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Corionicidade e complicações sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Corionicidade e complicações sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "go-urogine",
@@ -1204,7 +2604,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Ginecologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir incontinência, prolapso e bexiga hiperativa, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de incontinência, prolapso e bexiga hiperativa",
+       "Dominar: Tipos de incontinência urinária",
+       "Dominar: Prolapso de órgãos pélvicos",
+       "Dominar: Bexiga hiperativa e tratamento",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Tipos de incontinência urinária sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Tipos de incontinência urinária sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     }
    ]
   },
@@ -1238,7 +2666,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Geral",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir calendário vacinal e situações especiais, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de calendário vacinal e situações especiais",
+       "Dominar: Calendário do PNI e faixas etárias",
+       "Dominar: Contraindicações e falso contraindicações",
+       "Dominar: Vacinas em prematuros e imunossuprimidos",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Calendário do PNI e faixas etárias sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Calendário do PNI e faixas etárias sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "ped-puericultura",
@@ -1261,7 +2717,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Puericultura",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir curvas, marcos do desenvolvimento e triagens, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de curvas, marcos do desenvolvimento e triagens",
+       "Dominar: Curvas de crescimento e IMC",
+       "Dominar: Marcos do desenvolvimento",
+       "Dominar: M-CHAT e triagens neonatais",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Curvas de crescimento e IMC sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Curvas de crescimento e IMC sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "ped-neonatal",
@@ -1284,7 +2768,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Neonatologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir passos iniciais, VPP e massagem cardíaca, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de passos iniciais, VPP e massagem cardíaca",
+       "Dominar: Passos iniciais e estímulo",
+       "Dominar: VPP e oxigênio",
+       "Dominar: Massagem cardíaca e adrenalina",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Passos iniciais e estímulo sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Passos iniciais e estímulo sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "ped-adolescencia",
@@ -1307,7 +2819,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Puericultura",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir Tanner, ISTs e saúde mental, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de Tanner, ISTs e saúde mental",
+       "Dominar: Estadiamento de Tanner",
+       "Dominar: Contracepção e ISTs",
+       "Dominar: Depressão e automutilação",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Estadiamento de Tanner sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Estadiamento de Tanner sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "ped-aleitamento",
@@ -1330,7 +2870,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Puericultura",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir aleitamento materno e alimentação complementar, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de aleitamento materno e alimentação complementar",
+       "Dominar: Técnica e manejo de fissuras",
+       "Dominar: Introdução alimentar aos 6 meses",
+       "Dominar: Anemia ferropriva e vitamina D",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Técnica e manejo de fissuras sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Técnica e manejo de fissuras sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "ped-gastro",
@@ -1353,7 +2921,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Gastroenterologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir diarreia aguda, constipação e Roma IV, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de diarreia aguda, constipação e Roma IV",
+       "Dominar: Classificação de desidratação",
+       "Dominar: Constipação funcional",
+       "Dominar: Síndrome do intestino irritável",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Classificação de desidratação sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Classificação de desidratação sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "ped-ictericia",
@@ -1376,7 +2972,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Neonatologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir zonas de Kramer, bili total e fatores de risco, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de zonas de Kramer, bili total e fatores de risco",
+       "Dominar: Icterícia precoce e tardia",
+       "Dominar: Fototerapia e exsanguineotransfusão",
+       "Dominar: Colestase neonatal",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Icterícia precoce e tardia sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Icterícia precoce e tardia sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "ped-infecto",
@@ -1399,7 +3023,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Infectologia pediátrica",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir exantemas, diarreia e doenças tropicais, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de exantemas, diarreia e doenças tropicais",
+       "Dominar: Diagnóstico diferencial dos exantemas",
+       "Dominar: Diarreia aguda e desidratação",
+       "Dominar: Esquistossomose e parasitoses",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Diagnóstico diferencial dos exantemas sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Diagnóstico diferencial dos exantemas sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "ped-prematuridade",
@@ -1422,7 +3074,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Infectologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir sepse neonatal, enterocolite e displasia broncopulmonar, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de sepse neonatal, enterocolite e displasia broncopulmonar",
+       "Dominar: Fatores de risco e antibiótico na sepse",
+       "Dominar: Enterocolite e conduta",
+       "Dominar: Alimentação e crescimento do prematuro",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Fatores de risco e antibiótico na sepse sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Fatores de risco e antibiótico na sepse sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "ped-urgencias",
@@ -1445,7 +3125,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Urgências",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir desidratação, crise convulsiva e choque, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de desidratação, crise convulsiva e choque",
+       "Dominar: Hidratação oral e venosa",
+       "Dominar: Crise convulsiva e estado de mal",
+       "Dominar: Choque pediátrico",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Hidratação oral e venosa sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Hidratação oral e venosa sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "ped-cardio",
@@ -1468,7 +3176,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Cardiologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir sopros, cianose e insuficiência cardíaca, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de sopros, cianose e insuficiência cardíaca",
+       "Dominar: Sopro inocente versus patológico",
+       "Dominar: Cianose e teste do coraçãozinho",
+       "Dominar: Cardiopatias ducto-dependentes",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Sopro inocente versus patológico sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Sopro inocente versus patológico sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "ped-endo",
@@ -1491,7 +3227,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Endocrinologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir triagens neonatais, hiperplasia adrenal e erros inatos, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de triagens neonatais, hiperplasia adrenal e erros inatos",
+       "Dominar: Triagem neonatal e hipotireoidismo congênito",
+       "Dominar: Hiperplasia adrenal congênita",
+       "Dominar: Erros inatos do metabolismo",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Triagem neonatal e hipotireoidismo congênito sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Triagem neonatal e hipotireoidismo congênito sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "ped-hemato",
@@ -1514,7 +3278,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Hematologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir palidez, linfadenopatia e SHU, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de palidez, linfadenopatia e SHU",
+       "Dominar: Anemia ferropriva",
+       "Dominar: Leucemia linfoblástica aguda",
+       "Dominar: SHU e diarreia sanguinolenta",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Anemia ferropriva sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Anemia ferropriva sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "ped-neuro",
@@ -1537,7 +3329,35 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Neurologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir crise convulsiva, epilepsia e marcos neurológicos, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de crise convulsiva, epilepsia e marcos neurológicos",
+       "Dominar: Crise febril simples versus complexa",
+       "Dominar: Estado de mal epiléptico",
+       "Dominar: Atraso do desenvolvimento e investigação",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Crise febril simples versus complexa sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Crise febril simples versus complexa sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "ped-pneumo",
@@ -1560,22 +3380,50 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Pneumologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir bronquiolite, asma e PAC, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de bronquiolite, asma e PAC",
+       "Dominar: Manejo da bronquiolite",
+       "Dominar: Asma na infância",
+       "Dominar: Antibiótico na pneumonia",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Manejo da bronquiolite sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Manejo da bronquiolite sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     }
    ]
   },
   {
-   "id": "preventiva",
-   "name": "Preventiva e Saúde Coletiva",
-   "short": "PREV",
-   "color": "#65762c",
-   "weight": 14,
-   "description": "SUS, APS, ética e epidemiologia: conteúdo previsível e de alto retorno.",
-   "icon": "heart-pulse",
+   "id": "mfc",
+   "name": "Medicina de Família e Comunidade",
+   "short": "MFC",
+   "color": "#3f7a4e",
+   "weight": 6,
+   "description": "APS, longitudinalidade, crônicas e cuidado territorial.",
+   "icon": "home",
    "topics": [
     {
      "id": "prev-aps",
-     "area": "preventiva",
+     "area": "mfc",
      "title": "Atenção Primária à Saúde",
      "weight": 5,
      "incidence": 13.0,
@@ -1594,11 +3442,39 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "APS e MFC",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir atributos essenciais da APS e organização da UBS, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de atributos essenciais da APS e organização da UBS",
+       "Dominar: Atributos da APS",
+       "Dominar: PNAB e composição de equipe",
+       "Dominar: Acesso e longitudinalidade",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Atributos da APS sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Atributos da APS sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "prev-cronicas",
-     "area": "preventiva",
+     "area": "mfc",
      "title": "Doenças crônicas na APS",
      "weight": 5,
      "incidence": 12.0,
@@ -1617,11 +3493,39 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "APS e MFC",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir rastreio, adesão e manejo na APS, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de rastreio, adesão e manejo na APS",
+       "Dominar: Linha de cuidado de HAS e DM",
+       "Dominar: Asma e DPOC na APS",
+       "Dominar: Tabagismo e cessação",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Linha de cuidado de HAS e DM sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Linha de cuidado de HAS e DM sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "prev-imunizacao",
-     "area": "preventiva",
+     "area": "mfc",
      "title": "Imunizações no adulto e na APS",
      "weight": 5,
      "incidence": 12.0,
@@ -1640,57 +3544,39 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
-    },
-    {
-     "id": "prev-epidemiologia",
-     "area": "preventiva",
-     "title": "Epidemiologia e medidas de associação",
-     "weight": 4,
-     "incidence": 15.2,
-     "summary": "Incidência, prevalência, risco relativo e estudos.",
-     "focus": "medidas de frequência e desenhos de estudo",
-     "keyPoints": [
-      "Incidência versus prevalência",
-      "Risco relativo e odds ratio",
-      "Viés e causalidade"
      ],
-     "checklist": [
-      "Estudar a teoria de medidas de frequência e desenhos de estudo",
-      "Dominar: Incidência versus prevalência",
-      "Dominar: Risco relativo e odds ratio",
-      "Dominar: Viés e causalidade",
-      "Fazer resumo ativo de 1 página + 15 flashcards",
-      "Resolver 20 questões do tema e ler todos os comentários",
-      "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
-    },
-    {
-     "id": "prev-infecto",
-     "area": "preventiva",
-     "title": "Infectologia na APS",
-     "weight": 4,
-     "incidence": 8.0,
-     "summary": "Tuberculose, arboviroses e mpox no território.",
-     "focus": "busca ativa, notificação e manejo inicial",
-     "keyPoints": [
-      "Tuberculose na APS",
-      "Arboviroses e notificação",
-      "Mpox e isolamento"
-     ],
-     "checklist": [
-      "Estudar a teoria de busca ativa, notificação e manejo inicial",
-      "Dominar: Tuberculose na APS",
-      "Dominar: Arboviroses e notificação",
-      "Dominar: Mpox e isolamento",
-      "Fazer resumo ativo de 1 página + 15 flashcards",
-      "Resolver 20 questões do tema e ler todos os comentários",
-      "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     "group": "Geral",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir calendário, contraindicações e hesitação vacinal, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de calendário, contraindicações e hesitação vacinal",
+       "Dominar: Calendário do adulto e gestante",
+       "Dominar: Vacinas em imunossuprimidos",
+       "Dominar: Hesitação vacinal e comunicação",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Calendário do adulto e gestante sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar Calendário do adulto e gestante sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "prev-mfc",
-     "area": "preventiva",
+     "area": "mfc",
      "title": "MFC e método clínico centrado na pessoa",
      "weight": 4,
      "incidence": 14.0,
@@ -1709,34 +3595,39 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
-    },
-    {
-     "id": "prev-sus",
-     "area": "preventiva",
-     "title": "SUS: princípios, financiamento e redes",
-     "weight": 4,
-     "incidence": 20.1,
-     "summary": "Base legal, princípios, financiamento e organização da rede.",
-     "focus": "Constituição, Lei 8.080 e financiamento",
-     "keyPoints": [
-      "Princípios doutrinários e organizativos",
-      "Lei 8.080 e participação social",
-      "Financiamento e regionalização"
      ],
-     "checklist": [
-      "Estudar a teoria de Constituição, Lei 8.080 e financiamento",
-      "Dominar: Princípios doutrinários e organizativos",
-      "Dominar: Lei 8.080 e participação social",
-      "Dominar: Financiamento e regionalização",
-      "Fazer resumo ativo de 1 página + 15 flashcards",
-      "Resolver 20 questões do tema e ler todos os comentários",
-      "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     "group": "APS e MFC",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir MCCP e abordagem familiar, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de MCCP e abordagem familiar",
+       "Dominar: Componentes do MCCP",
+       "Dominar: Entrevista e escuta ativa",
+       "Dominar: Plano de cuidado compartilhado",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Componentes do MCCP sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Componentes do MCCP sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "prev-saude-mulher",
-     "area": "preventiva",
+     "area": "mfc",
      "title": "Saúde da mulher na APS",
      "weight": 4,
      "incidence": 7.0,
@@ -1755,80 +3646,39 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
-    },
-    {
-     "id": "prev-vigilancia",
-     "area": "preventiva",
-     "title": "Vigilância em saúde",
-     "weight": 4,
-     "incidence": 7.3,
-     "summary": "Notificação, surtos e vigilância epidemiológica.",
-     "focus": "doenças de notificação compulsória e investigação de surto",
-     "keyPoints": [
-      "Lista de notificação compulsória",
-      "Investigação de surto",
-      "Vigilância de óbitos"
      ],
-     "checklist": [
-      "Estudar a teoria de doenças de notificação compulsória e investigação de surto",
-      "Dominar: Lista de notificação compulsória",
-      "Dominar: Investigação de surto",
-      "Dominar: Vigilância de óbitos",
-      "Fazer resumo ativo de 1 página + 15 flashcards",
-      "Resolver 20 questões do tema e ler todos os comentários",
-      "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
-    },
-    {
-     "id": "prev-etica",
-     "area": "preventiva",
-     "title": "Ética médica e bioética",
-     "weight": 4,
-     "incidence": 15.9,
-     "summary": "Código de Ética, consentimento e fim de vida.",
-     "focus": "autonomia, confidencialidade e documentos",
-     "keyPoints": [
-      "Código de Ética Médica",
-      "Consentimento informado",
-      "Diretivas antecipadas e ortotanásia"
-     ],
-     "checklist": [
-      "Estudar a teoria de autonomia, confidencialidade e documentos",
-      "Dominar: Código de Ética Médica",
-      "Dominar: Consentimento informado",
-      "Dominar: Diretivas antecipadas e ortotanásia",
-      "Fazer resumo ativo de 1 página + 15 flashcards",
-      "Resolver 20 questões do tema e ler todos os comentários",
-      "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
-    },
-    {
-     "id": "prev-estatistica",
-     "area": "preventiva",
-     "title": "Bioestatística",
-     "weight": 3,
-     "incidence": 7.3,
-     "summary": "Sensibilidade, especificidade, VPP e testes.",
-     "focus": "acurácia de testes diagnósticos",
-     "keyPoints": [
-      "Sensibilidade e especificidade",
-      "Valores preditivos",
-      "Intervalo de confiança e p-valor"
-     ],
-     "checklist": [
-      "Estudar a teoria de acurácia de testes diagnósticos",
-      "Dominar: Sensibilidade e especificidade",
-      "Dominar: Valores preditivos",
-      "Dominar: Intervalo de confiança e p-valor",
-      "Fazer resumo ativo de 1 página + 15 flashcards",
-      "Resolver 20 questões do tema e ler todos os comentários",
-      "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     "group": "APS e MFC",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir pré-natal compartilhado, contracepção e climatério, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de pré-natal compartilhado, contracepção e climatério",
+       "Dominar: Pré-natal na APS e referência de risco",
+       "Dominar: Contracepção e planejamento familiar",
+       "Dominar: Climatério e rastreios",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Pré-natal na APS e referência de risco sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Pré-natal na APS e referência de risco sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "prev-determinantes",
-     "area": "preventiva",
+     "area": "mfc",
      "title": "Determinantes sociais da saúde",
      "weight": 3,
      "incidence": 5.0,
@@ -1847,11 +3697,39 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "APS e MFC",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir determinantes sociais e equidade, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de determinantes sociais e equidade",
+       "Dominar: Modelo de Dahlgren e Whitehead",
+       "Dominar: Vulnerabilidade social",
+       "Dominar: Ações intersetoriais",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Modelo de Dahlgren e Whitehead sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Modelo de Dahlgren e Whitehead sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "prev-idoso",
-     "area": "preventiva",
+     "area": "mfc",
      "title": "Saúde do idoso na APS",
      "weight": 3,
      "incidence": 6.0,
@@ -1870,57 +3748,39 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
-    },
-    {
-     "id": "prev-trabalhador",
-     "area": "preventiva",
-     "title": "Saúde do trabalhador",
-     "weight": 3,
-     "incidence": 4.0,
-     "summary": "Acidentes, doenças ocupacionais e nexo causal.",
-     "focus": "CAT, notificação e prevenção",
-     "keyPoints": [
-      "Doenças ocupacionais",
-      "CAT e notificação",
-      "Prevenção e EPI"
      ],
-     "checklist": [
-      "Estudar a teoria de CAT, notificação e prevenção",
-      "Dominar: Doenças ocupacionais",
-      "Dominar: CAT e notificação",
-      "Dominar: Prevenção e EPI",
-      "Fazer resumo ativo de 1 página + 15 flashcards",
-      "Resolver 20 questões do tema e ler todos os comentários",
-      "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
-    },
-    {
-     "id": "prev-saude-mental",
-     "area": "preventiva",
-     "title": "Saúde mental na APS",
-     "weight": 3,
-     "incidence": 6.0,
-     "summary": "Transtornos mentais comuns, CAPS e matriciamento.",
-     "focus": "rede de saúde mental e manejo inicial",
-     "keyPoints": [
-      "RAPS e CAPS",
-      "Transtorno mental comum",
-      "Matriciamento"
-     ],
-     "checklist": [
-      "Estudar a teoria de rede de saúde mental e manejo inicial",
-      "Dominar: RAPS e CAPS",
-      "Dominar: Transtorno mental comum",
-      "Dominar: Matriciamento",
-      "Fazer resumo ativo de 1 página + 15 flashcards",
-      "Resolver 20 questões do tema e ler todos os comentários",
-      "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     "group": "Geriatria",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir avaliação funcional e rede de apoio, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de avaliação funcional e rede de apoio",
+       "Dominar: Avaliação de funcionalidade",
+       "Dominar: Cuidados paliativos",
+       "Dominar: Rede de apoio e AD",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Avaliação de funcionalidade sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Avaliação de funcionalidade sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     },
     {
      "id": "prev-urgencias",
-     "area": "preventiva",
+     "area": "mfc",
      "title": "Urgências na APS",
      "weight": 3,
      "incidence": 6.0,
@@ -1939,7 +3799,873 @@
       "Fazer resumo ativo de 1 página + 15 flashcards",
       "Resolver 20 questões do tema e ler todos os comentários",
       "Refazer os erros em D+7 e revisar o resumo em D+30"
-     ]
+     ],
+     "group": "Urgências",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir sinais de alarme e referência, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de sinais de alarme e referência",
+       "Dominar: Cefaleia de alarme",
+       "Dominar: Lombalgia e red flags",
+       "Dominar: Crise asmática e anafilaxia",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Cefaleia de alarme sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Cefaleia de alarme sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "sc",
+   "name": "Saúde Coletiva",
+   "short": "SC",
+   "color": "#66742f",
+   "weight": 5,
+   "description": "SUS, epidemiologia, vigilância e ética pública.",
+   "icon": "building-2",
+   "topics": [
+    {
+     "id": "prev-epidemiologia",
+     "area": "sc",
+     "title": "Epidemiologia e medidas de associação",
+     "weight": 4,
+     "incidence": 15.2,
+     "summary": "Incidência, prevalência, risco relativo e estudos.",
+     "focus": "medidas de frequência e desenhos de estudo",
+     "keyPoints": [
+      "Incidência versus prevalência",
+      "Risco relativo e odds ratio",
+      "Viés e causalidade"
+     ],
+     "checklist": [
+      "Estudar a teoria de medidas de frequência e desenhos de estudo",
+      "Dominar: Incidência versus prevalência",
+      "Dominar: Risco relativo e odds ratio",
+      "Dominar: Viés e causalidade",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "Epidemiologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir medidas de frequência e desenhos de estudo, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de medidas de frequência e desenhos de estudo",
+       "Dominar: Incidência versus prevalência",
+       "Dominar: Risco relativo e odds ratio",
+       "Dominar: Viés e causalidade",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Incidência versus prevalência sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Incidência versus prevalência sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    },
+    {
+     "id": "prev-infecto",
+     "area": "sc",
+     "title": "Infectologia na APS",
+     "weight": 4,
+     "incidence": 8.0,
+     "summary": "Tuberculose, arboviroses e mpox no território.",
+     "focus": "busca ativa, notificação e manejo inicial",
+     "keyPoints": [
+      "Tuberculose na APS",
+      "Arboviroses e notificação",
+      "Mpox e isolamento"
+     ],
+     "checklist": [
+      "Estudar a teoria de busca ativa, notificação e manejo inicial",
+      "Dominar: Tuberculose na APS",
+      "Dominar: Arboviroses e notificação",
+      "Dominar: Mpox e isolamento",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "Geral",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir busca ativa, notificação e manejo inicial, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de busca ativa, notificação e manejo inicial",
+       "Dominar: Tuberculose na APS",
+       "Dominar: Arboviroses e notificação",
+       "Dominar: Mpox e isolamento",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Tuberculose na APS sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Tuberculose na APS sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    },
+    {
+     "id": "prev-sus",
+     "area": "sc",
+     "title": "SUS: princípios, financiamento e redes",
+     "weight": 4,
+     "incidence": 20.1,
+     "summary": "Base legal, princípios, financiamento e organização da rede.",
+     "focus": "Constituição, Lei 8.080 e financiamento",
+     "keyPoints": [
+      "Princípios doutrinários e organizativos",
+      "Lei 8.080 e participação social",
+      "Financiamento e regionalização"
+     ],
+     "checklist": [
+      "Estudar a teoria de Constituição, Lei 8.080 e financiamento",
+      "Dominar: Princípios doutrinários e organizativos",
+      "Dominar: Lei 8.080 e participação social",
+      "Dominar: Financiamento e regionalização",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "SUS",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir Constituição, Lei 8.080 e financiamento, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de Constituição, Lei 8.080 e financiamento",
+       "Dominar: Princípios doutrinários e organizativos",
+       "Dominar: Lei 8.080 e participação social",
+       "Dominar: Financiamento e regionalização",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Princípios doutrinários e organizativos sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Princípios doutrinários e organizativos sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    },
+    {
+     "id": "prev-vigilancia",
+     "area": "sc",
+     "title": "Vigilância em saúde",
+     "weight": 4,
+     "incidence": 7.3,
+     "summary": "Notificação, surtos e vigilância epidemiológica.",
+     "focus": "doenças de notificação compulsória e investigação de surto",
+     "keyPoints": [
+      "Lista de notificação compulsória",
+      "Investigação de surto",
+      "Vigilância de óbitos"
+     ],
+     "checklist": [
+      "Estudar a teoria de doenças de notificação compulsória e investigação de surto",
+      "Dominar: Lista de notificação compulsória",
+      "Dominar: Investigação de surto",
+      "Dominar: Vigilância de óbitos",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "Epidemiologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir doenças de notificação compulsória e investigação de surto, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de doenças de notificação compulsória e investigação de surto",
+       "Dominar: Lista de notificação compulsória",
+       "Dominar: Investigação de surto",
+       "Dominar: Vigilância de óbitos",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Lista de notificação compulsória sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Lista de notificação compulsória sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    },
+    {
+     "id": "prev-etica",
+     "area": "sc",
+     "title": "Ética médica e bioética",
+     "weight": 4,
+     "incidence": 15.9,
+     "summary": "Código de Ética, consentimento e fim de vida.",
+     "focus": "autonomia, confidencialidade e documentos",
+     "keyPoints": [
+      "Código de Ética Médica",
+      "Consentimento informado",
+      "Diretivas antecipadas e ortotanásia"
+     ],
+     "checklist": [
+      "Estudar a teoria de autonomia, confidencialidade e documentos",
+      "Dominar: Código de Ética Médica",
+      "Dominar: Consentimento informado",
+      "Dominar: Diretivas antecipadas e ortotanásia",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "Ética e profissionalismo",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir autonomia, confidencialidade e documentos, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de autonomia, confidencialidade e documentos",
+       "Dominar: Código de Ética Médica",
+       "Dominar: Consentimento informado",
+       "Dominar: Diretivas antecipadas e ortotanásia",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Código de Ética Médica sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Código de Ética Médica sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    },
+    {
+     "id": "prev-estatistica",
+     "area": "sc",
+     "title": "Bioestatística",
+     "weight": 3,
+     "incidence": 7.3,
+     "summary": "Sensibilidade, especificidade, VPP e testes.",
+     "focus": "acurácia de testes diagnósticos",
+     "keyPoints": [
+      "Sensibilidade e especificidade",
+      "Valores preditivos",
+      "Intervalo de confiança e p-valor"
+     ],
+     "checklist": [
+      "Estudar a teoria de acurácia de testes diagnósticos",
+      "Dominar: Sensibilidade e especificidade",
+      "Dominar: Valores preditivos",
+      "Dominar: Intervalo de confiança e p-valor",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "Epidemiologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir acurácia de testes diagnósticos, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de acurácia de testes diagnósticos",
+       "Dominar: Sensibilidade e especificidade",
+       "Dominar: Valores preditivos",
+       "Dominar: Intervalo de confiança e p-valor",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Sensibilidade e especificidade sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Sensibilidade e especificidade sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    },
+    {
+     "id": "prev-trabalhador",
+     "area": "sc",
+     "title": "Saúde do trabalhador",
+     "weight": 3,
+     "incidence": 4.0,
+     "summary": "Acidentes, doenças ocupacionais e nexo causal.",
+     "focus": "CAT, notificação e prevenção",
+     "keyPoints": [
+      "Doenças ocupacionais",
+      "CAT e notificação",
+      "Prevenção e EPI"
+     ],
+     "checklist": [
+      "Estudar a teoria de CAT, notificação e prevenção",
+      "Dominar: Doenças ocupacionais",
+      "Dominar: CAT e notificação",
+      "Dominar: Prevenção e EPI",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "Saúde do trabalhador",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir CAT, notificação e prevenção, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de CAT, notificação e prevenção",
+       "Dominar: Doenças ocupacionais",
+       "Dominar: CAT e notificação",
+       "Dominar: Prevenção e EPI",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Doenças ocupacionais sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar Doenças ocupacionais sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "sm",
+   "name": "Saúde Mental",
+   "short": "SM",
+   "color": "#7b5b8f",
+   "weight": 3,
+   "description": "Transtornos mentais, rede e urgências psíquicas.",
+   "icon": "brain",
+   "topics": [
+    {
+     "id": "prev-saude-mental",
+     "area": "sm",
+     "title": "Saúde mental na APS",
+     "weight": 3,
+     "incidence": 6.0,
+     "summary": "Transtornos mentais comuns, CAPS e matriciamento.",
+     "focus": "rede de saúde mental e manejo inicial",
+     "keyPoints": [
+      "RAPS e CAPS",
+      "Transtorno mental comum",
+      "Matriciamento"
+     ],
+     "checklist": [
+      "Estudar a teoria de rede de saúde mental e manejo inicial",
+      "Dominar: RAPS e CAPS",
+      "Dominar: Transtorno mental comum",
+      "Dominar: Matriciamento",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "Saúde mental",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir rede de saúde mental e manejo inicial, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de rede de saúde mental e manejo inicial",
+       "Dominar: RAPS e CAPS",
+       "Dominar: Transtorno mental comum",
+       "Dominar: Matriciamento",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar RAPS e CAPS sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar RAPS e CAPS sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    },
+    {
+     "id": "sm-depressao",
+     "area": "sm",
+     "title": "Depressão e distimia",
+     "weight": 5,
+     "incidence": 7,
+     "summary": "Rastreio, diagnóstico diferencial e tratamento da depressão.",
+     "focus": "critérios, gravidade e tratamento escalonado",
+     "keyPoints": [
+      "PHQ-9 e critérios DSM",
+      "Antidepressivos e tempo de resposta",
+      "Ideação suicida e internação"
+     ],
+     "checklist": [
+      "Estudar a teoria de critérios, gravidade e tratamento escalonado",
+      "Dominar: PHQ-9 e critérios DSM",
+      "Dominar: Antidepressivos e tempo de resposta",
+      "Dominar: Ideação suicida e internação",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "Infectologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir critérios, gravidade e tratamento escalonado, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de critérios, gravidade e tratamento escalonado",
+       "Dominar: PHQ-9 e critérios DSM",
+       "Dominar: Antidepressivos e tempo de resposta",
+       "Dominar: Ideação suicida e internação",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar PHQ-9 e critérios DSM sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 85,
+      "mastery": [
+       "Explicar PHQ-9 e critérios DSM sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    },
+    {
+     "id": "sm-ansiedade",
+     "area": "sm",
+     "title": "Transtornos ansiosos",
+     "weight": 4,
+     "incidence": 6,
+     "summary": "Ansiedade generalizada, pânico e fobias.",
+     "focus": "diagnóstico diferencial e terapia inicial",
+     "keyPoints": [
+      "Critérios de TAG e pânico",
+      "ISRS e terapia cognitivo-comportamental",
+      "Crises e diagnóstico diferencial orgânico"
+     ],
+     "checklist": [
+      "Estudar a teoria de diagnóstico diferencial e terapia inicial",
+      "Dominar: Critérios de TAG e pânico",
+      "Dominar: ISRS e terapia cognitivo-comportamental",
+      "Dominar: Crises e diagnóstico diferencial orgânico",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "Geral",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir diagnóstico diferencial e terapia inicial, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de diagnóstico diferencial e terapia inicial",
+       "Dominar: Critérios de TAG e pânico",
+       "Dominar: ISRS e terapia cognitivo-comportamental",
+       "Dominar: Crises e diagnóstico diferencial orgânico",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Critérios de TAG e pânico sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Critérios de TAG e pânico sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    },
+    {
+     "id": "sm-psicose",
+     "area": "sm",
+     "title": "Psicoses e esquizofrenia",
+     "weight": 4,
+     "incidence": 6,
+     "summary": "Sintomas psicóticos, esquizofrenia e primeiros episódios.",
+     "focus": "reconhecimento, antipsicóticos e rede",
+     "keyPoints": [
+      "Sintomas positivos e negativos",
+      "Antipsicóticos e efeitos metabólicos",
+      "Primeiro episódio e encaminhamento"
+     ],
+     "checklist": [
+      "Estudar a teoria de reconhecimento, antipsicóticos e rede",
+      "Dominar: Sintomas positivos e negativos",
+      "Dominar: Antipsicóticos e efeitos metabólicos",
+      "Dominar: Primeiro episódio e encaminhamento",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "Saúde mental",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir reconhecimento, antipsicóticos e rede, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de reconhecimento, antipsicóticos e rede",
+       "Dominar: Sintomas positivos e negativos",
+       "Dominar: Antipsicóticos e efeitos metabólicos",
+       "Dominar: Primeiro episódio e encaminhamento",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Sintomas positivos e negativos sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Sintomas positivos e negativos sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    },
+    {
+     "id": "sm-bipolar",
+     "area": "sm",
+     "title": "Transtorno bipolar",
+     "weight": 4,
+     "incidence": 5,
+     "summary": "Mania, hipomania e depressão bipolar.",
+     "focus": "estabilização do humor e prevenção de recaída",
+     "keyPoints": [
+      "Critérios de mania e hipomania",
+      "Lítio e monitorização",
+      "Depressão bipolar e switches"
+     ],
+     "checklist": [
+      "Estudar a teoria de estabilização do humor e prevenção de recaída",
+      "Dominar: Critérios de mania e hipomania",
+      "Dominar: Lítio e monitorização",
+      "Dominar: Depressão bipolar e switches",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "Saúde mental",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir estabilização do humor e prevenção de recaída, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de estabilização do humor e prevenção de recaída",
+       "Dominar: Critérios de mania e hipomania",
+       "Dominar: Lítio e monitorização",
+       "Dominar: Depressão bipolar e switches",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Critérios de mania e hipomania sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Critérios de mania e hipomania sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    },
+    {
+     "id": "sm-substancias",
+     "area": "sm",
+     "title": "Álcool e outras substâncias",
+     "weight": 4,
+     "incidence": 6,
+     "summary": "Intoxicação, abstinência e dependência.",
+     "focus": "abstinência alcoólica e redução de danos",
+     "keyPoints": [
+      "Delirium tremens e tiamina",
+      "Entrevista motivacional",
+      "Tratamento da dependência"
+     ],
+     "checklist": [
+      "Estudar a teoria de abstinência alcoólica e redução de danos",
+      "Dominar: Delirium tremens e tiamina",
+      "Dominar: Entrevista motivacional",
+      "Dominar: Tratamento da dependência",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "Saúde mental",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir abstinência alcoólica e redução de danos, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de abstinência alcoólica e redução de danos",
+       "Dominar: Delirium tremens e tiamina",
+       "Dominar: Entrevista motivacional",
+       "Dominar: Tratamento da dependência",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Delirium tremens e tiamina sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Delirium tremens e tiamina sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    },
+    {
+     "id": "sm-demencia",
+     "area": "sm",
+     "title": "Demências e delirium",
+     "weight": 4,
+     "incidence": 6,
+     "summary": "Declínio cognitivo, demências e delirium.",
+     "focus": "diferenciação e manejo não farmacológico",
+     "keyPoints": [
+      "MEEM e avaliação cognitiva",
+      "Delirium e causa orgânica",
+      "Demência e sobrecarga do cuidador"
+     ],
+     "checklist": [
+      "Estudar a teoria de diferenciação e manejo não farmacológico",
+      "Dominar: MEEM e avaliação cognitiva",
+      "Dominar: Delirium e causa orgânica",
+      "Dominar: Demência e sobrecarga do cuidador",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "Neurologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir diferenciação e manejo não farmacológico, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de diferenciação e manejo não farmacológico",
+       "Dominar: MEEM e avaliação cognitiva",
+       "Dominar: Delirium e causa orgânica",
+       "Dominar: Demência e sobrecarga do cuidador",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar MEEM e avaliação cognitiva sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar MEEM e avaliação cognitiva sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    },
+    {
+     "id": "sm-tdah",
+     "area": "sm",
+     "title": "TDAH e neurodesenvolvimento",
+     "weight": 3,
+     "incidence": 4,
+     "summary": "TDAH, autismo e queixas escolares.",
+     "focus": "triagem, diagnóstico e suporte",
+     "keyPoints": [
+      "M-CHAT e SNAP-IV",
+      "Estimulantes e contraindicações",
+      "Plano escolar e multiprofissional"
+     ],
+     "checklist": [
+      "Estudar a teoria de triagem, diagnóstico e suporte",
+      "Dominar: M-CHAT e SNAP-IV",
+      "Dominar: Estimulantes e contraindicações",
+      "Dominar: Plano escolar e multiprofissional",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "Neurologia",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir triagem, diagnóstico e suporte, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de triagem, diagnóstico e suporte",
+       "Dominar: M-CHAT e SNAP-IV",
+       "Dominar: Estimulantes e contraindicações",
+       "Dominar: Plano escolar e multiprofissional",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar M-CHAT e SNAP-IV sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 65,
+      "mastery": [
+       "Explicar M-CHAT e SNAP-IV sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
+    },
+    {
+     "id": "sm-urgencias",
+     "area": "sm",
+     "title": "Urgências psiquiátricas",
+     "weight": 4,
+     "incidence": 5,
+     "summary": "Agitação, suicídio, abstinência e internação.",
+     "focus": "contenção, risco e fluxo de urgência",
+     "keyPoints": [
+      "Risco suicida e avaliação",
+      "Agitação psicomotora e contenção",
+      "Critérios de internação"
+     ],
+     "checklist": [
+      "Estudar a teoria de contenção, risco e fluxo de urgência",
+      "Dominar: Risco suicida e avaliação",
+      "Dominar: Agitação psicomotora e contenção",
+      "Dominar: Critérios de internação",
+      "Fazer resumo ativo de 1 página + 15 flashcards",
+      "Resolver 20 questões do tema e ler todos os comentários",
+      "Refazer os erros em D+7 e revisar o resumo em D+30"
+     ],
+     "group": "Urgências",
+     "guide": {
+      "objective": "Ser capaz de reconhecer, diagnosticar e conduzir contenção, risco e fluxo de urgência, justificando cada decisão.",
+      "sequence": [
+       "Revisar a base fisiopatológica de contenção, risco e fluxo de urgência",
+       "Dominar: Risco suicida e avaliação",
+       "Dominar: Agitação psicomotora e contenção",
+       "Dominar: Critérios de internação",
+       "Comparar diagnósticos diferenciais e critérios de gravidade",
+       "Resolver casos e questões, revisando todos os erros"
+      ],
+      "questions": [
+       "Quais achados tornam o quadro grave?",
+       "Qual é a conduta inicial e o que muda o destino?",
+       "Quais exames confirmam e quais são armadilhas?"
+      ],
+      "traps": [
+       "Decorar Risco suicida e avaliação sem entender quando aplicar",
+       "Confundir diagnósticos diferenciais por não comparar critérios",
+       "Pular a estabilização e ir direto ao tratamento definitivo"
+      ],
+      "minutes": 75,
+      "mastery": [
+       "Explicar Risco suicida e avaliação sem consultar",
+       "Resolver 10 questões do tema com ≥70% de acerto",
+       "Justificar conduta e alternativa errada em voz alta"
+      ]
+     }
     }
    ]
   }

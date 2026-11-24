@@ -12,7 +12,7 @@
     "build": "vite build",
     "start": "NODE_ENV=production node server/index.js",
     "import": "node server/cli-import.js",
-    "test": "node --test test/core.test.js"
+    "test": "node --test test/*.test.js"
   },
   "dependencies": {
     "@libsql/client": "^0.18.0",

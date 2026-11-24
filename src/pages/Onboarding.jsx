@@ -44,7 +44,7 @@ export default function Onboarding() {
           <p>Um plano que monitora o que mais cai, o que você domina e o que precisa voltar à circulação.</p>
         </div>
         <div className="onboard-points">
-          <div><Target size={18} /> 82 subtópicos priorizados por incidência real</div>
+          <div><Target size={18} /> 90 subtópicos priorizados por incidência real</div>
           <div><ShieldCheck size={18} /> 300 questões oficiais com comentários</div>
           <div><Compass size={18} /> Checklists, revisões e monitor de ritmo</div>
         </div>

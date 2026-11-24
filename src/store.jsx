@@ -248,7 +248,7 @@ export function StoreProvider({ children }) {
       topicId: question.topicId,
       area: question.area,
       chosen,
-      correct: question.answer ? chosen === question.answer : null,
+      correct: question.answer ? String(chosen).toUpperCase() === String(question.answer).toUpperCase() : null,
       seconds,
       createdAt: new Date().toISOString(),
     };

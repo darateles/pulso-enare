@@ -96,7 +96,7 @@ export default function Battle() {
 
   const submit = async () => {
     if (!q || selected == null || answered) return;
-    const correct = q.answer === selected;
+    const correct = String(q.answer).toUpperCase() === String(selected).toUpperCase();
     answeredIds.current.add(q.id);
     setAnswered(true);
     try {

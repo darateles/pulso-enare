@@ -223,7 +223,7 @@ export default function Dashboard() {
       <div className="quick-strip">
         <Link to="/questoes" className="quick-tile"><Library size={20} /><span>Banco de questões</span><small>Filtre por tema e incidência</small></Link>
         <Link to="/questoes/importar" className="quick-tile"><RefreshCw size={20} /><span>Importar prova</span><small>Cole uma URL ou use fonte oficial</small></Link>
-        <Link to="/conteudos" className="quick-tile"><Target size={20} /><span>Checklists</span><small>82 subtópicos priorizados</small></Link>
+        <Link to="/conteudos" className="quick-tile"><Target size={20} /><span>Checklists</span><small>90 subtópicos priorizados</small></Link>
         <Link to="/pulso" className="quick-tile"><Sparkles size={20} /><span>Pulso Pro</span><small>18 ferramentas integradas</small></Link>
       </div>
     </>

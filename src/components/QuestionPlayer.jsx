@@ -73,7 +73,7 @@ export default function QuestionPlayer({ pool, mode = 'treino', duration = 0, on
     const results = pool.map((question) => ({
       question,
       chosen: answers[question.id] ?? (question.id === q.id ? selected : null),
-      correct: question.answer ? (answers[question.id] ?? (question.id === q.id ? selected : null)) === question.answer : null,
+      correct: question.answer ? String(answers[question.id] ?? (question.id === q.id ? selected : null)).toUpperCase() === String(question.answer).toUpperCase() : null,
     }));
     onFinish?.({
       results,
@@ -103,7 +103,7 @@ export default function QuestionPlayer({ pool, mode = 'treino', duration = 0, on
     setShowNote(false);
   };
 
-  const correctKey = q.answer;
+  const correctKey = q.answer ? String(q.answer).trim().toUpperCase() : null;
   const picked = selected;
   const isRight = correctKey && picked === correctKey;
   const answeredCount = Object.keys(answers).length + (revealed && !answers[q.id] ? 1 : 0);
