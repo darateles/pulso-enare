@@ -17,6 +17,7 @@ export const api = {
   login: (username, password) => request('/api/login', { method: 'POST', body: JSON.stringify({ username, password }) }),
   logout: () => request('/api/logout', { method: 'POST', body: '{}' }),
   bootstrap: () => request('/api/bootstrap'),
+  ranking: () => request('/api/ranking'),
   questions: () => request('/api/questions'),
   reportQuestion: (id, payload) => request(`/api/questions/${id}/report`, { method: 'POST', body: JSON.stringify(payload) }),
   saveState: (state) => request('/api/state', { method: 'PUT', body: JSON.stringify(state) }),

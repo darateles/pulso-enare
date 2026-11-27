@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight, CalendarDays, CheckCircle2, Circle, Clock3, Flame, GraduationCap, HeartPulse, Library,
-  ListChecks, Play, RefreshCw, Sparkles, TrendingUp,
+  ListChecks, Play, RefreshCw, Sparkles, TrendingUp, Trophy,
 } from 'lucide-react';
 import { Button, Card, Chip, Empty, PageHead, Progress, Ring, Stat } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
@@ -13,9 +13,10 @@ import {
 import { todaySessions } from '../planner.js';
 import { currentLevel, levelStats, nextTopics, semesterLabel } from '../trilha.js';
 import { SESSION_STAGE, STAGE_LABEL, STAGES, calibration, calibrationLabel } from '../metodo.js';
+import { dailyScore, rankingDate, rankingId } from '../ranking.js';
 
 export default function Dashboard() {
-  const { user, curriculum, questions, updateUser, bumpActivity } = useStore();
+  const { user, curriculum, questions, account, updateUser, bumpActivity } = useStore();
   const navigate = useNavigate();
   const stats = useMemo(() => globalStats(curriculum, user.progress), [curriculum, user.progress]);
   const due = useMemo(() => dueReviews(curriculum, user.progress), [curriculum, user.progress]);
@@ -29,6 +30,8 @@ export default function Dashboard() {
   const level = currentLevel(user);
   const levelData = useMemo(() => levelStats(curriculum, level.id, user.progress), [curriculum, level.id, user.progress]);
   const cal = useMemo(() => calibration(user.progress, user.attempts), [user.progress, user.attempts]);
+  const rank = useMemo(() => dailyScore(user, rankingDate()), [user]);
+  const myRankingId = rankingId(account || 'davi');
   const attemptsToday = user.attempts.filter((a) => a.createdAt?.slice(0, 10) === iso());
   const rightToday = attemptsToday.filter((a) => a.correct).length;
   const last7 = useMemo(() => {
@@ -155,8 +158,7 @@ export default function Dashboard() {
 
       <div className="dash-method">
         <div className="dash-method-head">
-          <span className="eyebrow">Ciclo de hoje · método Pulso</span>
-          <Link to="/metodo" className="text-link">Entender o método <ArrowRight size={14} /></Link>
+          <span className="eyebrow">Ciclo de hoje</span>
         </div>
         <div className="dash-method-steps">
           {STAGES.filter((stage) => stage.id !== 'ativar').map((stage) => (
@@ -268,7 +270,21 @@ export default function Dashboard() {
               <div><span>Acerto real</span><strong>{cal.accuracy != null ? `${cal.accuracy}%` : '—'}</strong></div>
             </div>
             <p className="muted-note">{calibrationLabel(cal.gap)}</p>
-            <Link to="/metodo" className="text-link">Como calibramos <ArrowRight size={14} /></Link>
+          </Card>
+
+          <Card className="side-card ranking-mini">
+            <div className="section-head small">
+              <div><span className="eyebrow">Ranking diário</span><h2>ID #{myRankingId}</h2></div>
+              <Trophy size={18} />
+            </div>
+            <div className="ranking-mini-points">
+              <strong>{rank.points}</strong>
+              <span>pontos hoje</span>
+              <Chip tone={rank.perfect ? 'success' : 'neutral'}>{rank.perfect ? '100%' : `${rank.goalsDone}/3 metas`}</Chip>
+            </div>
+            <Progress value={Math.min(100, Math.round((rank.points / 580) * 100))} tone="accent" />
+            <p className="muted-note">{rank.perfect ? 'Questionário sem erros: bônus aplicado.' : 'Feche as metas e acerte tudo para ganhar os bônus.'}</p>
+            <Button size="sm" variant="soft" onClick={() => navigate('/ranking')} icon={Trophy}>Ver ranking</Button>
           </Card>
 
           <Card className="mini-week">

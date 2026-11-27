@@ -11,7 +11,7 @@ import { DatabaseSync } from 'node:sqlite';
 import os from 'node:os';
 import {
   initStore, getUser, saveUser, getQuestions, addQuestions, backupUser, resetUser,
-  getSources, DATA_DIR,
+  getSources, listAccounts, DATA_DIR,
 } from './store.js';
 import { importFromUrl, parseQuestions, parseAnswerKey, buildQuestions, fetchText } from './importer.js';
 import { readKV, writeKV, storageMode } from './storage.js';
@@ -19,6 +19,7 @@ import {
   createBattle, getBattle, getBattleByCode, joinBattle, addBot, startBattle, answerBattle,
   finishBattle, publicBattle, getArenas, joinArena, submitArena, getArena, arenaPublic,
 } from './social.js';
+import { rankingDate, rankingEntry, rankingId, sortRanking } from '../src/ranking.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -160,6 +161,18 @@ function ok(res, data) {
   res.set('Cache-Control', 'no-store');
   res.json(data);
 }
+
+app.get('/api/ranking', async (req, res, next) => {
+  try {
+    const date = rankingDate();
+    const accounts = listAccounts();
+    const users = await Promise.all(accounts.map(async (account) => ({ account, user: await getUser(account) })));
+    const entries = users.map(({ account, user }) => rankingEntry(user, account, date));
+    const meId = rankingId(req.pulsoUser || 'davi');
+    const ranking = sortRanking(entries, meId);
+    ok(res, { date, entries: ranking.slice(0, 50), me: ranking.find((entry) => entry.isMe) || null });
+  } catch (err) { next(err); }
+});
 
 app.get('/api/bootstrap', async (req, res, next) => {
   try {

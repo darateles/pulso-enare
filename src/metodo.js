@@ -1,7 +1,7 @@
 import { addDays, iso } from './utils.js';
 
 /**
- * Método Pulso — camada de aprendizagem baseada em evidências.
+ * Ciclo de estudo — camada interna que organiza a aprendizagem.
  *
  * Não existe um único "método ideal" universal. A literatura converge em
  * alguns princípios com forte suporte:
@@ -65,106 +65,6 @@ export const SESSION_STAGE = {
   revisao: 'revisar',
   simulado: 'intercalar',
 };
-
-/** Princípios e referências usados na página Método. */
-export const PRINCIPLES = [
-  {
-    id: 'recuperacao',
-    name: 'Prática de recuperação',
-    summary: 'Tentar lembrar sem consultar é mais eficaz do que reler ou grifar.',
-    application: 'Questões fechadas, recall livre e flashcards antes de abrir o resumo.',
-    evidence: 'Efeito de teste (testing effect).',
-    refs: [
-      { label: 'Roediger & Karpicke, 2006', href: 'https://doi.org/10.1111/j.1467-9280.2006.01693.x' },
-      { label: 'Dunlosky et al., 2013', href: 'https://doi.org/10.1177/1529100612453266' },
-      { label: 'Larsen, Butler & Roediger, 2008 (medicina)', href: 'https://doi.org/10.1111/j.1365-2923.2008.03124.x' },
-    ],
-  },
-  {
-    id: 'espacamento',
-    name: 'Prática espaçada',
-    summary: 'Distribuir o estudo no tempo retém mais do que concentrar tudo em um dia.',
-    application: 'Revisões adaptativas em D+1, D+3, D+7, D+14, D+30 e D+60.',
-    evidence: 'Efeito de espaçamento (spacing effect).',
-    refs: [
-      { label: 'Cepeda et al., 2006', href: 'https://doi.org/10.1037/0033-2909.132.3.354' },
-      { label: 'Dunlosky et al., 2013', href: 'https://doi.org/10.1177/1529100612453266' },
-    ],
-  },
-  {
-    id: 'intercalacao',
-    name: 'Intercalação',
-    summary: 'Alternar temas e tipos de problema ajuda a discriminar quando aplicar cada conduta.',
-    application: 'Treino intercalado e simulados mistos, em vez de só blocos de uma matéria.',
-    evidence: 'Evidência robusta em matemática; promissora em ciências da saúde.',
-    refs: [
-      { label: 'Rohrer & Taylor, 2007', href: 'https://doi.org/10.1007/s11251-007-9015-8' },
-      { label: 'Dunlosky et al., 2013', href: 'https://doi.org/10.1177/1529100612453266' },
-    ],
-  },
-  {
-    id: 'elaboracao',
-    name: 'Elaboração e autoexplicação',
-    summary: 'Perguntar “por quê?” e explicar com as próprias palavras aprofunda a compreensão.',
-    application: 'Perguntas-guia antes da teoria, resumo ativo e justificativa da conduta.',
-    evidence: 'Elaborative interrogation e self-explanation.',
-    refs: [
-      { label: 'Chi et al., 1994', href: 'https://doi.org/10.1207/s15516709cog1803_3' },
-      { label: 'Dunlosky et al., 2013', href: 'https://doi.org/10.1177/1529100612453266' },
-    ],
-  },
-  {
-    id: 'feedback',
-    name: 'Feedback corretivo',
-    summary: 'Saber por que errou vale mais do que apenas ver o gabarito.',
-    application: 'Comentário da alternativa, caderno de erros e nova tentativa depois.',
-    evidence: 'Feedback orientado a tarefa e processo.',
-    refs: [
-      { label: 'Hattie & Timperley, 2007', href: 'https://doi.org/10.3102/003465430298487' },
-      { label: 'Butler & Winne, 1995', href: 'https://doi.org/10.3102/00346543065002245' },
-    ],
-  },
-  {
-    id: 'metacognicao',
-    name: 'Metacognição e calibração',
-    summary: 'Perceber o que você realmente sabe evita a armadilha da familiaridade.',
-    application: 'Autoavaliação de confiança comparada ao desempenho real em questões.',
-    evidence: 'Julgamentos de aprendizagem e calibração.',
-    refs: [
-      { label: 'Dunlosky & Metcalfe, 2009', href: 'https://scholar.google.com/scholar?q=Dunlosky+Metcalfe+2009+Metacognition' },
-      { label: 'Bjork, Dunlosky & Kornell, 2013', href: 'https://doi.org/10.1146/annurev-psych-113011-143823' },
-    ],
-  },
-  {
-    id: 'carga',
-    name: 'Carga cognitiva',
-    summary: 'Segmentar o conteúdo e usar exemplos reduz a sobrecarga de quem está começando.',
-    application: 'Sessões curtas, um tema por vez e complexidade progressiva por nível.',
-    evidence: 'Teoria da carga cognitiva.',
-    refs: [
-      { label: 'Sweller, 1988', href: 'https://doi.org/10.1207/s15516709cog1202_4' },
-      { label: 'van Merriënboer & Sweller, 2005', href: 'https://doi.org/10.1007/s10648-005-3951-0' },
-    ],
-  },
-  {
-    id: 'deliberada',
-    name: 'Prática deliberada',
-    summary: 'Treinar o ponto fraco com objetivo claro e feedback supera repetir o que já se sabe.',
-    application: 'Treino que prioriza lacunas, erros recentes e temas de maior peso.',
-    evidence: 'Prática deliberada e feedback especializado.',
-    refs: [
-      { label: 'Ericsson, Krampe & Tesch-Römer, 1993', href: 'https://doi.org/10.1037/0033-295X.100.3.363' },
-    ],
-  },
-];
-
-export const LOW_UTILITY = [
-  'Reler o mesmo material várias vezes',
-  'Grifar sem transformar em pergunta',
-  'Maratonar tudo na véspera',
-  'Estudar só o que já domina',
-  'Confundir familiaridade com domínio',
-];
 
 /** Mapeia cada item do checklist para uma etapa do ciclo. */
 export function checklistStage(index, total = 7) {

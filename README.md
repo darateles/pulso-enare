@@ -26,9 +26,9 @@ Plataforma com login individual para organizar a preparação ao ENARE com foco 
 | 4 · Prática e urgências | 7º e 8º | Cirurgia, obstetrícia, urgências e plantão |
 | 5 · Alta complexidade | 9º ao 12º | Oncologia, trauma grave, medicina fetal e reta final do internato |
 
-### Método Pulso
+### Como o estudo é estruturado
 
-O app organiza cada tema em cinco etapas: **Ativar → Codificar → Recuperar → Revisar → Intercalar**. A base é um conjunto de princípios com suporte científico, não uma promessa de método único:
+O app organiza cada tema em cinco etapas: **Ativar → Codificar → Recuperar → Revisar → Intercalar**. A estrutura é baseada em princípios com suporte científico, não em uma promessa de método único:
 
 - **Prática de recuperação** (testing effect): tentar lembrar antes de reler.
 - **Prática espaçada**: revisões adaptativas em intervalos crescentes.
@@ -38,7 +38,18 @@ O app organiza cada tema em cinco etapas: **Ativar → Codificar → Recuperar �
 - **Metacognição**: confiança registrada comparada ao acerto real.
 - **Carga cognitiva e prática deliberada**: níveis progressivos e foco nas lacunas.
 
-Referências principais: Dunlosky et al. (2013), Roediger & Karpicke (2006), Cepeda et al. (2006), Rohrer & Taylor (2007), Chi et al. (1994), Hattie & Timperley (2007), Bjork et al. (2013) e Larsen et al. (2008). A página **Método** dentro do app detalha cada princípio e os links.
+Referências principais: Dunlosky et al. (2013), Roediger & Karpicke (2006), Cepeda et al. (2006), Rohrer & Taylor (2007), Chi et al. (1994), Hattie & Timperley (2007), Bjork et al. (2013) e Larsen et al. (2008).
+
+## Ranking diário
+
+Cada conta recebe um **ID público de 4 dígitos**. O placar diário é calculado no servidor a partir das tentativas e da atividade salvas, sem confiar em um contador enviado pelo navegador:
+
+- +10 por acerto (até 300/dia);
+- +60 meta de questões, +40 meta de tempo e +30 meta de checklist;
+- +50 ao fechar as três metas;
+- +100 ao responder um questionário com 10+ questões e 100% de acerto.
+
+O ranking zera diariamente. Em caso de empate, vale a maior precisão do dia. A tela **Ranking** mostra sua posição, metas e o placar dos participantes.
 
 ## Login e contas
 

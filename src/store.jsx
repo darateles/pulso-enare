@@ -273,11 +273,11 @@ export function StoreProvider({ children }) {
   }, [updateUser, bumpActivity]);
 
   const toggleChecklist = useCallback((topic, index) => {
+    const wasDone = (userRef.current.progress?.[topic.id]?.done || []).includes(index);
     updateUser((prev) => {
       const p = prev.progress[topic.id] || {};
       const done = new Set(Array.isArray(p.done) ? p.done : []);
-      const had = done.has(index);
-      if (had) done.delete(index);
+      if (done.has(index)) done.delete(index);
       else done.add(index);
       const nextP = { ...p, done: [...done].sort((a, b) => a - b) };
       if (nextP.done.length === topic.checklist.length && !nextP.nextReview) {
@@ -287,7 +287,7 @@ export function StoreProvider({ children }) {
       }
       return { ...prev, progress: { ...prev.progress, [topic.id]: nextP } };
     });
-    bumpActivity({ checklist: 1, minutes: 4 });
+    if (!wasDone) bumpActivity({ checklist: 1, minutes: 4 });
   }, [updateUser, bumpActivity]);
 
   const setConfidence = useCallback((topic, value) => {

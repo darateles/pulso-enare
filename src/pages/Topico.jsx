@@ -129,7 +129,7 @@ export default function Topico() {
 
       <Card className="method-stepper">
         <div className="method-stepper-head">
-          <div><span className="eyebrow">Método Pulso</span><h2>Seu ciclo neste tema</h2></div>
+          <div><span className="eyebrow">Ciclo de estudo</span><h2>Seu ciclo neste tema</h2></div>
           <Chip tone={currentStage === 'dominado' ? 'success' : 'accent'}>{TOPIC_STAGE_LABEL[currentStage]}</Chip>
         </div>
         <div className="method-steps">

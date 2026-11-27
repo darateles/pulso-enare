@@ -256,7 +256,6 @@ export default function Trilha() {
               <li><strong>Intercalar.</strong> Misture temas em treinos e simulados.</li>
             </ol>
             <p className="muted-note">Um tema é dominado quando o checklist está completo e sua confiança é 4 ou 5. O nível avança quando todos os temas estiverem dominados.</p>
-            <Link to="/metodo" className="text-link">Ver evidências do método <ChevronRight size={14} /></Link>
           </Card>
         </aside>
       </div>

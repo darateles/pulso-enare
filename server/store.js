@@ -73,6 +73,10 @@ function accountNames() {
   return [...new Set(names)];
 }
 
+export function listAccounts() {
+  return accountNames();
+}
+
 export async function initStore() {
   await fs.mkdir(BACKUP_DIR, { recursive: true });
   if ((await hasKV('user')) && !(await hasKV('user:davi'))) {
