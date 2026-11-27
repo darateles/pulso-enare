@@ -67,7 +67,7 @@ export default function Ajustes() {
           <Field label="Horas por dia"><select value={form.dailyHours} onChange={(e) => setForm({ ...form, dailyHours: Number(e.target.value) })}>{[1,2,3,4,5,6].map((h) => <option key={h} value={h}>{h}h</option>)}</select></Field>
           <Field label="Dias de estudo"><div className="day-picker compact">{WEEKDAYS.map((d, i) => <button key={d} type="button" className={form.studyDays.includes(i) ? 'active' : ''} onClick={() => toggleDay(i)}>{d}</button>)}</div></Field>
           <Button onClick={save} icon={Save}>Salvar ajustes</Button>
-          <div className="account-row"><span>Conta: <strong>{account}</strong></span><Button variant="ghost" size="sm" onClick={logout} icon={LogOut}>Sair</Button></div>
+          <div className="account-row"><span>Conta: <strong>{account}</strong></span><Button variant="ghost" size="sm" onClick={async () => { await logout(); navigate('/login'); }} icon={LogOut}>Sair</Button></div>
         </Card>
 
         <div>

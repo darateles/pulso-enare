@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, HeartPulse, LockKeyhole, LogIn, UserRound } from 'lucide-react';
 import { Button, Field, InlineError, Logo } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
 
 export default function Login() {
   const { login } = useStore();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [show, setShow] = useState(false);
@@ -14,7 +17,7 @@ export default function Login() {
   const submit = async (e) => {
     e.preventDefault();
     setBusy(true); setError('');
-    try { await login(username.trim(), password); }
+    try { await login(username.trim(), password); navigate(location.pathname === '/login' ? '/' : location.pathname, { replace: true }); }
     catch (err) { setError(err.message); setBusy(false); }
   };
 
@@ -37,6 +40,7 @@ export default function Login() {
       </div>
       <div className="login-panel">
         <form className="login-box" onSubmit={submit}>
+          <Link to="/" className="login-back">← Voltar ao início</Link>
           <span className="onboard-step">Acesso restrito</span>
           <h2>Entrar no Pulso.</h2>
           <p>Use sua conta individual. Progresso e histórico ficam separados por usuário.</p>

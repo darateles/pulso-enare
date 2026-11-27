@@ -4,6 +4,7 @@ import { useStore } from './store.jsx';
 import Layout from './components/Layout.jsx';
 import Onboarding from './pages/Onboarding.jsx';
 import Login from './pages/Login.jsx';
+import Landing from './pages/Landing.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import { Logo, Spinner } from './components/ui.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
@@ -72,7 +73,13 @@ export default function App() {
     );
   }
 
-  if (needLogin) return <Login />;
+  if (needLogin) return (
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="*" element={<Login />} />
+    </Routes>
+  );
 
   if (!user.onboardingDone) return <Onboarding />;
 
@@ -114,6 +121,7 @@ export default function App() {
             <Route path="pulso/flashcards" element={<Flashcards />} />
             <Route path="pulso/connect" element={<Connect />} />
             <Route path="pulso/offline" element={<Offline />} />
+            <Route path="login" element={<Navigate to="/" replace />} />
             <Route path="*" element={<Missing />} />
           </Route>
           <Route path="/onboarding" element={<Navigate to="/" replace />} />
