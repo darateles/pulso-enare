@@ -10,6 +10,8 @@ services:
       PULSO_DATA_DIR: /data
       APP_USER: ${APP_USER:-pulso}
       APP_PASSWORD: ${APP_PASSWORD:?defina APP_PASSWORD no .env}
+      # Recomendado: openssl rand -hex 32. Sem ele, o servidor deriva da senha.
+      SESSION_SECRET: ${SESSION_SECRET:-}
       TRUST_PROXY: "1"
     volumes:
       - pulso-data:/data

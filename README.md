@@ -4,22 +4,46 @@
 
 Persistência em Turso (libSQL). Render Free pode levar alguns segundos no primeiro acesso após inatividade.
 
-Plataforma local, sem login, para organizar a preparação ao ENARE com foco no que mais cai. Inclui:
+Plataforma com login individual para organizar a preparação ao ENARE com foco no que mais cai. Inclui:
 
+- **Trilha em níveis** (como um curso): 5 níveis ligados ao semestre da faculdade, 7 matérias e 90 temas. O onboarding pergunta o período e monta a trilha personalizada.
 - **Mapa do edital** com 7 áreas ENAMED, 90 subtópicos agrupados por especialidade e orientação de estudo por tema.
 - **Guia de estudo + checklist de 7 etapas por subtópico**, com sequência, perguntas-guia, pegadinhas, fontes e baralho de flashcards do tema.
-- **Planner** de 8 semanas que distribui carga por peso, confiança e erros recentes.
+- **Planner** de 8 semanas que prioriza o nível atual e distribui carga por peso, confiança e erros recentes.
 - **Banco com 300 questões oficiais** do ENARE 2022, 2023 e 2024, com gabarito oficial, comentário e fonte.
 - **Importador** de provas por URL/PDF ou texto colado, com extração de gabarito e deduplicação.
 - **Geração de questões por IA** (opcional, via Venice).
 - **Simulado cronometrado**, caderno de erros, anotações, revisão espaçada e relatórios.
-- Dados **local-first**: servidor escuta só em `127.0.0.1`; backup em JSON.
+- Backup em JSON e persistência local ou Turso.
 
-## Contas de demonstração
+### Níveis da trilha
 
-O login é próprio do app e usa sessão em cookie. Contas atuais: `davi` e `teste` (senhas no arquivo local `data/acesso.txt` ou no painel do Render em `APP_USERS`).
+| Nível | Semestres | Foco |
+|---|---|---|
+| 1 · Fundamentos | 1º e 2º | SUS, APS, epidemiologia, ética, puericultura e cuidado inicial |
+| 2 · Clínica essencial | 3º e 4º | Cardiologia, endocrinologia, infectologia, pneumologia, pré-natal e saúde mental |
+| 3 · Especialidades | 5º e 6º | Nefrologia, neurologia, hematologia, reumatologia, pediatria e endocrinologia |
+| 4 · Prática e urgências | 7º e 8º | Cirurgia, obstetrícia, urgências e plantão |
+| 5 · Alta complexidade | 9º ao 12º | Oncologia, trauma grave, medicina fetal e reta final do internato |
 
-Para testar duas contas simultaneamente, use uma janela anônima.
+## Login e contas
+
+O login é próprio do app e usa sessão assinada em cookie (`pulso_session`). Configure uma ou mais contas:
+
+```bash
+APP_USER=pulso
+APP_PASSWORD=senha-longa
+# ou várias contas: APP_USERS="pulso:senha1,maria:senha2"
+SESSION_SECRET=$(openssl rand -hex 32)
+```
+
+No primeiro acesso, o onboarding pede nome, semestre da faculdade, data da prova e rotina. O semestre define o nível inicial da trilha e a prioridade do planner. Contas antigas são migradas e passam pelo onboarding uma vez, sem perder o progresso.
+
+```bash
+# gerar uma senha e um segredo de sessão
+openssl rand -base64 18
+openssl rand -hex 32
+```
 
 ## Pulso Pro
 
@@ -50,13 +74,13 @@ npm install
 npm run dev
 ```
 
-Abra `http://localhost:5173`.
+Abra `http://localhost:5173`. O servidor de desenvolvimento usa `.env` ou variáveis de ambiente; sem `APP_PASSWORD`, o login fica desativado e o app abre direto.
 
 Produção:
 
 ```bash
 npm run build
-npm start
+APP_USER=pulso APP_PASSWORD=senha-longa SESSION_SECRET=$(openssl rand -hex 32) npm start
 # http://127.0.0.1:4175
 ```
 
@@ -66,9 +90,9 @@ Sim, dá para publicar — desde que com **disco persistente** e `APP_PASSWORD`.
 
 ## Dados e backup
 
-- Progresso em `data/user.json`, banco importado em `data/questions.json`.
-- Exporte em **Ajustes → Exportar backup**. Cópias automáticas manuais em `data/backups/`.
-- `PRUMO_DATA_DIR` muda a pasta de dados.
+- Progresso em `data/user:<conta>.json` (ou no Turso), banco importado em `data/questions.json`.
+- Exporte em **Ajustes → Exportar backup**. Cópias manuais em `data/backups/`.
+- `PULSO_DATA_DIR` muda a pasta de dados local.
 
 ## Importar
 
@@ -95,8 +119,9 @@ Sem a chave, o restante funciona normalmente.
 ## Estrutura
 
 ```
-server/      API local, persistência, parser de provas e CLI
+server/      API, autenticação, persistência, parser de provas e CLI
 seed/        currículo e banco inicial de questões oficiais
 src/         interface React
+src/trilha.js  mapa dos 90 temas nos 5 níveis do curso
 data/        dados do usuário (gerado, não versionado)
 ```

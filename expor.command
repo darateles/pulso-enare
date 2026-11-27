@@ -10,8 +10,14 @@ else
   PASS=$(awk -F': ' '/^senha:/{print $2}' data/acesso.txt)
 fi
 
+if [ ! -f data/session.secret ]; then
+  openssl rand -hex 32 > data/session.secret
+  chmod 600 data/session.secret
+fi
+SECRET=$(cat data/session.secret)
+
 if ! lsof -nP -iTCP:4175 -sTCP:LISTEN >/dev/null 2>&1; then
-  PORT=4175 HOST=127.0.0.1 APP_PASSWORD="$PASS" NODE_ENV=production nohup node server/index.js >> data/server.log 2>&1 &
+  PORT=4175 HOST=127.0.0.1 APP_PASSWORD="$PASS" SESSION_SECRET="$SECRET" NODE_ENV=production nohup node server/index.js >> data/server.log 2>&1 &
   echo $! > data/server.pid
   sleep 2
 fi

@@ -1,11 +1,12 @@
 import React, { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import {
-  ArrowRight, BookMarked, CircleCheck, Filter, ListChecks, Search, Sparkles, Target,
+  ArrowRight, BookMarked, CircleCheck, Filter, GraduationCap, ListChecks, Search, Sparkles, Target,
 } from 'lucide-react';
 import { Button, Card, Chip, Empty, PageHead, Progress, Segmented } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
 import { areaStats, dueReviews, normalize, topicProgress, topicStatus } from '../utils.js';
+import { LEVELS, topicLevelId } from '../trilha.js';
 
 const STATUS = [
   { value: 'todos', label: 'Todos' },
@@ -23,6 +24,7 @@ export default function Conteudos() {
   const [status, setStatus] = useState(params.get('status') || 'todos');
   const [areaFilter, setAreaFilter] = useState('todas');
   const [groupFilter, setGroupFilter] = useState('todos');
+  const [levelFilter, setLevelFilter] = useState('todos');
   const due = useMemo(() => new Set(dueReviews(curriculum, user.progress).map((d) => d.topic.id)), [curriculum, user.progress]);
 
   const setStatusAndParams = (v) => {
@@ -40,6 +42,7 @@ export default function Conteudos() {
       .filter(({ t, a }) => {
         if (areaFilter !== 'todas' && a.id !== areaFilter) return false;
         if (groupFilter !== 'todos' && t.group !== groupFilter) return false;
+        if (levelFilter !== 'todos' && topicLevelId(t.id) !== Number(levelFilter)) return false;
         const st = topicStatus(user.progress[t.id], t.checklist.length);
         if (status === 'revisao' && !due.has(t.id)) return false;
         if (['novo', 'estudando', 'dominado'].includes(status) && st !== status) return false;
@@ -48,7 +51,7 @@ export default function Conteudos() {
         return true;
       })
       .sort((x, y) => (status === 'prioridade' ? y.t.weight - x.t.weight : 0) || x.t.title.localeCompare(y.t.title));
-  }, [allTopics, areaFilter, groupFilter, status, query, user.progress, due]);
+  }, [allTopics, areaFilter, groupFilter, levelFilter, status, query, user.progress, due]);
 
   return (
     <>
@@ -58,6 +61,12 @@ export default function Conteudos() {
         subtitle="Cada tema tem um roteiro de 7 etapas e peso por incidência. Progresso pessoal, não vaidade: marque apenas o que realmente dominou."
         actions={<Button variant="soft" onClick={() => setStatusAndParams('prioridade')} icon={Target}>Só alta prioridade</Button>}
       />
+
+      <Card className="content-banner">
+        <GraduationCap size={18} />
+        <p><strong>Quer seguir a ordem do curso?</strong> A trilha organiza estes mesmos temas em 5 níveis, do fundamento ao internato.</p>
+        <Link to="/trilha" className="text-link">Abrir trilha <ArrowRight size={14} /></Link>
+      </Card>
 
       <div className="area-overview">
         {curriculum.areas.map((a) => {
@@ -78,11 +87,15 @@ export default function Conteudos() {
         <div className="filter-scroll"><Segmented options={STATUS} value={status} onChange={setStatusAndParams} label="Filtrar por status" /></div>
         {areaFilter !== 'todas' && <Chip tone="accent"><Filter size={12} /> {curriculum.areas.find((a) => a.id === areaFilter)?.short}</Chip>}
         {groups.length > 1 && <select className="group-select" value={groupFilter} onChange={(e) => setGroupFilter(e.target.value)}><option value="todos">Todas as especialidades</option>{groups.map((g) => <option key={g} value={g}>{g}</option>)}</select>}
+        <select className="group-select" value={levelFilter} onChange={(e) => setLevelFilter(e.target.value)}>
+          <option value="todos">Todos os níveis</option>
+          {LEVELS.map((l) => <option key={l.id} value={l.id}>{l.code} · {l.name}</option>)}
+        </select>
         <span className="filter-count">{filtered.length} temas</span>
       </Card>
 
       {!filtered.length ? (
-        <Card><Empty icon={ListChecks} title="Nenhum subtópico com esses filtros" text="Limpe a busca ou troque o status para ver mais temas." action={<Button variant="ghost" onClick={() => { setQuery(''); setStatusAndParams('todos'); setAreaFilter('todas'); setGroupFilter('todos'); }}>Limpar filtros</Button>} /></Card>
+        <Card><Empty icon={ListChecks} title="Nenhum subtópico com esses filtros" text="Limpe a busca ou troque o status para ver mais temas." action={<Button variant="ghost" onClick={() => { setQuery(''); setStatusAndParams('todos'); setAreaFilter('todas'); setGroupFilter('todos'); setLevelFilter('todos'); }}>Limpar filtros</Button>} /></Card>
       ) : (
         <div className="topic-table">
           {filtered.map(({ t, a }) => {
@@ -99,7 +112,7 @@ export default function Conteudos() {
                     {st === 'estudando' && <Chip tone="warning">em estudo</Chip>}
                   </div>
                   <p>{t.summary}</p>
-                  <div className="topic-meta"><span>{a.name}</span><span className="topic-group">{t.group}</span><span>incidência {t.incidence}%</span><span>{t.checklist.length} etapas</span></div>
+                  <div className="topic-meta"><span>{a.name}</span><span className="topic-group">{t.group}</span><span>Nível {topicLevelId(t.id)}</span><span>incidência {t.incidence}%</span><span>{t.checklist.length} etapas</span></div>
                 </div>
                 <div className="topic-weight">
                   <span>peso</span>

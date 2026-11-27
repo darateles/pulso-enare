@@ -26,9 +26,9 @@ export default function Login() {
       <div className="login-art">
         <Logo />
         <div className="login-copy">
-          <span className="eyebrow light">Preparação para a residência</span>
-          <h1>Sua preparação, <em>com foco no que importa.</em></h1>
-          <p>Planner, banco de questões, suíte clínica e monitor de constância. Entre para retomar de onde parou.</p>
+          <span className="eyebrow light">Pulso · curso em níveis</span>
+          <h1>Sua preparação, <em>nível por nível.</em></h1>
+          <p>Uma trilha do fundamento ao internato, com planner, banco de questões e monitor de constância. Entre para retomar de onde parou.</p>
           <div className="login-monitor">
             <HeartPulse size={17} />
             <span>60 bpm</span>
@@ -41,9 +41,9 @@ export default function Login() {
       <div className="login-panel">
         <form className="login-box" onSubmit={submit}>
           <Link to="/" className="login-back">← Voltar ao início</Link>
-          <span className="onboard-step">Acesso restrito</span>
+          <span className="onboard-step">Acesso individual</span>
           <h2>Entrar no Pulso.</h2>
-          <p>Use sua conta individual. Progresso e histórico ficam separados por usuário.</p>
+          <p>Use a conta fornecida pelo administrador. Seu progresso, trilha e histórico ficam salvos por usuário.</p>
           <Field label="Usuário">
             <div className="input-icon"><UserRound size={16} /><input value={username} onChange={(e) => setUsername(e.target.value)} autoFocus autoComplete="username" placeholder="seu usuário" /></div>
           </Field>
@@ -52,7 +52,7 @@ export default function Login() {
           </Field>
           <InlineError>{error}</InlineError>
           <Button type="submit" disabled={busy || !username || !password} icon={LogIn}>{busy ? 'Entrando…' : 'Entrar'}</Button>
-          <div className="login-hint"><strong>Contas de teste:</strong> davi · teste. Use janela anônima para entrar na segunda conta ao mesmo tempo.</div>
+          <div className="login-hint"><strong>Primeiro acesso?</strong> Entre com o usuário e a senha combinados com o administrador. Na primeira vez, o Pulso pede seu semestre e monta a trilha.</div>
         </form>
       </div>
     </div>

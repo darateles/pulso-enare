@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, CalendarDays, Check, HeartPulse, Layers, RefreshCw, ShieldCheck, Sparkles,
+  ArrowRight, CalendarDays, Check, GraduationCap, HeartPulse, Layers, RefreshCw, ShieldCheck, Sparkles,
 } from 'lucide-react';
 import { Logo } from '../components/ui.jsx';
 import { fmtDate, iso } from '../utils.js';
+import { LEVELS } from '../trilha.js';
 
 export default function Landing() {
   const [tab, setTab] = useState('planner');
@@ -16,6 +17,7 @@ export default function Landing() {
         <Link to="/" className="landing-brand"><Logo /></Link>
         <nav>
           <a href="#metodo">Método</a>
+          <a href="#niveis">Níveis</a>
           <a href="#planos">Planos</a>
           <a href="#faq">FAQ</a>
           <Link to="/login" className="btn btn-solid btn-sm">Entrar</Link>
@@ -73,6 +75,23 @@ export default function Landing() {
           </div>
         </section>
 
+        <section className="landing-section levels" id="niveis">
+          <div className="landing-section-head">
+            <div><span className="eyebrow">Curso em níveis</span><h2>Do fundamento ao internato.</h2></div>
+            <p>Informe seu semestre e o Pulso monta a trilha do seu período, matéria por matéria.</p>
+          </div>
+          <div className="landing-levels">
+            {LEVELS.map((level) => (
+              <article key={level.id} className="landing-level" style={{ '--level-tone': level.tone }}>
+                <span className="landing-level-code"><GraduationCap size={13} /> {level.code}</span>
+                <h3>{level.name}</h3>
+                <small>{level.semesterLabel}</small>
+                <p>{level.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="landing-section plans" id="planos">
           <div className="landing-section-head">
             <div><span className="eyebrow">Assinaturas</span><h2>Escolha seu plano de estudos</h2></div>
@@ -89,7 +108,7 @@ export default function Landing() {
           <div className="landing-section-head"><div><span className="eyebrow">Dúvidas</span><h2>Perguntas frequentes</h2></div></div>
           <details><summary>Posso escolher a data inicial do planner?</summary><p>Sim. A data fica nas configurações e o plano é refeito a partir dela.</p></details>
           <details><summary>Como são agendadas as revisões?</summary><p>Após concluir o checklist, você registra confiança e o sistema agenda D+1, D+7 ou D+30.</p></details>
-          <details><summary>Preciso de cartão para começar?</summary><p>Não. A demonstração usa as contas fornecidas na tela de acesso e não cobra nada.</p></details>
+          <details><summary>Preciso de cartão para começar?</summary><p>Não. Entre com a conta liberada para você e comece pelo onboarding do semestre. Nenhuma cobrança é feita.</p></details>
           <details><summary>Os dados ficam no navegador?</summary><p>O Pulso publicado salva em banco de nuvem, mas nunca saiu da sua conta. Você pode exportar backup em Ajustes.</p></details>
         </section>
 

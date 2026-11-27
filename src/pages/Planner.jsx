@@ -2,12 +2,13 @@ import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight, CalendarDays, CheckCircle2, Circle, Clock3, RefreshCw, Sparkles, Timer,
-  BookOpen, ListChecks, Repeat, Info, ChevronLeft, ChevronRight,
+  BookOpen, ListChecks, Repeat, Info, ChevronLeft, ChevronRight, GraduationCap,
 } from 'lucide-react';
 import { Button, Card, Chip, Empty, Field, InlineError, Modal, PageHead, Progress } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
 import { fmtDate, fmtLong, iso, minutesLabel, WEEKDAYS, WEEKDAYS_LONG, dueReviews, daysUntil } from '../utils.js';
 import { generatePlan, planCounts } from '../planner.js';
+import { currentLevel } from '../trilha.js';
 
 const ICONS = { teoria: BookOpen, questoes: ListChecks, revisao: Repeat, simulado: Timer };
 
@@ -18,6 +19,7 @@ export default function Planner() {
   const [offset, setOffset] = useState(0);
   const [error, setError] = useState('');
   const counts = planCounts(user.plan);
+  const level = currentLevel(user);
   const due = useMemo(() => dueReviews(curriculum, user.progress), [curriculum, user.progress]);
 
   const weeks = user.plan.weeks || [];
@@ -34,7 +36,7 @@ export default function Planner() {
     setConfirm(false);
     setOffset(0);
     setError('');
-    toast('Plano de 8 semanas gerado. Você pode ajustar sempre que precisar.');
+    toast(`Plano de 8 semanas gerado para o Nível ${level.id} · ${level.name}.`);
   };
 
   const toggleDay = (d) => {
@@ -65,7 +67,7 @@ export default function Planner() {
       <PageHead
         eyebrow="Plano de estudo"
         title={<>Um plano claro <em>para cada etapa.</em></>}
-        subtitle="O planner distribui suas horas conforme peso, incidência, confiança e erros recentes. Sessões curtas, com revisão espaçada."
+        subtitle={`O planner prioriza o Nível ${level.id} · ${level.name} e distribui suas horas conforme peso, incidência, confiança e erros recentes. Sessões curtas, com revisão espaçada.`}
         actions={<Button onClick={() => (counts.total ? setConfirm(true) : build())} icon={Sparkles}>{counts.total ? 'Regerar plano' : 'Gerar plano'}</Button>}
       />
 
@@ -89,6 +91,7 @@ export default function Planner() {
           </Field>
           <InlineError>{error}</InlineError>
           <div className="plan-summary">
+            <div><span>Nível da trilha</span><strong><Link to="/trilha" className="inline-icon"><GraduationCap size={13} /> {level.code} · {level.name}</Link></strong></div>
             <div><span>Fase sugerida</span><strong>{phase}</strong></div>
             <div><span>Semanas até a prova</span><strong>{totalWeeks}</strong></div>
             <div><span>Sessões planejadas</span><strong>{counts.done}/{counts.total}</strong></div>

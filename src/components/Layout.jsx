@@ -3,13 +3,16 @@ import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
   House, CalendarDays, ListChecks, Library, ChartNoAxesColumnIncreasing, NotebookPen,
   Settings, Search, Moon, Sun, Flame, Menu, X, ArrowRight, Layers, HeartPulse,
+  GraduationCap, ChevronRight,
 } from 'lucide-react';
 import { Logo, Ring, Progress } from './ui.jsx';
 import { useStore } from '../store.jsx';
 import { daysUntil, fmtDate, globalStats, normalize, streak, greeting, initials } from '../utils.js';
+import { currentLevel } from '../trilha.js';
 
 const NAV = [
   { to: '/', label: 'Hoje', icon: House, end: true },
+  { to: '/trilha', label: 'Trilha', icon: GraduationCap },
   { to: '/planner', label: 'Planner', icon: CalendarDays },
   { to: '/conteudos', label: 'Conteúdos', icon: ListChecks },
   { to: '/questoes', label: 'Questões', icon: Library },
@@ -27,6 +30,7 @@ export default function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
   const stats = useMemo(() => globalStats(curriculum, user.progress), [curriculum, user.progress]);
+  const level = currentLevel(user);
   const count = daysUntil(user.examDate);
   const streakDays = streak(user);
   const bpm = 58 + Math.min(34, streakDays * 2 + Math.min(8, Math.round((user.activity?.[new Date().toISOString().slice(0, 10)]?.minutes || 0) / 15)));
@@ -90,6 +94,11 @@ export default function Layout() {
         </nav>
 
         <div className="side-progress">
+          <NavLink to="/trilha" className="side-level" onClick={() => setDrawer(false)}>
+            <span className="side-level-code" style={{ background: level.tone }}>{level.code}</span>
+            <span className="side-level-copy"><small>Seu nível</small><strong>{level.name}</strong></span>
+            <ChevronRight size={14} />
+          </NavLink>
           <div className="side-progress-head">
             <span>Cobertura do edital</span>
             <strong>{stats.pct}%</strong>

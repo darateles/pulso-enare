@@ -9,13 +9,24 @@ const SEED_DIR = path.resolve('seed');
 
 const today = () => new Date().toISOString().slice(0, 10);
 
+function levelForSemester(semester) {
+  if (semester <= 2) return 1;
+  if (semester <= 4) return 2;
+  if (semester <= 6) return 3;
+  if (semester <= 8) return 4;
+  return 5;
+}
+
 export function defaultUser() {
   return {
     version: 1,
+    profileVersion: 2,
     onboardingDone: false,
     name: '',
     examDate: '2027-09-12',
     startDate: today(),
+    semester: 1,
+    level: 1,
     dailyHours: 3,
     studyDays: [1, 2, 3, 4, 5, 6],
     goalQuestions: 40,
@@ -71,8 +82,23 @@ export async function initStore() {
     if (!(await hasKV(`user:${name}`))) {
       const u = defaultUser();
       if (name !== 'davi') u.name = name.charAt(0).toUpperCase() + name.slice(1);
-      u.onboardingDone = true;
+      u.onboardingDone = false;
       await writeKV(`user:${name}`, u);
+      continue;
+    }
+    // Migração: contas antigas não tinham semestre. Pede o onboarding uma vez,
+    // preservando todo o progresso já existente.
+    const raw = await readKV(`user:${name}`, null);
+    if (raw && raw.profileVersion !== 2) {
+      const semester = Math.min(12, Math.max(1, Math.round(Number(raw.semester) || 1)));
+      await writeKV(`user:${name}`, {
+        ...defaultUser(),
+        ...raw,
+        semester,
+        level: levelForSemester(semester),
+        onboardingDone: false,
+        profileVersion: 2,
+      });
     }
   }
   if (!(await hasKV('questions'))) {
@@ -87,7 +113,10 @@ export async function initStore() {
 
 export async function getUser(account = 'davi') {
   const raw = await readKV(`user:${account}`, defaultUser());
-  return { ...defaultUser(), ...raw };
+  const user = { ...defaultUser(), ...raw };
+  user.semester = Math.min(12, Math.max(1, Math.round(Number(user.semester) || 1)));
+  user.level = levelForSemester(user.semester);
+  return user;
 }
 
 export async function saveUser(account, incoming) {
@@ -108,6 +137,8 @@ export async function saveUser(account, incoming) {
   next.mentorNotes = Array.isArray(next.mentorNotes) ? next.mentorNotes.slice(0, 500) : [];
   next.bookmarks = Array.isArray(next.bookmarks) ? [...new Set(next.bookmarks)] : [];
   next.studyDays = Array.isArray(next.studyDays) ? next.studyDays.filter((d) => Number.isInteger(d) && d >= 0 && d <= 6) : base.studyDays;
+  next.semester = Math.min(12, Math.max(1, Math.round(Number(next.semester) || 1)));
+  next.level = levelForSemester(next.semester);
   next.dailyHours = Math.min(16, Math.max(0.5, Number(next.dailyHours) || 3));
   next.goalQuestions = Math.min(400, Math.max(5, Number(next.goalQuestions) || 40));
   if (!next.progress || typeof next.progress !== 'object') next.progress = {};

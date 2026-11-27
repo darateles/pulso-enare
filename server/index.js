@@ -43,7 +43,12 @@ const app = express();
 const PORT = Number(process.env.PORT) || 4175;
 const HOST = process.env.HOST || '127.0.0.1';
 const APP_PASSWORD = process.env.APP_PASSWORD || '';
-const SESSION_SECRET = process.env.SESSION_SECRET || '';
+// Fallback seguro: sem SESSION_SECRET explícito, deriva o segredo da senha do app.
+// Isso evita o bug em que o login retorna 200 mas a sessão nunca é lida.
+const SESSION_SECRET = process.env.SESSION_SECRET
+  || ((APP_PASSWORD || process.env.APP_USERS)
+    ? crypto.createHash('sha256').update(`pulso-session:${APP_PASSWORD}:${process.env.APP_USERS || ''}`).digest('hex')
+    : '');
 const SESSION_COOKIE = 'pulso_session';
 const ACCOUNTS = new Map(
   (process.env.APP_USERS || (APP_PASSWORD ? `${process.env.APP_USER || 'pulso'}:${APP_PASSWORD}` : ''))
@@ -55,6 +60,9 @@ const ACCOUNTS = new Map(
       return [user, crypto.createHash('sha256').update(`${user}:${pass}`).digest()];
     }).filter(([u]) => u),
 );
+if ((APP_PASSWORD || process.env.APP_USERS) && !process.env.SESSION_SECRET) {
+  console.warn('[pulso] SESSION_SECRET ausente: usando segredo derivado das credenciais. Defina SESSION_SECRET em produção.');
+}
 app.disable('x-powered-by');
 app.use(compression({ threshold: 512 }));
 if (process.env.TRUST_PROXY) app.set('trust proxy', 1);

@@ -7,6 +7,7 @@ import {
 import { Button, Card, Chip, Field, Modal, PageHead, Progress, Ring } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
 import { fmtDate, topicProgress, topicStatus } from '../utils.js';
+import { topicLevel } from '../trilha.js';
 
 export default function Topico() {
   const { topicId } = useParams();
@@ -25,6 +26,7 @@ export default function Topico() {
 
   if (!found) return <Card><p>Tema não encontrado. <Link to="/conteudos">Voltar aos conteúdos.</Link></p></Card>;
   const { a, t } = found;
+  const level = topicLevel(t.id);
   const progress = user.progress[t.id] || {};
   const done = new Set(progress.done || []);
   const pct = topicProgress(progress, t.checklist.length);
@@ -66,12 +68,13 @@ export default function Topico() {
 
   return (
     <>
-      <Link to="/conteudos" className="back-link"><ArrowLeft size={15} /> Todos os conteúdos</Link>
+      <Link to="/trilha" className="back-link"><ArrowLeft size={15} /> Trilha · Nível {level.id} · {level.name}</Link>
       <header className="topic-head">
         <div>
           <div className="topic-head-chips">
             <Chip style={{ borderColor: a.color, color: a.color }}>{a.short}</Chip>
             <Chip tone="soft">{t.group}</Chip>
+            <Chip tone="neutral">Nível {level.id} · {level.semesterLabel}</Chip>
             <Chip tone="accent">incidência {t.incidence}%</Chip>
             <div className="weight-dots">{[1,2,3,4,5].map((i) => <i key={i} className={i <= t.weight ? 'on' : ''} />)}</div>
           </div>

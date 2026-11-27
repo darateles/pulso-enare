@@ -17,6 +17,8 @@ services:
         value: pulso
       - key: APP_PASSWORD
         generateValue: true
+      - key: SESSION_SECRET
+        generateValue: true
       - key: TRUST_PROXY
         value: 1
       - key: TURSO_DATABASE_URL

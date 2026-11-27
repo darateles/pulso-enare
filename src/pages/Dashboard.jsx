@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  ArrowRight, BookOpen, CalendarDays, CheckCircle2, Circle, Clock3, Flame, HeartPulse, Library,
-  NotebookPen, Play, RefreshCw, Sparkles, Target, TrendingUp,
+  ArrowRight, CalendarDays, CheckCircle2, Circle, Clock3, Flame, GraduationCap, HeartPulse, Library,
+  NotebookPen, Play, RefreshCw, Sparkles, TrendingUp,
 } from 'lucide-react';
 import { Button, Card, Chip, Empty, PageHead, Progress, Ring, Stat } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
@@ -11,6 +11,7 @@ import {
   streak, weakTopics, WEEKDAYS, pct,
 } from '../utils.js';
 import { todaySessions } from '../planner.js';
+import { currentLevel, levelStats, nextTopics, semesterLabel } from '../trilha.js';
 
 export default function Dashboard() {
   const { user, curriculum, questions, updateUser, bumpActivity } = useStore();
@@ -19,6 +20,8 @@ export default function Dashboard() {
   const due = useMemo(() => dueReviews(curriculum, user.progress), [curriculum, user.progress]);
   const weak = useMemo(() => weakTopics(curriculum, user.attempts, user.progress, 3), [curriculum, user.attempts, user.progress]);
   const today = useMemo(() => todaySessions(user.plan), [user.plan]);
+  const level = currentLevel(user);
+  const levelData = useMemo(() => levelStats(curriculum, level.id, user.progress), [curriculum, level.id, user.progress]);
   const attemptsToday = user.attempts.filter((a) => a.createdAt?.slice(0, 10) === iso());
   const rightToday = attemptsToday.filter((a) => a.correct).length;
   const last7 = useMemo(() => {
@@ -35,6 +38,8 @@ export default function Dashboard() {
   const goalPct = pct(attemptsToday.length, user.goalQuestions);
   const acc = accuracyByArea(curriculum, user.attempts).filter((a) => a.total >= 3).sort((a, b) => (a.pct ?? 100) - (b.pct ?? 100));
   const focus = useMemo(() => {
+    const inLevel = nextTopics(curriculum, user, 3);
+    if (inLevel.length) return inLevel;
     const all = curriculum.areas.flatMap((a) => a.topics.map((t) => ({ t, a })));
     return all
       .filter(({ t }) => (user.progress[t.id]?.done || []).length < t.checklist.length)
@@ -44,7 +49,7 @@ export default function Dashboard() {
         return (y.t.weight * 10 - (py.confidence || 0) * 4) - (x.t.weight * 10 - (px.confidence || 0) * 4);
       })
       .slice(0, 3);
-  }, [curriculum, user.progress]);
+  }, [curriculum, user]);
 
   const count = daysUntil(user.examDate);
   const bpm = 58 + Math.min(34, streak(user) * 2 + Math.min(8, Math.round(attemptsToday.length * 1.5)));
@@ -89,10 +94,10 @@ export default function Dashboard() {
               <Chip tone="accent"><HeartPulse size={13} /> em ritmo · {streak(user)} dias</Chip>
               <h2>Seu progresso, <em>mais claro a cada dia.</em></h2>
               <div className="monitor-strip"><span><HeartPulse size={13} /> {bpm} bpm</span><span>PA de estudo {Math.min(140, 90 + stats.pct)}/{Math.min(90, 60 + stats.started)}</span><span>perfusão {stats.pct}%</span></div>
-              <p>Você já iniciou {stats.started} subtópicos e domina {stats.mastered}. O plano usa o peso real de cada área para decidir o próximo passo.</p>
+              <p>Você está no Nível {level.id} · {level.name}. Já iniciou {stats.started} subtópicos e domina {stats.mastered}. O plano prioriza o seu bloco de semestres e o peso real de cada área.</p>
               <div className="hero-actions">
-                <Button variant="light" onClick={() => navigate('/planner')} icon={CalendarDays}>Ver meu plano</Button>
-                <Button variant="ghost-light" onClick={() => navigate('/conteudos')} icon={BookOpen}>Escolher tema</Button>
+                <Button variant="light" onClick={() => navigate('/trilha')} icon={GraduationCap}>Ver minha trilha</Button>
+                <Button variant="ghost-light" onClick={() => navigate('/planner')} icon={CalendarDays}>Abrir planner</Button>
               </div>
             </div>
             <Ring value={stats.pct} size={132} stroke={10} tone="accent">
@@ -119,6 +124,33 @@ export default function Dashboard() {
           <Link to="/planner" className="text-link">Ajustar rotina <ArrowRight size={14} /></Link>
         </Card>
       </div>
+
+      <Card className="dash-trilha" style={{ '--level-tone': level.tone }}>
+        <div className="dash-trilha-head">
+          <div>
+            <span className="eyebrow">Sua trilha · Nível {level.id} · {semesterLabel(user.semester)}</span>
+            <h2>{level.name}</h2>
+            <p>{level.goal}</p>
+          </div>
+          <Ring value={levelData.pct} size={82} stroke={7} tone="accent">
+            <strong>{levelData.pct}%</strong>
+            <span>nível</span>
+          </Ring>
+        </div>
+        <div className="dash-trilha-topics">
+          {focus.map(({ t, a }) => (
+            <Link key={t.id} to={`/conteudos/${t.id}`} className="dash-trilha-topic">
+              <span className="focus-area" style={{ background: a.color }}>{a.short}</span>
+              <span className="dash-trilha-topic-copy"><strong>{t.title}</strong><small>{t.group} · incidência {t.incidence}%</small></span>
+              <ArrowRight size={15} />
+            </Link>
+          ))}
+        </div>
+        <div className="dash-trilha-foot">
+          <span>{levelData.mastered} de {levelData.total} temas dominados · {levelData.subjects.length} matérias no nível</span>
+          <Button size="sm" onClick={() => navigate('/trilha')} icon={GraduationCap}>Abrir trilha</Button>
+        </div>
+      </Card>
 
       <div className="stats-row">
         <Stat label="Questões resolvidas" value={user.attempts.length} note={`${rightToday} acertos hoje`} />
@@ -223,7 +255,7 @@ export default function Dashboard() {
       <div className="quick-strip">
         <Link to="/questoes" className="quick-tile"><Library size={20} /><span>Banco de questões</span><small>Filtre por tema e incidência</small></Link>
         <Link to="/questoes/importar" className="quick-tile"><RefreshCw size={20} /><span>Importar prova</span><small>Cole uma URL ou use fonte oficial</small></Link>
-        <Link to="/conteudos" className="quick-tile"><Target size={20} /><span>Checklists</span><small>90 subtópicos priorizados</small></Link>
+        <Link to="/trilha" className="quick-tile"><GraduationCap size={20} /><span>Trilha em níveis</span><small>5 níveis, 90 temas por matéria</small></Link>
         <Link to="/pulso" className="quick-tile"><Sparkles size={20} /><span>Pulso Pro</span><small>18 ferramentas integradas</small></Link>
       </div>
     </>

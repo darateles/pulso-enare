@@ -1,4 +1,5 @@
 import { addDays, iso, parseISO, shuffle, uid } from './utils.js';
+import { semesterLevel, topicLevelId } from './trilha.js';
 
 const TYPES = {
   teoria: { label: 'Teoria dirigida', minutes: 50, icon: 'book' },
@@ -7,21 +8,33 @@ const TYPES = {
   simulado: { label: 'Simulado semanal', minutes: 90, icon: 'timer' },
 };
 
-function difficultyWeight(topic, progress, attempts) {
+function levelFactor(topic, userLevel) {
+  const diff = topicLevelId(topic.id) - userLevel;
+  if (diff === 0) return 4;
+  if (diff === -1) return 0.8;
+  if (diff === -2) return 0.3;
+  if (diff < -2) return 0.12;
+  if (diff === 1) return 0.25;
+  return 0.08;
+}
+
+function difficultyWeight(topic, progress, attempts, userLevel) {
   const p = progress?.[topic.id] || {};
   const done = (p.done || []).length;
   const conf = p.confidence || 0;
   const arr = attempts.filter((a) => a.topicId === topic.id && a.correct !== null);
   const wrong = arr.filter((a) => !a.correct).length;
   const freshness = done > 0 ? 0.6 : 1.6;
-  return Math.max(0.4, topic.weight * (1 + (4 - conf) * 0.35) * freshness + wrong * 0.8);
+  const base = topic.weight * (1 + (4 - conf) * 0.35) * freshness + wrong * 0.8;
+  return Math.max(0.25, base * levelFactor(topic, userLevel));
 }
 
 export function generatePlan(user, curriculum, weekCount = 4) {
+  const userLevel = Number(user.level) || semesterLevel(user.semester);
   const topics = curriculum.areas.flatMap((a) => a.topics.map((t) => ({ ...t, areaName: a.name, areaColor: a.color })));
   const pool = [];
   for (const t of topics) {
-    const n = Math.max(1, Math.round(difficultyWeight(t, user.progress, user.attempts || []) * 1.4));
+    const n = Math.max(1, Math.round(difficultyWeight(t, user.progress, user.attempts || [], userLevel) * 1.4));
     for (let i = 0; i < n; i++) pool.push(t);
   }
   let bag = shuffle(pool);
@@ -80,7 +93,7 @@ export function generatePlan(user, curriculum, weekCount = 4) {
     }
     cursor = addDays(cursor, 7);
   }
-  return { generatedAt: new Date().toISOString(), weeks };
+  return { generatedAt: new Date().toISOString(), level: userLevel, weeks };
 }
 
 export function todaySessions(plan) {

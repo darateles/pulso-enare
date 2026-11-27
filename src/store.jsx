@@ -10,10 +10,13 @@ const CACHE = 'prumo.cache.v1';
 
 function blankUser() {
   return {
+    profileVersion: 2,
     onboardingDone: false,
     name: '',
     examDate: '2027-09-12',
     startDate: iso(),
+    semester: 1,
+    level: 1,
     dailyHours: 3,
     studyDays: [1, 2, 3, 4, 5, 6],
     goalQuestions: 40,
