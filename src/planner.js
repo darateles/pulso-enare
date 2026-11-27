@@ -1,11 +1,11 @@
-import { addDays, iso, parseISO, shuffle, uid } from './utils.js';
+import { addDays, iso, parseISO, topicStatus, uid } from './utils.js';
 import { semesterLevel, topicLevelId } from './trilha.js';
 
 const TYPES = {
-  teoria: { label: 'Teoria dirigida', minutes: 50, icon: 'book' },
-  questoes: { label: 'Questões', minutes: 30, icon: 'list' },
-  revisao: { label: 'Revisão ativa', minutes: 20, icon: 'repeat' },
-  simulado: { label: 'Simulado semanal', minutes: 90, icon: 'timer' },
+  teoria: { label: 'Codificar', minutes: 50, icon: 'book' },
+  questoes: { label: 'Recuperar', minutes: 30, icon: 'list' },
+  revisao: { label: 'Revisar', minutes: 20, icon: 'repeat' },
+  simulado: { label: 'Intercalar', minutes: 90, icon: 'timer' },
 };
 
 function levelFactor(topic, userLevel) {
@@ -29,70 +29,130 @@ function difficultyWeight(topic, progress, attempts, userLevel) {
   return Math.max(0.25, base * levelFactor(topic, userLevel));
 }
 
+function sessionFor(type, topic = null) {
+  return {
+    id: uid(),
+    type,
+    topicId: topic?.id || null,
+    areaId: topic?.area || null,
+    title: type === 'simulado'
+      ? 'Simulado semanal · 20 questões mistas'
+      : type === 'teoria'
+        ? topic.title
+        : type === 'questoes'
+          ? `${topic.title} · recuperação`
+          : `Revisar: ${topic.title}`,
+    minutes: TYPES[type].minutes,
+    done: false,
+  };
+}
+
+/**
+ * Planner em ciclos: um tema novo entra em Codificar, retorna em Recuperar
+ * no próximo dia de estudo e em Revisar nos intervalos seguintes. O restante
+ * da capacidade recebe revisões vencidas e o simulado intercalado da semana.
+ */
 export function generatePlan(user, curriculum, weekCount = 4) {
   const userLevel = Number(user.level) || semesterLevel(user.semester);
+  const progress = user.progress || {};
+  const attempts = user.attempts || [];
   const topics = curriculum.areas.flatMap((a) => a.topics.map((t) => ({ ...t, areaName: a.name, areaColor: a.color })));
-  const pool = [];
-  for (const t of topics) {
-    const n = Math.max(1, Math.round(difficultyWeight(t, user.progress, user.attempts || [], userLevel) * 1.4));
-    for (let i = 0; i < n; i++) pool.push(t);
-  }
-  let bag = shuffle(pool);
-  const nextTopic = (excluded, areaCounts) => {
-    for (let i = 0; i < bag.length; i++) {
-      const candidate = bag[i];
-      if (excluded.has(candidate.id)) continue;
-      if ((areaCounts[candidate.area] || 0) >= 2) continue;
-      bag.splice(i, 1);
-      if (bag.length < 12) bag = shuffle(pool);
-      return candidate;
-    }
-    return null;
-  };
-
   const start = parseISO(user.startDate) > parseISO(iso()) ? parseISO(user.startDate) : parseISO(iso());
-  const perDay = user.dailyHours >= 5 ? 3 : user.dailyHours >= 3 ? 2 : 1;
   const studyDays = new Set(user.studyDays);
-  const weeks = [];
+  const perDay = user.dailyHours >= 5 ? 3 : user.dailyHours >= 3 ? 2 : 1;
+
+  const weeksDates = [];
   let cursor = start;
-  let bagResets = 0;
   for (let w = 0; w < weekCount; w++) {
-    const days = [];
+    const week = [];
     for (let d = 0; d < 7; d++) {
       const date = addDays(cursor, d);
-      if (!studyDays.has(date.getDay())) continue;
-      const sessions = [];
-      const areaCounts = {};
-      const excluded = new Set();
-      const count = date.getDay() === 0 || date.getDay() === 6 ? Math.max(1, perDay - 1) : perDay;
-      for (let s = 0; s < count; s++) {
-        const topic = nextTopic(excluded, areaCounts);
-        if (!topic) {
-          bagResets += 1;
-          if (bagResets > 8) break;
-          s -= 1;
-          continue;
-        }
-        excluded.add(topic.id);
-        areaCounts[topic.area] = (areaCounts[topic.area] || 0) + 1;
-        const type = s === 0 ? 'teoria' : s === count - 1 && date.getDay() !== 0 ? 'questoes' : 'revisao';
-        sessions.push({
-          id: uid(), type, topicId: topic.id, areaId: topic.area,
-          title: type === 'teoria' ? topic.title : type === 'questoes' ? `${topic.title} · questões` : `Revisar: ${topic.title}`,
-          minutes: TYPES[type].minutes, done: false,
-        });
-      }
-      if (sessions.length) days.push({ date: iso(date), sessions });
+      if (studyDays.has(date.getDay())) week.push(iso(date));
     }
-    if (days.length) {
-      days[days.length - 1].sessions.push({
-        id: uid(), type: 'simulado', topicId: null, areaId: null,
-        title: 'Simulado semanal · 20 questões mistas', minutes: 90, done: false,
-      });
-      weeks.push({ start: iso(cursor), days });
-    }
+    weeksDates.push(week);
     cursor = addDays(cursor, 7);
   }
+  const dates = weeksDates.flat();
+  const dayMap = new Map(dates.map((date) => [date, []]));
+  const loads = new Map(dates.map((date) => [date, 0]));
+  const keys = new Set();
+
+  const capacityFor = (date) => {
+    const day = new Date(`${date}T12:00:00`).getDay();
+    return day === 0 || day === 6 ? Math.max(1, perDay - 1) : perDay;
+  };
+
+  const add = (date, type, topic) => {
+    if (!date || !dayMap.has(date)) return false;
+    const key = `${date}|${type}|${topic.id}`;
+    if (keys.has(key)) return false;
+    keys.add(key);
+    dayMap.get(date).push({ type, topic });
+    loads.set(date, (loads.get(date) || 0) + 1);
+    return true;
+  };
+
+  // Tenta a data desejada e desloca no máximo alguns dias de estudo.
+  const scheduleAt = (index, type, topic, shift = 3) => {
+    for (let k = 0; k <= shift; k += 1) {
+      const date = dates[index + k];
+      if (!date) return false;
+      if (loads.get(date) < capacityFor(date)) return add(date, type, topic);
+    }
+    return false;
+  };
+
+  // Revisões que já venceram ou vencem dentro da janela do plano.
+  for (const topic of topics) {
+    const due = progress[topic.id]?.nextReview;
+    if (!due) continue;
+    const index = dates.findIndex((date) => date >= due);
+    if (index >= 0) scheduleAt(index, 'revisao', topic, 6);
+  }
+
+  const queue = topics
+    .filter((topic) => topicStatus(progress[topic.id], topic.checklist.length) !== 'dominado')
+    .map((topic) => ({ ...topic, priority: difficultyWeight(topic, progress, attempts, userLevel) }))
+    .sort((a, b) => b.priority - a.priority);
+
+  const introduced = new Set();
+  for (let i = 0; i < dates.length; i += 1) {
+    const date = dates[i];
+    const dateCapacity = capacityFor(date);
+    const areaCounts = (dayMap.get(date) || []).reduce((acc, session) => {
+      acc[session.topic.area] = (acc[session.topic.area] || 0) + 1;
+      return acc;
+    }, {});
+
+    // No máximo um tema novo por dia: o restante da capacidade é recuperação/revisão.
+    let newToday = 0;
+    while (newToday < 1 && loads.get(date) < dateCapacity) {
+      const index = queue.findIndex((topic) => !introduced.has(topic.id) && (areaCounts[topic.area] || 0) < 2);
+      if (index < 0) break;
+      const [topic] = queue.splice(index, 1);
+      introduced.add(topic.id);
+      areaCounts[topic.area] = (areaCounts[topic.area] || 0) + 1;
+      add(date, 'teoria', topic);
+      scheduleAt(i + 1, 'questoes', topic, 2);
+      scheduleAt(i + 3, 'revisao', topic, 3);
+      scheduleAt(i + 7, 'revisao', topic, 4);
+      newToday += 1;
+    }
+  }
+
+  const order = { questoes: 0, revisao: 1, teoria: 2 };
+  const weeks = weeksDates.map((weekDates, w) => {
+    const days = weekDates.map((date) => {
+      const sessions = (dayMap.get(date) || [])
+        .sort((a, b) => (order[a.type] ?? 3) - (order[b.type] ?? 3))
+        .map(({ type, topic }) => sessionFor(type, topic));
+      return { date, sessions };
+    });
+    const last = days[days.length - 1];
+    if (last) last.sessions.push(sessionFor('simulado'));
+    return { start: iso(addDays(start, w * 7)), days };
+  }).filter((week) => week.days.length);
+
   return { generatedAt: new Date().toISOString(), level: userLevel, weeks };
 }
 

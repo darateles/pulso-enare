@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight, CalendarDays, CheckCircle2, Circle, Clock3, Flame, GraduationCap, HeartPulse, Library,
-  NotebookPen, Play, RefreshCw, Sparkles, TrendingUp,
+  ListChecks, Play, RefreshCw, Sparkles, TrendingUp,
 } from 'lucide-react';
 import { Button, Card, Chip, Empty, PageHead, Progress, Ring, Stat } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
@@ -12,6 +12,7 @@ import {
 } from '../utils.js';
 import { todaySessions } from '../planner.js';
 import { currentLevel, levelStats, nextTopics, semesterLabel } from '../trilha.js';
+import { SESSION_STAGE, STAGE_LABEL, STAGES, calibration, calibrationLabel } from '../metodo.js';
 
 export default function Dashboard() {
   const { user, curriculum, questions, updateUser, bumpActivity } = useStore();
@@ -20,8 +21,14 @@ export default function Dashboard() {
   const due = useMemo(() => dueReviews(curriculum, user.progress), [curriculum, user.progress]);
   const weak = useMemo(() => weakTopics(curriculum, user.attempts, user.progress, 3), [curriculum, user.attempts, user.progress]);
   const today = useMemo(() => todaySessions(user.plan), [user.plan]);
+  const todayStages = useMemo(() => today.reduce((acc, session) => {
+    const stage = SESSION_STAGE[session.type];
+    if (stage && stage !== 'ativar') acc[stage] = (acc[stage] || 0) + 1;
+    return acc;
+  }, {}), [today]);
   const level = currentLevel(user);
   const levelData = useMemo(() => levelStats(curriculum, level.id, user.progress), [curriculum, level.id, user.progress]);
+  const cal = useMemo(() => calibration(user.progress, user.attempts), [user.progress, user.attempts]);
   const attemptsToday = user.attempts.filter((a) => a.createdAt?.slice(0, 10) === iso());
   const rightToday = attemptsToday.filter((a) => a.correct).length;
   const last7 = useMemo(() => {
@@ -81,12 +88,6 @@ export default function Dashboard() {
         actions={<Button onClick={() => navigate('/questoes/treino?modo=rapido')} icon={Play}>Treino rápido</Button>}
       />
 
-      <Link to="/pulso" className="new-suite">
-        <span className="new-suite-icon"><Sparkles size={19} /></span>
-        <div><strong>Novo: Pulso Pro</strong><span>18 ferramentas integradas — foco, batalhas, atlas, ECG, Anki e offline.</span></div>
-        <ArrowRight size={18} />
-      </Link>
-
       <div className="dash-grid">
         <Card className="hero-card">
           <div className="hero-top">
@@ -94,7 +95,7 @@ export default function Dashboard() {
               <Chip tone="accent"><HeartPulse size={13} /> em ritmo · {streak(user)} dias</Chip>
               <h2>Seu progresso, <em>mais claro a cada dia.</em></h2>
               <div className="monitor-strip"><span><HeartPulse size={13} /> {bpm} bpm</span><span>PA de estudo {Math.min(140, 90 + stats.pct)}/{Math.min(90, 60 + stats.started)}</span><span>perfusão {stats.pct}%</span></div>
-              <p>Você está no Nível {level.id} · {level.name}. Já iniciou {stats.started} subtópicos e domina {stats.mastered}. O plano prioriza o seu bloco de semestres e o peso real de cada área.</p>
+              <p>Você está no Nível {level.id} · {level.name}. Já iniciou {stats.started} subtópicos e domina {stats.mastered}. O plano combina codificação, recuperação, revisão espaçada e treino intercalado.</p>
               <div className="hero-actions">
                 <Button variant="light" onClick={() => navigate('/trilha')} icon={GraduationCap}>Ver minha trilha</Button>
                 <Button variant="ghost-light" onClick={() => navigate('/planner')} icon={CalendarDays}>Abrir planner</Button>
@@ -152,6 +153,22 @@ export default function Dashboard() {
         </div>
       </Card>
 
+      <div className="dash-method">
+        <div className="dash-method-head">
+          <span className="eyebrow">Ciclo de hoje · método Pulso</span>
+          <Link to="/metodo" className="text-link">Entender o método <ArrowRight size={14} /></Link>
+        </div>
+        <div className="dash-method-steps">
+          {STAGES.filter((stage) => stage.id !== 'ativar').map((stage) => (
+            <div key={stage.id} className={todayStages[stage.id] ? 'active' : ''}>
+              <span>{stage.label}</span>
+              <strong>{todayStages[stage.id] || 0}</strong>
+            </div>
+          ))}
+          <Link to="/planner" className="dash-method-link">Ver plano <ArrowRight size={14} /></Link>
+        </div>
+      </div>
+
       <div className="stats-row">
         <Stat label="Questões resolvidas" value={user.attempts.length} note={`${rightToday} acertos hoje`} />
         <Stat label="Tempo na semana" value={minutesLabel(weekMinutes)} note="Últimos 7 dias" />
@@ -173,7 +190,7 @@ export default function Dashboard() {
                 </button>
                 <div className="today-session-main">
                   <strong>{s.title}</strong>
-                  <span><Clock3 size={13} /> {s.minutes} min · {s.type === 'teoria' ? 'Teoria' : s.type === 'questoes' ? 'Questões' : s.type === 'simulado' ? 'Simulado' : 'Revisão'}</span>
+                  <span><Clock3 size={13} /> {s.minutes} min · {STAGE_LABEL[SESSION_STAGE[s.type]] || s.type}</span>
                 </div>
                 {s.topicId && <Button size="sm" variant="ghost" onClick={() => navigate(`/conteudos/${s.topicId}`)}>Abrir</Button>}
                 {s.type === 'simulado' && <Button size="sm" variant="soft" onClick={() => navigate('/questoes/simulado')}>Iniciar</Button>}
@@ -189,18 +206,26 @@ export default function Dashboard() {
           </Card>
 
           <div className="section-head spaced">
-            <div><span className="eyebrow">Alta prioridade</span><h2>Onde colocar energia</h2></div>
+            <div><span className="eyebrow">Recuperação ativa</span><h2>Onde você errou</h2></div>
+            {weak.length > 0 && <Link to="/caderno-erros" className="text-link">Abrir caderno <ArrowRight size={14} /></Link>}
           </div>
-          <div className="focus-list">
-            {focus.map(({ t, a }) => (
-              <Link key={t.id} to={`/conteudos/${t.id}`} className="focus-item">
-                <span className="focus-area" style={{ background: a.color }}>{a.short}</span>
-                <div><strong>{t.title}</strong><span>{a.name} · incidência {t.incidence}%</span></div>
-                <div className="weight-dots">{[1,2,3,4,5].map((i) => <i key={i} className={i <= t.weight ? 'on' : ''} />)}</div>
-                <ArrowRight size={16} />
-              </Link>
-            ))}
-          </div>
+          {weak.length ? (
+            <div className="focus-list">
+              {weak.map(({ topic: t, area: a, wrong, total, pct: errorPct }) => (
+                <Link key={t.id} to={`/conteudos/${t.id}`} className="focus-item">
+                  <span className="focus-area" style={{ background: a.color }}>{a.short}</span>
+                  <div><strong>{t.title}</strong><span>{a.name} · {wrong} de {total} erros · {errorPct}%</span></div>
+                  <Chip tone="danger">{wrong} {wrong === 1 ? 'erro' : 'erros'}</Chip>
+                  <ArrowRight size={16} />
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <Card className="empty-inline">
+              <p className="muted-note">Nenhum erro registrado ainda. Resolva questões para o Pulso identificar seus pontos fracos.</p>
+              <Button size="sm" variant="soft" onClick={() => navigate('/questoes/treino?modo=rapido')} icon={Play}>Treinar agora</Button>
+            </Card>
+          )}
         </section>
 
         <aside>
@@ -233,11 +258,17 @@ export default function Dashboard() {
             <Link to="/desempenho" className="text-link">Ver desempenho <TrendingUp size={14} /></Link>
           </Card>
 
-          <Card className="side-card warm">
-            <NotebookPen size={19} />
-            <h3>Transforme erros em aprendizado.</h3>
-            <p>Seus erros ficam no caderno com a explicação da alternativa correta. Revise antes que virem lacunas.</p>
-            <Button size="sm" variant="light" onClick={() => navigate('/caderno-erros')}>Abrir caderno</Button>
+          <Card className="side-card">
+            <div className="section-head small">
+              <div><span className="eyebrow">Metacognição</span><h2>Calibração</h2></div>
+              <Chip tone={(cal.gap ?? 0) > 15 ? 'warning' : 'neutral'}>confiança × acerto</Chip>
+            </div>
+            <div className="calibration-grid">
+              <div><span>Confiança</span><strong>{cal.confidence != null ? `${cal.confidence}%` : '—'}</strong></div>
+              <div><span>Acerto real</span><strong>{cal.accuracy != null ? `${cal.accuracy}%` : '—'}</strong></div>
+            </div>
+            <p className="muted-note">{calibrationLabel(cal.gap)}</p>
+            <Link to="/metodo" className="text-link">Como calibramos <ArrowRight size={14} /></Link>
           </Card>
 
           <Card className="mini-week">
@@ -255,7 +286,7 @@ export default function Dashboard() {
       <div className="quick-strip">
         <Link to="/questoes" className="quick-tile"><Library size={20} /><span>Banco de questões</span><small>Filtre por tema e incidência</small></Link>
         <Link to="/questoes/importar" className="quick-tile"><RefreshCw size={20} /><span>Importar prova</span><small>Cole uma URL ou use fonte oficial</small></Link>
-        <Link to="/trilha" className="quick-tile"><GraduationCap size={20} /><span>Trilha em níveis</span><small>5 níveis, 90 temas por matéria</small></Link>
+        <Link to="/conteudos" className="quick-tile"><ListChecks size={20} /><span>Mapa do edital</span><small>Filtre os 90 temas por nível</small></Link>
         <Link to="/pulso" className="quick-tile"><Sparkles size={20} /><span>Pulso Pro</span><small>18 ferramentas integradas</small></Link>
       </div>
     </>

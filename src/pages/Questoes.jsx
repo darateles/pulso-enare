@@ -9,7 +9,11 @@ import QuestionPlayer, { Results } from '../components/QuestionPlayer.jsx';
 import { normalize, pct, shuffle, weightedPick, weakTopics } from '../utils.js';
 import { accuracyByArea } from '../utils.js';
 
-const MODES = [{ value: 'treino', label: 'Treinar' }, { value: 'rapido', label: 'Rápido' }];
+const MODES = [
+  { value: 'treino', label: 'Treinar' },
+  { value: 'rapido', label: 'Rápido' },
+  { value: 'intercalado', label: 'Intercalado' },
+];
 const STATUS = [{ value: 'novas', label: 'Não respondidas' }, { value: 'todas', label: 'Todas' }, { value: 'erradas', label: 'Meus erros' }, { value: 'salvas', label: 'Salvas' }];
 
 export default function Questoes() {
@@ -31,10 +35,13 @@ export default function Questoes() {
   const sample = useMemo(() => questions.filter((q) => q.status !== 'annulled' && !answered.has(q.id)).slice(-5).reverse(), [questions, answered]);
 
   const pick = () => {
+    const interleaved = mode === 'intercalado';
     let arr = questions.filter((q) => {
       if (q.status === 'annulled') return false;
-      if (area !== 'todas' && q.area !== area) return false;
-      if (topic !== 'todas' && q.topicId !== topic) return false;
+      if (!interleaved) {
+        if (area !== 'todas' && q.area !== area) return false;
+        if (topic !== 'todas' && q.topicId !== topic) return false;
+      }
       if (status === 'novas' && answered.has(q.id)) return false;
       if (status === 'erradas' && !wrongSet.has(q.id)) return false;
       if (status === 'salvas' && !user.bookmarks.includes(q.id)) return false;
@@ -43,18 +50,35 @@ export default function Questoes() {
     if (!arr.length) return;
     const n = mode === 'rapido' ? Math.min(10, arr.length) : Math.min(count, arr.length);
     const picked = [];
-    // Metade prioriza lacunas, metade prioriza incidência.
-    const weak = weakTopics(curriculum, user.attempts, user.progress, 25);
-    const weakIds = new Set(weak.map((x) => x.topic.id));
-    for (let i = 0; i < n; i++) {
-      const topicMeta = (q) => curriculum.areas.flatMap((a) => a.topics).find((t) => t.id === q.topicId);
-      const chosen = weightedPick(arr, (q) => {
-        const t = topicMeta(q);
-        return (t?.weight || 2) * (weakIds.has(q.topicId) ? 3 : 1) * (answered.has(q.id) ? 0.4 : 1.5);
-      });
-      if (!chosen) break;
-      picked.push(chosen);
-      arr = arr.filter((q) => q.id !== chosen.id);
+
+    if (interleaved) {
+      // Round-robin por área: garante mistura em vez de bloco de uma matéria.
+      const groups = new Map();
+      for (const q of shuffle(arr)) {
+        if (!groups.has(q.area)) groups.set(q.area, []);
+        groups.get(q.area).push(q);
+      }
+      const list = [...groups.values()];
+      let i = 0;
+      while (picked.length < n && list.some((g) => g.length)) {
+        const group = list[i % list.length];
+        if (group.length) picked.push(group.shift());
+        i += 1;
+      }
+    } else {
+      // Metade prioriza lacunas, metade prioriza incidência.
+      const weak = weakTopics(curriculum, user.attempts, user.progress, 25);
+      const weakIds = new Set(weak.map((x) => x.topic.id));
+      for (let i = 0; i < n; i++) {
+        const topicMeta = (q) => curriculum.areas.flatMap((a) => a.topics).find((t) => t.id === q.topicId);
+        const chosen = weightedPick(arr, (q) => {
+          const t = topicMeta(q);
+          return (t?.weight || 2) * (weakIds.has(q.topicId) ? 3 : 1) * (answered.has(q.id) ? 0.4 : 1.5);
+        });
+        if (!chosen) break;
+        picked.push(chosen);
+        arr = arr.filter((q) => q.id !== chosen.id);
+      }
     }
     setPool(shuffle(picked));
     setResults(null);
@@ -86,7 +110,7 @@ export default function Questoes() {
       <PageHead
         eyebrow="Banco de questões"
         title={<>Treine o que <em>realmente cai.</em></>}
-        subtitle="300+ questões oficiais do ENARE com comentário. Filtre por área, subtópico e incidência; o treino prioriza suas lacunas."
+        subtitle="300+ questões oficiais do ENARE com comentário. Filtre por área e subtópico, ou use o modo intercalado para misturar matérias."
         actions={<><Button variant="soft" onClick={() => navigate('/questoes/simulado')} icon={Clock3}>Simulado</Button><Button onClick={() => navigate('/questoes/importar')} icon={Import}>Importar</Button></>}
       />
 
@@ -102,13 +126,13 @@ export default function Questoes() {
           <div className="section-head small"><div><span className="eyebrow">Novo treino</span><h2>Monte o recorte</h2></div><Target size={19} /></div>
           <div className="config-grid">
             <Field label="Área">
-              <select value={area} onChange={(e) => { setArea(e.target.value); setTopic('todas'); }}>
+              <select value={area} onChange={(e) => { setArea(e.target.value); setTopic('todas'); }} disabled={mode === 'intercalado'}>
                 <option value="todas">Todas as áreas</option>
                 {curriculum.areas.map((a) => <option key={a.id} value={a.id}>{a.name}</option>)}
               </select>
             </Field>
             <Field label="Subtópico">
-              <select value={topic} onChange={(e) => setTopic(e.target.value)} disabled={area === 'todas'}>
+              <select value={topic} onChange={(e) => setTopic(e.target.value)} disabled={mode === 'intercalado' || area === 'todas'}>
                 <option value="todas">Todos do recorte</option>
                 {topics.map((t) => <option key={t.id} value={t.id}>{t.title}</option>)}
               </select>
@@ -125,7 +149,7 @@ export default function Questoes() {
           </div>
           <div className="trainer-summary">
             <Flame size={16} />
-            <span>{mode === 'rapido' ? 'Treino rápido de 10 questões, priorizando lacunas e incidência.' : 'O sorteio equilibra alta incidência e temas com erro recente.'}</span>
+            <span>{mode === 'intercalado' ? 'Treino intercalado: mistura áreas e temas para treinar discriminação e transferência.' : mode === 'rapido' ? 'Treino rápido de 10 questões, priorizando lacunas e incidência.' : 'O sorteio equilibra alta incidência e temas com erro recente.'}</span>
           </div>
           <Button onClick={pick} icon={Play} className="wide">Começar treino</Button>
         </Card>

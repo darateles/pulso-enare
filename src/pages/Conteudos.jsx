@@ -7,6 +7,7 @@ import { Button, Card, Chip, Empty, PageHead, Progress, Segmented } from '../com
 import { useStore } from '../store.jsx';
 import { areaStats, dueReviews, normalize, topicProgress, topicStatus } from '../utils.js';
 import { LEVELS, topicLevelId } from '../trilha.js';
+import { TOPIC_STAGE_LABEL, topicStage } from '../metodo.js';
 
 const STATUS = [
   { value: 'todos', label: 'Todos' },
@@ -100,6 +101,7 @@ export default function Conteudos() {
         <div className="topic-table">
           {filtered.map(({ t, a }) => {
             const st = topicStatus(user.progress[t.id], t.checklist.length);
+            const stage = topicStage(user.progress[t.id], t.checklist.length);
             const p = topicProgress(user.progress[t.id], t.checklist.length);
             return (
               <Link to={`/conteudos/${t.id}`} key={t.id} className="topic-row">
@@ -108,8 +110,9 @@ export default function Conteudos() {
                   <div className="topic-line">
                     <strong>{t.title}</strong>
                     {due.has(t.id) && <Chip tone="danger">revisar</Chip>}
-                    {st === 'dominado' && <Chip tone="success"><CircleCheck size={12} /> dominado</Chip>}
-                    {st === 'estudando' && <Chip tone="warning">em estudo</Chip>}
+                    <Chip tone={stage === 'dominado' ? 'success' : stage === 'revisado' ? 'accent' : stage === 'recuperado' ? 'warning' : 'neutral'}>
+                      {stage === 'dominado' && <CircleCheck size={12} />} {TOPIC_STAGE_LABEL[stage]}
+                    </Chip>
                   </div>
                   <p>{t.summary}</p>
                   <div className="topic-meta"><span>{a.name}</span><span className="topic-group">{t.group}</span><span>Nível {topicLevelId(t.id)}</span><span>incidência {t.incidence}%</span><span>{t.checklist.length} etapas</span></div>

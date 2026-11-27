@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, BarChart3, Download, Flame, Target, TrendingDown, TrendingUp } from 'lucide-react';
+import { ArrowRight, BarChart3, Brain, Clock3, Download, Flame, Target, TrendingDown, TrendingUp } from 'lucide-react';
 import { Button, Card, Chip, Empty, PageHead, Progress, Ring, Stat } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
-import { accuracyByArea, daysUntil, fmtDate, globalStats, iso, minutesLabel, pct, streak, weakTopics, WEEKDAYS } from '../utils.js';
+import { accuracyByArea, daysUntil, dueReviews, fmtDate, globalStats, iso, minutesLabel, pct, streak, weakTopics, WEEKDAYS } from '../utils.js';
+import { calibration, calibrationLabel } from '../metodo.js';
 
 export default function Desempenho() {
   const { user, curriculum, questions } = useStore();
@@ -14,6 +15,8 @@ export default function Desempenho() {
   const overall = pct(right, answered.length);
   const areas = accuracyByArea(curriculum, user.attempts);
   const weak = weakTopics(curriculum, user.attempts, user.progress, 8);
+  const cal = calibration(user.progress, user.attempts);
+  const due = useMemo(() => dueReviews(curriculum, user.progress), [curriculum, user.progress]);
   const days = useMemo(() => {
     const arr = [];
     for (let i = 13; i >= 0; i--) {
@@ -107,6 +110,21 @@ export default function Desempenho() {
           )) : <p className="muted-note">Ainda sem erros registrados. Quando errar, o tema aparece aqui.</p>}
         </Card>
       </div>
+
+      <Card className="perf-calibration">
+        <div className="section-head small">
+          <div><span className="eyebrow">Metacognição</span><h2>Confiança × desempenho</h2></div>
+          <Brain size={19} />
+        </div>
+        <div className="calibration-wide">
+          <div><span>Confiança média</span><strong>{cal.confidence != null ? `${cal.confidence}%` : '—'}</strong></div>
+          <div><span>Acerto real</span><strong>{cal.accuracy != null ? `${cal.accuracy}%` : '—'}</strong></div>
+          <div><span>Diferença</span><strong>{cal.gap != null ? `${cal.gap > 0 ? '+' : ''}${cal.gap} p.p.` : '—'}</strong></div>
+          <div><span>Revisões vencidas</span><strong>{due.length}</strong></div>
+        </div>
+        <p className="muted-note">{calibrationLabel(cal.gap)}</p>
+        {due.length > 0 && <Button variant="soft" size="sm" onClick={() => navigate('/conteudos?status=revisao')} icon={Clock3}>Abrir fila de revisão</Button>}
+      </Card>
 
       <Card>
         <div className="section-head small"><div><span className="eyebrow">Histórico</span><h2>Tentativas recentes</h2></div><Chip>{user.attempts.length}</Chip></div>

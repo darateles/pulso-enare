@@ -9,7 +9,7 @@ Plataforma com login individual para organizar a preparação ao ENARE com foco 
 - **Trilha em níveis** (como um curso): 5 níveis ligados ao semestre da faculdade, 7 matérias e 90 temas. O onboarding pergunta o período e monta a trilha personalizada.
 - **Mapa do edital** com 7 áreas ENAMED, 90 subtópicos agrupados por especialidade e orientação de estudo por tema.
 - **Guia de estudo + checklist de 7 etapas por subtópico**, com sequência, perguntas-guia, pegadinhas, fontes e baralho de flashcards do tema.
-- **Planner** de 8 semanas que prioriza o nível atual e distribui carga por peso, confiança e erros recentes.
+- **Planner em ciclos** de 8 semanas: codificação de um tema, recuperação no próximo dia de estudo e revisões espaçadas nos intervalos seguintes, com simulados intercalados.
 - **Banco com 300 questões oficiais** do ENARE 2022, 2023 e 2024, com gabarito oficial, comentário e fonte.
 - **Importador** de provas por URL/PDF ou texto colado, com extração de gabarito e deduplicação.
 - **Geração de questões por IA** (opcional, via Venice).
@@ -25,6 +25,20 @@ Plataforma com login individual para organizar a preparação ao ENARE com foco 
 | 3 · Especialidades | 5º e 6º | Nefrologia, neurologia, hematologia, reumatologia, pediatria e endocrinologia |
 | 4 · Prática e urgências | 7º e 8º | Cirurgia, obstetrícia, urgências e plantão |
 | 5 · Alta complexidade | 9º ao 12º | Oncologia, trauma grave, medicina fetal e reta final do internato |
+
+### Método Pulso
+
+O app organiza cada tema em cinco etapas: **Ativar → Codificar → Recuperar → Revisar → Intercalar**. A base é um conjunto de princípios com suporte científico, não uma promessa de método único:
+
+- **Prática de recuperação** (testing effect): tentar lembrar antes de reler.
+- **Prática espaçada**: revisões adaptativas em intervalos crescentes.
+- **Intercalação**: treinos e simulados misturando matérias.
+- **Elaboração e autoexplicação**: perguntas-guia e justificativa da conduta.
+- **Feedback corretivo**: comentário do erro e nova tentativa.
+- **Metacognição**: confiança registrada comparada ao acerto real.
+- **Carga cognitiva e prática deliberada**: níveis progressivos e foco nas lacunas.
+
+Referências principais: Dunlosky et al. (2013), Roediger & Karpicke (2006), Cepeda et al. (2006), Rohrer & Taylor (2007), Chi et al. (1994), Hattie & Timperley (2007), Bjork et al. (2013) e Larsen et al. (2008). A página **Método** dentro do app detalha cada princípio e os links.
 
 ## Login e contas
 

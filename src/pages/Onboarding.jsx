@@ -6,6 +6,7 @@ import { useStore } from '../store.jsx';
 import { WEEKDAYS, iso, daysUntil } from '../utils.js';
 import { SEMESTERS, levelById, levelStats, semesterLabel, semesterLevel } from '../trilha.js';
 import { generatePlan } from '../planner.js';
+import { STAGES } from '../metodo.js';
 
 export default function Onboarding() {
   const { user, curriculum, updateUser, toast } = useStore();
@@ -72,9 +73,14 @@ export default function Onboarding() {
             <p>Em menos de um minuto você define seu semestre, sua rotina e sua data de prova. O sistema transforma isso em uma trilha com níveis e um plano de 8 semanas.</p>
             <ul className="check-list-static">
               <li><Check size={16} /> Níveis do fundamental ao internato, como um curso</li>
-              <li><Check size={16} /> Matérias e temas na ordem certa para o seu período</li>
-              <li><Check size={16} /> Plano personalizado por prioridade, erros e confiança</li>
+              <li><Check size={16} /> Ciclo baseado em evidências: recuperação, espaçamento e intercalação</li>
+              <li><Check size={16} /> Revisão adaptativa e plano personalizado por prioridade e erros</li>
             </ul>
+            <div className="onboard-method">
+              {STAGES.map((stage, index) => (
+                <span key={stage.id}><b>{index + 1}</b>{stage.label}</span>
+              ))}
+            </div>
             <Button onClick={() => setStep(1)} icon={ArrowRight}>Começar meu onboarding</Button>
             <small>Seu progresso fica salvo na sua conta e pode ser exportado quando quiser.</small>
           </div>

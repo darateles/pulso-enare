@@ -595,8 +595,20 @@ app.post('/api/import/anki', async (req, res, next) => {
 app.get('/api/health', (_req, res) => ok(res, { ok: true, storage: storageMode() }));
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(root, 'dist'), { maxAge: '1h' }));
-  app.get('/{*splat}', (_req, res) => res.sendFile(path.join(root, 'dist', 'index.html')));
+  const dist = path.join(root, 'dist');
+  app.use(express.static(dist, {
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith('index.html') || filePath.endsWith('sw.js')) {
+        res.setHeader('Cache-Control', 'no-store, must-revalidate');
+      } else if (filePath.includes(`${path.sep}assets${path.sep}`)) {
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      }
+    },
+  }));
+  app.get('/{*splat}', (_req, res) => {
+    res.setHeader('Cache-Control', 'no-store, must-revalidate');
+    res.sendFile(path.join(dist, 'index.html'));
+  });
 } else {
   app.get('/', (_req, res) => res.redirect('http://localhost:5173'));
 }

@@ -3,6 +3,7 @@ import { api } from './api.js';
 import fallbackCurriculum from '../seed/curriculum.json';
 import fallbackSources from '../seed/sources.json';
 import { iso, uid } from './utils.js';
+import { adaptiveReview } from './metodo.js';
 
 const StoreCtx = createContext(null);
 const ToastCtx = createContext(null);
@@ -321,6 +322,29 @@ export function StoreProvider({ children }) {
     }));
   }, [updateUser]);
 
+  const reviewTopic = useCallback((topic, rating) => {
+    updateUser((prev) => {
+      const p = prev.progress[topic.id] || {};
+      return {
+        ...prev,
+        progress: {
+          ...prev.progress,
+          [topic.id]: { ...p, ...adaptiveReview(p, rating) },
+        },
+      };
+    });
+  }, [updateUser]);
+
+  const setTopicField = useCallback((topicId, field, value) => {
+    updateUser((prev) => ({
+      ...prev,
+      progress: {
+        ...prev.progress,
+        [topicId]: { ...(prev.progress[topicId] || {}), [field]: value },
+      },
+    }));
+  }, [updateUser]);
+
   const toggleBookmark = useCallback((qid) => {
     updateUser((prev) => {
       const has = prev.bookmarks.includes(qid);
@@ -365,7 +389,7 @@ export function StoreProvider({ children }) {
   const value = {
     user, questions, setQuestions, sources, setSources, curriculum,
     loading, offline, saveState, needLogin, account, login, logout, updateUser, bumpActivity, addAttempt,
-    toggleChecklist, setConfidence, setTopicNote, scheduleReview,
+    toggleChecklist, setConfidence, setTopicNote, scheduleReview, reviewTopic, setTopicField,
     toggleBookmark, setQuestionNote, dismissError, setTheme, toast, refreshData, cancelPending, outbox, syncOutbox,
   };
 

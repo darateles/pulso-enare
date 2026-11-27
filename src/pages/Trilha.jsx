@@ -1,17 +1,18 @@
 import React, { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  ArrowRight, BookOpen, CheckCircle2, ChevronRight, Clock3, GraduationCap, Layers,
+  BookOpen, CheckCircle2, ChevronRight, Clock3, GraduationCap, Layers,
   Play, RefreshCw, Sparkles, Target, Trophy,
 } from 'lucide-react';
 import { Button, Card, Chip, Field, PageHead, Progress, Ring } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
 import { topicProgress, topicStatus } from '../utils.js';
+import { TOPIC_STAGE_LABEL, topicStage } from '../metodo.js';
 import {
   LEVELS, LEVEL_STATUS_LABEL, currentLevel, levelById, levelStats, levelStatus,
   nextTopics, semesterLabel, semesterLevel,
 } from '../trilha.js';
-import { generatePlan } from '../planner.js';
+import { generatePlan, planCounts } from '../planner.js';
 
 function subjectStats(topics, progress) {
   const totalSteps = topics.reduce((sum, t) => sum + t.checklist.length, 0);
@@ -37,6 +38,7 @@ export default function Trilha() {
   const stats = allStats[selectedId] || levelStats(curriculum, selectedId, user.progress);
   const currentStats = allStats[current.id];
   const next = useMemo(() => nextTopics(curriculum, user, 4), [curriculum, user]);
+  const plan = planCounts(user.plan);
   const selectedStatus = levelStatus(selectedId, user, stats);
 
   const continueStudy = () => {
@@ -119,25 +121,32 @@ export default function Trilha() {
 
       <div className="trilha-layout">
         <section>
-          <div className="trilha-level-head">
-            <div>
-              <span className="eyebrow">Nível {selected.id} · {selected.semesterLabel}</span>
-              <h2>{selected.name}</h2>
-              <p>{selected.description}</p>
-              <div className="trilha-level-tags">
-                <Chip tone={selectedStatus === 'current' ? 'accent' : selectedStatus === 'done' ? 'success' : 'neutral'}>
-                  {LEVEL_STATUS_LABEL[selectedStatus]}
-                </Chip>
-                <span>{stats.subjects.length} matérias</span>
-                <span>{stats.total} temas</span>
-                <span>{stats.mastered} dominados</span>
-              </div>
+          {selectedId === current.id ? (
+            <div className="trilha-list-head">
+              <span className="eyebrow">Matérias do nível</span>
+              <h2>Comece por onde parou</h2>
             </div>
-            <Ring value={stats.pct} size={92} stroke={7} tone={selectedStatus === 'done' ? 'green' : 'accent'}>
-              <strong>{stats.pct}%</strong>
-              <span>concluído</span>
-            </Ring>
-          </div>
+          ) : (
+            <div className="trilha-level-head">
+              <div>
+                <span className="eyebrow">Nível {selected.id} · {selected.semesterLabel}</span>
+                <h2>{selected.name}</h2>
+                <p>{selected.description}</p>
+                <div className="trilha-level-tags">
+                  <Chip tone={selectedStatus === 'done' ? 'success' : 'neutral'}>
+                    {LEVEL_STATUS_LABEL[selectedStatus]}
+                  </Chip>
+                  <span>{stats.subjects.length} matérias</span>
+                  <span>{stats.total} temas</span>
+                  <span>{stats.mastered} dominados</span>
+                </div>
+              </div>
+              <Ring value={stats.pct} size={92} stroke={7} tone={selectedStatus === 'done' ? 'green' : 'accent'}>
+                <strong>{stats.pct}%</strong>
+                <span>concluído</span>
+              </Ring>
+            </div>
+          )}
 
           {selectedStatus === 'ahead' && (
             <div className="trilha-notice">
@@ -171,7 +180,7 @@ export default function Trilha() {
                 <div className="lesson-list">
                   {topics.map((t, index) => {
                     const p = user.progress[t.id] || {};
-                    const status = topicStatus(p, t.checklist.length);
+                    const stage = topicStage(p, t.checklist.length);
                     const progress = topicProgress(p, t.checklist.length);
                     return (
                       <Link key={t.id} to={`/conteudos/${t.id}`} className="lesson-row">
@@ -181,16 +190,13 @@ export default function Trilha() {
                           <span>{t.group} · {t.summary}</span>
                         </div>
                         <div className="lesson-status">
-                          {status === 'dominado' ? (
-                            <Chip tone="success"><CheckCircle2 size={12} /> dominado</Chip>
-                          ) : status === 'estudando' ? (
-                            <Chip tone="warning">em estudo</Chip>
-                          ) : (
-                            <Chip tone="neutral">novo</Chip>
-                          )}
+                          <Chip tone={stage === 'dominado' ? 'success' : stage === 'revisado' ? 'accent' : stage === 'recuperado' ? 'warning' : 'neutral'}>
+                            {stage === 'dominado' && <CheckCircle2 size={12} />}
+                            {TOPIC_STAGE_LABEL[stage]}
+                          </Chip>
                         </div>
                         <div className="lesson-progress">
-                          <Progress value={progress} tone={status === 'dominado' ? 'green' : 'accent'} />
+                          <Progress value={progress} tone={stage === 'dominado' || stage === 'revisado' ? 'green' : 'accent'} />
                           <small>{progress}%</small>
                         </div>
                         <ChevronRight size={16} className="lesson-arrow" />
@@ -211,30 +217,31 @@ export default function Trilha() {
 
         <aside className="trilha-side">
           <Card>
-            <span className="eyebrow">Seu momento</span>
-            <h3>{semesterLabel(user.semester)}</h3>
-            <p className="muted-note">Nível {current.id} · {current.name}. Ao mudar o semestre, a trilha e o planner passam a priorizar o novo bloco.</p>
-            <Field label="Atualizar semestre">
+            <div className="section-head small">
+              <div><span className="eyebrow">Ajustar trilha</span><h3>Semestre da faculdade</h3></div>
+            </div>
+            <Field hint={`Nível ${current.id} · ${current.name}`}>
               <select value={user.semester || 1} onChange={(e) => changeSemester(e.target.value)}>
                 {Array.from({ length: 12 }, (_, i) => i + 1).map((s) => (
                   <option key={s} value={s}>{s}º semestre · Nível {semesterLevel(s)}</option>
                 ))}
               </select>
             </Field>
-            <Button variant="soft" size="sm" onClick={rebuildPlan} icon={RefreshCw}>Aplicar no plano</Button>
+            <p className="muted-note">Ao mudar o semestre, regenere o plano para aplicar o novo nível.</p>
+            <Button variant="soft" size="sm" onClick={rebuildPlan} icon={RefreshCw}>Atualizar plano</Button>
           </Card>
 
-          <Card className="trilha-next">
+          <Card className="trilha-plan">
             <div className="section-head small">
-              <div><span className="eyebrow">Próximos passos</span><h3>O que estudar agora</h3></div>
+              <div><span className="eyebrow">Plano de 8 semanas</span><h3>Seu cronograma</h3></div>
+              <Chip tone={plan.done ? 'success' : 'neutral'}>{plan.done}/{plan.total}</Chip>
             </div>
-            {next.length ? next.map(({ t, a }) => (
-              <Link key={t.id} to={`/conteudos/${t.id}`} className="mini-row">
-                <span className="dot" style={{ background: a.color }} />
-                <span>{t.title}</span>
-                <ArrowRight size={14} />
-              </Link>
-            )) : <p className="muted-note">Você dominou todos os temas da trilha. Hora de simulado e revisão.</p>}
+            <div className="plan-mini">
+              <div><strong>{plan.done}</strong><span>concluídas</span></div>
+              <div><strong>{Math.max(0, plan.total - plan.done)}</strong><span>restantes</span></div>
+              <div><strong>{(user.plan?.weeks || []).length}</strong><span>semanas</span></div>
+            </div>
+            <Progress value={plan.total ? (plan.done / plan.total) * 100 : 0} tone="accent" />
             <Button variant="ghost" size="sm" onClick={() => navigate('/planner')} icon={Clock3}>Abrir planner</Button>
           </Card>
 
@@ -242,12 +249,14 @@ export default function Trilha() {
             <span className="eyebrow">Método do curso</span>
             <h3>Como avançar de nível</h3>
             <ol>
-              <li><strong>Teoria dirigida.</strong> Leia o guia do tema e monte um resumo ativo.</li>
-              <li><strong>Checklist.</strong> Marque só o que executou de verdade.</li>
-              <li><strong>Questões.</strong> Resolva o tema e leia todos os comentários.</li>
-              <li><strong>Revisão.</strong> Refaça os erros em D+7 e D+30.</li>
+              <li><strong>Ativar.</strong> Recupere o que já sabe e transforme o tema em perguntas.</li>
+              <li><strong>Codificar.</strong> Entenda, elabore e conecte com exemplos.</li>
+              <li><strong>Recuperar.</strong> Feche o material, responda e corrija os erros.</li>
+              <li><strong>Revisar.</strong> Volte no intervalo adaptativo, não em releitura passiva.</li>
+              <li><strong>Intercalar.</strong> Misture temas em treinos e simulados.</li>
             </ol>
             <p className="muted-note">Um tema é dominado quando o checklist está completo e sua confiança é 4 ou 5. O nível avança quando todos os temas estiverem dominados.</p>
+            <Link to="/metodo" className="text-link">Ver evidências do método <ChevronRight size={14} /></Link>
           </Card>
         </aside>
       </div>

@@ -10,6 +10,7 @@ import { Logo, Spinner } from './components/ui.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 
 const Trilha = lazy(() => import('./pages/Trilha.jsx'));
+const Metodo = lazy(() => import('./pages/Metodo.jsx'));
 const Planner = lazy(() => import('./pages/Planner.jsx'));
 const Conteudos = lazy(() => import('./pages/Conteudos.jsx'));
 const Topico = lazy(() => import('./pages/Topico.jsx'));
@@ -93,6 +94,7 @@ export default function App() {
           <Route element={<Layout />}>
             <Route index element={<Dashboard />} />
             <Route path="trilha" element={<Trilha />} />
+            <Route path="metodo" element={<Metodo />} />
             <Route path="planner" element={<Planner />} />
             <Route path="conteudos" element={<Conteudos />} />
             <Route path="conteudos/:topicId" element={<Topico />} />

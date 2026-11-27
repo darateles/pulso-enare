@@ -3,7 +3,7 @@ import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
   House, CalendarDays, ListChecks, Library, ChartNoAxesColumnIncreasing, NotebookPen,
   Settings, Search, Moon, Sun, Flame, Menu, X, ArrowRight, Layers, HeartPulse,
-  GraduationCap, ChevronRight,
+  GraduationCap, ChevronRight, BookOpenCheck,
 } from 'lucide-react';
 import { Logo, Ring, Progress } from './ui.jsx';
 import { useStore } from '../store.jsx';
@@ -13,6 +13,7 @@ import { currentLevel } from '../trilha.js';
 const NAV = [
   { to: '/', label: 'Hoje', icon: House, end: true },
   { to: '/trilha', label: 'Trilha', icon: GraduationCap },
+  { to: '/metodo', label: 'Método', icon: BookOpenCheck },
   { to: '/planner', label: 'Planner', icon: CalendarDays },
   { to: '/conteudos', label: 'Conteúdos', icon: ListChecks },
   { to: '/questoes', label: 'Questões', icon: Library },

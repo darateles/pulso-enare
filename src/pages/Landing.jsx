@@ -29,7 +29,7 @@ export default function Landing() {
           <div className="landing-hero-copy">
             <span className="eyebrow light">Pulso · Medical Learning System</span>
             <h1>Seu estudo de hoje.<br /><em>Sua residência amanhã.</em></h1>
-            <p>Organize a preparação, pratique com questões e volte ao conteúdo quando for hora de revisar. Um sistema cardíaco de estudos para o ENARE.</p>
+            <p>Um método baseado em recuperação ativa, revisão espaçada e treino intercalado. Organize a preparação, pratique com questões e volte ao conteúdo no intervalo certo.</p>
             <div className="landing-actions">
               <Link to="/login" className="btn btn-warm">Começar a estudar <ArrowRight size={16} /></Link>
               <Link to="/login" className="landing-link">Experimentar o planner</Link>
@@ -47,9 +47,9 @@ export default function Landing() {
             <span className="eyebrow">Conheça o método</span>
             <h2>Planeje. Aprenda. Revise. Evolua.</h2>
             <ul className="landing-steps">
-              <li><CalendarDays size={18} /><div><strong>Escolha quando começar</strong><span>O planner distribui carga por peso e incidência.</span></div></li>
-              <li><RefreshCw size={18} /><div><strong>Relembre antes de consultar</strong><span>Recall e revisão espaçada em vez de releitura passiva.</span></div></li>
-              <li><ShieldCheck size={18} /><div><strong>Retome seus erros</strong><span>O caderno transforma erro em próxima prioridade.</span></div></li>
+              <li><CalendarDays size={18} /><div><strong>Planeje o ciclo</strong><span>Codifique, recupere, revise e intercale na mesma semana.</span></div></li>
+              <li><RefreshCw size={18} /><div><strong>Recupere antes de reler</strong><span>Questões e recall fortalecem a memória mais do que a releitura.</span></div></li>
+              <li><ShieldCheck size={18} /><div><strong>Revise no intervalo certo</strong><span>Revisão espaçada adaptativa em vez de maratona na véspera.</span></div></li>
             </ul>
             <p className="muted-note">A demonstração usa um exemplo. Seu histórico pessoal começa quando entra na conta.</p>
           </div>

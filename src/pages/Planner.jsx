@@ -9,6 +9,7 @@ import { useStore } from '../store.jsx';
 import { fmtDate, fmtLong, iso, minutesLabel, WEEKDAYS, WEEKDAYS_LONG, dueReviews, daysUntil } from '../utils.js';
 import { generatePlan, planCounts } from '../planner.js';
 import { currentLevel } from '../trilha.js';
+import { SESSION_STAGE, STAGE_LABEL, STAGES, planStageCounts } from '../metodo.js';
 
 const ICONS = { teoria: BookOpen, questoes: ListChecks, revisao: Repeat, simulado: Timer };
 
@@ -19,6 +20,7 @@ export default function Planner() {
   const [offset, setOffset] = useState(0);
   const [error, setError] = useState('');
   const counts = planCounts(user.plan);
+  const stageCounts = useMemo(() => planStageCounts(user.plan), [user.plan]);
   const level = currentLevel(user);
   const due = useMemo(() => dueReviews(curriculum, user.progress), [curriculum, user.progress]);
 
@@ -67,7 +69,7 @@ export default function Planner() {
       <PageHead
         eyebrow="Plano de estudo"
         title={<>Um plano claro <em>para cada etapa.</em></>}
-        subtitle={`O planner prioriza o Nível ${level.id} · ${level.name} e distribui suas horas conforme peso, incidência, confiança e erros recentes. Sessões curtas, com revisão espaçada.`}
+        subtitle={`O planner prioriza o Nível ${level.id} · ${level.name} e organiza a semana no ciclo Codificar → Recuperar → Revisar → Intercalar, usando peso, incidência, confiança e erros recentes.`}
         actions={<Button onClick={() => (counts.total ? setConfirm(true) : build())} icon={Sparkles}>{counts.total ? 'Regerar plano' : 'Gerar plano'}</Button>}
       />
 
@@ -97,6 +99,12 @@ export default function Planner() {
             <div><span>Sessões planejadas</span><strong>{counts.done}/{counts.total}</strong></div>
           </div>
           <Progress value={counts.total ? (counts.done / counts.total) * 100 : 0} tone="accent" />
+          <div className="plan-cycle">
+            {STAGES.filter((stage) => stage.id !== 'ativar').map((stage) => (
+              <div key={stage.id}><span>{stage.label}</span><strong>{stageCounts[stage.id] || 0}</strong></div>
+            ))}
+          </div>
+          <p className="muted-note">O ciclo distribui codificação, recuperação, revisão espaçada e treino intercalado — não apenas leitura.</p>
         </Card>
 
         <Card className="plan-manual">
@@ -158,7 +166,7 @@ export default function Planner() {
                             {s.done ? <CheckCircle2 size={19} /> : <Circle size={19} />}
                           </button>
                           <div className="plan-session-main">
-                            <div className="plan-type"><Icon size={13} /> {s.type} · {s.minutes} min</div>
+                            <div className="plan-type"><Icon size={13} /> {STAGE_LABEL[SESSION_STAGE[s.type]] || s.type} · {s.minutes} min</div>
                             {s.topicId ? <Link to={`/conteudos/${s.topicId}`}>{s.title}</Link> : <button className="linkish" onClick={() => window.location.assign('/questoes/simulado')}>{s.title}</button>}
                           </div>
                         </div>
@@ -171,7 +179,7 @@ export default function Planner() {
           </div>
 
           <div className="plan-legend">
-            <span><BookOpen size={14} /> Teoria dirigida</span><span><ListChecks size={14} /> Questões</span><span><Repeat size={14} /> Revisão</span><span><Timer size={14} /> Simulado</span>
+            <span><BookOpen size={14} /> Codificar</span><span><ListChecks size={14} /> Recuperar</span><span><Repeat size={14} /> Revisar</span><span><Timer size={14} /> Intercalar</span>
           </div>
         </>
       )}

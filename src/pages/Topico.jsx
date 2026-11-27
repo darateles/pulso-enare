@@ -1,19 +1,33 @@
 import React, { useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
-  ArrowLeft, ArrowRight, BookOpen, Check, CheckCircle2, Circle, Clock3, ExternalLink,
-  FileText, Lightbulb, ListChecks, NotebookPen, RefreshCw, Sparkles, Target, Network, Layers, Plus, Clock, Search, BookOpenCheck,
+  ArrowLeft, ArrowRight, BookOpen, Brain, Check, CheckCircle2, Clock, ExternalLink,
+  Layers, ListChecks, Network, NotebookPen, Plus, RefreshCw, Repeat, Search,
+  Shuffle, Sparkles, Target, Timer, BookOpenCheck,
 } from 'lucide-react';
-import { Button, Card, Chip, Field, Modal, PageHead, Progress, Ring } from '../components/ui.jsx';
+import { Button, Card, Chip, Field, Progress, Ring } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
-import { fmtDate, topicProgress, topicStatus } from '../utils.js';
+import { fmtDate, iso, topicProgress, topicStatus } from '../utils.js';
 import { topicLevel } from '../trilha.js';
+import {
+  STAGE_LABEL, STAGES, adaptiveReview, calibrationLabel, checklistStage, stageStatus,
+  topicCalibration, topicStage, TOPIC_STAGE_LABEL,
+} from '../metodo.js';
+
+const STAGE_ICONS = { ativar: Brain, codificar: BookOpenCheck, recuperar: Target, revisar: Repeat, intercalar: Shuffle };
+
+const RATINGS = [
+  { n: 1, label: 'Esqueci' },
+  { n: 2, label: 'Difícil' },
+  { n: 3, label: 'Ok' },
+  { n: 4, label: 'Bem' },
+  { n: 5, label: 'Dominei' },
+];
 
 export default function Topico() {
   const { topicId } = useParams();
-  const { user, curriculum, questions, updateUser, toggleChecklist, setConfidence, setTopicNote, scheduleReview, toast } = useStore();
+  const { user, curriculum, questions, updateUser, toggleChecklist, setConfidence, setTopicNote, reviewTopic, setTopicField, toast } = useStore();
   const navigate = useNavigate();
-  const [review, setReview] = useState(false);
   const [celebrate, setCelebrate] = useState(false);
 
   const found = useMemo(() => {
@@ -24,28 +38,41 @@ export default function Topico() {
     return null;
   }, [curriculum, topicId]);
 
-  if (!found) return <Card><p>Tema não encontrado. <Link to="/conteudos">Voltar aos conteúdos.</Link></p></Card>;
+  if (!found) return <Card><p>Tema não encontrado. <Link to="/trilha">Voltar à trilha.</Link></p></Card>;
   const { a, t } = found;
   const level = topicLevel(t.id);
   const progress = user.progress[t.id] || {};
   const done = new Set(progress.done || []);
   const pct = topicProgress(progress, t.checklist.length);
   const status = topicStatus(progress, t.checklist.length);
+  const currentStage = topicStage(progress, t.checklist.length);
+  const stages = stageStatus(progress, t.checklist.length);
+  const cal = topicCalibration(user.progress, user.attempts, t.id);
   const related = questions.filter((q) => q.topicId === t.id).slice(0, 6);
   const topicCards = user.flashcards.filter((c) => (c.tags || []).includes(t.id));
+  const guide = t.guide || {};
+
+  const itemsByStage = (stageId) => t.checklist
+    .map((text, index) => ({ text, index }))
+    .filter(({ index }) => checklistStage(index, t.checklist.length) === stageId);
 
   const toggle = (i) => {
     const wasDone = done.has(i);
     toggleChecklist(t, i);
     if (!wasDone && done.size + 1 === t.checklist.length) {
       setCelebrate(true);
-      setTimeout(() => setCelebrate(false), 5000);
+      setTimeout(() => setCelebrate(false), 6000);
     }
   };
 
+  const rateReview = (rating) => {
+    const next = adaptiveReview(progress, rating);
+    reviewTopic(t, rating);
+    setConfidence(t, rating);
+    toast(`Revisão registrada: ${next.interval} dia${next.interval > 1 ? 's' : ''}. Próxima em ${fmtDate(next.nextReview)}.`);
+  };
+
   const confidence = progress.confidence || 0;
-  const searchBase = encodeURIComponent(`${t.title} diretriz brasileira`);
-  const guide = t.guide || {};
   const search = (q) => `https://www.google.com/search?q=${encodeURIComponent(q)}`;
   const sources = [
     { label: 'Diretriz / consenso', href: search(`${t.title} diretriz brasileira`) },
@@ -65,6 +92,20 @@ export default function Topico() {
     updateUser((prev) => ({ ...prev, flashcards: [...cards, ...prev.flashcards] }));
     toast(`Baralho criado com ${cards.length} flashcards.`);
   };
+
+  const renderCheckItem = ({ text, index }) => {
+    const checked = done.has(index);
+    return (
+      <button key={index} className={`check-item ${checked ? 'checked' : ''}`} onClick={() => toggle(index)}>
+        <span className="check-box">{checked ? <Check size={15} /> : null}</span>
+        <span className="check-text">{text}</span>
+        {index === t.checklist.length - 1 && <Chip tone="soft"><RefreshCw size={11} /> revisão</Chip>}
+      </button>
+    );
+  };
+
+  const nextReviewDate = progress.nextReview ? fmtDate(progress.nextReview, { day: '2-digit', month: 'long' }) : null;
+  const reviewDue = progress.nextReview && progress.nextReview <= iso();
 
   return (
     <>
@@ -86,12 +127,56 @@ export default function Topico() {
         </Ring>
       </header>
 
-      {celebrate && <div className="celebrate"><Sparkles size={20} /><div><strong>Checklist concluído.</strong> Registre sua confiança e programe a próxima revisão.</div><Button size="sm" variant="light" onClick={() => setReview(true)}>Agendar</Button></div>}
+      <Card className="method-stepper">
+        <div className="method-stepper-head">
+          <div><span className="eyebrow">Método Pulso</span><h2>Seu ciclo neste tema</h2></div>
+          <Chip tone={currentStage === 'dominado' ? 'success' : 'accent'}>{TOPIC_STAGE_LABEL[currentStage]}</Chip>
+        </div>
+        <div className="method-steps">
+          {STAGES.map((stage) => {
+            const state = stages[stage.id] || 'next';
+            const Icon = STAGE_ICONS[stage.id] || Target;
+            return (
+              <div key={stage.id} className={`method-step ${state}`}>
+                <span className="method-step-icon"><Icon size={16} /></span>
+                <div><strong>{stage.label}</strong><small>{state === 'done' ? 'concluído' : state === 'current' ? 'agora' : 'depois'}</small></div>
+              </div>
+            );
+          })}
+        </div>
+        <p className="muted-note">A ordem importa: tentar lembrar antes de reler é o que fortalece a memória. “Intercalar” acontece nos treinos mistos.</p>
+      </Card>
+
+      {celebrate && (
+        <div className="celebrate">
+          <Sparkles size={20} />
+          <div><strong>Checklist concluído.</strong> Registre sua confiança e faça a revisão adaptativa para fechar o ciclo.</div>
+        </div>
+      )}
 
       <div className="topic-layout">
         <section>
-          <Card className="study-guide">
-            <div className="section-head small"><div><span className="eyebrow">Direção de estudo</span><h2>O que estudar e como</h2></div><span className="guide-time"><Clock size={14} /> ~{guide.minutes || 60} min</span></div>
+          <Card className="method-card">
+            <div className="method-card-head">
+              <span className="method-badge">01</span>
+              <div><span className="eyebrow">Ativar</span><h2>Antes de estudar, tente responder</h2></div>
+              <Chip tone={stages.ativar === 'done' ? 'success' : 'neutral'}>{stages.ativar === 'done' ? 'ativado' : '5 min'}</Chip>
+            </div>
+            <p className="muted-note">Não consulte o resumo. Responder errado agora prepara o cérebro para corrigir depois — é o conhecimento prévio ancorando o novo.</p>
+            <ul className="activate-questions">
+              {guide.questions?.map((q) => <li key={q}>{q}</li>)}
+            </ul>
+            <Field label="Sua hipótese (opcional, mas ajuda)">
+              <textarea rows={3} value={progress.activation || ''} onChange={(e) => setTopicField(t.id, 'activation', e.target.value)} placeholder="O que você já sabe? Onde trava? Qual conduta parece mais provável?" />
+            </Field>
+          </Card>
+
+          <Card className="method-card">
+            <div className="method-card-head">
+              <span className="method-badge">02</span>
+              <div><span className="eyebrow">Codificar</span><h2>Entenda, elabore e conecte</h2></div>
+              <span className="guide-time"><Clock size={14} /> ~{guide.minutes || 45} min</span>
+            </div>
             <p className="guide-objective"><strong>Objetivo:</strong> {guide.objective || `Dominar ${t.focus}.`}</p>
             <div className="guide-cols">
               <div><span className="eyebrow">Sequência</span><ol>{guide.sequence?.map((x) => <li key={x}>{x}</li>)}</ol></div>
@@ -99,23 +184,31 @@ export default function Topico() {
             </div>
             <div className="guide-traps"><span className="eyebrow">Pegadinhas de prova</span><ul>{guide.traps?.map((x) => <li key={x}>{x}</li>)}</ul></div>
             <div className="guide-mastery"><span className="eyebrow">Só avance quando conseguir</span><ul>{guide.mastery?.map((x) => <li key={x}>{x}</li>)}</ul></div>
+            <div className="method-keypoints">
+              <span className="eyebrow">Pontos que você precisa dominar</span>
+              <ul>{t.keyPoints.map((kp) => <li key={kp}><CheckCircle2 size={15} /> {kp}</li>)}</ul>
+            </div>
             <div className="guide-sources"><Search size={15} /><span>Onde buscar:</span>{sources.map((s) => <a key={s.label} href={s.href} target="_blank" rel="noreferrer">{s.label} ↗</a>)}</div>
           </Card>
+
           <Card className="checklist-card">
             <div className="section-head small">
               <div><span className="eyebrow">Roteiro do subtópico</span><h2>Checklist de domínio</h2></div>
               <span className="muted-note">{done.size}/{t.checklist.length}</span>
             </div>
-            <p className="muted-note">Marque somente depois de executar. A ordem foi desenhada para sair da teoria passiva e chegar a recuperação ativa.</p>
+            <p className="muted-note">Marque somente depois de executar. A ordem foi desenhada para sair da teoria passiva e chegar à recuperação ativa.</p>
             <div className="checklist">
-              {t.checklist.map((item, i) => {
-                const checked = done.has(i);
+              {['codificar', 'recuperar', 'revisar'].map((stageId) => {
+                const items = itemsByStage(stageId);
                 return (
-                  <button key={i} className={`check-item ${checked ? 'checked' : ''}`} onClick={() => toggle(i)}>
-                    <span className="check-box">{checked ? <Check size={15} /> : null}</span>
-                    <span className="check-text">{item}</span>
-                    {i === t.checklist.length - 1 && <Chip tone="soft"><RefreshCw size={11} /> revisão</Chip>}
-                  </button>
+                  <div key={stageId} className="checklist-stage">
+                    <div className="checklist-stage-head">
+                      <span className={`stage-dot ${stages[stageId]}`} />
+                      <span className="eyebrow">{STAGE_LABEL[stageId]}</span>
+                      <small>{items.filter(({ index }) => done.has(index)).length}/{items.length}</small>
+                    </div>
+                    {items.map(renderCheckItem)}
+                  </div>
                 );
               })}
             </div>
@@ -125,23 +218,22 @@ export default function Topico() {
             </div>
           </Card>
 
-          <Card className="keypoints-card">
-            <div className="section-head small"><div><span className="eyebrow">Recorte de prova</span><h2>Pontos que você precisa dominar</h2></div><Lightbulb size={19} /></div>
-            <ul>
-              {t.keyPoints.map((kp) => <li key={kp}><CheckCircle2 size={15} /> {kp}</li>)}
-            </ul>
-            <p className="muted-note">Foque no foco central: {t.focus}.</p>
-          </Card>
-
-          <Card>
-            <div className="section-head small"><div><span className="eyebrow">Recuperação ativa</span><h2>Questões do tema</h2></div><Chip>{related.length}</Chip></div>
-            {related.length ? (
-              <div className="related-list">
-                {related.map((q) => (
-                  <Link key={q.id} to={`/questoes?q=${q.id}`} className="mini-row"><span className="q-num">Q</span><span>{q.stem.slice(0, 110)}…</span><ArrowRight size={14} /></Link>
-                ))}
-              </div>
-            ) : <p className="muted-note">Ainda não há questões deste subtópico. Importe provas ou gere uma com IA no banco de questões.</p>}
+          <Card className="method-card" id="recuperar">
+            <div className="method-card-head">
+              <span className="method-badge">03</span>
+              <div><span className="eyebrow">Recuperar</span><h2>Feche o material e tente lembrar</h2></div>
+              <Chip tone={stages.recuperar === 'done' ? 'success' : 'neutral'}>{related.length} questões</Chip>
+            </div>
+            <div className="recall-box">
+              <strong>Brain dump de 2 minutos</strong>
+              <p>Sem consultar: qual é o problema clínico, o que muda o desfecho e qual é a pegadinha de prova? Escreva tudo que lembrar.</p>
+              <textarea rows={4} value={progress.brainDump || ''} onChange={(e) => setTopicField(t.id, 'brainDump', e.target.value)} placeholder="Escreva sem olhar o resumo. Depois compare com os pontos-chave." />
+            </div>
+            <div className="related-list">
+              {related.length ? related.map((q) => (
+                <Link key={q.id} to={`/questoes?q=${q.id}`} className="mini-row"><span className="q-num">Q</span><span>{q.stem.slice(0, 110)}…</span><ArrowRight size={14} /></Link>
+              )) : <p className="muted-note">Ainda não há questões deste subtópico. Importe provas ou gere uma com IA no banco de questões.</p>}
+            </div>
             <div className="related-actions">
               <Button variant="soft" onClick={() => navigate(`/questoes/treino?topic=${t.id}`)} icon={ListChecks}>Treinar este tema</Button>
               <Button variant="ghost" onClick={() => navigate('/questoes/importar')} icon={ExternalLink}>Buscar mais questões</Button>
@@ -149,28 +241,61 @@ export default function Topico() {
               <Button variant="ghost" onClick={() => navigate('/pulso/blocks')} icon={Network}>Mapa mental</Button>
             </div>
           </Card>
+
+          <Card className="method-card" id="revisar">
+            <div className="method-card-head">
+              <span className="method-badge">04</span>
+              <div><span className="eyebrow">Revisar</span><h2>Volte no intervalo certo</h2></div>
+              {reviewDue ? <Chip tone="danger">vencida</Chip> : <Chip tone={stages.revisar === 'done' ? 'success' : 'neutral'}>{nextReviewDate || 'não agendada'}</Chip>}
+            </div>
+            <div className="review-status">
+              <div><span>Próxima revisão</span><strong>{nextReviewDate || '—'}</strong></div>
+              <div><span>Intervalo atual</span><strong>{progress.interval ? `${progress.interval} dia${progress.interval > 1 ? 's' : ''}` : '—'}</strong></div>
+              <div><span>Repetições</span><strong>{progress.reps || 0}</strong></div>
+            </div>
+            <p className="muted-note">A nota abaixo ajusta o próximo intervalo. 1 = esqueci; 5 = dominei. Notas baixas encurtam; notas altas espaçam.</p>
+            <div className="review-rating">
+              {RATINGS.map(({ n, label }) => {
+                const next = adaptiveReview(progress, n);
+                return (
+                  <button key={n} className={progress.lastRating === n ? 'active' : ''} onClick={() => rateReview(n)}>
+                    <strong>{n}</strong><span>{label}</span><small>{next.interval} dia{next.interval > 1 ? 's' : ''}</small>
+                  </button>
+                );
+              })}
+            </div>
+            {progress.lastRating && <p className="muted-note">Última nota: {progress.lastRating}/5 · {progress.lastReview ? fmtDate(progress.lastReview) : ''}</p>}
+          </Card>
+
+          <Card className="method-card interleave-card">
+            <div className="method-card-head">
+              <span className="method-badge">05</span>
+              <div><span className="eyebrow">Intercalar</span><h2>Misture com outros temas</h2></div>
+              <Shuffle size={18} />
+            </div>
+            <p className="muted-note">Estudar só um bloco pode criar a ilusão de domínio. Misturar diagnósticos e condutas treina a discriminação que a prova exige.</p>
+            <div className="related-actions">
+              <Button variant="soft" onClick={() => { setTopicField(t.id, 'interleavedAt', new Date().toISOString()); navigate('/questoes/treino?modo=intercalado'); }} icon={Shuffle}>Treino intercalado</Button>
+              <Button variant="ghost" onClick={() => navigate('/questoes/simulado')} icon={Timer}>Simulado misto</Button>
+            </div>
+          </Card>
         </section>
 
         <aside>
           <Card className="side-card">
-            <span className="eyebrow">Autoavaliação</span>
+            <span className="eyebrow">Metacognição</span>
             <h3>Quanta confiança você tem?</h3>
             <div className="confidence">
               {[1,2,3,4,5].map((n) => (
                 <button key={n} className={confidence >= n ? 'on' : ''} onClick={() => { setConfidence(t, n); toast('Confiança registrada.'); }} aria-label={`Confiança ${n} de 5`}>{n}</button>
               ))}
             </div>
-            <small>{confidence ? `Registrado: ${confidence}/5` : 'Seja honesto(a). Isso calibra o planner.'}</small>
-            <Button variant="soft" size="sm" onClick={() => setReview(true)} icon={Clock3}>Agendar revisão</Button>
-            {progress.nextReview && <p className="next-review">Próxima revisão: <strong>{fmtDate(progress.nextReview, { day: '2-digit', month: 'long' })}</strong></p>}
-          </Card>
-
-          <Card className="side-card">
-            <span className="eyebrow">Fontes e apoio</span>
-            <div className="resource-list">
-              {sources.map((s) => <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="resource-row"><FileText size={15} /> {s.label} <ExternalLink size={13} /></a>)}
+            <div className="calibration-grid">
+              <div><span>Confiança</span><strong>{cal.confidence != null ? `${cal.confidence}%` : '—'}</strong></div>
+              <div><span>Acerto real</span><strong>{cal.accuracy != null ? `${cal.accuracy}%` : '—'}</strong></div>
             </div>
-            <p className="muted-note">Use diretrizes atualizadas e o manual do Ministério da Saúde como base.</p>
+            <small>{calibrationLabel(cal.gap)}</small>
+            {cal.total > 0 && <p className="muted-note">{cal.total} questão{cal.total > 1 ? 'ões' : ''} respondida{cal.total > 1 ? 's' : ''} neste tema.</p>}
           </Card>
 
           <Card className="side-card">
@@ -180,33 +305,21 @@ export default function Topico() {
             <Button variant="soft" size="sm" onClick={createDeck} icon={topicCards.length ? RefreshCw : Plus}>{topicCards.length ? 'Completar baralho' : 'Criar baralho do tema'}</Button>
             {topicCards.length > 0 && <Link to={`/pulso/flashcards?deck=${encodeURIComponent(t.title)}`} className="btn btn-ghost btn-sm"><Layers size={14} /> Revisar cartões</Link>}
           </Card>
+
           <Card className="side-card">
             <span className="eyebrow">Anotações do tema</span>
-            <Field hint="Salvo automaticamente neste navegador.">
+            <Field hint="Salvo automaticamente na sua conta.">
               <textarea rows={8} value={progress.note || ''} onChange={(e) => setTopicNote(t.id, e.target.value)} placeholder="Pegadinhas, doses, critérios, links de aula…" />
             </Field>
           </Card>
 
           <Card className="side-card warm">
             <BookOpen size={18} />
-            <h3>Regra das 3 passadas</h3>
-            <p>Teoria no dia 1, questões no dia 2, erro corrigido no dia 7. A revisão não é reler: é tentar lembrar sem olhar.</p>
+            <h3>Recuperação &gt; releitura</h3>
+            <p>Se você só releu, ainda não testou a memória. Feche o resumo, escreva o que lembra e só depois confira. O esforço de lembrar é o que consolida.</p>
           </Card>
         </aside>
       </div>
-
-      <Modal open={review} onClose={() => setReview(false)} title="Como foi sua recuperação?">
-        <p>A nota define o intervalo da próxima revisão. Use a memória sem consultar o resumo.</p>
-        <div className="recall-grid">
-          {[
-            [1, 'Esqueci', 'amanhã'], [2, 'Difícil', '3 dias'], [3, 'Ok', '7 dias'], [4, 'Bem', '15 dias'], [5, 'Dominei', '30 dias'],
-          ].map(([n, label, interval]) => (
-            <button key={n} onClick={() => { scheduleReview(t, [1,3,7,15,30][n - 1]); setConfidence(t, n); setReview(false); toast(`Revisão agendada para ${interval}.`); }}>
-              <strong>{n}</strong><span>{label}</span><small>{interval}</small>
-            </button>
-          ))}
-        </div>
-      </Modal>
     </>
   );
 }
