@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "deck": "ENARE · Lacunas",
+  "cards": [
+    {
+      "id": "cloze-sca-reperfusao",
+      "area": "clinica",
+      "topicId": "cm-cardio-sca",
+      "text": "Na SCA com supradesnivelamento do segmento ST, a angioplastia primária deve ser feita em até {{90 minutos}} do diagnóstico."
+    },
+    {
+      "id": "cloze-has-dm",
+      "area": "clinica",
+      "topicId": "cm-cardio-has",
+      "text": "Em pacientes com hipertensão e diabetes ou doença renal crônica, a primeira linha é {{IECA ou BRA}}."
+    },
+    {
+      "id": "cloze-ic-congestao",
+      "area": "clinica",
+      "topicId": "cm-cardio-ic",
+      "text": "Na insuficiência cardíaca descompensada com congestão, o diurético de escolha é a {{furosemida}}."
+    },
+    {
+      "id": "cloze-cad-potassio",
+      "area": "clinica",
+      "topicId": "cm-endo-dm",
+      "text": "Na cetoacidose diabética, a insulina só é iniciada com potássio acima de {{3,3 mEq/L}}."
+    },
+    {
+      "id": "cloze-ehh-glicemia",
+      "area": "clinica",
+      "topicId": "cm-endo-dm",
+      "text": "O estado hiperosmolar hiperglicêmico costuma ter glicemia acima de {{600 mg/dL}}."
+    },
+    {
+      "id": "cloze-sepse-antibiotico",
+      "area": "clinica",
+      "topicId": "cm-infecto-sepse",
+      "text": "No choque séptico, o antibiótico de amplo espectro deve ser iniciado na {{primeira hora}}."
+    },
+    {
+      "id": "cloze-tb-aerossois",
+      "area": "clinica",
+      "topicId": "cm-infecto-tb",
+      "text": "A transmissão da tuberculose pulmonar ocorre por {{aerossóis}}."
+    },
+    {
+      "id": "cloze-dengue-alarme",
+      "area": "clinica",
+      "topicId": "cm-infecto-arboviro",
+      "text": "Na dengue com sinais de alarme, a hidratação deve ser {{venosa}}."
+    },
+    {
+      "id": "cloze-asma-saba",
+      "area": "clinica",
+      "topicId": "cm-pneumo",
+      "text": "Na crise de asma, o broncodilatador de alívio é o {{beta-2 agonista de curta ação}}."
+    },
+    {
+      "id": "cloze-pac-idoso",
+      "area": "clinica",
+      "topicId": "cm-pneumo",
+      "text": "No idoso, a pneumonia pode se apresentar sem {{febre}}."
+    },
+    {
+      "id": "cloze-pancreatite-lipase",
+      "area": "clinica",
+      "topicId": "cm-gastro",
+      "text": "Na pancreatite aguda, a lipase costuma estar acima de {{3 vezes o limite superior}}."
+    },
+    {
+      "id": "cloze-hda-varizes",
+      "area": "clinica",
+      "topicId": "cm-gastro",
+      "text": "Na hemorragia digestiva alta por varizes, a droga vasoativa de escolha é a {{terlipressina}}."
+    },
+    {
+      "id": "cloze-hipercalemia-ecg",
+      "area": "clinica",
+      "topicId": "cm-nefro",
+      "text": "Na hipercalemia com alterações no ECG, a primeira medida é {{gluconato de cálcio}}."
+    },
+    {
+      "id": "cloze-avc-trombolise",
+      "area": "clinica",
+      "topicId": "cm-neuro",
+      "text": "A trombólise no AVC isquêmico pode ser feita até {{4,5 horas}} do início dos sintomas."
+    },
+    {
+      "id": "cloze-meningite-ceftriaxona",
+      "area": "clinica",
+      "topicId": "cm-neuro",
+      "text": "Na meningite bacteriana do adulto, a antibioticoterapia empírica inclui {{ceftriaxona}}."
+    },
+    {
+      "id": "cloze-pre-eclampsia-magnesio",
+      "area": "go",
+      "topicId": "go-hipertensivas",
+      "text": "Na pré-eclâmpsia grave, o sulfato de magnésio é usado para prevenir {{convulsões}}."
+    },
+    {
+      "id": "cloze-placenta-previa",
+      "area": "go",
+      "topicId": "go-hemorragias",
+      "text": "A placenta prévia costuma causar sangramento vaginal {{indolor}}."
+    },
+    {
+      "id": "cloze-hpp-massagem",
+      "area": "go",
+      "topicId": "go-parto",
+      "text": "Na hemorragia pós-parto, a primeira medida é a {{massagem uterina}}."
+    },
+    {
+      "id": "cloze-rn-31",
+      "area": "pediatria",
+      "topicId": "ped-neonatal",
+      "text": "Na reanimação neonatal, a relação compressão/ventilação é {{3:1}}."
+    },
+    {
+      "id": "cloze-apendicite-migracao",
+      "area": "cirurgia",
+      "topicId": "cir-abdome-agudo",
+      "text": "Na apendicite aguda, a dor migra do mesogástrio para a {{fossa ilíaca direita}}."
+    },
+    {
+      "id": "cloze-queimadura-parkland",
+      "area": "cirurgia",
+      "topicId": "cir-queimados",
+      "text": "A reposição volêmica inicial do queimado segue a fórmula de {{Parkland}}."
+    },
+    {
+      "id": "cloze-trauma-a",
+      "area": "cirurgia",
+      "topicId": "cir-trauma-atls",
+      "text": "No atendimento ao trauma, a letra A do ABCDE significa {{via aérea com proteção cervical}}."
+    },
+    {
+      "id": "cloze-sus-aps",
+      "area": "sc",
+      "topicId": "prev-sus",
+      "text": "A porta de entrada preferencial do SUS é a {{atenção primária}}."
+    },
+    {
+      "id": "cloze-depressao-isrs",
+      "area": "sm",
+      "topicId": "sm-depressao",
+      "text": "A primeira linha farmacológica na depressão maior é {{ISRS}}."
+    },
+    {
+      "id": "cloze-delirium-causa",
+      "area": "sm",
+      "topicId": "sm-demencia",
+      "text": "No delirium, a primeira conduta é tratar a {{causa de base}}."
+    },
+    {
+      "id": "cloze-tiamina-glicose",
+      "area": "sm",
+      "topicId": "sm-substancias",
+      "text": "Na intoxicação alcoólica, a tiamina deve ser administrada antes da {{glicose}}."
+    },
+    {
+      "id": "cloze-sigilo-terceiros",
+      "area": "clinica",
+      "topicId": "cm-etica",
+      "text": "O sigilo médico pode ser quebrado quando há {{risco à vida de terceiros}}."
+    },
+    {
+      "id": "cloze-anemia-hipocromia",
+      "area": "clinica",
+      "topicId": "cm-hemato",
+      "text": "Na anemia ferropriva, o hemograma mostra microcitose e {{hipocromia}}."
+    },
+    {
+      "id": "cloze-ptp-corticoide",
+      "area": "clinica",
+      "topicId": "cm-hemato",
+      "text": "O tratamento inicial da púrpura trombocitopênica imune sintomática é com {{corticosteroides}}."
+    },
+    {
+      "id": "cloze-dm-hba1c",
+      "area": "clinica",
+      "topicId": "cm-endo-dm",
+      "text": "O diagnóstico de diabetes pode ser feito com HbA1c maior ou igual a {{6,5%}}."
+    }
+  ]
+}
