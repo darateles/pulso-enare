@@ -11,7 +11,8 @@ Plataforma com login individual para organizar a preparação ao ENARE com foco 
 - **Mapa do edital** com 7 áreas ENAMED, 90 subtópicos agrupados por especialidade e orientação de estudo por tema.
 - **Guia de estudo + checklist de 7 etapas por subtópico**, com sequência, perguntas-guia, pegadinhas, fontes e baralho de flashcards do tema.
 - **Minha conta** concentra perfil, progresso, metas, rotina do planner, ajustes, backup e suporte. O planner apenas exibe o cronograma.
-- **Navegação superior** em quatro seções: Início, Conteúdos, Ferramentas de IA e Minha conta. A aba Conteúdos lista todos os temas do nível atual, agrupados por área e especialidade.
+- **Navegação superior:** Início, Conteúdos, Treino, Flashcards, Mapas mentais, Ferramentas de IA e Minha conta. A aba Conteúdos lista todos os temas do nível atual, agrupados por área e especialidade.
+- **Importação por arquivo:** PDF/TXT de questões na aba Treino e Anki/CSV/TXT/JSON de flashcards na aba Flashcards.
 - **Planner em ciclos** de 8 semanas: codificação de um tema, recuperação no próximo dia de estudo e revisões espaçadas nos intervalos seguintes, com simulados intercalados.
 - **Banco com 300 questões oficiais** do ENARE 2022, 2023 e 2024, com gabarito oficial, comentário e fonte.
 - **Importador** de provas por URL/PDF ou texto colado, com extração de gabarito e deduplicação.

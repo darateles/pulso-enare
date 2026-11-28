@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CalendarDays, GraduationCap, Layers, Library, ListChecks, RefreshCw } from 'lucide-react';
+import { ArrowRight, CalendarDays, GraduationCap, Layers, Library, ListChecks, Network, RefreshCw } from 'lucide-react';
 import { Card, Chip, PageHead, Progress } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
 import { dueReviews, groupBy, topicProgress } from '../utils.js';
@@ -18,6 +18,7 @@ export default function ConteudosHub() {
     { to: '/planner', icon: CalendarDays, label: 'Planner' },
     { to: '/questoes', icon: Library, label: 'Questões' },
     { to: '/flashcards', icon: Layers, label: 'Flashcards' },
+    { to: '/mapas', icon: Network, label: 'Mapas mentais' },
     { to: '/conteudos/mapa?status=revisao', icon: RefreshCw, label: `Revisões${due.length ? ` (${due.length})` : ''}` },
     { to: '/conteudos/mapa', icon: ListChecks, label: 'Mapa completo' },
   ];

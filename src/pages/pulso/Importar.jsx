@@ -30,6 +30,7 @@ export default function Importar() {
   const [paste, setPaste] = useState('');
   const [manual, setManual] = useState({ front: '', back: '', deck: 'Meu deck' });
   const fileRef = useRef(null);
+  const textFileRef = useRef(null);
 
   const readAnki = async (file) => {
     if (!file) return;
@@ -47,6 +48,38 @@ export default function Importar() {
     if (!cards.length) { setError('Formato não reconhecido. Use front + TAB + verso por linha.'); return; }
     setPreview(cards.map((c) => ({ ...c, deck: deck || 'Importado' })));
     setError('');
+  };
+
+  const readTextFile = async (selected) => {
+    if (!selected) return;
+    setError('');
+    setPreview([]);
+    try {
+      const content = await selected.text();
+      if (/\.json$/i.test(selected.name)) {
+        const parsed = JSON.parse(content);
+        const list = Array.isArray(parsed) ? parsed : (parsed.cards || parsed.flashcards || []);
+        const cards = list
+          .map((card) => ({
+            front: card.front || card.frente || '',
+            back: card.back || card.verso || '',
+            tags: card.tags || [],
+            deck: card.deck || deck || 'Importado',
+          }))
+          .filter((card) => card.front && card.back);
+        if (!cards.length) throw new Error('O JSON não contém cartões com frente e verso.');
+        setPreview(cards);
+        toast(`${cards.length} cartões lidos. Revise antes de importar.`);
+      } else {
+        setPaste(content);
+        const cards = parseDelimited(content);
+        if (!cards.length) throw new Error('Formato não reconhecido. Use frente + TAB + verso por linha.');
+        setPreview(cards.map((card) => ({ ...card, deck: deck || 'Importado' })));
+        toast(`${cards.length} cartões lidos. Revise antes de importar.`);
+      }
+    } catch (err) { setError(err.message); } finally {
+      if (textFileRef.current) textFileRef.current.value = '';
+    }
   };
 
   const importAll = () => {
@@ -79,8 +112,13 @@ export default function Importar() {
       )}
       {tab === 'texto' && (
         <Card className="import-form">
-          <div className="import-form-note"><Table2 size={18} /><p>Cole uma linha por cartão, separando frente e verso por TAB, ponto e vírgula ou vírgula. Opcional: terceira coluna de tags.</p></div>
+          <div className="import-form-note"><Table2 size={18} /><p>Envie CSV, TXT ou JSON, ou cole uma linha por cartão separando frente e verso por TAB, ponto e vírgula ou vírgula. Opcional: terceira coluna de tags.</p></div>
           <Field label="Deck"><input value={deck} onChange={(e) => setDeck(e.target.value)} /></Field>
+          <input ref={textFileRef} type="file" accept=".csv,.txt,.json,text/csv,text/plain,application/json" hidden onChange={(e) => readTextFile(e.target.files?.[0])} />
+          <div className="file-picker">
+            <Button variant="soft" onClick={() => textFileRef.current?.click()} icon={FileUp}>Selecionar CSV/TXT/JSON</Button>
+            <span>ou cole o conteúdo abaixo</span>
+          </div>
           <Field label="Conteúdo"><textarea rows={12} value={paste} onChange={(e) => setPaste(e.target.value)} placeholder={`Pergunta\tResposta\nOutra pergunta;Outra resposta`} /></Field>
           <Button onClick={readText} icon={Layers}>Pré-visualizar</Button>
         </Card>

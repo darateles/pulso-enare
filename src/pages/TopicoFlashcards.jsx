@@ -54,6 +54,7 @@ export default function TopicoFlashcards() {
               <Layers size={14} /> Revisar no modo flashcards
             </Link>
           )}
+          <Link to="/pulso/import" className="btn btn-ghost btn-sm">Importar do Anki</Link>
         </div>
       </Card>
 

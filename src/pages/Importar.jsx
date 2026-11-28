@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ArrowLeft, Bot, CheckCircle2, ClipboardPaste, Download, ExternalLink, FileUp, Info,
@@ -9,6 +9,7 @@ import { Button, Card, Chip, Field, InlineError, PageHead, Segmented, Spinner } 
 import { useStore } from '../store.jsx';
 
 const TABS = [
+  { value: 'arquivo', label: 'Arquivo' },
   { value: 'oficiais', label: 'Fontes oficiais' },
   { value: 'url', label: 'Por URL' },
   { value: 'colar', label: 'Colar texto' },
@@ -18,13 +19,16 @@ const TABS = [
 export default function Importar() {
   const { sources, curriculum, questions, refreshData, toast } = useStore();
   const navigate = useNavigate();
-  const [tab, setTab] = useState('oficiais');
+  const [tab, setTab] = useState('arquivo');
   const [busy, setBusy] = useState('');
   const [error, setError] = useState('');
   const [urlForm, setUrlForm] = useState({ url: '', answerUrl: '', answerType: '1', areaId: '', institution: '', year: '' });
   const [paste, setPaste] = useState({ text: '', answerText: '', areaId: '', institution: '' });
   const [ai, setAi] = useState({ area: 'clinica', topicId: '' });
   const [generated, setGenerated] = useState(null);
+  const [file, setFile] = useState(null);
+  const [fileForm, setFileForm] = useState({ areaId: '', institution: '', year: '', answerText: '' });
+  const fileRef = useRef(null);
 
   const runSource = async (id) => {
     setBusy(id);
@@ -33,6 +37,30 @@ export default function Importar() {
       const res = await api.importSource(id);
       await refreshData();
       toast(`${res.found} questões lidas, ${res.added} novas adicionadas.`);
+    } catch (e) { setError(e.message); } finally { setBusy(''); }
+  };
+
+  const runFile = async () => {
+    if (!file) { setError('Selecione um arquivo PDF ou TXT.'); return; }
+    setBusy('file');
+    setError('');
+    try {
+      const data = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result).split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+      const res = await api.importFile({
+        name: file.name,
+        data,
+        ...fileForm,
+        areaId: fileForm.areaId || undefined,
+      });
+      await refreshData();
+      toast(`${res.found} questões lidas, ${res.added} novas adicionadas.`);
+      setFile(null);
+      if (fileRef.current) fileRef.current.value = '';
     } catch (e) { setError(e.message); } finally { setBusy(''); }
   };
 
@@ -85,6 +113,33 @@ export default function Importar() {
 
       <Card className="import-tabs"><Segmented options={TABS} value={tab} onChange={setTab} label="Forma de importação" /></Card>
       <InlineError>{error}</InlineError>
+
+      {tab === 'arquivo' && (
+        <Card className="import-form">
+          <div className="import-form-note"><FileUp size={18} /><p>PDF com texto selecionável ou TXT. O arquivo é lido no servidor e não fica armazenado.</p></div>
+          <input
+            ref={fileRef}
+            type="file"
+            accept=".pdf,.txt,application/pdf,text/plain"
+            hidden
+            onChange={(e) => setFile(e.target.files?.[0] || null)}
+          />
+          <div className="file-picker">
+            <Button onClick={() => fileRef.current?.click()} icon={FileUp}>Selecionar arquivo</Button>
+            <span>{file ? `${file.name} · ${(file.size / 1024 / 1024).toFixed(1)} MB` : 'Nenhum arquivo selecionado'}</span>
+          </div>
+          <div className="form-3">
+            <Field label="Área" hint="Obrigatória se o arquivo não tiver o cabeçalho da área."><select value={fileForm.areaId} onChange={(e) => setFileForm({ ...fileForm, areaId: e.target.value })}><option value="">Detectar pelo cabeçalho</option>{curriculum.areas.map((a) => <option key={a.id} value={a.id}>{a.name}</option>)}</select></Field>
+            <Field label="Instituição"><input placeholder="Ex.: ENARE / FGV" value={fileForm.institution} onChange={(e) => setFileForm({ ...fileForm, institution: e.target.value })} /></Field>
+            <Field label="Ano"><input type="number" placeholder="2024" value={fileForm.year} onChange={(e) => setFileForm({ ...fileForm, year: e.target.value })} /></Field>
+          </div>
+          <Field label="Gabarito (opcional)" hint="Cole o gabarito ou envie depois em “Colar texto”.">
+            <textarea rows={3} value={fileForm.answerText} onChange={(e) => setFileForm({ ...fileForm, answerText: e.target.value })} placeholder="1 C, 2 A, 3 E…" />
+          </Field>
+          <Button onClick={runFile} disabled={Boolean(busy)} icon={Download}>{busy === 'file' ? <><Spinner /> Lendo arquivo…</> : 'Importar arquivo'}</Button>
+          <p className="muted-note">Limite: 18 MB. PDFs escaneados sem texto não são reconhecidos.</p>
+        </Card>
+      )}
 
       {tab === 'oficiais' && (
         <div className="source-grid">

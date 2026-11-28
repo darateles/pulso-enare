@@ -1811,3 +1811,11 @@ code { background: var(--surface-2); border: 1px solid var(--line); border-radiu
 .account-metrics strong { font-size: .84rem; }
 .support-list { margin: 0; padding-left: 18px; display: grid; gap: 7px; font-size: .76rem; color: var(--muted); line-height: 1.5; }
 @media (max-width: 900px) { .account-grid { grid-template-columns: 1fr; } }
+.file-picker { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 4px 0 14px; }
+.file-picker span { font-size: .72rem; color: var(--muted); }
+.top-nav { overflow-x: auto; scrollbar-width: none; }
+.top-nav::-webkit-scrollbar { display: none; }
+@media (max-width: 1200px) {
+  .top-nav a { padding: 7px; font-size: .7rem; }
+  .search-trigger { flex-basis: 220px; }
+}

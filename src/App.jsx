@@ -113,6 +113,7 @@ export default function App() {
             <Route path="questoes/simulado" element={<Simulado />} />
             <Route path="questoes/importar" element={<Importar />} />
             <Route path="flashcards" element={<Flashcards />} />
+            <Route path="mapas" element={<Blocks />} />
             <Route path="desempenho" element={<Desempenho />} />
             <Route path="caderno-erros" element={<CadernoErros />} />
             <Route path="perfil" element={<Ajustes />} />

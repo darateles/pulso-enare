@@ -13,7 +13,7 @@ import {
   initStore, getUser, saveUser, getQuestions, addQuestions, backupUser, resetUser,
   getSources, listAccounts, DATA_DIR,
 } from './store.js';
-import { importFromUrl, parseQuestions, parseAnswerKey, buildQuestions, fetchText } from './importer.js';
+import { importFromFile, importFromUrl, parseQuestions, parseAnswerKey, buildQuestions, fetchText } from './importer.js';
 import { readKV, writeKV, storageMode } from './storage.js';
 import {
   createBattle, getBattle, getBattleByCode, joinBattle, addBot, startBattle, answerBattle,
@@ -266,6 +266,22 @@ app.post('/api/import/questions', async (req, res, next) => {
     });
     if (!result.questions.length) {
       return res.status(422).json({ error: 'Não encontrei questões no formato esperado. Verifique se o PDF tem texto selecionável e alternativas A–E.' });
+    }
+    const added = await addQuestions(result.questions);
+    ok(res, { found: result.questions.length, added: added.length, withoutAnswer: result.questions.filter((q) => !q.answer).length });
+  } catch (err) { next(err); }
+});
+
+app.post('/api/import/file', async (req, res, next) => {
+  try {
+    const { name, data, answerText, answerType, areaId, institution, year, exam } = req.body || {};
+    if (!data) return res.status(400).json({ error: 'Envie um arquivo PDF ou TXT.' });
+    if (areaId && !curriculum.areas.some((a) => a.id === areaId)) return res.status(400).json({ error: 'Área inválida.' });
+    const result = await importFromFile({
+      name, data, answerText, answerType, areaId, institution, year, exam, curriculum,
+    });
+    if (!result.questions.length) {
+      return res.status(422).json({ error: 'Não encontrei questões no formato esperado. Verifique o PDF (texto selecionável e alternativas A–E) ou selecione a área quando o arquivo não tiver cabeçalho.' });
     }
     const added = await addQuestions(result.questions);
     ok(res, { found: result.questions.length, added: added.length, withoutAnswer: result.questions.filter((q) => !q.answer).length });

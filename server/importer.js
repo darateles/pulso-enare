@@ -198,6 +198,37 @@ export function buildQuestions(blocks, { answerMap, areaDefault, curriculum, sou
   return out;
 }
 
+export async function importFromFile({ name, data, answerText, answerType, areaId, institution, year, exam, curriculum }) {
+  const buffer = Buffer.from(String(data || '').replace(/^data:.*;base64,/, ''), 'base64');
+  if (!buffer.length) throw new Error('Arquivo vazio.');
+  if (buffer.length > MAX_BYTES) throw new Error('Arquivo maior que 18 MB.');
+  let text;
+  if (buffer.subarray(0, 4).toString() === '%PDF' || /\.pdf$/i.test(name || '')) {
+    const result = await extractText(new Uint8Array(buffer), { mergePages: true });
+    text = Array.isArray(result.text) ? result.text.join('\n') : result.text;
+  } else {
+    text = buffer.toString('utf8');
+  }
+  if (!text || text.length < 80) throw new Error('Não consegui ler texto suficiente do arquivo. Use PDF com texto selecionável ou TXT.');
+  const detectedArea = areaId || mapAreaName(text.slice(0, 5000));
+  const answerMap = answerText ? parseAnswerKey(answerText, answerType || '1') : null;
+  const blocks = parseQuestions(text, { areaId: areaId || detectedArea });
+  const questions = buildQuestions(blocks, {
+    answerMap,
+    areaDefault: areaId || detectedArea,
+    curriculum,
+    source: {
+      institution: institution || 'Arquivo importado',
+      exam: exam || name || 'Importação por arquivo',
+      year: year ? Number(year) : null,
+      type: 'Importada',
+      url: null,
+      answerUrl: null,
+    },
+  });
+  return { questions, textLength: text.length };
+}
+
 export async function importFromUrl({ url, answerUrl, answerType, areaId, institution, year, exam, curriculum }) {
   const sourceLabel = `${institution || 'Fonte externa'}${year ? ` · ${year}` : ''}`;
   const { text } = await fetchText(url);

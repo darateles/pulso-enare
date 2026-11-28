@@ -8,6 +8,9 @@ import { normalize, initials } from '../utils.js';
 const NAV = [
   { to: '/', label: 'Início', end: true },
   { to: '/conteudos', label: 'Conteúdos' },
+  { to: '/questoes', label: 'Treino' },
+  { to: '/flashcards', label: 'Flashcards' },
+  { to: '/mapas', label: 'Mapas mentais' },
   { to: '/pulso', label: 'Ferramentas de IA' },
   { to: '/perfil', label: 'Minha conta' },
 ];

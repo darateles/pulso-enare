@@ -24,6 +24,7 @@ export const api = {
   generateQuestion: (topicId) => request('/api/ai/question', { method: 'POST', body: JSON.stringify({ topicId }) }),
   importQuestions: (payload) => request('/api/import/questions', { method: 'POST', body: JSON.stringify(payload) }),
   importText: (payload) => request('/api/import/text', { method: 'POST', body: JSON.stringify(payload) }),
+  importFile: (payload) => request('/api/import/file', { method: 'POST', body: JSON.stringify(payload) }),
   importSource: (id) => request(`/api/import/source/${id}`, { method: 'POST', body: '{}' }),
   backup: () => request('/api/backup', { method: 'POST', body: '{}' }),
   importBackup: (payload) => request('/api/import/backup', { method: 'POST', body: JSON.stringify(payload) }),
