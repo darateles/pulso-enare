@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Check, Copy, Download, GitBranch, Network, Plus, Save, Trash2, X } from 'lucide-react';
+import { ArrowLeft, Check, Copy, Download, GitBranch, GripVertical, Network, Plus, Save, Trash2, X } from 'lucide-react';
 import blocks from '../../../seed/blocks.json';
 import { Button, Card, Chip, Empty, Field, Modal, PageHead } from '../../components/ui.jsx';
 import { useStore } from '../../store.jsx';
@@ -25,7 +25,15 @@ export default function Blocks() {
 
   const addNode = () => {
     if (!map) return;
-    const n = { id: crypto.randomUUID(), text: 'Novo bloco', x: 300 + Math.random() * 140, y: 150 + Math.random() * 180, color: 'green' };
+    const width = canvas.current?.clientWidth || 860;
+    const height = canvas.current?.clientHeight || 540;
+    const n = {
+      id: crypto.randomUUID(),
+      text: 'Novo bloco',
+      x: Math.max(10, Math.round(60 + Math.random() * Math.max(1, width - 240))),
+      y: Math.max(10, Math.round(60 + Math.random() * Math.max(1, height - 140))),
+      color: 'green',
+    };
     setMap({ ...map, nodes: [...map.nodes, n] });
     setSelected(n.id);
   };
@@ -34,9 +42,10 @@ export default function Blocks() {
 
   const connectTo = (targetId) => {
     if (!selected || selected === targetId) return;
-    if (map.edges.some((e) => e.from === selected && e.to === targetId)) return;
+    if (map.edges.some((e) => e.from === selected && e.to === targetId)) { toast('Esses blocos já estão conectados.'); return; }
     setMap((m) => ({ ...m, edges: [...m.edges, { from: selected, to: targetId }] }));
-    setSelected(targetId);
+    setSelected(null);
+    toast('Conexão criada.');
   };
 
   const removeNode = (id) => {
@@ -46,9 +55,18 @@ export default function Blocks() {
 
   const saveMap = () => {
     if (!map) return;
-    const saved = { ...map, title, updatedAt: new Date().toISOString() };
+    const cleanTitle = title.trim() || 'Mapa sem título';
+    const saved = { ...map, title: cleanTitle, updatedAt: new Date().toISOString() };
     updateUser((prev) => ({ ...prev, maps: prev.maps.some((m) => m.id === map.id) ? prev.maps.map((m) => m.id === map.id ? saved : m) : [saved, ...prev.maps] }));
-    setMap(saved); setModal(false); toast('Mapa salvo.');
+    setMap(saved); setTitle(cleanTitle); setModal(false); toast('Mapa salvo.');
+  };
+
+  const deleteMap = () => {
+    if (!map || !window.confirm('Excluir este mapa? Esta ação não pode ser desfeita.')) return;
+    updateUser((prev) => ({ ...prev, maps: prev.maps.filter((m) => m.id !== map.id) }));
+    setMap(null);
+    setSelected(null);
+    toast('Mapa excluído.');
   };
 
   const exportSvg = () => {
@@ -63,16 +81,32 @@ export default function Blocks() {
   };
 
   const onPointerDown = (e, node) => {
-    if (connect) { connectTo(node.id); return; }
+    if (connect) {
+      e.stopPropagation();
+      if (!selected) {
+        setSelected(node.id);
+        toast('Origem selecionada. Clique no bloco de destino.');
+        return;
+      }
+      if (selected === node.id) { setSelected(null); return; }
+      connectTo(node.id);
+      return;
+    }
     e.currentTarget.setPointerCapture(e.pointerId);
     const p = pos(e);
     setDragging({ id: node.id, dx: p.x - node.x, dy: p.y - node.y });
     setSelected(node.id);
   };
+
   const onPointerMove = (e) => {
-    if (!dragging) return;
+    if (!dragging || !canvas.current) return;
     const p = pos(e);
-    updateNode(dragging.id, { x: Math.max(0, Math.min(700, p.x - dragging.dx)), y: Math.max(0, Math.min(460, p.y - dragging.dy)) });
+    const maxX = Math.max(0, canvas.current.clientWidth - 160);
+    const maxY = Math.max(0, canvas.current.clientHeight - 60);
+    updateNode(dragging.id, {
+      x: Math.max(0, Math.min(maxX, p.x - dragging.dx)),
+      y: Math.max(0, Math.min(maxY, p.y - dragging.dy)),
+    });
   };
 
   if (!map) {
@@ -98,25 +132,41 @@ export default function Blocks() {
           <Button size="sm" variant={connect ? 'solid' : 'ghost'} onClick={() => setConnect((c) => !c)} icon={GitBranch}>{connect ? 'Conectando…' : 'Conectar'}</Button>
           <Button size="sm" variant="ghost" onClick={addNode} icon={Plus}>Bloco</Button>
           <Button size="sm" variant="ghost" onClick={exportSvg} icon={Download}>SVG</Button>
+          <Button size="sm" variant="ghost" onClick={deleteMap} icon={Trash2}>Excluir</Button>
           <Button size="sm" onClick={() => setModal(true)} icon={Save}>Salvar</Button>
         </div>
       </div>
-      <div className="blocks-canvas" ref={canvas} onPointerMove={onPointerMove} onPointerUp={() => setDragging(null)}>
-        <svg className="blocks-edges">
-          {map.edges.map((e, i) => {
-            const a = map.nodes.find((n) => n.id === e.from); const b = map.nodes.find((n) => n.id === e.to);
-            if (!a || !b) return null;
-            return <line key={i} x1={a.x + 70} y1={a.y + 30} x2={b.x + 70} y2={b.y + 30} />;
-          })}
-        </svg>
-        {map.nodes.map((n) => (
-          <div key={n.id} className={`block-node ${selected === n.id ? 'selected' : ''} ${connect && selected === n.id ? 'connecting' : ''}`} style={{ left: n.x, top: n.y }} onPointerDown={(e) => onPointerDown(e, n)}>
-            <textarea value={n.text} onPointerDown={(e) => e.stopPropagation()} onChange={(e) => updateNode(n.id, { text: e.target.value })} />
-            <button className="block-del" onClick={(e) => { e.stopPropagation(); removeNode(n.id); }}><X size={12} /></button>
-          </div>
-        ))}
+      <div className="blocks-canvas-wrap">
+        <div
+          className="blocks-canvas"
+          ref={canvas}
+          onPointerDown={(e) => { if (e.target === e.currentTarget) setSelected(null); }}
+          onPointerMove={onPointerMove}
+          onPointerUp={() => setDragging(null)}
+          onPointerCancel={() => setDragging(null)}
+        >
+          <svg className="blocks-edges">
+            {map.edges.map((e, i) => {
+              const a = map.nodes.find((n) => n.id === e.from); const b = map.nodes.find((n) => n.id === e.to);
+              if (!a || !b) return null;
+              return <line key={i} x1={a.x + 70} y1={a.y + 30} x2={b.x + 70} y2={b.y + 30} />;
+            })}
+          </svg>
+          {map.nodes.map((n) => (
+            <div key={n.id} className={`block-node ${selected === n.id ? 'selected' : ''} ${connect && selected === n.id ? 'connecting' : ''}`} style={{ left: n.x, top: n.y }} onPointerDown={(e) => onPointerDown(e, n)}>
+              <button type="button" className="block-drag" onPointerDown={(e) => { e.stopPropagation(); onPointerDown(e, n); }} aria-label="Mover bloco"><GripVertical size={12} /></button>
+              <textarea
+                value={n.text}
+                style={connect ? { pointerEvents: 'none' } : undefined}
+                onPointerDown={(e) => e.stopPropagation()}
+                onChange={(e) => updateNode(n.id, { text: e.target.value })}
+              />
+              <button className="block-del" onPointerDown={(e) => e.stopPropagation()} onClick={(e) => { e.stopPropagation(); removeNode(n.id); }} aria-label="Excluir bloco"><X size={12} /></button>
+            </div>
+          ))}
+        </div>
       </div>
-      <p className="blocks-hint">{connect ? 'Selecione a origem e clique no destino para criar uma conexão.' : 'Arraste os blocos. Clique para editar. Use Conectar para ligar ideias.'}</p>
+      <p className="blocks-hint">{connect ? 'Clique na origem e depois no destino. Em telas pequenas, deslize o quadro para navegar.' : 'Arraste os blocos. Clique para editar. Use Conectar para ligar ideias. Em telas pequenas, deslize o quadro.'}</p>
       <Modal open={modal} onClose={() => setModal(false)} title="Salvar mapa">
         <Field label="Título do mapa"><input value={title} onChange={(e) => setTitle(e.target.value)} /></Field>
         <div className="modal-actions"><Button variant="ghost" onClick={() => setModal(false)}>Cancelar</Button><Button onClick={saveMap} icon={Check}>Salvar</Button></div>
