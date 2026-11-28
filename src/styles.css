@@ -1912,3 +1912,15 @@ body { touch-action: pan-x pan-y; }
   .blocks-inspector { display: none; }
   .format-popup { padding: 14px; }
 }
+
+/* Cloze deletion */
+.cloze-blank { display: inline-block; min-width: 62px; padding: 0 4px; border-bottom: 2px solid var(--accent); color: var(--muted); font-weight: 800; text-align: center; }
+.cloze-answer { background: var(--accent-wash); color: var(--accent); font-weight: 800; padding: 0 4px; border-radius: 3px; }
+.cloze-context { color: var(--ink-2); }
+.cloze-hint { font-size: .74rem; color: var(--muted); margin: 8px 0 12px; }
+.cloze-preview-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 10px 0 18px; }
+.cloze-preview-card { padding: 14px; }
+.cloze-preview-card small { color: var(--muted); font-size: .6rem; text-transform: uppercase; letter-spacing: .06em; font-weight: 800; }
+.cloze-preview-card p { font-size: .84rem; line-height: 1.5; margin: 8px 0 0; }
+.cloze-preview-answer { color: var(--muted); border-top: 1px solid var(--line); padding-top: 6px; }
+@media (max-width: 700px) { .cloze-preview-grid { grid-template-columns: 1fr; } }

@@ -1,8 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle2, FileUp, Image as ImageIcon, Layers, Plus, Table2, X } from 'lucide-react';
 import { api } from '../../api.js';
 import { Button, Card, Chip, Field, InlineError, PageHead, Segmented, Spinner } from '../../components/ui.jsx';
+import ClozeText from '../../components/ClozeText.jsx';
+import { buildClozeCards, parseCloze } from '../../cloze.js';
 import { useStore } from '../../store.jsx';
 
 function parseDelimited(text) {
@@ -30,9 +32,13 @@ export default function Importar() {
   const [paste, setPaste] = useState('');
   const [manual, setManual] = useState({ front: '', back: '', deck: 'Meu deck' });
   const [manualImage, setManualImage] = useState(null);
+  const [clozeText, setClozeText] = useState('');
+  const [clozeDeck, setClozeDeck] = useState('Cloze');
   const fileRef = useRef(null);
   const textFileRef = useRef(null);
   const imageRef = useRef(null);
+  const clozeRef = useRef(null);
+  const clozeParsed = useMemo(() => parseCloze(clozeText), [clozeText]);
 
   const readAnki = async (file) => {
     if (!file) return;
@@ -123,6 +129,31 @@ export default function Importar() {
     }
   };
 
+  const wrapCloze = () => {
+    const element = clozeRef.current;
+    const start = element?.selectionStart ?? 0;
+    const end = element?.selectionEnd ?? 0;
+    if (start === end) { setError('Selecione a palavra ou trecho que deseja ocultar.'); return; }
+    const selected = clozeText.slice(start, end);
+    if (!selected.trim()) { setError('Selecione um trecho com texto.'); return; }
+    const insertion = `{{${selected}}}`;
+    setClozeText(`${clozeText.slice(0, start)}${insertion}${clozeText.slice(end)}`);
+    setError('');
+    requestAnimationFrame(() => {
+      element?.focus();
+      element?.setSelectionRange(start + insertion.length, start + insertion.length);
+    });
+  };
+
+  const createClozeCards = () => {
+    const cards = buildClozeCards({ text: clozeText, deck: clozeDeck.trim() || 'Cloze', tags: [] });
+    if (!cards.length) { setError('Adicione ao menos uma lacuna usando {{palavra}}.'); return; }
+    updateUser((prev) => ({ ...prev, flashcards: [...cards, ...prev.flashcards] }));
+    toast(`${cards.length} cartões cloze criados.`);
+    setClozeText('');
+    setError('');
+  };
+
   const addManual = () => {
     const front = manual.front.trim();
     const back = manual.back.trim();
@@ -148,7 +179,7 @@ export default function Importar() {
   return (
     <>
       <PageHead eyebrow="Pulso Import" title="Importar flashcards" subtitle="Importe flashcards do Anki, CSV ou texto e mantenha a revisão espaçada no Pulso. Cartões ficam no seu deck local." actions={<Link to="/pulso/flashcards" className="btn btn-ghost">Revisar flashcards</Link>} />
-      <Card className="import-tabs"><Segmented options={[{ value: 'anki', label: 'Anki (.apkg)' }, { value: 'texto', label: 'CSV / TXT' }, { value: 'manual', label: 'Criar cartão' }]} value={tab} onChange={(v) => { setTab(v); setPreview([]); setError(''); }} label="Modo" /></Card>
+      <Card className="import-tabs"><Segmented options={[{ value: 'anki', label: 'Anki (.apkg)' }, { value: 'cloze', label: 'Lacunas (cloze)' }, { value: 'texto', label: 'CSV / TXT' }, { value: 'manual', label: 'Criar cartão' }]} value={tab} onChange={(v) => { setTab(v); setPreview([]); setError(''); }} label="Modo" /></Card>
       {tab === 'anki' && (
         <Card className="import-form">
           <div className="import-form-note"><FileUp size={18} /><p>Exporte o deck no Anki como <strong>.apkg</strong> e envie abaixo. O primeiro campo vira frente e o segundo, verso. O arquivo é processado localmente no servidor e não é armazenado.</p></div>
@@ -158,6 +189,44 @@ export default function Importar() {
           <p className="muted-note">Limite de 5.000 cartões por importação. Mídias não são copiadas.</p>
         </Card>
       )}
+      {tab === 'cloze' && (
+        <>
+          <Card className="import-form">
+            <div className="import-form-note"><Layers size={18} /><p>Escreva a afirmação, selecione a parte que quer ocultar e clique em <strong>Ocultar seleção</strong>. Cada lacuna vira um cartão. Use <code>{'{{palavra::dica}}'}</code> para adicionar uma dica.</p></div>
+            <Field label="Deck"><input value={clozeDeck} onChange={(e) => setClozeDeck(e.target.value)} /></Field>
+            <Field label="Afirmação com lacunas">
+              <textarea
+                ref={clozeRef}
+                rows={7}
+                value={clozeText}
+                onChange={(e) => setClozeText(e.target.value)}
+                placeholder="Uma zebra é um animal com listras."
+              />
+            </Field>
+            <div className="plan-actions">
+              <Button type="button" variant="soft" onClick={wrapCloze} icon={Plus}>Ocultar seleção</Button>
+              <Button type="button" onClick={createClozeCards} icon={CheckCircle2} disabled={!clozeParsed.deletions.length}>Criar cartões cloze</Button>
+            </div>
+            <p className="muted-note">{clozeParsed.deletions.length ? `${clozeParsed.deletions.length} lacuna${clozeParsed.deletions.length > 1 ? 's' : ''} encontrada${clozeParsed.deletions.length > 1 ? 's' : ''}.` : 'Nenhuma lacuna ainda. Selecione um trecho ou digite {{palavra}}.'}</p>
+          </Card>
+
+          {clozeParsed.deletions.length > 0 && (
+            <>
+              <div className="preview-bar"><strong>{clozeParsed.deletions.length} cartões cloze</strong><span className="muted-note">Frente oculta · verso completo</span></div>
+              <div className="cloze-preview-grid">
+                {clozeParsed.deletions.map((deletion) => (
+                  <Card key={deletion.index} className="cloze-preview-card">
+                    <small>Lacuna {deletion.index}{deletion.hint ? ` · dica: ${deletion.hint}` : ''}</small>
+                    <p><ClozeText text={clozeText} index={deletion.index} /></p>
+                    <p className="cloze-preview-answer"><ClozeText text={clozeText} index={deletion.index} revealed /></p>
+                  </Card>
+                ))}
+              </div>
+            </>
+          )}
+        </>
+      )}
+
       {tab === 'texto' && (
         <Card className="import-form">
           <div className="import-form-note"><Table2 size={18} /><p>Envie CSV, TXT ou JSON, ou cole uma linha por cartão separando frente e verso por TAB, ponto e vírgula ou vírgula. Opcional: terceira coluna de tags.</p></div>

@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { CheckCircle2, Eye, Image as ImageIcon, Layers, Sparkles, ThumbsDown, ThumbsUp } from 'lucide-react';
 import { Button, Card, Chip, Empty, PageHead, Segmented } from '../../components/ui.jsx';
+import ClozeText from '../../components/ClozeText.jsx';
 import { useStore } from '../../store.jsx';
 import { addDays, iso } from '../../utils.js';
 import atlas from '../../../seed/atlas.json';
@@ -71,13 +72,20 @@ export default function Flashcards() {
         <Card className="flash-start"><Layers size={26} /><h2>{due.length} cartões para revisar</h2><p>Sessão curta. Revele apenas depois de tentar lembrar.</p><Button onClick={startSession} disabled={!due.length}>Iniciar revisão</Button></Card>
       ) : card ? (
         <Card className="flash-card">
-          <div className="battle-top"><Chip tone="soft">{card.deck}</Chip><span>{i + 1} / {queue.length}</span><button className="text-link" onClick={() => setSession(false)}>pausar</button></div>
-          {card.image && <img className="flash-image" src={card.image} alt={card.imageAlt || card.front || 'Imagem do flashcard'} />}
-          <div className="flash-front">{card.front}</div>
+          <div className="battle-top"><Chip tone="soft">{card.deck}</Chip>{card.clozeText && <Chip tone="accent">lacuna</Chip>}<span>{i + 1} / {queue.length}</span><button className="text-link" onClick={() => setSession(false)}>pausar</button></div>
+          {!revealed && (
+            card.clozeText
+              ? <div className="flash-front cloze-front"><ClozeText text={card.clozeText} index={card.clozeIndex} /></div>
+              : <>
+                  {card.image && <img className="flash-image" src={card.image} alt={card.imageAlt || card.front || 'Imagem do flashcard'} />}
+                  <div className="flash-front">{card.front}</div>
+                </>
+          )}
+          {!revealed && card.clozeHint && <p className="cloze-hint">Dica: {card.clozeHint}</p>}
           {!revealed ? <Button onClick={() => setRevealed(true)} icon={Eye}>Mostrar verso</Button> : (
             <>
               {card.imageBack && <img className="flash-image" src={card.imageBack} alt={card.back || 'Imagem do verso'} />}
-              <div className="flash-back">{card.back}</div>
+              <div className="flash-back">{card.clozeText ? <ClozeText text={card.clozeText} index={card.clozeIndex} revealed /> : card.back}</div>
               <div className="recall-grade"><span>Como foi?</span><Button variant="soft" onClick={() => grade(1)} icon={ThumbsDown}>Errei</Button><Button variant="ghost" onClick={() => grade(2)}>Difícil</Button><Button variant="ghost" onClick={() => grade(3)}>Bom</Button><Button onClick={() => grade(4)} icon={ThumbsUp}>Fácil</Button></div>
             </>
           )}
