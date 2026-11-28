@@ -1,15 +1,19 @@
 import React from 'react';
-import { Link, useOutletContext } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ArrowRight, NotebookPen } from 'lucide-react';
 import { Card, Field } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
+import { useTopic } from '../useTopic.js';
+import TopicPageShell from '../components/TopicPageShell.jsx';
 
 export default function TopicoNotas() {
-  const { t, progress } = useOutletContext();
+  const data = useTopic();
   const { setTopicNote } = useStore();
+  if (!data.found) return <Card><p>Tema não encontrado. <Link to="/trilha">Voltar à trilha.</Link></p></Card>;
+  const { t, progress } = data;
 
   return (
-    <div className="topic-content-single">
+    <TopicPageShell data={data} eyebrow="Elaboração" title="Anotações do tema" subtitle={t.title}>
       <Card>
         <div className="section-head small">
           <div><span className="eyebrow">Elaboração</span><h2>Anotações do tema</h2></div>
@@ -30,6 +34,6 @@ export default function TopicoNotas() {
         <Link to={`/conteudos/${t.id}/revisao`} className="btn btn-soft">Ir para a revisão <ArrowRight size={15} /></Link>
         <Link to={`/conteudos/${t.id}`} className="btn btn-ghost">Voltar ao conteúdo</Link>
       </div>
-    </div>
+    </TopicPageShell>
   );
 }

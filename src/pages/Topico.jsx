@@ -1,47 +1,18 @@
-import React, { useMemo } from 'react';
-import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
-import { ArrowLeft, BookOpen, Layers, ListChecks, NotebookPen, RefreshCw } from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import { Card, Chip, Ring } from '../components/ui.jsx';
-import { useStore } from '../store.jsx';
-import { fmtDate, topicProgress, topicStatus } from '../utils.js';
-import { topicLevel } from '../trilha.js';
-import { stageStatus, topicCalibration, topicStage, TOPIC_STAGE_LABEL } from '../metodo.js';
+import { fmtDate } from '../utils.js';
+import { useTopic } from '../useTopic.js';
+import TopicoConteudo from './TopicoConteudo.jsx';
 
 export default function Topico() {
-  const { topicId } = useParams();
-  const { user, curriculum, questions } = useStore();
-
-  const found = useMemo(() => {
-    for (const area of curriculum.areas) {
-      const topic = area.topics.find((item) => item.id === topicId);
-      if (topic) return { area, topic };
-    }
-    return null;
-  }, [curriculum, topicId]);
-
-  if (!found) {
+  const data = useTopic();
+  if (!data.found) {
     return <Card><p>Tema não encontrado. <Link to="/trilha">Voltar à trilha.</Link></p></Card>;
   }
 
-  const { area, topic: t } = found;
-  const level = topicLevel(t.id);
-  const progress = user.progress[t.id] || {};
-  const pct = topicProgress(progress, t.checklist.length);
-  const status = topicStatus(progress, t.checklist.length);
-  const currentStage = topicStage(progress, t.checklist.length);
-  const stages = stageStatus(progress, t.checklist.length);
-  const cal = topicCalibration(user.progress, user.attempts, t.id);
-  const related = questions.filter((q) => q.topicId === t.id);
-  const topicCards = user.flashcards.filter((card) => (card.tags || []).includes(t.id));
-  const guide = t.guide || {};
-
-  const tabs = [
-    { to: '', end: true, label: 'Conteúdo', icon: BookOpen },
-    { to: 'flashcards', label: 'Flashcards', icon: Layers, badge: topicCards.length || null },
-    { to: 'questoes', label: 'Questões', icon: ListChecks, badge: related.length || null },
-    { to: 'notas', label: 'Anotações', icon: NotebookPen, badge: progress.note?.trim() ? '•' : null },
-    { to: 'revisao', label: 'Revisão', icon: RefreshCw, badge: progress.nextReview ? fmtDate(progress.nextReview, { day: '2-digit', month: 'short' }) : null },
-  ];
+  const { area, t, level, pct, status, progress, topicCards, related } = data;
 
   return (
     <>
@@ -63,25 +34,14 @@ export default function Topico() {
         </Ring>
       </header>
 
-      <div className="topic-tabs-wrap">
-        <nav className="topic-tabs" aria-label="Seções do tema">
-          {tabs.map((tab) => (
-            <NavLink
-              key={tab.to || 'conteudo'}
-              to={`/conteudos/${t.id}${tab.to ? `/${tab.to}` : ''}`}
-              end={tab.end}
-              className={({ isActive }) => `topic-tab ${isActive ? 'active' : ''}`}
-            >
-              <tab.icon size={15} />
-              <span>{tab.label}</span>
-              {tab.badge != null && <span className="topic-tab-badge">{tab.badge}</span>}
-            </NavLink>
-          ))}
-        </nav>
-        <Chip tone={currentStage === 'dominado' ? 'success' : 'accent'}>{TOPIC_STAGE_LABEL[currentStage]}</Chip>
+      <div className="topic-page-shortcuts">
+        <Link to={`/conteudos/${t.id}/flashcards`} className="topic-shortcut">Flashcards <span>{topicCards.length}</span></Link>
+        <Link to={`/conteudos/${t.id}/questoes`} className="topic-shortcut">Questões <span>{related.length}</span></Link>
+        <Link to={`/conteudos/${t.id}/notas`} className="topic-shortcut">Anotações <span>{progress.note?.trim() ? '•' : '—'}</span></Link>
+        <Link to={`/conteudos/${t.id}/revisao`} className="topic-shortcut">Revisão <span>{progress.nextReview ? fmtDate(progress.nextReview, { day: '2-digit', month: 'short' }) : 'agendar'}</span></Link>
       </div>
 
-      <Outlet context={{ area, t, level, progress, pct, status, currentStage, stages, cal, related, topicCards, guide }} />
+      <TopicoConteudo data={data} />
     </>
   );
 }

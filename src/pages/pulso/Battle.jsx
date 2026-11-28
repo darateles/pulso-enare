@@ -126,7 +126,7 @@ export default function Battle() {
   if (stage === 'home') {
     return (
       <>
-        <PageHead eyebrow="Pulso Battle" title={<>Duelo de <em>questões.</em></>} subtitle="Crie uma sala, convide colegas e dispute 3 a 10 questões. O ranking é ao vivo e usa o banco oficial." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
+        <PageHead eyebrow="Pulso Battle" title="Battle" subtitle="Crie uma sala, convide colegas e dispute 3 a 10 questões. O ranking é ao vivo e usa o banco oficial." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
         <div className="battle-home">
           <Card>
             <span className="eyebrow">Criar sala</span>

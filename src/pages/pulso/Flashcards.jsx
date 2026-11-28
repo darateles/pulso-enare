@@ -37,7 +37,7 @@ export default function Flashcards() {
 
   if (!user.flashcards.length) {
     return (
-      <><PageHead eyebrow="Flashcards" title={<>Memória com <em>método.</em></>} subtitle="O acervo está vazio. Importe do Anki ou gere um deck inicial a partir dos temas de maior incidência." actions={<Link to="/pulso/import" className="btn btn-ghost">Importar</Link>} />
+      <><PageHead eyebrow="Flashcards" title="Flashcards" subtitle="Nenhum cartão ainda. Importe do Anki ou crie um deck a partir dos temas de maior incidência." actions={<Link to="/pulso/import" className="btn btn-ghost">Importar</Link>} />
         <Card><Empty icon={Layers} title="Nenhum cartão" text="Crie um deck inicial de alta prioridade ou importe seu material." action={<Button onClick={starter} icon={Sparkles}>Gerar deck inicial</Button>} /></Card>
       </>
     );
@@ -45,7 +45,7 @@ export default function Flashcards() {
 
   return (
     <>
-      <PageHead eyebrow="Flashcards" title={<>Revise antes de <em>esquecer.</em></>} subtitle="Repetição espaçada com autoavaliação. Cartões vencidos aparecem primeiro; os dominados voltam em 21 dias." actions={<Link to="/pulso/import" className="btn btn-ghost">Importar mais</Link>} />
+      <PageHead eyebrow="Flashcards" title="Flashcards" subtitle="Repetição espaçada com autoavaliação. Cartões vencidos aparecem primeiro." actions={<Link to="/pulso/import" className="btn btn-ghost">Importar mais</Link>} />
       <div className="radar-toolbar"><Segmented options={[{ value: 'todos', label: `Todos (${user.flashcards.length})` }, ...decks.map((d) => ({ value: d, label: d }))]} value={deck} onChange={(v) => { setDeck(v); setI(0); setRevealed(false); setSession(false); }} label="Deck" /><span className="filter-count">{due.length} vencidos</span></div>
       {!session ? (
         <Card className="flash-start"><Layers size={26} /><h2>{due.length} cartões para revisar</h2><p>Sessão curta. Revele apenas depois de tentar lembrar.</p><Button onClick={startSession} disabled={!due.length}>Iniciar revisão</Button></Card>

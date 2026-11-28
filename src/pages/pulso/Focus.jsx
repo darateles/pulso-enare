@@ -101,8 +101,8 @@ export default function Focus() {
     <>
       <PageHead
         eyebrow="Pulso Focus"
-        title={<>Foco com <em>começo e fim.</em></>}
-        subtitle="O timer se conecta ao planner, registra minutos e protege a pausa. Trabalhe em blocos curtos, sem vigiar o relógio."
+        title="Foco"
+        subtitle="Timer conectado ao planner."
         actions={<Link to="/planner" className="btn btn-ghost">Abrir planner</Link>}
       />
 

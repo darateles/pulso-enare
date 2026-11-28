@@ -26,7 +26,7 @@ export default function Atlas() {
 
   return (
     <>
-      <PageHead eyebrow="Pulso Atlas" title={<>Ver para <em>reconhecer.</em></>} subtitle="Anatomia, histologia e patologia com estruturas-chave e correlação clínica. Imagens de acervos abertos, com crédito e licença." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
+      <PageHead eyebrow="Pulso Atlas" title="Atlas" subtitle="Anatomia, histologia e patologia com estruturas-chave e correlação clínica. Imagens de acervos abertos, com crédito e licença." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
       <div className="radar-toolbar">
         <div className="filter-search"><Search size={17} /><input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar estrutura ou tecido" /></div>
         <Segmented options={[{ value: 'todas', label: 'Todas' }, { value: 'Anatomia', label: 'Anatomia' }, { value: 'Histologia', label: 'Histologia' }, { value: 'Patologia', label: 'Patologia' }]} value={cat} onChange={setCat} label="Categoria" />

@@ -31,7 +31,7 @@ export default function Research() {
 
   return (
     <>
-      <PageHead eyebrow="Pulso Research" title={<>Ler artigo é uma <em>competência.</em></>} subtitle="Delineamento, viés, medida de associação e relevância clínica em casos curtos. Treine para não aceitar título de abstract." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
+      <PageHead eyebrow="Pulso Research" title="Research" subtitle="Delineamento, viés, medida de associação e relevância clínica em casos curtos. Treine para não aceitar título de abstract." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
       <Card className="guideline-banner"><FlaskConical size={19} /><div><strong>Leitura crítica aplicada</strong><p>Não é aula de estatística isolada: cada caso pede uma decisão de interpretação. O comentário explica o raciocínio e os conceitos envolvidos.</p></div></Card>
       <div className="radar-toolbar">
         <div className="filter-search"><Search size={17} /><input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar conceito ou desenho" /></div>

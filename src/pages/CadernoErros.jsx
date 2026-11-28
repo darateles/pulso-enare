@@ -24,8 +24,8 @@ export default function CadernoErros() {
     <>
       <PageHead
         eyebrow="Caderno de erros"
-        title={<>Erros que viram <em>pontos.</em></>}
-        subtitle="Cada erro traz a explicação do gabarito e um espaço de anotação. Refaça, entenda a pegadinha e só então marque como revisado."
+        title="Caderno de erros"
+        subtitle="Cada erro com a explicação do gabarito e um espaço de anotação."
         actions={<Button onClick={() => toast('Caderno organizado por erro mais recente.')} variant="soft" icon={NotebookPen}>{filtered.length} {filtered.length === 1 ? 'pendente' : 'pendentes'}</Button>}
       />
 

@@ -1,12 +1,16 @@
 import React from 'react';
-import { Link, useOutletContext } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ArrowRight, Layers, Plus, RefreshCw } from 'lucide-react';
 import { Button, Card, Chip, Empty } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
+import { useTopic } from '../useTopic.js';
+import TopicPageShell from '../components/TopicPageShell.jsx';
 
 export default function TopicoFlashcards() {
-  const { t, topicCards, guide } = useOutletContext();
+  const data = useTopic();
   const { updateUser, toast } = useStore();
+  if (!data.found) return <Card><p>Tema não encontrado. <Link to="/trilha">Voltar à trilha.</Link></p></Card>;
+  const { t, topicCards, guide } = data;
 
   const createDeck = () => {
     const existing = new Set(topicCards.map((card) => card.id));
@@ -34,7 +38,7 @@ export default function TopicoFlashcards() {
   };
 
   return (
-    <div className="topic-content-single">
+    <TopicPageShell data={data} eyebrow="Recuperação ativa" title="Flashcards do tema">
       <Card>
         <div className="section-head small">
           <div><span className="eyebrow">Recuperação ativa</span><h2>Flashcards do tema</h2></div>
@@ -79,6 +83,6 @@ export default function TopicoFlashcards() {
         <Link to={`/conteudos/${t.id}/questoes`} className="btn btn-soft">Agora recupere com questões <ArrowRight size={15} /></Link>
         <Link to={`/conteudos/${t.id}`} className="btn btn-ghost">Voltar ao conteúdo</Link>
       </div>
-    </div>
+    </TopicPageShell>
   );
 }

@@ -30,7 +30,7 @@ export default function Simulado() {
   return (
     <>
       <button className="back-link" onClick={() => navigate('/questoes')}><ArrowLeft size={15} /> Banco de questões</button>
-      <PageHead eyebrow="Modo prova" title={<>Simulado <em>cronometrado.</em></>} subtitle="Sem comentários até o gabarito final. O tempo simula pressão real e ajuda a calibrar ritmo." />
+      <PageHead eyebrow="Simulado" title="Simulado" subtitle="Questões cronometradas, sem comentário até o fim." />
       <div className="simulado-grid">
         <Card>
           <span className="eyebrow">Configuração</span>

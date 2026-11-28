@@ -64,17 +64,16 @@ export default function Trilha() {
   return (
     <>
       <PageHead
-        eyebrow="Trilha de estudos · curso em níveis"
-        title={<>Do fundamento <em>ao internato.</em></>}
-        subtitle="Cada nível corresponde a um bloco de semestres. Dentro dele, você estuda matéria por matéria, tema por tema, com checklist, questões e revisão espaçada."
-        actions={<Chip tone="accent"><GraduationCap size={13} /> Nível {current.id} ativo</Chip>}
+        eyebrow="Trilha"
+        title="Trilha"
+        subtitle="5 níveis, 7 matérias e 90 temas."
+        actions={<Chip tone="accent"><GraduationCap size={13} /> Nível {current.id}</Chip>}
       />
 
       <Card className="trilha-hero" style={{ '--level-tone': current.tone }}>
         <div className="trilha-hero-copy">
-          <span className="eyebrow">Seu nível atual · {semesterLabel(user.semester)}</span>
-          <h2>Nível {current.id}: <em>{current.name}</em></h2>
-          <p>{current.description}</p>
+          <span className="eyebrow">Nível atual · {semesterLabel(user.semester)}</span>
+          <h2>Nível {current.id}: {current.name}</h2>
           <div className="trilha-hero-meta">
             <span><Layers size={14} /> {currentStats.total} temas</span>
             <span><BookOpen size={14} /> {currentStats.subjects.length} matérias</span>
@@ -124,7 +123,7 @@ export default function Trilha() {
           {selectedId === current.id ? (
             <div className="trilha-list-head">
               <span className="eyebrow">Matérias do nível</span>
-              <h2>Comece por onde parou</h2>
+              <h2>Matérias e temas</h2>
             </div>
           ) : (
             <div className="trilha-level-head">
@@ -245,18 +244,6 @@ export default function Trilha() {
             <Button variant="ghost" size="sm" onClick={() => navigate('/planner')} icon={Clock3}>Abrir planner</Button>
           </Card>
 
-          <Card className="trilha-method">
-            <span className="eyebrow">Método do curso</span>
-            <h3>Como avançar de nível</h3>
-            <ol>
-              <li><strong>Ativar.</strong> Recupere o que já sabe e transforme o tema em perguntas.</li>
-              <li><strong>Codificar.</strong> Entenda, elabore e conecte com exemplos.</li>
-              <li><strong>Recuperar.</strong> Feche o material, responda e corrija os erros.</li>
-              <li><strong>Revisar.</strong> Volte no intervalo adaptativo, não em releitura passiva.</li>
-              <li><strong>Intercalar.</strong> Misture temas em treinos e simulados.</li>
-            </ol>
-            <p className="muted-note">Um tema é dominado quando o checklist está completo e sua confiança é 4 ou 5. O nível avança quando todos os temas estiverem dominados.</p>
-          </Card>
         </aside>
       </div>
     </>

@@ -15,7 +15,7 @@ export default function Connect() {
 
   return (
     <>
-      <PageHead eyebrow="Pulso Connect" title={<>Seu plano no <em>calendário.</em></>} subtitle="Exporte as sessões como arquivo ICS, com alarme de 15 minutos. Importe no Google Calendar, Apple Calendar ou Outlook." actions={<Link to="/pulso" className="btn btn-ghost">Suíte</Link>} />
+      <PageHead eyebrow="Pulso Connect" title="Calendário" subtitle="Exporte as sessões como arquivo ICS, com alarme de 15 minutos. Importe no Google Calendar, Apple Calendar ou Outlook." actions={<Link to="/pulso" className="btn btn-ghost">Suíte</Link>} />
       <div className="connect-grid">
         <Card>
           <CalendarPlus size={28} /><h2>Planner para o calendário</h2>

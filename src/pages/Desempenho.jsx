@@ -43,9 +43,9 @@ export default function Desempenho() {
   return (
     <>
       <PageHead
-        eyebrow="Dados de estudo"
-        title={<>O que os números <em>dizem.</em></>}
-        subtitle="Sem narrativa: precisão por área, temas frágeis, constância e cobertura. Use para decidir a próxima hora."
+        eyebrow="Desempenho"
+        title="Desempenho"
+        subtitle="Precisão por área, lacunas e cobertura do edital."
         actions={<Button variant="soft" onClick={exportCsv} icon={Download}>Exportar CSV</Button>}
       />
 
@@ -123,7 +123,7 @@ export default function Desempenho() {
           <div><span>Revisões vencidas</span><strong>{due.length}</strong></div>
         </div>
         <p className="muted-note">{calibrationLabel(cal.gap)}</p>
-        {due.length > 0 && <Button variant="soft" size="sm" onClick={() => navigate('/conteudos?status=revisao')} icon={Clock3}>Abrir fila de revisão</Button>}
+        {due.length > 0 && <Button variant="soft" size="sm" onClick={() => navigate('/conteudos/mapa?status=revisao')} icon={Clock3}>Abrir fila de revisão</Button>}
       </Card>
 
       <Card>

@@ -50,7 +50,7 @@ export default function Farma() {
   if (mode === 'quiz' && qd) {
     return (
       <>
-        <PageHead eyebrow="Pulso Farma · quiz" title={<>Mecanismo → <em>droga.</em></>} subtitle={`Questão ${qi + 1} de ${quiz.length} · ${score} acertos`} actions={<Button variant="ghost" onClick={() => setMode('biblia')}>Sair do quiz</Button>} />
+        <PageHead eyebrow="Pulso Farma · quiz" title="Quiz de farmacologia" subtitle={`Questão ${qi + 1} de ${quiz.length} · ${score} acertos`} actions={<Button variant="ghost" onClick={() => setMode('biblia')}>Sair do quiz</Button>} />
         <Card className="farma-quiz">
           <span className="eyebrow">Identifique o fármaco</span>
           <p className="q-stem">{qd.d.mechanism}</p>
@@ -69,7 +69,7 @@ export default function Farma() {
 
   return (
     <>
-      <PageHead eyebrow="Pulso Farma" title={<>A droga certa, pelo <em>motivo certo.</em></>} subtitle="Farmacologia orientada a mecanismo, dose, efeitos adversos e interações. Biblioteca para consulta e quiz para recuperação." actions={<><Button variant="soft" onClick={startQuiz} icon={Sparkles}>Quiz de mecanismos</Button><Link to="/pulso" className="btn btn-ghost">Suíte</Link></>} />
+      <PageHead eyebrow="Pulso Farma" title="Farmacologia" subtitle="Farmacologia orientada a mecanismo, dose, efeitos adversos e interações. Biblioteca para consulta e quiz para recuperação." actions={<><Button variant="soft" onClick={startQuiz} icon={Sparkles}>Quiz de mecanismos</Button><Link to="/pulso" className="btn btn-ghost">Suíte</Link></>} />
       <div className="radar-toolbar">
         <div className="filter-search"><Search size={17} /><input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar fármaco, classe, efeito" /></div>
         <div className="filter-scroll"><Segmented options={[{ value: 'todas', label: 'Todas' }, ...classes.map((c) => ({ value: c, label: c }))]} value={cls} onChange={setCls} label="Classe" /></div>

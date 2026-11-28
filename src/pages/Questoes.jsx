@@ -108,9 +108,9 @@ export default function Questoes() {
   return (
     <>
       <PageHead
-        eyebrow="Banco de questões"
-        title={<>Treine o que <em>realmente cai.</em></>}
-        subtitle="300+ questões oficiais do ENARE com comentário. Filtre por área e subtópico, ou use o modo intercalado para misturar matérias."
+        eyebrow="Questões"
+        title="Questões"
+        subtitle="300+ questões oficiais do ENARE com comentário. Filtre por área ou use o modo intercalado."
         actions={<><Button variant="soft" onClick={() => navigate('/questoes/simulado')} icon={Clock3}>Simulado</Button><Button onClick={() => navigate('/questoes/importar')} icon={Import}>Importar</Button></>}
       />
 
@@ -167,7 +167,7 @@ export default function Questoes() {
             <div className="shortcut-list">
               <Link to="/caderno-erros"><span><Filter size={15} /> Caderno de erros</span><ArrowRight size={14} /></Link>
               <Link to="/questoes?status=salvas" onClick={() => { setStatus('salvas'); setPool(null); }}><span><Bookmark size={15} /> Questões salvas</span><ArrowRight size={14} /></Link>
-              <Link to="/conteudos?status=prioridade"><span><Sparkles size={15} /> Temas de alta prioridade</span><ArrowRight size={14} /></Link>
+              <Link to="/conteudos/mapa?status=prioridade"><span><Sparkles size={15} /> Temas de alta prioridade</span><ArrowRight size={14} /></Link>
             </div>
           </Card>
 

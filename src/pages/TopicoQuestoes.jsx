@@ -1,14 +1,18 @@
 import React from 'react';
-import { Link, useNavigate, useOutletContext } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, ExternalLink, ListChecks, NotebookPen, Shuffle, Target, Trophy } from 'lucide-react';
 import { Button, Card, Chip, Empty } from '../components/ui.jsx';
+import { useTopic } from '../useTopic.js';
+import TopicPageShell from '../components/TopicPageShell.jsx';
 
 export default function TopicoQuestoes() {
-  const { t, related, cal } = useOutletContext();
+  const data = useTopic();
   const navigate = useNavigate();
+  if (!data.found) return <Card><p>Tema não encontrado. <Link to="/trilha">Voltar à trilha.</Link></p></Card>;
+  const { t, related, cal } = data;
 
   return (
-    <div className="topic-content-single">
+    <TopicPageShell data={data} eyebrow="Recuperação" title="Questões do tema" subtitle={t.title}>
       <Card>
         <div className="section-head small">
           <div><span className="eyebrow">Recuperação</span><h2>Questões do tema</h2></div>
@@ -57,6 +61,6 @@ export default function TopicoQuestoes() {
         <Link to="/caderno-erros" className="btn btn-ghost"><NotebookPen size={15} /> Caderno de erros</Link>
         <Link to={`/conteudos/${t.id}`} className="btn btn-ghost">Voltar ao conteúdo</Link>
       </div>
-    </div>
+    </TopicPageShell>
   );
 }

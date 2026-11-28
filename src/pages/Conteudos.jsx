@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import {
-  ArrowRight, BookMarked, CircleCheck, Filter, GraduationCap, ListChecks, Search, Sparkles, Target,
+  ArrowLeft, ArrowRight, BookMarked, CircleCheck, Filter, ListChecks, Search, Sparkles, Target,
 } from 'lucide-react';
 import { Button, Card, Chip, Empty, PageHead, Progress, Segmented } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
@@ -56,18 +56,13 @@ export default function Conteudos() {
 
   return (
     <>
+      <Link to="/conteudos" className="back-link"><ArrowLeft size={15} /> Conteúdos</Link>
       <PageHead
         eyebrow="Mapa do edital"
-        title={<>Checklist por <em>subtópico.</em></>}
-        subtitle="Cada tema tem um roteiro de 7 etapas e peso por incidência. Progresso pessoal, não vaidade: marque apenas o que realmente dominou."
-        actions={<Button variant="soft" onClick={() => setStatusAndParams('prioridade')} icon={Target}>Só alta prioridade</Button>}
+        title="Mapa do edital"
+        subtitle="90 temas por área e especialidade. Marque apenas o que executou."
+        actions={<Button variant="soft" onClick={() => setStatusAndParams('prioridade')} icon={Target}>Alta prioridade</Button>}
       />
-
-      <Card className="content-banner">
-        <GraduationCap size={18} />
-        <p><strong>Quer seguir a ordem do curso?</strong> A trilha organiza estes mesmos temas em 5 níveis, do fundamento ao internato.</p>
-        <Link to="/trilha" className="text-link">Abrir trilha <ArrowRight size={14} /></Link>
-      </Card>
 
       <div className="area-overview">
         {curriculum.areas.map((a) => {

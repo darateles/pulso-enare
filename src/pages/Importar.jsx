@@ -78,9 +78,9 @@ export default function Importar() {
     <>
       <button className="back-link" onClick={() => navigate('/questoes')}><ArrowLeft size={15} /> Banco de questões</button>
       <PageHead
-        eyebrow="Curadoria"
-        title={<>Amplie seu <em>banco.</em></>}
-        subtitle="Use provas oficiais, uma URL pública ou cole um texto. O importador reconhece enunciados e alternativas A–E, extrai o gabarito quando disponível e evita duplicatas."
+        eyebrow="Importar"
+        title="Importar questões"
+        subtitle="Prova oficial, URL pública ou texto. O importador reconhece enunciados, alternativas A–E e gabarito."
       />
 
       <Card className="import-tabs"><Segmented options={TABS} value={tab} onChange={setTab} label="Forma de importação" /></Card>

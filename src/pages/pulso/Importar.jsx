@@ -66,7 +66,7 @@ export default function Importar() {
 
   return (
     <>
-      <PageHead eyebrow="Pulso Import" title={<>Traga seu <em>material.</em></>} subtitle="Importe flashcards do Anki, CSV ou texto e mantenha a revisão espaçada no Pulso. Cartões ficam no seu deck local." actions={<Link to="/pulso/flashcards" className="btn btn-ghost">Revisar flashcards</Link>} />
+      <PageHead eyebrow="Pulso Import" title="Importar flashcards" subtitle="Importe flashcards do Anki, CSV ou texto e mantenha a revisão espaçada no Pulso. Cartões ficam no seu deck local." actions={<Link to="/pulso/flashcards" className="btn btn-ghost">Revisar flashcards</Link>} />
       <Card className="import-tabs"><Segmented options={[{ value: 'anki', label: 'Anki (.apkg)' }, { value: 'texto', label: 'CSV / TXT' }, { value: 'manual', label: 'Criar cartão' }]} value={tab} onChange={(v) => { setTab(v); setPreview([]); setError(''); }} label="Modo" /></Card>
       {tab === 'anki' && (
         <Card className="import-form">

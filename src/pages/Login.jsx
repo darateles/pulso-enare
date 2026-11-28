@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, HeartPulse, LockKeyhole, LogIn, UserRound } from 'lucide-react';
+import { Eye, EyeOff, LockKeyhole, LogIn, UserRound } from 'lucide-react';
 import { Button, Field, InlineError, Logo } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
 
@@ -26,17 +26,10 @@ export default function Login() {
       <div className="login-art">
         <Logo />
         <div className="login-copy">
-          <span className="eyebrow light">Pulso · curso em níveis</span>
-          <h1>Sua preparação, <em>nível por nível.</em></h1>
-          <p>Uma trilha do fundamento ao internato, com planner, banco de questões e monitor de constância. Entre para retomar de onde parou.</p>
-          <div className="login-monitor">
-            <HeartPulse size={17} />
-            <span>60 bpm</span>
-            <span>PA 90/60</span>
-            <span>perfusão estável</span>
-          </div>
+          <span className="eyebrow light">Pulso</span>
+          <h1>Entrar.</h1>
+          <p>Acesse sua conta para continuar o estudo.</p>
         </div>
-        <div className="login-quote">“Planeje com clareza. Evolua com consistência.”</div>
       </div>
       <div className="login-panel">
         <form className="login-box" onSubmit={submit}>

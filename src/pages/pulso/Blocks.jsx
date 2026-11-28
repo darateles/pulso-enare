@@ -78,7 +78,7 @@ export default function Blocks() {
   if (!map) {
     return (
       <>
-        <PageHead eyebrow="Pulso Blocks" title={<>Conecte ideias, não <em>decoreba.</em></>} subtitle="Mapas mentais editáveis para fisiopatologia, diagnóstico diferencial e conduta. Comece de um modelo ou de uma tela em branco." actions={<Button onClick={() => start()} icon={Plus}>Novo mapa</Button>} />
+        <PageHead eyebrow="Pulso Blocks" title="Mapas mentais" subtitle="Mapas mentais editáveis para fisiopatologia, diagnóstico diferencial e conduta. Comece de um modelo ou de uma tela em branco." actions={<Button onClick={() => start()} icon={Plus}>Novo mapa</Button>} />
         <h3>Modelos prontos</h3>
         <div className="blocks-grid">
           {blocks.templates.map((t) => <Card key={t.id} className="block-template" onClick={() => start(t)}><Network size={22} /><strong>{t.title}</strong><small>{t.nodes.length} blocos · {t.edges.length} conexões</small></Card>)}

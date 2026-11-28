@@ -54,7 +54,7 @@ export default function Podcast() {
 
   return (
     <>
-      <PageHead eyebrow="Pulso Podcast" title={<>Revisão para <em>ouvir.</em></>} subtitle="Episódios curtos narrados pelo navegador, com transcrição sincronizada. Use no deslocamento e depois recupere os pontos por escrito." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
+      <PageHead eyebrow="Pulso Podcast" title="Podcast" subtitle="Episódios curtos narrados pelo navegador, com transcrição sincronizada. Use no deslocamento e depois recupere os pontos por escrito." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
       <Card className="podcast-banner"><Headphones size={20} /><div><strong>Áudio gerado no seu dispositivo</strong><p>Nenhum áudio é enviado para servidor. Escolha uma voz em português e ajuste a velocidade. A narração depende das vozes instaladas no sistema.</p></div></Card>
       <div className="podcast-layout">
         <div className="podcast-list">

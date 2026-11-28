@@ -58,7 +58,7 @@ export default function Wrapped() {
 
   return (
     <>
-      <PageHead eyebrow="Pulso Wrapped" title={<>Seu período em <em>perspectiva.</em></>} subtitle="Uma retrospectiva honesta, sem gamificação vazia. Use para escolher o próximo ciclo — e compartilhar se quiser." actions={<><Button variant="soft" onClick={exportPng} icon={Download}>Exportar card</Button><Link to="/pulso" className="btn btn-ghost">Suíte</Link></>} />
+      <PageHead eyebrow="Pulso Wrapped" title="Retrospectiva" subtitle="Uma retrospectiva honesta, sem gamificação vazia. Use para escolher o próximo ciclo — e compartilhar se quiser." actions={<><Button variant="soft" onClick={exportPng} icon={Download}>Exportar card</Button><Link to="/pulso" className="btn btn-ghost">Suíte</Link></>} />
       <div className="wrapped-toolbar"><Segmented options={[{ value: 'mes', label: 'Este mês' }, { value: 'ano', label: 'Este ano' }]} value={period} onChange={(v) => { setPeriod(v); setSlide(0); }} label="Período" /><Chip tone="soft">{label}</Chip></div>
       {!data.attempts.length && !data.minutes ? <Card><Empty icon={Sparkles} title="Período sem dados" text="Estude um pouco e volte: a retrospectiva é construída com atividade real." /></Card> : (
         <Card className="wrapped-card">

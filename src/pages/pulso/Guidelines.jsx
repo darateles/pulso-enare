@@ -27,7 +27,7 @@ export default function Guidelines() {
 
   return (
     <>
-      <PageHead eyebrow="Pulso Guidelines" title={<>Evidência <em>em movimento.</em></>} subtitle="Uma curadoria de diretrizes, consensos e protocolos com o que muda na prática. Salve, leia e conecte ao tema estudado." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
+      <PageHead eyebrow="Pulso Guidelines" title="Guidelines" subtitle="Uma curadoria de diretrizes, consensos e protocolos com o que muda na prática. Salve, leia e conecte ao tema estudado." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
       <Card className="guideline-banner"><Sparkles size={19} /><div><strong>Radar de atualizações</strong><p>Priorize o que tem impacto em prova e plantão. Cada ficha resume o ponto clínico; o link leva à fonte para leitura integral.</p></div></Card>
       <div className="radar-toolbar">
         <div className="filter-search"><Search size={17} /><input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar tema ou sociedade" /></div>

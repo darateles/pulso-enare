@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useOutletContext } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   ArrowRight, BookOpenCheck, Brain, Check, CheckCircle2, Clock, Layers, Repeat, Search,
   Shuffle, Sparkles, Target,
@@ -10,8 +10,8 @@ import { STAGE_LABEL, STAGES, checklistStage } from '../metodo.js';
 
 const STAGE_ICONS = { ativar: Brain, codificar: BookOpenCheck, recuperar: Target, revisar: Repeat, intercalar: Shuffle };
 
-export default function TopicoConteudo() {
-  const { t, progress, pct, stages } = useOutletContext();
+export default function TopicoConteudo({ data }) {
+  const { t, progress, pct, stages } = data;
   const { toggleChecklist, setTopicField } = useStore();
   const [celebrate, setCelebrate] = useState(false);
   const done = new Set(progress.done || []);

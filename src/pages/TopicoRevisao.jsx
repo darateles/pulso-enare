@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link, useNavigate, useOutletContext } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Brain, CheckCircle2, Clock3, RefreshCw, Shuffle, Timer } from 'lucide-react';
 import { Button, Card, Chip } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
 import { fmtDate, iso } from '../utils.js';
 import { adaptiveReview, calibrationLabel } from '../metodo.js';
+import { useTopic } from '../useTopic.js';
+import TopicPageShell from '../components/TopicPageShell.jsx';
 
 const RATINGS = [
   { n: 1, label: 'Esqueci' },
@@ -15,9 +17,11 @@ const RATINGS = [
 ];
 
 export default function TopicoRevisao() {
-  const { t, progress, cal, stages } = useOutletContext();
+  const data = useTopic();
   const { setConfidence, reviewTopic, setTopicField, toast } = useStore();
   const navigate = useNavigate();
+  if (!data.found) return <Card><p>Tema não encontrado. <Link to="/trilha">Voltar à trilha.</Link></p></Card>;
+  const { t, progress, cal, stages } = data;
 
   const confidence = progress.confidence || 0;
   const nextReviewDate = progress.nextReview ? fmtDate(progress.nextReview, { day: '2-digit', month: 'long' }) : null;
@@ -31,7 +35,7 @@ export default function TopicoRevisao() {
   };
 
   return (
-    <div className="topic-content-single">
+    <TopicPageShell data={data} eyebrow="Metacognição" title="Revisão e calibração" subtitle={t.title}>
       <div className="topic-review-grid">
         <Card>
           <div className="section-head small">
@@ -101,6 +105,6 @@ export default function TopicoRevisao() {
         <Link to={`/conteudos/${t.id}/questoes`} className="btn btn-soft">Recuperar com questões <ArrowRight size={15} /></Link>
         <Link to={`/conteudos/${t.id}`} className="btn btn-ghost"><Clock3 size={15} /> Voltar ao conteúdo</Link>
       </div>
-    </div>
+    </TopicPageShell>
   );
 }

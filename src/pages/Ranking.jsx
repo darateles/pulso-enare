@@ -49,8 +49,8 @@ export default function Ranking() {
     <>
       <PageHead
         eyebrow={`Ranking diário · ${fmtDate(date, { day: '2-digit', month: 'long' })}`}
-        title={<>Seu lugar <em>de hoje.</em></>}
-        subtitle="Feche as metas do dia e acerte um questionário inteiro para subir no placar. O ranking é recalculado no servidor a partir das suas tentativas e da sua atividade."
+        title="Ranking diário"
+        subtitle="Pontuação por metas e acertos. O placar é recalculado no servidor."
         actions={<Button variant="soft" onClick={() => { load(true); toast('Ranking atualizado.'); }} icon={RefreshCw}>{loading ? 'Atualizando…' : 'Atualizar'}</Button>}
       />
 

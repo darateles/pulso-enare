@@ -67,7 +67,7 @@ export default function Radar() {
     <>
       <PageHead
         eyebrow="Pulso Radar"
-        title={<>Nenhum edital passa <em>despercebido.</em></>}
+        title="Radar de editais"
         subtitle="Fontes oficiais e datas acompanhadas em um só painel. O monitor compara o conteúdo das páginas e marca mudanças desde a última verificação."
         actions={<><Button variant="soft" onClick={exportIcs} icon={Download}>ICS</Button><Button onClick={() => setModal(true)} icon={Plus}>Adicionar fonte</Button></>}
       />

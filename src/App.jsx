@@ -12,9 +12,9 @@ import ErrorBoundary from './components/ErrorBoundary.jsx';
 const Trilha = lazy(() => import('./pages/Trilha.jsx'));
 const Ranking = lazy(() => import('./pages/Ranking.jsx'));
 const Planner = lazy(() => import('./pages/Planner.jsx'));
+const ConteudosHub = lazy(() => import('./pages/ConteudosHub.jsx'));
 const Conteudos = lazy(() => import('./pages/Conteudos.jsx'));
 const Topico = lazy(() => import('./pages/Topico.jsx'));
-const TopicoConteudo = lazy(() => import('./pages/TopicoConteudo.jsx'));
 const TopicoFlashcards = lazy(() => import('./pages/TopicoFlashcards.jsx'));
 const TopicoQuestoes = lazy(() => import('./pages/TopicoQuestoes.jsx'));
 const TopicoNotas = lazy(() => import('./pages/TopicoNotas.jsx'));
@@ -101,14 +101,13 @@ export default function App() {
             <Route path="trilha" element={<Trilha />} />
             <Route path="ranking" element={<Ranking />} />
             <Route path="planner" element={<Planner />} />
-            <Route path="conteudos" element={<Conteudos />} />
-            <Route path="conteudos/:topicId" element={<Topico />}>
-              <Route index element={<TopicoConteudo />} />
-              <Route path="flashcards" element={<TopicoFlashcards />} />
-              <Route path="questoes" element={<TopicoQuestoes />} />
-              <Route path="notas" element={<TopicoNotas />} />
-              <Route path="revisao" element={<TopicoRevisao />} />
-            </Route>
+            <Route path="conteudos" element={<ConteudosHub />} />
+            <Route path="conteudos/mapa" element={<Conteudos />} />
+            <Route path="conteudos/:topicId" element={<Topico />} />
+            <Route path="conteudos/:topicId/flashcards" element={<TopicoFlashcards />} />
+            <Route path="conteudos/:topicId/questoes" element={<TopicoQuestoes />} />
+            <Route path="conteudos/:topicId/notas" element={<TopicoNotas />} />
+            <Route path="conteudos/:topicId/revisao" element={<TopicoRevisao />} />
             <Route path="questoes" element={<Questoes />} />
             <Route path="questoes/treino" element={<Questoes />} />
             <Route path="questoes/simulado" element={<Simulado />} />

@@ -93,7 +93,7 @@ export default function Arena() {
 
   return (
     <>
-      <PageHead eyebrow="Pulso Arena" title={<>Simulados <em>coletivos.</em></>} subtitle="Eventos periódicos com janela de participação, ranking e questões oficiais. Competir calibra ritmo e exposição." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
+      <PageHead eyebrow="Pulso Arena" title="Arena" subtitle="Eventos periódicos com janela de participação, ranking e questões oficiais. Competir calibra ritmo e exposição." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
       <Card className="arena-name"><Field label="Seu apelido no ranking"><input value={name} maxLength={24} onChange={(e) => setName(e.target.value)} placeholder="Como quer aparecer" /></Field><InlineError>{error}</InlineError></Card>
       {loading ? <Card><Spinner /> Carregando arenas…</Card> : (
         <div className="arena-grid">

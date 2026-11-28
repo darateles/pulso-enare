@@ -53,16 +53,15 @@ export default function Onboarding() {
       <div className="onboard-art">
         <Logo />
         <div className="onboard-copy">
-          <span className="eyebrow light">Pulso · curso em níveis</span>
-          <h1>Sua preparação,<br /><em>nível por nível.</em></h1>
-          <p>Informe seu semestre. O Pulso monta uma trilha com os temas certos para o seu momento — e um plano que respeita sua rotina.</p>
+          <span className="eyebrow light">Pulso</span>
+          <h1>Configurar<br /><em>estudo.</em></h1>
+          <p>Informe seu semestre e sua rotina. O plano é gerado a partir disso.</p>
         </div>
         <div className="onboard-points">
-          <div><Layers size={18} /> 5 níveis, 7 matérias e 90 temas organizados</div>
-          <div><GraduationCap size={18} /> Conteúdo priorizado pelo seu período da faculdade</div>
-          <div><Compass size={18} /> Checklists, revisões e questões conectados ao plano</div>
+          <div><Layers size={18} /> 5 níveis, 7 matérias e 90 temas</div>
+          <div><GraduationCap size={18} /> Conteúdo do seu período da faculdade</div>
+          <div><Compass size={18} /> Checklist, revisão e questões</div>
         </div>
-        <div className="onboard-quote">“Planeje com clareza. Evolua com consistência.”</div>
       </div>
 
       <div className="onboard-panel">

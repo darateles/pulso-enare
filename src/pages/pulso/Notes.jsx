@@ -66,7 +66,7 @@ export default function Notes() {
 
   return (
     <>
-      <PageHead eyebrow="Pulso Notes" title={<>Seu caderno, <em>do seu jeito.</em></>} subtitle="Notas em Markdown, com tags e vínculo a subtópicos. O que você escreve fica ao lado do que precisa revisar." actions={<><Button variant="soft" onClick={exportNotes} icon={Download}>Exportar</Button><Button onClick={() => edit()} icon={Plus}>Nova nota</Button></>} />
+      <PageHead eyebrow="Pulso Notes" title="Anotações" subtitle="Notas em Markdown, com tags e vínculo a subtópicos. O que você escreve fica ao lado do que precisa revisar." actions={<><Button variant="soft" onClick={exportNotes} icon={Download}>Exportar</Button><Button onClick={() => edit()} icon={Plus}>Nova nota</Button></>} />
       <div className="radar-toolbar">
         <div className="filter-search"><Search size={17} /><input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Buscar nas notas" /></div>
         <div className="filter-scroll">{tags.map((t) => <button key={t} className={`chip ${tag === t ? 'chip-accent' : 'chip-neutral'}`} onClick={() => setTag(tag === t ? 'todas' : t)}>#{t}</button>)}</div>

@@ -57,7 +57,7 @@ export default function Recall() {
 
   return (
     <>
-      <PageHead eyebrow="Pulso Recall" title={<>Prova sem <em>múltipla escolha.</em></>} subtitle="Recordação discursiva: escreva, compare e agende. É mais difícil que reconhecer — e por isso transfere melhor para a prova." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
+      <PageHead eyebrow="Pulso Recall" title="Recall" subtitle="Recordação discursiva: escreva, compare e agende. É mais difícil que reconhecer — e por isso transfere melhor para a prova." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
       <div className="recall-grid-top">
         <Card className="recall-start"><Sparkles size={24} /><h2>{filtered.length} prompts disponíveis</h2><p>Sessão curta de até 12 perguntas. As vencidas entram primeiro.</p><Segmented options={[{ value: 'todas', label: 'Todas' }, ...curriculum.areas.map((a) => ({ value: a.id, label: a.short }))]} value={area} onChange={setArea} label="Área" /><Button onClick={begin} disabled={!filtered.length} icon={MessageSquareQuote}>Iniciar recordação</Button></Card>
         <Card><span className="eyebrow">Fila</span>{curriculum.areas.map((a) => { const n = due.filter((p) => p.area.id === a.id).length; return <div key={a.id} className="acc-row"><span>{a.short}</span><Progress value={n / Math.max(1, prompts.filter((p) => p.area.id === a.id).length) * 100} tone="accent" /><strong>{n}</strong></div>; })}<p className="muted-note">Recordações vencidas por área.</p></Card>

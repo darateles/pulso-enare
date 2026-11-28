@@ -25,7 +25,7 @@ export default function Offline() {
 
   return (
     <>
-      <PageHead eyebrow="Pulso Offline" title={<>Estudo que não <em>para.</em></>} subtitle="O Pulso instala como app e mantém a interface em cache. Sem internet, alterações ficam em fila e sincronizam ao reconectar." actions={<Link to="/pulso" className="btn btn-ghost">Suíte</Link>} />
+      <PageHead eyebrow="Pulso Offline" title="Offline" subtitle="O Pulso instala como app e mantém a interface em cache. Sem internet, alterações ficam em fila e sincronizam ao reconectar." actions={<Link to="/pulso" className="btn btn-ghost">Suíte</Link>} />
       <div className="offline-grid">
         <Card className={`offline-status ${online ? 'online' : 'off'}`}>
           {online ? <Wifi size={30} /> : <WifiOff size={30} />}

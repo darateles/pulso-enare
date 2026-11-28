@@ -60,9 +60,9 @@ export default function Planner() {
   return (
     <>
       <PageHead
-        eyebrow="Plano de estudo"
-        title={<>Um plano claro <em>para cada etapa.</em></>}
-        subtitle={`O planner prioriza o Nível ${level.id} · ${level.name} e organiza a semana no ciclo Codificar → Recuperar → Revisar → Intercalar, usando peso, incidência, confiança e erros recentes.`}
+        eyebrow="Planner"
+        title="Planner"
+        subtitle={`Cronograma de 8 semanas do Nível ${level.id} · ${level.name}: codificação, recuperação, revisão e simulado.`}
         actions={<Button onClick={() => (counts.total ? setConfirm(true) : build())} icon={Sparkles}>{counts.total ? 'Regerar plano' : 'Gerar plano'}</Button>}
       />
 

@@ -25,7 +25,7 @@ export default function Mentoria() {
 
   return (
     <>
-      <PageHead eyebrow="Pulso Mentoria" title={<>Acompanhamento com <em>contexto.</em></>} subtitle="Gere um relatório claro para seu mentor, registre devolutivas e acompanhe check-ins. Integração com agenda será conectada ao plano Mentoria." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
+      <PageHead eyebrow="Pulso Mentoria" title="Mentoria" subtitle="Gere um relatório claro para seu mentor, registre devolutivas e acompanhe check-ins. Integração com agenda será conectada ao plano Mentoria." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
       <div className="mentor-grid">
         <Card className="mentor-card">
           <div className="avatar big"><UserRound size={28} /></div>

@@ -33,7 +33,7 @@ export default function ECG() {
 
   return (
     <>
-      <PageHead eyebrow="Pulso ECG" title={<>Do ritmo à <em>decisão.</em></>} subtitle="Traçados progressivos com explicação objetiva. Nível 1: ritmo e frequência. Nível 2: bloqueios e isquemia. Nível 3: ritmos de parada." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
+      <PageHead eyebrow="Pulso ECG" title="ECG" subtitle="Traçados progressivos com explicação objetiva. Nível 1: ritmo e frequência. Nível 2: bloqueios e isquemia. Nível 3: ritmos de parada." actions={<Link to="/pulso" className="btn btn-ghost">Voltar à suíte</Link>} />
       <Card className="ecg-progress"><div><span className="eyebrow">Trilha de ECG</span><h2>{levelDone(1) + levelDone(2) + levelDone(3)} de {ecg.cases.length} traçados concluídos</h2><Progress value={progress} tone="accent" /></div><div className="ecg-levels">{[1,2,3].map((n) => <button key={n} disabled={locked(n)} className={level === n ? 'active' : ''} onClick={() => setLevel(n)}>{locked(n) ? <Lock size={13} /> : <HeartPulse size={13} />} Nível {n}</button>)}</div></Card>
       <div className="ecg-grid">
         {cases.map((c, i) => {
