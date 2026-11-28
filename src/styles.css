@@ -1819,3 +1819,16 @@ code { background: var(--surface-2); border: 1px solid var(--line); border-radiu
   .top-nav a { padding: 7px; font-size: .7rem; }
   .search-trigger { flex-basis: 220px; }
 }
+
+/* Flashcards com imagem */
+.flash-image { display: block; width: 100%; max-height: 380px; object-fit: contain; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line); margin: 0 0 14px; }
+.empty-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.manual-image-preview { position: relative; display: inline-flex; max-width: 320px; margin: 4px 0 14px; }
+.manual-image-preview img { width: 100%; max-height: 220px; object-fit: contain; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); }
+.manual-image-preview .icon-btn { position: absolute; top: 5px; right: 5px; background: var(--surface); box-shadow: var(--shadow); }
+.atlas-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+.flashcard-topic-image { display: block; width: 100%; max-height: 200px; object-fit: contain; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-2); margin-bottom: 10px; }
+@media (max-width: 1250px) and (min-width: 761px) {
+  .search-trigger { flex: 0 0 42px; width: 42px; padding: 8px; justify-content: center; }
+  .search-trigger span, .search-trigger kbd { display: none; }
+}

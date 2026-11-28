@@ -62,6 +62,7 @@ export default function TopicoFlashcards() {
         <div className="flashcard-topic-list">
           {topicCards.map((card) => (
             <article key={card.id} className="flashcard-topic-card">
+              {card.image && <img className="flashcard-topic-image" src={card.image} alt={card.imageAlt || card.front || 'Imagem do flashcard'} />}
               <span className="eyebrow">Frente</span>
               <strong>{card.front}</strong>
               <span className="eyebrow">Verso</span>

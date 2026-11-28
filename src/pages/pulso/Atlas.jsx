@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle2, Eye, Image as ImageIcon, ScanEye, Search, XCircle } from 'lucide-react';
+import { CheckCircle2, Eye, Image as ImageIcon, Layers, ScanEye, Search, XCircle } from 'lucide-react';
 import atlas from '../../../seed/atlas.json';
 import { Button, Card, Chip, Empty, PageHead, Segmented } from '../../components/ui.jsx';
 import { useStore } from '../../store.jsx';
@@ -23,6 +23,24 @@ export default function Atlas() {
 
   const openItem = (item) => { setOpen(item); setSelected(null); setRevealed(false); setShowStruct(false); };
   const mark = (item) => { updateUser((prev) => ({ ...prev, atlasSeen: { ...prev.atlasSeen, [item.id]: new Date().toISOString() } })); toast('Ficha revisada.'); };
+  const addAtlasCard = (item) => {
+    const id = `atlas-${item.id}`;
+    if (user.flashcards.some((card) => card.id === id)) { toast('Esta imagem já está nos flashcards.'); return; }
+    updateUser((prev) => ({
+      ...prev,
+      flashcards: [{
+        id,
+        front: `Identifique a imagem: ${item.title}`,
+        back: `${item.title}\n${item.structures.join(' · ')}`,
+        image: item.image,
+        imageAlt: item.title,
+        deck: 'Atlas visual',
+        tags: ['atlas', item.category],
+        createdAt: new Date().toISOString(),
+      }, ...prev.flashcards],
+    }));
+    toast('Flashcard com imagem criado.');
+  };
 
   return (
     <>
@@ -52,7 +70,10 @@ export default function Atlas() {
               <h2>{open.title}</h2>
               <p>{open.description}</p>
               <small>{open.credit}</small>
-              <Button variant="soft" size="sm" onClick={() => setShowStruct((s) => !s)}>{showStruct ? 'Esconder' : 'Ver'} estruturas-chave</Button>
+              <div className="atlas-actions">
+                <Button variant="soft" size="sm" onClick={() => setShowStruct((s) => !s)}>{showStruct ? 'Esconder' : 'Ver'} estruturas-chave</Button>
+                <Button variant="ghost" size="sm" onClick={() => addAtlasCard(open)} icon={Layers}>Criar flashcard</Button>
+              </div>
               {showStruct && <ul className="atlas-structures">{open.structures.map((s) => <li key={s}>{s}</li>)}</ul>}
               <div className="atlas-quiz">
                 <span className="eyebrow">Teste rápido</span>

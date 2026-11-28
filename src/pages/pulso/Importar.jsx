@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle2, FileUp, Layers, Plus, Table2 } from 'lucide-react';
+import { CheckCircle2, FileUp, Image as ImageIcon, Layers, Plus, Table2, X } from 'lucide-react';
 import { api } from '../../api.js';
 import { Button, Card, Chip, Field, InlineError, PageHead, Segmented, Spinner } from '../../components/ui.jsx';
 import { useStore } from '../../store.jsx';
@@ -29,8 +29,10 @@ export default function Importar() {
   const [error, setError] = useState('');
   const [paste, setPaste] = useState('');
   const [manual, setManual] = useState({ front: '', back: '', deck: 'Meu deck' });
+  const [manualImage, setManualImage] = useState(null);
   const fileRef = useRef(null);
   const textFileRef = useRef(null);
+  const imageRef = useRef(null);
 
   const readAnki = async (file) => {
     if (!file) return;
@@ -63,6 +65,8 @@ export default function Importar() {
           .map((card) => ({
             front: card.front || card.frente || '',
             back: card.back || card.verso || '',
+            image: card.image || card.imagem || undefined,
+            imageAlt: card.imageAlt || undefined,
             tags: card.tags || [],
             deck: card.deck || deck || 'Importado',
           }))
@@ -90,10 +94,54 @@ export default function Importar() {
     setPreview([]);
   };
 
+  const readImageFile = async (selected) => {
+    if (!selected) return;
+    setError('');
+    try {
+      if (!selected.type.startsWith('image/')) throw new Error('Selecione um arquivo de imagem.');
+      const dataUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result));
+        reader.onerror = reject;
+        reader.readAsDataURL(selected);
+      });
+      const image = await new Promise((resolve, reject) => {
+        const element = new Image();
+        element.onload = () => resolve(element);
+        element.onerror = reject;
+        element.src = dataUrl;
+      });
+      const max = 1200;
+      const scale = Math.min(1, max / image.width, max / image.height);
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(image.width * scale));
+      canvas.height = Math.max(1, Math.round(image.height * scale));
+      canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
+      setManualImage(canvas.toDataURL('image/jpeg', 0.82));
+    } catch (err) { setError(err.message || 'Não foi possível ler a imagem.'); } finally {
+      if (imageRef.current) imageRef.current.value = '';
+    }
+  };
+
   const addManual = () => {
-    if (!manual.front || !manual.back) return;
-    updateUser((prev) => ({ ...prev, flashcards: [{ id: crypto.randomUUID(), front: manual.front, back: manual.back, deck: manual.deck || 'Meu deck', tags: [], createdAt: new Date().toISOString() }, ...prev.flashcards] }));
+    const front = manual.front.trim();
+    const back = manual.back.trim();
+    if ((!front && !manualImage) || !back) { setError('Preencha a frente (ou envie uma imagem) e o verso.'); return; }
+    updateUser((prev) => ({
+      ...prev,
+      flashcards: [{
+        id: crypto.randomUUID(),
+        front: front || 'Identifique a imagem',
+        back,
+        image: manualImage || undefined,
+        deck: manual.deck || 'Meu deck',
+        tags: [],
+        createdAt: new Date().toISOString(),
+      }, ...prev.flashcards],
+    }));
     setManual({ front: '', back: '', deck: manual.deck });
+    setManualImage(null);
+    setError('');
     toast('Cartão criado.');
   };
 
@@ -126,8 +174,19 @@ export default function Importar() {
       {tab === 'manual' && (
         <Card className="import-form">
           <Field label="Deck"><input value={manual.deck} onChange={(e) => setManual({ ...manual, deck: e.target.value })} /></Field>
-          <Field label="Frente"><textarea rows={3} value={manual.front} onChange={(e) => setManual({ ...manual, front: e.target.value })} /></Field>
-          <Field label="Verso"><textarea rows={3} value={manual.back} onChange={(e) => setManual({ ...manual, back: e.target.value })} /></Field>
+          <input ref={imageRef} type="file" accept="image/*" hidden onChange={(e) => readImageFile(e.target.files?.[0])} />
+          <div className="file-picker">
+            <Button variant="soft" onClick={() => imageRef.current?.click()} icon={ImageIcon}>Selecionar imagem</Button>
+            <span>JPG/PNG; redimensionada para até 1200 px.</span>
+          </div>
+          {manualImage && (
+            <div className="manual-image-preview">
+              <img src={manualImage} alt="Prévia do flashcard" />
+              <button type="button" className="icon-btn" onClick={() => setManualImage(null)} aria-label="Remover imagem"><X size={17} /></button>
+            </div>
+          )}
+          <Field label="Frente" hint="Opcional quando houver imagem."><textarea rows={3} value={manual.front} onChange={(e) => setManual({ ...manual, front: e.target.value })} placeholder="Pergunta ou instrução" /></Field>
+          <Field label="Verso"><textarea rows={3} value={manual.back} onChange={(e) => setManual({ ...manual, back: e.target.value })} placeholder="Resposta ou estruturas" /></Field>
           <Button onClick={addManual} icon={Plus}>Criar cartão</Button>
         </Card>
       )}
@@ -135,7 +194,7 @@ export default function Importar() {
       {preview.length > 0 && (
         <>
           <div className="preview-bar"><strong>{preview.length} cartões para importar</strong><Button size="sm" onClick={importAll} icon={CheckCircle2}>Importar todos</Button></div>
-          <div className="flash-preview">{preview.slice(0, 30).map((c, i) => <Card key={i} className="flash-preview-card"><small>{c.deck}</small><strong>{c.front}</strong><p>{c.back}</p></Card>)}</div>
+          <div className="flash-preview">{preview.slice(0, 30).map((c, i) => <Card key={i} className="flash-preview-card">{c.image && <img className="flashcard-topic-image" src={c.image} alt={c.front || 'Imagem do flashcard'} />}<small>{c.deck}</small><strong>{c.front}</strong><p>{c.back}</p></Card>)}</div>
           {preview.length > 30 && <p className="muted-note">Mostrando os 30 primeiros.</p>}
         </>
       )}
