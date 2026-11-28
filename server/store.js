@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { readKV, writeKV, hasKV, dataDir } from './storage.js';
+import { recommendLevel } from '../src/trilha.js';
 
 const DATA_DIR = dataDir();
 const BACKUP_DIR = path.join(DATA_DIR, 'backups');
@@ -97,6 +98,19 @@ export async function initStore() {
         studyPace: ['base', 'equilibrado', 'avancado'].includes(raw.studyPace) ? raw.studyPace : 'equilibrado',
         onboardingDone: false,
         profileVersion: 2,
+        levelModel: 2,
+      });
+      continue;
+    }
+    // Migração do modelo antigo: o nível vinha do semestre. Recalcula uma vez
+    // pelo ritmo e mantém o aluno livre para escolher outro nível depois.
+    if (raw && raw.onboardingDone && raw.levelModel !== 2) {
+      const profile = { ...defaultUser(), ...raw, profileVersion: 2 };
+      const recommendation = recommendLevel(profile);
+      await writeKV(`user:${name}`, {
+        ...profile,
+        level: recommendation.levelId,
+        levelModel: 2,
       });
     }
   }
@@ -117,6 +131,10 @@ export async function getUser(account = 'davi') {
   user.level = Math.min(5, Math.max(1, Math.round(Number(user.level) || 1)));
   user.studyPace = ['base', 'equilibrado', 'avancado'].includes(user.studyPace) ? user.studyPace : 'equilibrado';
   if (!Array.isArray(user.difficultyGroups)) user.difficultyGroups = [];
+  if (user.onboardingDone && user.levelModel !== 2) {
+    user.level = recommendLevel(user).levelId;
+    user.levelModel = 2;
+  }
   return user;
 }
 
@@ -140,6 +158,7 @@ export async function saveUser(account, incoming) {
   next.studyDays = Array.isArray(next.studyDays) ? next.studyDays.filter((d) => Number.isInteger(d) && d >= 0 && d <= 6) : base.studyDays;
   next.semester = Math.min(12, Math.max(1, Math.round(Number(next.semester) || 1)));
   next.level = Math.min(5, Math.max(1, Math.round(Number(next.level) || 1)));
+  next.levelModel = 2;
   next.studyPace = ['base', 'equilibrado', 'avancado'].includes(next.studyPace) ? next.studyPace : 'equilibrado';
   next.difficultyGroups = Array.isArray(next.difficultyGroups)
     ? [...new Set(next.difficultyGroups.map((group) => String(group || '').trim()).filter(Boolean))].slice(0, 60)

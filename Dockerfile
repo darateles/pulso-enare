@@ -14,8 +14,10 @@ RUN npm ci --omit=dev && npm cache clean --force
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/server ./server
 COPY --from=build /app/seed ./seed
-# módulo puro compartilhado com o cliente (ranking diário)
+# módulos puros compartilhados com o cliente (ranking diário e recomendação de nível)
 COPY --from=build /app/src/ranking.js ./src/ranking.js
+COPY --from=build /app/src/trilha.js ./src/trilha.js
+COPY --from=build /app/src/utils.js ./src/utils.js
 RUN mkdir -p /data && chown -R node:node /data
 COPY docker-entrypoint.sh /usr/local/bin/pulso-entrypoint
 RUN chmod +x /usr/local/bin/pulso-entrypoint

@@ -66,6 +66,7 @@ export default function Ajustes() {
       ...form,
       semester,
       level: Math.min(5, Math.max(1, Number(form.level) || 1)),
+      levelModel: 2,
       studyPace: STUDY_PACES.some((pace) => pace.id === form.studyPace) ? form.studyPace : 'equilibrado',
       name: form.name.trim() || 'Estudante',
       startDate: form.startDate || user.startDate,

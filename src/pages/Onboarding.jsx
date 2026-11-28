@@ -46,6 +46,8 @@ export default function Onboarding() {
       name: form.name.trim() || 'Estudante',
       semester: Number(form.semester),
       level: levelId,
+      levelModel: 2,
+      studyPace: form.studyPace,
       startDate: iso(),
       onboardingDone: true,
       settings: { ...(user.settings || {}), plan: 'pro' },

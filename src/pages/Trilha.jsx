@@ -58,14 +58,14 @@ export default function Trilha() {
 
   const changeLevel = (value) => {
     const level = Math.min(5, Math.max(1, Number(value) || 1));
-    updateUser({ level });
+    updateUser({ level, levelModel: 2 });
     setSelectedId(level);
     toast(`Nível ${level} definido como referência. Todo o conteúdo continua liberado.`);
   };
 
   const applyRecommended = () => {
     const level = recommendation.levelId;
-    updateUser({ level });
+    updateUser({ level, levelModel: 2 });
     setSelectedId(level);
     toast(`Nível ${level} · ${levelById(level).name} aplicado a partir do seu ritmo.`);
   };

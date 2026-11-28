@@ -224,7 +224,7 @@ export function recommendLevel(profile = {}) {
   score += pace.boost;
   score += {
     fundamentos: 0,
-    construcao: 0,
+    construcao: 1,
     consolidacao: 1,
     intensivo: 2,
     prova: 3,
