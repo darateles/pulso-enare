@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   AlignCenter, AlignLeft, AlignRight, ArrowLeft, Bold, Check, Download, GitBranch,
-  GripVertical, Italic, Network, Pencil, Plus, Save, Trash2, X,
+  GripVertical, Italic, Network, Pencil, Plus, Printer, Save, Trash2, X,
 } from 'lucide-react';
 import blocks from '../../../seed/blocks.json';
 import { Button, Card, Chip, Empty, Field, Modal, PageHead } from '../../components/ui.jsx';
@@ -152,26 +152,65 @@ export default function Blocks() {
     toast('Mapa excluído.');
   };
 
-  const exportSvg = () => {
-    if (!map) return;
+  const buildA4Svg = () => {
+    if (!map) return '';
+    const pageW = 794;
+    const pageH = 1123;
+    const margin = 48;
+    const contentTop = 112;
+    const contentBottom = 1060;
+    const availW = pageW - margin * 2;
+    const availH = contentBottom - contentTop;
+    const bounds = map.nodes.reduce((acc, node) => ({
+      minX: Math.min(acc.minX, node.x),
+      minY: Math.min(acc.minY, node.y),
+      maxX: Math.max(acc.maxX, node.x + nodeWidth(node)),
+      maxY: Math.max(acc.maxY, node.y + nodeHeight(node)),
+    }), { minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity });
+    const hasNodes = Number.isFinite(bounds.minX);
+    const contentW = hasNodes ? Math.max(1, bounds.maxX - bounds.minX) : availW;
+    const contentH = hasNodes ? Math.max(1, bounds.maxY - bounds.minY) : availH;
+    const scale = hasNodes ? Math.min(availW / contentW, availH / contentH) : 1;
+    const tx = hasNodes ? margin + (availW - contentW * scale) / 2 - bounds.minX * scale : margin;
+    const ty = hasNodes ? contentTop + (availH - contentH * scale) / 2 - bounds.minY * scale : contentTop;
+
     const edges = map.edges.map((edge) => {
       const a = map.nodes.find((n) => n.id === edge.from);
       const b = map.nodes.find((n) => n.id === edge.to);
       if (!a || !b) return '';
-      return `<line x1="${a.x + nodeWidth(a) / 2}" y1="${a.y + nodeHeight(a) / 2}" x2="${b.x + nodeWidth(b) / 2}" y2="${b.y + nodeHeight(b) / 2}" stroke="#c94a21" stroke-width="2"/>`;
+      return `<line x1="${a.x + nodeWidth(a) / 2}" y1="${a.y + nodeHeight(a) / 2}" x2="${b.x + nodeWidth(b) / 2}" y2="${b.y + nodeHeight(b) / 2}" stroke="#174d40" stroke-width="2" vector-effect="non-scaling-stroke"/>`;
     }).join('');
     const nodes = map.nodes.map((node) => {
       const width = nodeWidth(node);
       const height = nodeHeight(node);
       const font = `${node.italic ? 'italic ' : ''}${node.bold ? 700 : 600} ${node.fontSize || 12}px sans-serif`;
-      return `<g><rect x="${node.x}" y="${node.y}" width="${width}" height="${height}" rx="10" fill="${node.bg || '#ffffff'}" stroke="#c94a21"/><foreignObject x="${node.x + 8}" y="${node.y + 8}" width="${width - 16}" height="${height - 16}"><div xmlns="http://www.w3.org/1999/xhtml" style="font:${font};color:${node.color || '#1d312c'};text-align:${node.align || 'left'};padding:4px;box-sizing:border-box;width:100%;height:100%">${escapeXml(node.text)}</div></foreignObject></g>`;
+      return `<g><rect x="${node.x}" y="${node.y}" width="${width}" height="${height}" rx="10" fill="${node.bg || '#ffffff'}" stroke="#9bb3a3" stroke-width="1.5" vector-effect="non-scaling-stroke"/><foreignObject x="${node.x + 8}" y="${node.y + 8}" width="${width - 16}" height="${height - 16}"><div xmlns="http://www.w3.org/1999/xhtml" style="font:${font};color:${node.color || '#1d312c'};text-align:${node.align || 'left'};padding:6px;box-sizing:border-box;width:100%;height:100%">${escapeXml(node.text)}</div></foreignObject></g>`;
     }).join('');
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="860" height="560"><rect width="100%" height="100%" fill="#f4f0e7"/>${edges}${nodes}</svg>`;
+    const safeTitle = escapeXml(String(title || 'Mapa sem título').slice(0, 70));
+    const date = new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date());
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 ${pageW} ${pageH}"><rect width="${pageW}" height="${pageH}" fill="#ffffff"/><text x="${margin}" y="42" font-family="Manrope, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="2" fill="#526358">MAPA MENTAL · PULSO</text><text x="${margin}" y="78" font-family="Georgia, serif" font-size="26" fill="#1d312c">${safeTitle}</text><line x1="${margin}" y1="94" x2="${pageW - margin}" y2="94" stroke="#dce3da" stroke-width="1"/><g transform="translate(${tx} ${ty}) scale(${scale})">${edges}${nodes}</g><text x="${margin}" y="1096" font-family="Manrope, Arial, sans-serif" font-size="9" fill="#526358">Gerado em ${date}</text><text x="${pageW - margin}" y="1096" text-anchor="end" font-family="Manrope, Arial, sans-serif" font-size="9" fill="#526358">A4 · retrato</text></svg>`;
+  };
+
+  const exportSvg = () => {
+    const svg = buildA4Svg();
+    if (!svg) return;
     const blob = new Blob([svg], { type: 'image/svg+xml' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = `${title || 'mapa'}.svg`;
+    link.download = `${(title || 'mapa').replace(/[^\w\-]+/g, '-').toLowerCase()}-a4.svg`;
     link.click();
+  };
+
+  const printMap = () => {
+    const svg = buildA4Svg();
+    if (!svg) return;
+    const win = window.open('', '_blank');
+    if (!win) { toast('Libere pop-ups para imprimir em A4.', 'error'); return; }
+    win.document.open();
+    win.document.write(`<!doctype html><html><head><title>${escapeXml(title || 'Mapa mental')}</title><style>@page{size:A4 portrait;margin:0}html,body{margin:0;padding:0;background:#fff}svg{display:block;width:100%;height:auto}</style></head><body>${svg}</body></html>`);
+    win.document.close();
+    win.focus();
+    setTimeout(() => win.print(), 350);
   };
 
   const pos = (e) => {
@@ -237,7 +276,8 @@ export default function Blocks() {
         <div className="blocks-tools">
           <Button size="sm" variant={connect ? 'solid' : 'ghost'} onClick={() => setConnect((c) => !c)} icon={GitBranch}>{connect ? 'Conectando…' : 'Conectar'}</Button>
           <Button size="sm" variant="ghost" onClick={addNode} icon={Plus}>Bloco</Button>
-          <Button size="sm" variant="ghost" onClick={exportSvg} icon={Download}>SVG</Button>
+          <Button size="sm" variant="ghost" onClick={exportSvg} icon={Download}>SVG A4</Button>
+          <Button size="sm" variant="ghost" onClick={printMap} icon={Printer}>Imprimir</Button>
           <Button size="sm" variant="ghost" onClick={deleteMap} icon={Trash2}>Excluir</Button>
           <Button size="sm" onClick={() => setModal(true)} icon={Save}>Salvar</Button>
         </div>
