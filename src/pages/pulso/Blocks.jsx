@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   AlignCenter, AlignLeft, AlignRight, ArrowLeft, Bold, Check, Download, GitBranch,
-  GripVertical, Italic, Network, Plus, Save, Trash2, X,
+  GripVertical, Italic, Network, Pencil, Plus, Save, Trash2, X,
 } from 'lucide-react';
 import blocks from '../../../seed/blocks.json';
 import { Button, Card, Chip, Empty, Field, Modal, PageHead } from '../../components/ui.jsx';
@@ -26,6 +26,7 @@ export default function Blocks() {
   const [modal, setModal] = useState(false);
   const [title, setTitle] = useState('');
   const [compact, setCompact] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 700);
+  const [formatOpen, setFormatOpen] = useState(null);
   const canvas = useRef(null);
 
   useEffect(() => {
@@ -33,6 +34,13 @@ export default function Blocks() {
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
+
+  useEffect(() => {
+    if (!formatOpen) return undefined;
+    const onKey = (event) => { if (event.key === 'Escape') setFormatOpen(null); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [formatOpen]);
 
   const compactWidth = () => Math.max(300, Math.min((typeof window !== 'undefined' ? window.innerWidth : 860) - 32, 560));
 
@@ -69,6 +77,7 @@ export default function Blocks() {
       createdAt: new Date().toISOString(),
     });
     setSelected(null);
+    setFormatOpen(null);
     setTitle(template?.title || 'Novo mapa');
   };
 
@@ -76,6 +85,7 @@ export default function Blocks() {
     setMap({ ...structuredClone(m), nodes: reflow((m.nodes || []).map((node) => normalizeNode(structuredClone(node)))) });
     setTitle(m.title);
     setSelected(null);
+    setFormatOpen(null);
   };
 
   const addNode = () => {
@@ -109,6 +119,8 @@ export default function Blocks() {
     }),
   }));
 
+  const resetNode = (id) => updateNode(id, { width: 160, height: 60, bg: '#ffffff', color: '#1d312c', fontSize: 12, bold: false, italic: false, align: 'left' });
+
   const connectTo = (targetId) => {
     if (!selected || selected === targetId) return;
     if (map.edges.some((e) => e.from === selected && e.to === targetId)) { toast('Esses blocos já estão conectados.'); return; }
@@ -120,6 +132,7 @@ export default function Blocks() {
   const removeNode = (id) => {
     setMap((m) => ({ ...m, nodes: m.nodes.filter((n) => n.id !== id), edges: m.edges.filter((e) => e.from !== id && e.to !== id) }));
     if (selected === id) setSelected(null);
+    if (formatOpen === id) setFormatOpen(null);
   };
 
   const saveMap = () => {
@@ -135,6 +148,7 @@ export default function Blocks() {
     updateUser((prev) => ({ ...prev, maps: prev.maps.filter((m) => m.id !== map.id) }));
     setMap(null);
     setSelected(null);
+    setFormatOpen(null);
     toast('Mapa excluído.');
   };
 
@@ -196,6 +210,7 @@ export default function Blocks() {
   };
 
   const selectedNode = map?.nodes.find((node) => node.id === selected) || null;
+  const formatNode = map?.nodes.find((node) => node.id === formatOpen) || null;
   const canvasHeight = compact && map
     ? Math.max(540, ...map.nodes.map((node) => node.y + nodeHeight(node) + 24))
     : 540;
@@ -252,6 +267,15 @@ export default function Blocks() {
               onPointerDown={(e) => onPointerDown(e, n)}
             >
               <button type="button" className="block-drag" onPointerDown={(e) => { e.stopPropagation(); onPointerDown(e, n); }} aria-label="Mover bloco"><GripVertical size={12} /></button>
+              <button
+                type="button"
+                className="block-format"
+                onPointerDown={(e) => e.stopPropagation()}
+                onClick={(e) => { e.stopPropagation(); setSelected(n.id); setFormatOpen(n.id); }}
+                aria-label="Formatar bloco"
+              >
+                <Pencil size={12} />
+              </button>
               <textarea
                 value={n.text}
                 style={{
@@ -278,55 +302,78 @@ export default function Blocks() {
           <div className="section-head small">
             <div><span className="eyebrow">Bloco selecionado</span><h3>Formatação</h3></div>
             <div className="inspector-actions">
-              <Button size="sm" variant="ghost" onClick={() => updateNode(selectedNode.id, { width: 160, height: 60, bg: '#ffffff', color: '#1d312c', fontSize: 12, bold: false, italic: false, align: 'left' })}>Restaurar</Button>
+              <Button size="sm" variant="ghost" onClick={() => resetNode(selectedNode.id)}>Restaurar</Button>
               <Button size="sm" variant="ghost" onClick={() => removeNode(selectedNode.id)} icon={Trash2}>Excluir bloco</Button>
             </div>
           </div>
-          <div className="inspector-grid">
-            <div className="inspector-field">
-              <span>Largura</span>
-              <div className="inspector-range"><input type="range" min="120" max="360" value={nodeWidth(selectedNode)} onChange={(e) => updateNode(selectedNode.id, { width: Number(e.target.value) })} /><b>{nodeWidth(selectedNode)}px</b></div>
+          <BlockFormatControls node={selectedNode} updateNode={updateNode} />
+        </Card>
+      )}
+
+      {formatNode && (
+        <div className="format-overlay" onMouseDown={(e) => { if (e.target === e.currentTarget) setFormatOpen(null); }}>
+          <div className="format-popup" role="dialog" aria-modal="true" aria-label="Formatar bloco">
+            <div className="format-popup-head">
+              <div><span className="eyebrow">Bloco</span><h2>Formatar bloco</h2></div>
+              <button className="icon-btn" onClick={() => setFormatOpen(null)} aria-label="Fechar"><X size={18} /></button>
             </div>
-            <div className="inspector-field">
-              <span>Altura</span>
-              <div className="inspector-range"><input type="range" min="50" max="240" value={nodeHeight(selectedNode)} onChange={(e) => updateNode(selectedNode.id, { height: Number(e.target.value) })} /><b>{nodeHeight(selectedNode)}px</b></div>
-            </div>
-            <div className="inspector-field">
-              <span>Tamanho da fonte</span>
-              <div className="inspector-range"><input type="range" min="10" max="24" value={selectedNode.fontSize || 12} onChange={(e) => updateNode(selectedNode.id, { fontSize: Number(e.target.value) })} /><b>{selectedNode.fontSize || 12}px</b></div>
-            </div>
-            <div className="inspector-field">
-              <span>Cor do bloco</span>
-              <div className="color-swatches">
-                {BG_COLORS.map((color) => <button key={color} type="button" className={`color-swatch ${(selectedNode.bg || NODE_DEFAULTS.bg) === color ? 'active' : ''}`} style={{ background: color }} onClick={() => updateNode(selectedNode.id, { bg: color })} aria-label={`Fundo ${color}`} />)}
-                <input className="color-input" type="color" value={selectedNode.bg || NODE_DEFAULTS.bg} onChange={(e) => updateNode(selectedNode.id, { bg: e.target.value })} aria-label="Cor personalizada do bloco" />
-              </div>
-            </div>
-            <div className="inspector-field">
-              <span>Cor da fonte</span>
-              <div className="color-swatches">
-                {FONT_COLORS.map((color) => <button key={color} type="button" className={`color-swatch ${(selectedNode.color || NODE_DEFAULTS.color) === color ? 'active' : ''}`} style={{ background: color }} onClick={() => updateNode(selectedNode.id, { color })} aria-label={`Fonte ${color}`} />)}
-                <input className="color-input" type="color" value={selectedNode.color || NODE_DEFAULTS.color} onChange={(e) => updateNode(selectedNode.id, { color: e.target.value })} aria-label="Cor personalizada da fonte" />
-              </div>
-            </div>
-            <div className="inspector-field">
-              <span>Estilo e alinhamento</span>
-              <div className="font-actions">
-                <button type="button" className={selectedNode.bold ? 'active' : ''} onClick={() => updateNode(selectedNode.id, { bold: !selectedNode.bold })} aria-label="Negrito"><Bold size={14} /></button>
-                <button type="button" className={selectedNode.italic ? 'active' : ''} onClick={() => updateNode(selectedNode.id, { italic: !selectedNode.italic })} aria-label="Itálico"><Italic size={14} /></button>
-                {[['left', AlignLeft], ['center', AlignCenter], ['right', AlignRight]].map(([align, Icon]) => (
-                  <button key={align} type="button" className={(selectedNode.align || 'left') === align ? 'active' : ''} onClick={() => updateNode(selectedNode.id, { align })} aria-label={`Alinhar ${align}`}><Icon size={14} /></button>
-                ))}
-              </div>
+            <BlockFormatControls node={formatNode} updateNode={updateNode} />
+            <div className="format-popup-actions">
+              <Button size="sm" variant="ghost" onClick={() => resetNode(formatNode.id)}>Restaurar</Button>
+              <Button size="sm" variant="ghost" onClick={() => removeNode(formatNode.id)} icon={Trash2}>Excluir</Button>
+              <Button size="sm" onClick={() => setFormatOpen(null)}>Concluir</Button>
             </div>
           </div>
-        </Card>
+        </div>
       )}
 
       <Modal open={modal} onClose={() => setModal(false)} title="Salvar mapa">
         <Field label="Título do mapa"><input value={title} onChange={(e) => setTitle(e.target.value)} /></Field>
         <div className="modal-actions"><Button variant="ghost" onClick={() => setModal(false)}>Cancelar</Button><Button onClick={saveMap} icon={Check}>Salvar</Button></div>
       </Modal>
+    </div>
+  );
+}
+
+function BlockFormatControls({ node, updateNode }) {
+  return (
+    <div className="inspector-grid">
+      <div className="inspector-field">
+        <span>Largura</span>
+        <div className="inspector-range"><input type="range" min="120" max="360" value={nodeWidth(node)} onChange={(e) => updateNode(node.id, { width: Number(e.target.value) })} /><b>{nodeWidth(node)}px</b></div>
+      </div>
+      <div className="inspector-field">
+        <span>Altura</span>
+        <div className="inspector-range"><input type="range" min="50" max="240" value={nodeHeight(node)} onChange={(e) => updateNode(node.id, { height: Number(e.target.value) })} /><b>{nodeHeight(node)}px</b></div>
+      </div>
+      <div className="inspector-field">
+        <span>Tamanho da fonte</span>
+        <div className="inspector-range"><input type="range" min="10" max="24" value={node.fontSize || 12} onChange={(e) => updateNode(node.id, { fontSize: Number(e.target.value) })} /><b>{node.fontSize || 12}px</b></div>
+      </div>
+      <div className="inspector-field">
+        <span>Cor do bloco</span>
+        <div className="color-swatches">
+          {BG_COLORS.map((color) => <button key={color} type="button" className={`color-swatch ${(node.bg || NODE_DEFAULTS.bg) === color ? 'active' : ''}`} style={{ background: color }} onClick={() => updateNode(node.id, { bg: color })} aria-label={`Fundo ${color}`} />)}
+          <input className="color-input" type="color" value={node.bg || NODE_DEFAULTS.bg} onChange={(e) => updateNode(node.id, { bg: e.target.value })} aria-label="Cor personalizada do bloco" />
+        </div>
+      </div>
+      <div className="inspector-field">
+        <span>Cor da fonte</span>
+        <div className="color-swatches">
+          {FONT_COLORS.map((color) => <button key={color} type="button" className={`color-swatch ${(node.color || NODE_DEFAULTS.color) === color ? 'active' : ''}`} style={{ background: color }} onClick={() => updateNode(node.id, { color })} aria-label={`Fonte ${color}`} />)}
+          <input className="color-input" type="color" value={node.color || NODE_DEFAULTS.color} onChange={(e) => updateNode(node.id, { color: e.target.value })} aria-label="Cor personalizada da fonte" />
+        </div>
+      </div>
+      <div className="inspector-field">
+        <span>Estilo e alinhamento</span>
+        <div className="font-actions">
+          <button type="button" className={node.bold ? 'active' : ''} onClick={() => updateNode(node.id, { bold: !node.bold })} aria-label="Negrito"><Bold size={14} /></button>
+          <button type="button" className={node.italic ? 'active' : ''} onClick={() => updateNode(node.id, { italic: !node.italic })} aria-label="Itálico"><Italic size={14} /></button>
+          {[['left', AlignLeft], ['center', AlignCenter], ['right', AlignRight]].map(([align, Icon]) => (
+            <button key={align} type="button" className={(node.align || 'left') === align ? 'active' : ''} onClick={() => updateNode(node.id, { align })} aria-label={`Alinhar ${align}`}><Icon size={14} /></button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
