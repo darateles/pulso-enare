@@ -1,6 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { Moon, Search, Sun, X } from 'lucide-react';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import {
+  BookOpen, ChartNoAxesColumnIncreasing, House, Layers, Library, Menu, Moon, Network,
+  NotebookPen, Search, Settings, Sparkles, Sun, X,
+} from 'lucide-react';
 import { Logo } from './ui.jsx';
 import { useStore } from '../store.jsx';
 import { normalize, initials } from '../utils.js';
@@ -15,11 +18,48 @@ const NAV = [
   { to: '/perfil', label: 'Minha conta' },
 ];
 
+const MENU = [
+  {
+    group: 'Estudo',
+    items: [
+      { to: '/', label: 'Início', icon: House, end: true },
+      { to: '/conteudos', label: 'Conteúdos', icon: BookOpen },
+      { to: '/questoes', label: 'Treino', icon: Library },
+      { to: '/flashcards', label: 'Flashcards', icon: Layers },
+      { to: '/mapas', label: 'Mapas mentais', icon: Network },
+    ],
+  },
+  {
+    group: 'Progresso',
+    items: [
+      { to: '/desempenho', label: 'Desempenho', icon: ChartNoAxesColumnIncreasing },
+      { to: '/caderno-erros', label: 'Caderno de erros', icon: NotebookPen },
+    ],
+  },
+  {
+    group: 'Ferramentas',
+    items: [{ to: '/pulso', label: 'Ferramentas de IA', icon: Sparkles }],
+  },
+  {
+    group: 'Conta',
+    items: [{ to: '/perfil', label: 'Minha conta', icon: Settings }],
+  },
+];
+
 export default function Layout() {
   const { user, curriculum, questions, setTheme } = useStore();
   const [palette, setPalette] = useState(false);
   const [query, setQuery] = useState('');
+  const [drawer, setDrawer] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => { setDrawer(false); }, [location.pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = drawer ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [drawer]);
 
   useEffect(() => {
     const onKey = (event) => {
@@ -27,7 +67,7 @@ export default function Layout() {
         event.preventDefault();
         setPalette((open) => !open);
       }
-      if (event.key === 'Escape') setPalette(false);
+      if (event.key === 'Escape') { setPalette(false); setDrawer(false); }
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
@@ -53,6 +93,7 @@ export default function Layout() {
   return (
     <div className="app-shell">
       <header className="topbar app-topbar">
+        <button className="mobile-menu-btn icon-btn" onClick={() => setDrawer(true)} aria-label="Abrir menu" aria-expanded={drawer}><Menu size={21} /></button>
         <NavLink to="/" className="top-brand" aria-label="Pulso, início"><Logo compact /></NavLink>
         <nav className="top-nav" aria-label="Navegação principal">
           {NAV.map(({ to, label, end }) => (
@@ -77,6 +118,37 @@ export default function Layout() {
       <main className="page">
         <Outlet />
       </main>
+
+      {drawer && <div className="mobile-drawer-overlay" onClick={() => setDrawer(false)} />}
+      <aside className={`mobile-drawer ${drawer ? 'open' : ''}`} aria-hidden={!drawer}>
+        <div className="mobile-drawer-head">
+          <Logo />
+          <button className="icon-btn" onClick={() => setDrawer(false)} aria-label="Fechar menu"><X size={19} /></button>
+        </div>
+        <nav className="mobile-drawer-nav" aria-label="Menu">
+          {MENU.map((group) => (
+            <section key={group.group}>
+              <span className="mobile-drawer-group">{group.group}</span>
+              {group.items.map(({ to, label, icon: Icon, end }) => (
+                <NavLink
+                  key={to}
+                  to={to}
+                  end={end}
+                  onClick={() => { if (location.pathname === to) setDrawer(false); }}
+                  className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
+                >
+                  <Icon size={18} />
+                  <span>{label}</span>
+                </NavLink>
+              ))}
+            </section>
+          ))}
+        </nav>
+        <NavLink to="/perfil" className="mobile-drawer-user" onClick={() => { if (location.pathname === '/perfil') setDrawer(false); }}>
+          <span className="avatar">{initials(user.name)}</span>
+          <span><strong>{user.name || 'Minha conta'}</strong><small>Perfil e ajustes</small></span>
+        </NavLink>
+      </aside>
 
       {palette && (
         <div className="overlay palette-overlay" onMouseDown={(event) => { if (event.target === event.currentTarget) setPalette(false); }}>
