@@ -172,10 +172,13 @@ export default function Planner() {
           <Button variant="soft" size="sm" onClick={openDifficulty} icon={Target}>Escolher especialidades</Button>
           {weakSpecialties.length > 0 && (
             <Button variant="ghost" size="sm" onClick={() => { setDraftGroups([...new Set([...selectedGroups, ...weakSpecialties.map((item) => item.group)])]); setDifficultyOpen(true); }} icon={Sparkles}>
-              Sugestão pelos erros: {weakSpecialties.slice(0, 3).map((item) => item.group).join(', ')}
+              Sugerir pelos meus erros
             </Button>
           )}
         </div>
+        {weakSpecialties.length > 0 && (
+          <p className="muted-note">Sugestão pelos erros: {weakSpecialties.slice(0, 3).map((item) => item.group).join(' · ')}.</p>
+        )}
       </Card>
 
       {weeks.length > 0 && user.plan.mode !== 'personalizado' && (
