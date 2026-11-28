@@ -22,3 +22,13 @@ test('retorna falso quando o gabarito não corresponde a nenhuma alternativa', (
   assert.equal(answerKey('Diagnóstico inexistente', options), null);
   assert.equal(isCorrectAnswer('Diagnóstico inexistente', options, 'A'), false);
 });
+
+test('todos os casos de ECG têm gabarito resolvível', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const ecg = JSON.parse(await readFile(new URL('../seed/ecg.json', import.meta.url), 'utf8'));
+  for (const item of ecg.cases) {
+    const key = answerKey(item.answer, item.options);
+    assert.ok(key, item.id);
+    assert.equal(isCorrectAnswer(item.answer, item.options, key), true, item.id);
+  }
+});

@@ -63,6 +63,25 @@ test('planner cria semanas com sessões e simulado', async () => {
   }
 });
 
+test('planner personalizado inclui revisões no ciclo', async () => {
+  const curriculum = JSON.parse(await readFile(new URL('../seed/curriculum.json', import.meta.url), 'utf8'));
+  const plan = generatePlan({
+    startDate: iso(),
+    examDate: iso(addDays(new Date(), 180)),
+    dailyHours: 3,
+    studyDays: [1, 2, 3, 4, 5, 6],
+    progress: {},
+    attempts: [],
+    difficultyGroups: ['Cardiologia'],
+    level: 3,
+  }, curriculum, 2);
+  const types = new Set(plan.weeks.flatMap((w) => w.days).flatMap((d) => d.sessions).map((s) => s.type));
+  assert.ok(types.has('teoria'));
+  assert.ok(types.has('questoes'));
+  assert.ok(types.has('revisao'));
+  assert.ok(types.has('simulado'));
+});
+
 test('planner personalizado ignora o nível de referência', async () => {
   const curriculum = JSON.parse(await readFile(new URL('../seed/curriculum.json', import.meta.url), 'utf8'));
   const base = {

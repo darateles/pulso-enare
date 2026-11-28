@@ -41,7 +41,9 @@ export function generatePlan(user, curriculum, weekCount = 4) {
   const topics = curriculum.areas.flatMap((a) => a.topics.map((t) => ({ ...t, areaName: a.name, areaColor: a.color })));
   const start = parseISO(user.startDate) > parseISO(iso()) ? parseISO(user.startDate) : parseISO(iso());
   const studyDays = new Set(user.studyDays);
-  const perDay = user.dailyHours >= 5 ? 3 : user.dailyHours >= 3 ? 2 : 1;
+  // Reserva capacidade para teoria, recuperação e revisão no mesmo dia.
+  // Antes, 3h/dia gerava apenas 2 sessões e a revisão nunca cabia no plano.
+  const perDay = Math.min(6, Math.max(1, Math.round((Number(user.dailyHours) || 3) * 1.25)));
 
   const weeksDates = [];
   let cursor = start;
