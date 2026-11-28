@@ -6,11 +6,11 @@ import {
 } from 'lucide-react';
 import { Button, Card, Chip, Field, PageHead, Progress, Ring } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
-import { topicProgress, topicStatus } from '../utils.js';
+import { examPhase, topicProgress, topicStatus } from '../utils.js';
 import { TOPIC_STAGE_LABEL, topicStage } from '../metodo.js';
 import {
-  LEVELS, LEVEL_STATUS_LABEL, currentLevel, levelById, levelStats, levelStatus,
-  nextTopics, semesterLabel, semesterLevel,
+  LEVELS, LEVEL_STATUS_LABEL, STUDY_PACES, currentLevel, levelById, levelStats, levelStatus,
+  nextTopics, recommendLevel, semesterLabel,
 } from '../trilha.js';
 import { generatePlan, planCounts } from '../planner.js';
 
@@ -30,6 +30,9 @@ export default function Trilha() {
   const current = currentLevel(user);
   const [selectedId, setSelectedId] = useState(current.id);
   const selected = levelById(selectedId);
+  const recommendation = useMemo(() => recommendLevel(user), [user.dailyHours, user.studyDays, user.examDate, user.studyPace]);
+  const pace = STUDY_PACES.find((item) => item.id === user.studyPace) || STUDY_PACES[1];
+  const phase = examPhase(user.examDate);
 
   const allStats = useMemo(
     () => Object.fromEntries(LEVELS.map((level) => [level.id, levelStats(curriculum, level.id, user.progress)])),
@@ -49,16 +52,28 @@ export default function Trilha() {
 
   const changeSemester = (value) => {
     const semester = Number(value);
-    const level = semesterLevel(semester);
-    updateUser({ semester, level });
+    updateUser({ semester });
+    toast(`Semestre salvo como informação de perfil. Seu nível não mudou.`);
+  };
+
+  const changeLevel = (value) => {
+    const level = Math.min(5, Math.max(1, Number(value) || 1));
+    updateUser({ level });
     setSelectedId(level);
-    toast(`Nível ${level} ativado para o ${semester}º semestre.`);
+    toast(`Nível ${level} definido como referência. Todo o conteúdo continua liberado.`);
+  };
+
+  const applyRecommended = () => {
+    const level = recommendation.levelId;
+    updateUser({ level });
+    setSelectedId(level);
+    toast(`Nível ${level} · ${levelById(level).name} aplicado a partir do seu ritmo.`);
   };
 
   const rebuildPlan = () => {
-    const plan = generatePlan({ ...user, level: current.id }, curriculum, 8);
+    const plan = generatePlan(user, curriculum, 8);
     updateUser({ plan });
-    toast(`Plano de 8 semanas refeito com prioridade no Nível ${current.id}.`);
+    toast('Plano personalizado refeito com todos os conteúdos liberados.');
   };
 
   return (
@@ -72,17 +87,18 @@ export default function Trilha() {
 
       <Card className="trilha-hero" style={{ '--level-tone': current.tone }}>
         <div className="trilha-hero-copy">
-          <span className="eyebrow">Nível atual · {semesterLabel(user.semester)}</span>
+          <span className="eyebrow">Nível atual · {pace.label}</span>
           <h2>Nível {current.id}: {current.name}</h2>
           <div className="trilha-hero-meta">
             <span><Layers size={14} /> {currentStats.total} temas</span>
             <span><BookOpen size={14} /> {currentStats.subjects.length} matérias</span>
             <span><Trophy size={14} /> {currentStats.mastered} dominados</span>
             <span><Target size={14} /> {currentStats.pct}% do nível</span>
+            <span><Clock3 size={14} /> {phase.label}</span>
           </div>
           <div className="trilha-hero-actions">
             <Button onClick={continueStudy} icon={Play}>Continuar de onde parei</Button>
-            <Button variant="ghost" onClick={rebuildPlan} icon={RefreshCw}>Regerar plano do nível</Button>
+            <Button variant="ghost" onClick={rebuildPlan} icon={RefreshCw}>Regerar plano personalizado</Button>
           </div>
         </div>
         <div className="trilha-hero-ring">
@@ -110,7 +126,7 @@ export default function Trilha() {
                 <span className="level-state">{LEVEL_STATUS_LABEL[state]}</span>
               </span>
               <strong>{level.name}</strong>
-              <small>{level.semesterLabel} · {s.total} temas</small>
+              <small>{level.paceLabel} · {s.total} temas</small>
               <Progress value={s.pct} tone={state === 'done' ? 'green' : 'accent'} />
               <span className="level-card-foot">{s.mastered}/{s.total} dominados</span>
             </button>
@@ -128,7 +144,7 @@ export default function Trilha() {
           ) : (
             <div className="trilha-level-head">
               <div>
-                <span className="eyebrow">Nível {selected.id} · {selected.semesterLabel}</span>
+                <span className="eyebrow">Nível {selected.id} · {selected.paceLabel}</span>
                 <h2>{selected.name}</h2>
                 <p>{selected.description}</p>
                 <div className="trilha-level-tags">
@@ -150,7 +166,7 @@ export default function Trilha() {
           {selectedStatus === 'ahead' && (
             <div className="trilha-notice">
               <Sparkles size={17} />
-              <p><strong>Este nível está à frente do seu semestre.</strong> Você pode antecipar temas, mas o planner dará prioridade ao Nível {current.id} até você concluir os fundamentos.</p>
+              <p><strong>Este nível está liberado.</strong> Ele é uma referência de profundidade, não uma trava. O planner personalizado continua usando todos os temas e as suas especialidades difíceis.</p>
               <Button size="sm" variant="soft" onClick={() => setSelectedId(current.id)}>Voltar ao meu nível</Button>
             </div>
           )}
@@ -217,17 +233,31 @@ export default function Trilha() {
         <aside className="trilha-side">
           <Card>
             <div className="section-head small">
-              <div><span className="eyebrow">Ajustar trilha</span><h3>Semestre da faculdade</h3></div>
+              <div><span className="eyebrow">Nível da trilha</span><h3>Definido pelo seu ritmo</h3></div>
+              <Chip tone="accent">{recommendation.level.code}</Chip>
             </div>
-            <Field hint={`Nível ${current.id} · ${current.name}`}>
-              <select value={user.semester || 1} onChange={(e) => changeSemester(e.target.value)}>
-                {Array.from({ length: 12 }, (_, i) => i + 1).map((s) => (
-                  <option key={s} value={s}>{s}º semestre · Nível {semesterLevel(s)}</option>
-                ))}
+            <p className="muted-note">O semestre não define seu nível. A recomendação usa horas por dia, dias por semana, profundidade escolhida e proximidade da prova.</p>
+            <div className="level-preview recommended" style={{ '--level-tone': recommendation.level.tone }}>
+              <span className="level-preview-code small">{recommendation.level.code}</span>
+              <div>
+                <strong>Recomendado: nível {recommendation.level.id} · {recommendation.level.name}</strong>
+                <p>{recommendation.reason}</p>
+              </div>
+            </div>
+            <Field label="Nível de referência" hint="Todo o conteúdo fica liberado; o planner não fica preso a ele.">
+              <select value={current.id} onChange={(e) => changeLevel(e.target.value)}>
+                {LEVELS.map((level) => <option key={level.id} value={level.id}>{level.code} · {level.name}{level.id === recommendation.levelId ? ' (recomendado)' : ''}</option>)}
               </select>
             </Field>
-            <p className="muted-note">Ao mudar o semestre, regenere o plano para aplicar o novo nível.</p>
-            <Button variant="soft" size="sm" onClick={rebuildPlan} icon={RefreshCw}>Atualizar plano</Button>
+            <Button variant="soft" size="sm" onClick={applyRecommended} icon={Sparkles}>Aplicar nível recomendado</Button>
+            <div className="trilha-profile-field">
+              <Field label="Semestre da faculdade" hint="Apenas informação de perfil. Alterar não muda seu nível.">
+                <select value={user.semester || 1} onChange={(e) => changeSemester(e.target.value)}>
+                  {Array.from({ length: 12 }, (_, i) => i + 1).map((s) => <option key={s} value={s}>{semesterLabel(s)}</option>)}
+                </select>
+              </Field>
+            </div>
+            <Button variant="ghost" size="sm" onClick={rebuildPlan} icon={RefreshCw}>Regerar plano personalizado</Button>
           </Card>
 
           <Card className="trilha-plan">

@@ -1,5 +1,4 @@
-import { addDays, iso, parseISO, topicStatus, uid } from './utils.js';
-import { semesterLevel, topicLevelId } from './trilha.js';
+import { addDays, accuracyBySpecialty, examPhase, iso, parseISO, topicPriority, topicStatus, uid } from './utils.js';
 
 const TYPES = {
   teoria: { label: 'Codificar', minutes: 50, icon: 'book' },
@@ -7,27 +6,6 @@ const TYPES = {
   revisao: { label: 'Revisar', minutes: 20, icon: 'repeat' },
   simulado: { label: 'Intercalar', minutes: 90, icon: 'timer' },
 };
-
-function levelFactor(topic, userLevel) {
-  const diff = topicLevelId(topic.id) - userLevel;
-  if (diff === 0) return 4;
-  if (diff === -1) return 0.8;
-  if (diff === -2) return 0.3;
-  if (diff < -2) return 0.12;
-  if (diff === 1) return 0.25;
-  return 0.08;
-}
-
-function difficultyWeight(topic, progress, attempts, userLevel) {
-  const p = progress?.[topic.id] || {};
-  const done = (p.done || []).length;
-  const conf = p.confidence || 0;
-  const arr = attempts.filter((a) => a.topicId === topic.id && a.correct !== null);
-  const wrong = arr.filter((a) => !a.correct).length;
-  const freshness = done > 0 ? 0.6 : 1.6;
-  const base = topic.weight * (1 + (4 - conf) * 0.35) * freshness + wrong * 0.8;
-  return Math.max(0.25, base * levelFactor(topic, userLevel));
-}
 
 function sessionFor(type, topic = null) {
   return {
@@ -48,14 +26,18 @@ function sessionFor(type, topic = null) {
 }
 
 /**
- * Planner em ciclos: um tema novo entra em Codificar, retorna em Recuperar
- * no próximo dia de estudo e em Revisar nos intervalos seguintes. O restante
- * da capacidade recebe revisões vencidas e o simulado intercalado da semana.
+ * Planner personalizado: todos os temas ficam disponíveis. A ordem nasce do
+ * que o aluno marcou como difícil, dos erros, do peso/incidência das provas e
+ * da proximidade da prova — sem bloquear ou privilegiar um nível fixo.
  */
 export function generatePlan(user, curriculum, weekCount = 4) {
-  const userLevel = Number(user.level) || semesterLevel(user.semester);
   const progress = user.progress || {};
   const attempts = user.attempts || [];
+  const difficultyGroups = Array.isArray(user.difficultyGroups) ? user.difficultyGroups : [];
+  const phase = examPhase(user.examDate);
+  const specialtyStats = new Map(
+    accuracyBySpecialty(curriculum, attempts).map((item) => [item.group, item]),
+  );
   const topics = curriculum.areas.flatMap((a) => a.topics.map((t) => ({ ...t, areaName: a.name, areaColor: a.color })));
   const start = parseISO(user.startDate) > parseISO(iso()) ? parseISO(user.startDate) : parseISO(iso());
   const studyDays = new Set(user.studyDays);
@@ -112,7 +94,10 @@ export function generatePlan(user, curriculum, weekCount = 4) {
 
   const queue = topics
     .filter((topic) => topicStatus(progress[topic.id], topic.checklist.length) !== 'dominado')
-    .map((topic) => ({ ...topic, priority: difficultyWeight(topic, progress, attempts, userLevel) }))
+    .map((topic) => ({
+      ...topic,
+      priority: topicPriority(topic, { progress, attempts, difficultyGroups, specialtyStats, phase }),
+    }))
     .sort((a, b) => b.priority - a.priority);
 
   const introduced = new Set();
@@ -153,7 +138,14 @@ export function generatePlan(user, curriculum, weekCount = 4) {
     return { start: iso(addDays(start, w * 7)), days };
   }).filter((week) => week.days.length);
 
-  return { generatedAt: new Date().toISOString(), level: userLevel, weeks };
+  return {
+    generatedAt: new Date().toISOString(),
+    mode: 'personalizado',
+    referenceLevel: Number(user.level) || 1,
+    phase: phase.id,
+    difficultyGroups,
+    weeks,
+  };
 }
 
 export function todaySessions(plan) {

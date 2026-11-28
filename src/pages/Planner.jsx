@@ -2,11 +2,11 @@ import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CalendarDays, CheckCircle2, Circle, RefreshCw, Sparkles, Timer,
-  BookOpen, ListChecks, Repeat, Info, ChevronLeft, ChevronRight, GraduationCap, ArrowRight,
+  BookOpen, ListChecks, Repeat, Info, ChevronLeft, ChevronRight, GraduationCap, ArrowRight, Target,
 } from 'lucide-react';
 import { Button, Card, Chip, Empty, Modal, PageHead, Progress } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
-import { fmtDate, iso, minutesLabel, WEEKDAYS, dueReviews, daysUntil } from '../utils.js';
+import { accuracyBySpecialty, daysUntil, dueReviews, examPhase, fmtDate, iso, minutesLabel, WEEKDAYS } from '../utils.js';
 import { generatePlan, planCounts } from '../planner.js';
 import { currentLevel } from '../trilha.js';
 import { SESSION_STAGE, STAGE_LABEL, STAGES, planStageCounts } from '../metodo.js';
@@ -17,10 +17,29 @@ export default function Planner() {
   const { user, curriculum, updateUser, bumpActivity, toast } = useStore();
   const [confirm, setConfirm] = useState(false);
   const [offset, setOffset] = useState(0);
+  const [difficultyOpen, setDifficultyOpen] = useState(false);
+  const [draftGroups, setDraftGroups] = useState([]);
   const counts = planCounts(user.plan);
   const stageCounts = useMemo(() => planStageCounts(user.plan), [user.plan]);
   const level = currentLevel(user);
   const due = useMemo(() => dueReviews(curriculum, user.progress), [curriculum, user.progress]);
+  const phase = examPhase(user.examDate);
+  const selectedGroups = user.difficultyGroups || [];
+  const specialties = useMemo(() => {
+    const map = new Map();
+    for (const area of curriculum.areas) {
+      for (const topic of area.topics) {
+        const entry = map.get(topic.group) || { group: topic.group, areaName: area.name, color: area.color, count: 0 };
+        entry.count += 1;
+        map.set(topic.group, entry);
+      }
+    }
+    return [...map.values()].sort((a, b) => a.areaName.localeCompare(b.areaName, 'pt-BR') || a.group.localeCompare(b.group, 'pt-BR'));
+  }, [curriculum]);
+  const weakSpecialties = useMemo(
+    () => accuracyBySpecialty(curriculum, user.attempts).filter((item) => item.total >= 2 && item.pct < 70).slice(0, 6),
+    [curriculum, user.attempts],
+  );
 
   const weeks = user.plan.weeks || [];
   const visible = weeks.slice(offset, offset + 2);
@@ -35,7 +54,35 @@ export default function Planner() {
     updateUser({ plan, onboardingDone: true });
     setConfirm(false);
     setOffset(0);
-    toast(`Plano de 8 semanas gerado para o Nível ${level.id} · ${level.name}.`);
+    toast('Plano personalizado de 8 semanas gerado.');
+  };
+
+  const openDifficulty = () => {
+    setDraftGroups([...selectedGroups]);
+    setDifficultyOpen(true);
+  };
+
+  const toggleDraftGroup = (group) => {
+    setDraftGroups((prev) => (prev.includes(group) ? prev.filter((item) => item !== group) : [...prev, group]));
+  };
+
+  const suggestWeak = () => {
+    if (!weakSpecialties.length) {
+      toast('Ainda não há questões suficientes para sugerir especialidades.', 'error');
+      return;
+    }
+    setDraftGroups((prev) => [...new Set([...prev, ...weakSpecialties.map((item) => item.group)])]);
+  };
+
+  const saveDifficulty = (regenerate = false) => {
+    const nextUser = { ...user, difficultyGroups: [...draftGroups] };
+    if (regenerate) nextUser.plan = generatePlan(nextUser, curriculum, 8);
+    updateUser(nextUser);
+    setDifficultyOpen(false);
+    if (regenerate) setOffset(0);
+    toast(regenerate
+      ? 'Preferências salvas e plano personalizado regerado.'
+      : 'Preferências salvas. Regenere o plano para aplicar ao cronograma.');
   };
 
   const toggleSession = (session) => {
@@ -55,14 +102,12 @@ export default function Planner() {
     }
   };
 
-  const phase = daysUntil(user.examDate) > 180 ? 'Fundamentação' : daysUntil(user.examDate) > 90 ? 'Consolidação' : daysUntil(user.examDate) > 30 ? 'Questões e revisão' : 'Reta final';
-
   return (
     <>
       <PageHead
         eyebrow="Planner"
         title="Planner"
-        subtitle={`Cronograma de 8 semanas do Nível ${level.id} · ${level.name}: codificação, recuperação, revisão e simulado.`}
+        subtitle="Plano Pro personalizado: todos os conteúdos liberados, prioridade para suas especialidades difíceis, seus erros e a incidência das provas."
         actions={<Button onClick={() => (counts.total ? setConfirm(true) : build())} icon={Sparkles}>{counts.total ? 'Regerar plano' : 'Gerar plano'}</Button>}
       />
 
@@ -70,7 +115,7 @@ export default function Planner() {
         <Card className="plan-config">
           <div className="section-head small">
             <div><span className="eyebrow">Sua rotina</span><h2>Capacidade semanal</h2></div>
-            <Link to="/perfil" className="text-link">Editar em Perfil e ajustes <ArrowRight size={14} /></Link>
+            <Link to="/perfil?secao=planner" className="text-link">Editar em Minha conta <ArrowRight size={14} /></Link>
           </div>
           <div className="plan-routine">
             <div><span>Horas/dia</span><strong>{user.dailyHours}h</strong></div>
@@ -79,8 +124,8 @@ export default function Planner() {
             <div><span>Meta</span><strong>{user.goalQuestions} questões</strong></div>
           </div>
           <div className="plan-summary">
-            <div><span>Nível da trilha</span><strong><Link to="/trilha" className="inline-icon"><GraduationCap size={13} /> {level.code} · {level.name}</Link></strong></div>
-            <div><span>Fase sugerida</span><strong>{phase}</strong></div>
+            <div><span>Plano</span><strong>Pro · personalizado</strong></div>
+            <div><span>Fase sugerida</span><strong>{phase.label}</strong></div>
             <div><span>Semanas até a prova</span><strong>{totalWeeks}</strong></div>
             <div><span>Sessões planejadas</span><strong>{counts.done}/{counts.total}</strong></div>
           </div>
@@ -90,7 +135,7 @@ export default function Planner() {
               <div key={stage.id}><span>{stage.label}</span><strong>{stageCounts[stage.id] || 0}</strong></div>
             ))}
           </div>
-          <p className="muted-note">O ciclo distribui codificação, recuperação, revisão espaçada e treino intercalado — não apenas leitura.</p>
+          <p className="muted-note">O ciclo distribui codificação, recuperação, revisão espaçada e treino intercalado — sem bloquear nenhum nível.</p>
         </Card>
 
         <Card className="plan-manual">
@@ -109,6 +154,37 @@ export default function Planner() {
           <div className="tip-box"><Info size={16} /><p>Errou um tema? Ele ganha prioridade automaticamente na próxima geração do plano.</p></div>
         </Card>
       </div>
+
+      <Card className="plan-difficulty">
+        <div className="section-head small">
+          <div><span className="eyebrow">Personalização</span><h2>Especialidades com mais dificuldade</h2></div>
+          <Chip tone={selectedGroups.length ? 'accent' : 'neutral'}>{selectedGroups.length ? `${selectedGroups.length} selecionadas` : 'prioridade automática'}</Chip>
+        </div>
+        <p className="muted-note">Marque o que quer priorizar. O plano usa todos os temas e combina suas escolhas com erros, peso e incidência das principais provas. Nível de referência: <Link to="/trilha" className="inline-icon"><GraduationCap size={13} /> {level.code} · {level.name}</Link>.</p>
+        {selectedGroups.length ? (
+          <div className="difficulty-selected">
+            {selectedGroups.map((group) => <Chip key={group} tone="accent">{group}</Chip>)}
+          </div>
+        ) : (
+          <div className="difficulty-selected empty"><span className="muted-note">Nenhuma especialidade marcada. O plano ainda prioriza peso, incidência, revisões e seus erros.</span></div>
+        )}
+        <div className="plan-actions">
+          <Button variant="soft" size="sm" onClick={openDifficulty} icon={Target}>Escolher especialidades</Button>
+          {weakSpecialties.length > 0 && (
+            <Button variant="ghost" size="sm" onClick={() => { setDraftGroups([...new Set([...selectedGroups, ...weakSpecialties.map((item) => item.group)])]); setDifficultyOpen(true); }} icon={Sparkles}>
+              Sugestão pelos erros: {weakSpecialties.slice(0, 3).map((item) => item.group).join(', ')}
+            </Button>
+          )}
+        </div>
+      </Card>
+
+      {weeks.length > 0 && user.plan.mode !== 'personalizado' && (
+        <div className="trilha-notice">
+          <Info size={17} />
+          <p><strong>Seu cronograma foi gerado no modelo antigo por nível.</strong> Regenere para aplicar o plano personalizado com todos os conteúdos e suas especialidades difíceis.</p>
+          <Button size="sm" variant="soft" onClick={build} icon={RefreshCw}>Regerar agora</Button>
+        </div>
+      )}
 
       {!weeks.length ? (
         <Card>
@@ -175,6 +251,32 @@ export default function Planner() {
         <div className="modal-actions">
           <Button variant="ghost" onClick={() => setConfirm(false)}>Cancelar</Button>
           <Button onClick={build} icon={RefreshCw}>Regerar agora</Button>
+        </div>
+      </Modal>
+
+      <Modal open={difficultyOpen} onClose={() => setDifficultyOpen(false)} title="Especialidades com mais dificuldade" size="lg">
+        <p className="muted-note">Marque as especialidades que quer priorizar. O plano continua com todos os conteúdos liberados e não fica preso a um nível.</p>
+        {weakSpecialties.length > 0 && (
+          <Button variant="ghost" size="sm" onClick={suggestWeak} icon={Sparkles}>Usar sugestão dos meus erros ({weakSpecialties.map((item) => `${item.group} ${item.pct}%`).slice(0, 3).join(' · ')})</Button>
+        )}
+        <div className="difficulty-picker">
+          {specialties.map((specialty) => (
+            <button
+              key={specialty.group}
+              type="button"
+              className={draftGroups.includes(specialty.group) ? 'active' : ''}
+              onClick={() => toggleDraftGroup(specialty.group)}
+              aria-pressed={draftGroups.includes(specialty.group)}
+            >
+              <span className="difficulty-dot" style={{ background: specialty.color }} />
+              <span className="difficulty-copy"><strong>{specialty.group}</strong><small>{specialty.areaName} · {specialty.count} temas</small></span>
+            </button>
+          ))}
+        </div>
+        <div className="modal-actions">
+          <Button variant="ghost" onClick={() => setDifficultyOpen(false)}>Cancelar</Button>
+          <Button variant="soft" onClick={() => saveDifficulty(false)}>Salvar</Button>
+          {counts.total > 0 && <Button onClick={() => saveDifficulty(true)} icon={RefreshCw}>Salvar e regerar</Button>}
         </div>
       </Modal>
     </>

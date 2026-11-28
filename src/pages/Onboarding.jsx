@@ -1,10 +1,12 @@
 import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Check, Clock3, Compass, GraduationCap, Layers } from 'lucide-react';
+import { ArrowRight, Check, Clock3, Compass, GraduationCap, Layers, Sparkles } from 'lucide-react';
 import { Button, Field, Logo } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
-import { WEEKDAYS, iso, daysUntil } from '../utils.js';
-import { SEMESTERS, levelById, levelStats, semesterLabel, semesterLevel } from '../trilha.js';
+import { WEEKDAYS, daysUntil, iso } from '../utils.js';
+import {
+  LEVELS, SEMESTERS, STUDY_PACES, levelById, levelStats, recommendLevel, semesterLabel,
+} from '../trilha.js';
 import { generatePlan } from '../planner.js';
 import { STAGES } from '../metodo.js';
 
@@ -12,15 +14,21 @@ export default function Onboarding() {
   const { user, curriculum, updateUser, toast } = useStore();
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
+  const [levelOverride, setLevelOverride] = useState(null);
   const [form, setForm] = useState({
     name: user.name || '',
     semester: user.semester || 1,
     examDate: user.examDate || '2027-09-12',
     dailyHours: user.dailyHours || 3,
     studyDays: user.studyDays || [1, 2, 3, 4, 5, 6],
+    studyPace: user.studyPace || 'equilibrado',
   });
 
-  const levelId = semesterLevel(form.semester);
+  const recommendation = useMemo(
+    () => recommendLevel(form),
+    [form.dailyHours, form.studyDays, form.examDate, form.studyPace],
+  );
+  const levelId = levelOverride || recommendation.levelId;
   const level = levelById(levelId);
   const preview = useMemo(() => levelStats(curriculum, levelId, user.progress), [curriculum, levelId, user.progress]);
 
@@ -44,7 +52,7 @@ export default function Onboarding() {
     };
     const plan = generatePlan(next, curriculum, 8);
     updateUser({ ...next, plan });
-    toast(`Plano do Nível ${levelId} criado. Bem-vindo(a) à trilha.`);
+    toast(`Plano personalizado criado. Nível de referência: N${levelId} · ${level.name}.`);
     navigate('/trilha');
   };
 
@@ -55,12 +63,12 @@ export default function Onboarding() {
         <div className="onboard-copy">
           <span className="eyebrow light">Pulso</span>
           <h1>Configurar<br /><em>estudo.</em></h1>
-          <p>Informe seu semestre e sua rotina. O plano é gerado a partir disso.</p>
+          <p>Informe sua rotina e sua data de prova. O nível é sugerido pelo seu ritmo — não pelo semestre.</p>
         </div>
         <div className="onboard-points">
           <div><Layers size={18} /> 5 níveis, 7 matérias e 90 temas</div>
-          <div><GraduationCap size={18} /> Conteúdo do seu período da faculdade</div>
-          <div><Compass size={18} /> Checklist, revisão e questões</div>
+          <div><GraduationCap size={18} /> Todo o conteúdo liberado desde o início</div>
+          <div><Compass size={18} /> Planner personalizado pelas suas dificuldades</div>
         </div>
       </div>
 
@@ -69,11 +77,11 @@ export default function Onboarding() {
           <div className="onboard-welcome">
             <span className="onboard-step">Passo 1 de 3</span>
             <h2>Vamos montar seu curso.</h2>
-            <p>Em menos de um minuto você define seu semestre, sua rotina e sua data de prova. O sistema transforma isso em uma trilha com níveis e um plano de 8 semanas.</p>
+            <p>Em menos de um minuto você define sua rotina, sua data de prova e o seu ritmo. O nível é só uma referência de profundidade; todo o conteúdo fica liberado.</p>
             <ul className="check-list-static">
-              <li><Check size={16} /> Níveis do fundamental ao internato, como um curso</li>
-              <li><Check size={16} /> Ciclo baseado em evidências: recuperação, espaçamento e intercalação</li>
-              <li><Check size={16} /> Revisão adaptativa e plano personalizado por prioridade e erros</li>
+              <li><Check size={16} /> Nível sugerido por horas de estudo, constância e proximidade da prova</li>
+              <li><Check size={16} /> Semestre é apenas informação de perfil</li>
+              <li><Check size={16} /> Planner Pro personalizado pelas especialidades mais difíceis</li>
             </ul>
             <div className="onboard-method">
               {STAGES.map((stage, index) => (
@@ -87,37 +95,28 @@ export default function Onboarding() {
 
         {step === 1 && (
           <div className="onboard-form">
-            <span className="onboard-step">Passo 2 de 3 · seu momento</span>
-            <h2>Em que semestre você está?</h2>
-            <p>O nível da sua trilha é definido pelo período da faculdade. Você pode ajustar isso depois, em Ajustes ou na própria Trilha.</p>
+            <span className="onboard-step">Passo 2 de 3 · seu perfil</span>
+            <h2>Seu momento.</h2>
+            <p>O semestre serve só para contextualizar seu perfil. Ele não define mais o seu nível nem bloqueia conteúdos.</p>
             <Field label="Como quer ser chamado(a)?">
               <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Seu primeiro nome" autoFocus />
             </Field>
-            <Field label="Semestre atual" hint={`${semesterLabel(form.semester)} · ${level.semesterLabel}`}>
+            <Field label="Semestre atual" hint={`${semesterLabel(form.semester)} · informação de perfil`}>
               <div className="semester-grid" role="group" aria-label="Semestre da faculdade">
                 {SEMESTERS.map((s) => (
                   <button
                     key={s.value}
                     type="button"
                     className={form.semester === s.value ? 'active' : ''}
-                    style={{ '--level-tone': levelById(s.level).tone }}
                     onClick={() => setForm({ ...form, semester: s.value })}
                     aria-pressed={form.semester === s.value}
                   >
                     <strong>{s.label}</strong>
-                    <span>N{s.level}</span>
                   </button>
                 ))}
               </div>
             </Field>
-            <div className="level-preview" style={{ '--level-tone': level.tone }}>
-              <span className="level-preview-code">{level.code}</span>
-              <div>
-                <strong>Nível {level.id} · {level.name}</strong>
-                <p>{level.description}</p>
-                <small>{preview.subjects.length} matérias · {preview.total} temas · {level.semesterLabel}</small>
-              </div>
-            </div>
+            <div className="profile-note"><GraduationCap size={17} /><span>Seu nível será calculado pelo ritmo de estudo na próxima etapa. Você poderá mudar depois em Minha conta.</span></div>
             <div className="onboard-actions">
               <Button variant="ghost" onClick={() => setStep(0)}>Voltar</Button>
               <Button onClick={() => setStep(2)} icon={ArrowRight}>Continuar</Button>
@@ -127,13 +126,9 @@ export default function Onboarding() {
 
         {step === 2 && (
           <div className="onboard-form">
-            <span className="onboard-step">Passo 3 de 3 · sua rotina</span>
-            <h2>Seu ponto de partida.</h2>
-            <p>Use dados realistas. O plano distribui a carga do seu nível por prioridade — não por perfeição.</p>
-            <div className="onboard-level-line">
-              <span className="level-preview-code small">{level.code}</span>
-              <span><strong>Nível {level.id} · {level.name}</strong> · {level.semesterLabel}</span>
-            </div>
+            <span className="onboard-step">Passo 3 de 3 · seu ritmo</span>
+            <h2>Seu ritmo define o nível.</h2>
+            <p>O Pulso combina horas por dia, frequência semanal, profundidade escolhida e proximidade da prova. O semestre não entra nessa conta.</p>
             <Field label="Data da prova" hint={form.examDate ? `${daysUntil(form.examDate)} dias a partir de hoje` : 'Defina uma data'}>
               <input type="date" value={form.examDate} onChange={(e) => setForm({ ...form, examDate: e.target.value })} />
             </Field>
@@ -151,9 +146,44 @@ export default function Onboarding() {
                 ))}
               </div>
             </Field>
+            <Field label="Como você quer estudar?" hint="Você decide se quer algo mais avançado.">
+              <div className="pace-picker">
+                {STUDY_PACES.map((pace) => (
+                  <button
+                    key={pace.id}
+                    type="button"
+                    className={form.studyPace === pace.id ? 'active' : ''}
+                    onClick={() => setForm({ ...form, studyPace: pace.id })}
+                  >
+                    <strong>{pace.label}</strong>
+                    <span>{pace.description}</span>
+                  </button>
+                ))}
+              </div>
+            </Field>
+            <div className="level-preview recommended" style={{ '--level-tone': level.tone }}>
+              <span className="level-preview-code">{level.code}</span>
+              <div>
+                <strong>Nível sugerido: {level.id} · {level.name}</strong>
+                <p>{recommendation.reason}</p>
+                <small>{preview.subjects.length} matérias · {preview.total} temas liberados · {recommendation.phase.label}</small>
+              </div>
+            </div>
+            <div className="level-select-row">
+              <Field label="Nível de referência" hint="Organiza a ordem sugerida. O planner personalizado usa todos os conteúdos.">
+                <select value={level.id} onChange={(e) => setLevelOverride(Number(e.target.value))}>
+                  {LEVELS.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.code} · {item.name}{item.id === recommendation.levelId ? ' (recomendado)' : ''}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+              {levelOverride && <Button variant="ghost" size="sm" onClick={() => setLevelOverride(null)} icon={Sparkles}>Usar recomendado</Button>}
+            </div>
             <div className="onboard-actions">
               <Button variant="ghost" onClick={() => setStep(1)}>Voltar</Button>
-              <Button onClick={finish} disabled={!form.examDate || !form.studyDays.length} icon={Clock3}>Criar minha trilha e plano</Button>
+              <Button onClick={finish} disabled={!form.examDate || !form.studyDays.length} icon={Clock3}>Criar meu plano</Button>
             </div>
           </div>
         )}

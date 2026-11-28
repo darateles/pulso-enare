@@ -2,11 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import {
-  LEVELS, TOPIC_LEVEL, levelSubjects, nextTopics, semesterLevel, currentLevelId,
+  LEVELS, TOPIC_LEVEL, currentLevelId, levelSubjects, nextTopics, recommendLevel,
 } from '../src/trilha.js';
+import { addDays, iso } from '../src/utils.js';
 
 const curriculum = JSON.parse(await readFile(new URL('../seed/curriculum.json', import.meta.url), 'utf8'));
 const allTopics = curriculum.areas.flatMap((area) => area.topics);
+const future = (days) => iso(addDays(new Date(), days));
 
 test('todos os temas do currículo têm exatamente um nível', () => {
   assert.equal(allTopics.length, Object.keys(TOPIC_LEVEL).length);
@@ -31,15 +33,51 @@ test('os cinco níveis particionam os temas sem repetição', () => {
   assert.equal(seen.size, allTopics.length);
 });
 
-test('semestre da faculdade define o nível da trilha', () => {
-  const expected = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5, 5];
-  expected.forEach((level, index) => assert.equal(semesterLevel(index + 1), level));
-  assert.equal(currentLevelId({ semester: 5 }), 3);
+test('semestre é apenas perfil e não define o nível', () => {
+  assert.equal(currentLevelId({ semester: 5 }), 1);
   assert.equal(currentLevelId({ semester: 5, level: 4 }), 4);
+  const base = {
+    dailyHours: 3,
+    studyDays: [1, 2, 3, 4, 5],
+    studyPace: 'equilibrado',
+    examDate: future(240),
+  };
+  const first = recommendLevel({ ...base, semester: 1 });
+  const last = recommendLevel({ ...base, semester: 12 });
+  assert.equal(first.levelId, last.levelId);
+  assert.equal(first.reason, last.reason);
 });
 
-test('próximos temas priorizam o nível atual', () => {
-  const next = nextTopics(curriculum, { semester: 5, level: 3, progress: {} }, 6);
-  assert.equal(next.length, 6);
-  for (const { t } of next) assert.equal(TOPIC_LEVEL[t.id], 3);
+test('mais horas, constância e ritmo avançado elevam a recomendação', () => {
+  const low = recommendLevel({
+    dailyHours: 1,
+    studyDays: [1, 2],
+    studyPace: 'base',
+    examDate: future(700),
+  });
+  const high = recommendLevel({
+    dailyHours: 6,
+    studyDays: [1, 2, 3, 4, 5, 6],
+    studyPace: 'avancado',
+    examDate: future(45),
+  });
+  assert.ok(high.levelId > low.levelId);
+  assert.ok(high.weeklyHours > low.weeklyHours);
+  assert.equal(high.phase.id, 'intensivo');
+});
+
+test('próximos temas usam prioridade personalizada e não bloqueiam por nível', () => {
+  const next = nextTopics(curriculum, {
+    level: 3,
+    dailyHours: 4,
+    studyDays: [1, 2, 3, 4, 5],
+    examDate: future(60),
+    progress: {},
+    attempts: [],
+    difficultyGroups: ['Cardiologia'],
+  }, 8);
+  assert.equal(next.length, 8);
+  const levels = new Set(next.map(({ t }) => TOPIC_LEVEL[t.id]));
+  assert.ok(levels.size > 1, 'a lista deve atravessar mais de um nível');
+  assert.ok(next.some(({ t }) => t.group === 'Cardiologia'));
 });

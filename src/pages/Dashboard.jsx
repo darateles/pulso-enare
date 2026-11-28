@@ -5,9 +5,9 @@ import {
 } from 'lucide-react';
 import { Button, Card, Empty, PageHead, Progress, Stat } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
-import { daysUntil, dueReviews, fmtDate, globalStats, iso, minutesLabel } from '../utils.js';
+import { daysUntil, dueReviews, examPhase, fmtDate, globalStats, iso, minutesLabel } from '../utils.js';
 import { todaySessions } from '../planner.js';
-import { currentLevel, levelStats, nextTopics, semesterLabel } from '../trilha.js';
+import { currentLevel, levelStats, nextTopics } from '../trilha.js';
 import { SESSION_STAGE, STAGE_LABEL } from '../metodo.js';
 import { dailyScore, rankingDate, rankingId } from '../ranking.js';
 
@@ -23,6 +23,7 @@ export default function Dashboard() {
   const myRankingId = rankingId(account || 'davi');
   const focus = useMemo(() => nextTopics(curriculum, user, 3), [curriculum, user]);
   const count = daysUntil(user.examDate);
+  const phase = examPhase(user.examDate);
   const firstName = (user.name || 'estudante').split(' ')[0];
 
   const toggleSession = (session) => {
@@ -115,7 +116,7 @@ export default function Dashboard() {
 
       <Card>
         <div className="section-head small">
-          <div><span className="eyebrow">Trilha · {semesterLabel(user.semester)}</span><h2>Nível {level.id} · {level.name}</h2></div>
+          <div><span className="eyebrow">Trilha · {phase.label}</span><h2>Nível {level.id} · {level.name}</h2></div>
           <Link to="/trilha" className="text-link">Abrir trilha</Link>
         </div>
         <div className="dash-trilha-topics">

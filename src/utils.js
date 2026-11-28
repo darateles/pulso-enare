@@ -37,6 +37,29 @@ export function daysUntil(s) {
   return Math.round((target - now) / 86400000);
 }
 
+export function examPhase(examDate) {
+  if (!examDate) {
+    return { id: 'sem-data', label: 'Sem data', days: null, description: 'Defina a data da prova para calibrar a reta final.' };
+  }
+  const days = daysUntil(examDate);
+  if (!Number.isFinite(days)) {
+    return { id: 'sem-data', label: 'Sem data', days: null, description: 'Defina a data da prova para calibrar a reta final.' };
+  }
+  if (days <= 30) {
+    return { id: 'prova', label: 'Reta final', days, description: 'Prioridade máxima para o que mais cai, revisão e simulados.' };
+  }
+  if (days <= 90) {
+    return { id: 'intensivo', label: 'Intensivo', days, description: 'Questões, revisão dirigida e especialidades de maior incidência.' };
+  }
+  if (days <= 180) {
+    return { id: 'consolidacao', label: 'Consolidação', days, description: 'Aprofundar o que mais cai e fechar lacunas por desempenho.' };
+  }
+  if (days <= 365) {
+    return { id: 'construcao', label: 'Construção', days, description: 'Base consistente com os temas de maior peso no ENARE.' };
+  }
+  return { id: 'fundamentos', label: 'Fundamentos', days, description: 'Tempo para construir base, revisão espaçada e constância.' };
+}
+
 export function greeting() {
   const h = new Date().getHours();
   if (h < 12) return 'Bom dia';
@@ -131,6 +154,70 @@ export function accuracyByArea(curriculum, attempts) {
     const right = arr.filter((a) => a.correct).length;
     return { area, total: arr.length, right, pct: arr.length ? Math.round((right / arr.length) * 100) : null };
   });
+}
+
+export function accuracyBySpecialty(curriculum, attempts) {
+  const topicInfo = new Map();
+  const groups = new Map();
+  for (const area of curriculum.areas) {
+    for (const topic of area.topics) {
+      topicInfo.set(topic.id, { group: topic.group, areaId: area.id, areaName: area.name });
+      if (!groups.has(topic.group)) {
+        groups.set(topic.group, {
+          group: topic.group,
+          areaId: area.id,
+          areaName: area.name,
+          total: 0,
+          right: 0,
+        });
+      }
+    }
+  }
+  for (const attempt of attempts) {
+    if (attempt.correct === null || attempt.correct === undefined) continue;
+    const info = topicInfo.get(attempt.topicId);
+    if (!info) continue;
+    const item = groups.get(info.group);
+    item.total += 1;
+    if (attempt.correct) item.right += 1;
+  }
+  return [...groups.values()]
+    .map((item) => ({ ...item, pct: item.total ? Math.round((item.right / item.total) * 100) : null }))
+    .sort((a, b) => (a.pct ?? 101) - (b.pct ?? 101) || b.total - a.total);
+}
+
+export function topicPriority(topic, {
+  progress = {},
+  attempts = [],
+  difficultyGroups = [],
+  specialtyStats = new Map(),
+  phase = examPhase(),
+} = {}) {
+  const p = progress?.[topic.id] || {};
+  const done = Array.isArray(p.done) ? p.done.length : 0;
+  const confidence = Number(p.confidence) || 0;
+  let wrong = 0;
+  for (const attempt of attempts) {
+    if (attempt.topicId === topic.id && attempt.correct === false) wrong += 1;
+  }
+  const groupStat = specialtyStats.get(topic.group);
+  const groupAccuracy = groupStat?.total ? groupStat.pct / 100 : null;
+  const freshness = done > 0 ? 0.65 : 1.6;
+  const due = p.nextReview && p.nextReview <= iso() ? 1.8 : 1;
+  const base = (Number(topic.weight) || 0) * (1 + (4 - confidence) * 0.35) * freshness + wrong * 1.1;
+  const difficulty = difficultyGroups.includes(topic.group) ? 2.5 : 1;
+  const lowAccuracy = groupAccuracy == null ? 1 : 1 + (1 - groupAccuracy) * 0.8;
+  const incidence = 1 + (Number(topic.incidence) || 0) / 25;
+  const phaseBoost = {
+    prova: 1.8,
+    intensivo: 1.45,
+    consolidacao: 1.2,
+    construcao: 1.05,
+    fundamentos: 1,
+    'sem-data': 1,
+  }[phase.id] || 1;
+  const started = done > 0 ? 1.15 : 1;
+  return Math.max(0.2, base * difficulty * lowAccuracy * incidence * phaseBoost * started * due);
 }
 
 export function weakTopics(curriculum, attempts, progress, limit = 5) {

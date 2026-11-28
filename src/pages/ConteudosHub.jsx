@@ -1,17 +1,32 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CalendarDays, GraduationCap, Layers, Library, ListChecks, Network, RefreshCw } from 'lucide-react';
+import {
+  ArrowRight, CalendarDays, GraduationCap, Layers, Library, ListChecks, Network, RefreshCw, Target,
+} from 'lucide-react';
 import { Card, Chip, PageHead, Progress } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
 import { dueReviews, groupBy, topicProgress } from '../utils.js';
-import { currentLevel, levelStats } from '../trilha.js';
+import { LEVELS, currentLevel, topicLevelId } from '../trilha.js';
 import { TOPIC_STAGE_LABEL, topicStage } from '../metodo.js';
 
 export default function ConteudosHub() {
   const { user, curriculum } = useStore();
+  const [levelFilter, setLevelFilter] = useState('todos');
   const level = currentLevel(user);
-  const levelData = useMemo(() => levelStats(curriculum, level.id, user.progress), [curriculum, level.id, user.progress]);
   const due = useMemo(() => dueReviews(curriculum, user.progress), [curriculum, user.progress]);
+  const difficultyGroups = useMemo(() => new Set(user.difficultyGroups || []), [user.difficultyGroups]);
+  const allTopics = useMemo(
+    () => curriculum.areas.flatMap((area) => area.topics.map((topic) => ({ area, topic }))),
+    [curriculum],
+  );
+  const effectiveLevel = levelFilter === 'meu' ? level.id : levelFilter === 'todos' ? null : Number(levelFilter);
+  const visibleAreas = useMemo(() => curriculum.areas
+    .map((area) => ({
+      area,
+      topics: area.topics.filter((topic) => !effectiveLevel || topicLevelId(topic.id) === effectiveLevel),
+    }))
+    .filter((item) => item.topics.length), [curriculum, effectiveLevel]);
+  const visibleCount = visibleAreas.reduce((sum, item) => sum + item.topics.length, 0);
 
   const links = [
     { to: '/trilha', icon: GraduationCap, label: 'Trilha' },
@@ -28,7 +43,7 @@ export default function ConteudosHub() {
       <PageHead
         eyebrow="Conteúdos"
         title="Conteúdos"
-        subtitle={`Nível ${level.id} · ${level.name} · ${levelData.total} temas`}
+        subtitle={`Todos os ${allTopics.length} temas liberados · Nível de referência ${level.code} · ${level.name}`}
       />
 
       <div className="content-links">
@@ -37,7 +52,22 @@ export default function ConteudosHub() {
         ))}
       </div>
 
-      {levelData.subjects.map(({ area, topics }) => {
+      <Card className="content-hub-filter">
+        <div>
+          <span className="eyebrow">Biblioteca completa</span>
+          <p className="muted-note">Todos os temas estão disponíveis. Use o nível apenas como filtro de organização.</p>
+        </div>
+        <div className="content-hub-filter-actions">
+          <span className="filter-count">{visibleCount} temas</span>
+          <select className="group-select" value={levelFilter} onChange={(e) => setLevelFilter(e.target.value)}>
+            <option value="todos">Todos os níveis</option>
+            <option value="meu">Meu nível · {level.code}</option>
+            {LEVELS.map((item) => <option key={item.id} value={item.id}>{item.code} · {item.name}</option>)}
+          </select>
+        </div>
+      </Card>
+
+      {visibleAreas.map(({ area, topics }) => {
         const groups = groupBy(topics, (topic) => topic.group || 'Geral');
         const mastered = topics.filter((topic) => topicStage(user.progress[topic.id], topic.checklist.length) === 'dominado').length;
         return (
@@ -61,6 +91,8 @@ export default function ConteudosHub() {
                           <strong>{topic.title}</strong>
                           <Progress value={pct} tone={stage === 'dominado' ? 'green' : 'accent'} />
                         </span>
+                        {difficultyGroups.has(topic.group) && <Chip tone="accent"><Target size={11} /> foco</Chip>}
+                        <Chip tone="soft">{`N${topicLevelId(topic.id)}`}</Chip>
                         <span className={`stage-label stage-${stage}`}>{TOPIC_STAGE_LABEL[stage]}</span>
                         <ArrowRight size={14} />
                       </Link>
@@ -73,8 +105,8 @@ export default function ConteudosHub() {
         );
       })}
 
-      {!levelData.subjects.length && (
-        <Card><p className="muted-note">Nenhum tema cadastrado para este nível.</p></Card>
+      {!visibleAreas.length && (
+        <Card><p className="muted-note">Nenhum tema neste nível.</p></Card>
       )}
     </>
   );

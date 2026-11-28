@@ -1,11 +1,12 @@
-import { topicStatus } from './utils.js';
+import { accuracyBySpecialty, daysUntil, examPhase, topicPriority, topicStatus } from './utils.js';
 
 /**
  * Trilha em níveis — o "curso" do Pulso.
  *
- * Cada nível reúne os temas de um bloco de semestres da faculdade.
- * A ordem dentro do nível é a ordem do currículo, matéria por matéria.
- * O nível do usuário é derivado do semestre informado no onboarding.
+ * O nível não é derivado do semestre da faculdade. Ele é uma referência de
+ * profundidade escolhida pelo aluno a partir do ritmo de estudo, das horas
+ * disponíveis e da proximidade da prova. O conteúdo completo fica liberado;
+ * o planner personalizado não obedece a essa ordem.
  */
 export const LEVELS = [
   {
@@ -13,8 +14,7 @@ export const LEVELS = [
     code: 'N1',
     name: 'Fundamentos',
     title: 'Fundamentos e SUS',
-    semesters: [1, 2],
-    semesterLabel: '1º e 2º semestre',
+    paceLabel: 'Ponto de partida',
     description: 'Bases da saúde coletiva, APS, ética, epidemiologia e cuidado da criança e da mulher. O alicerce para interpretar o restante do curso.',
     goal: 'Entender o sistema, a população e os princípios do cuidado antes de mergulhar na clínica.',
     tone: '#3f7a4e',
@@ -24,8 +24,7 @@ export const LEVELS = [
     code: 'N2',
     name: 'Clínica essencial',
     title: 'Clínica essencial',
-    semesters: [3, 4],
-    semesterLabel: '3º e 4º semestre',
+    paceLabel: 'Ritmo inicial',
     description: 'Os temas que mais aparecem nas provas: cardiologia, endocrinologia, infectologia, pneumologia, pré-natal e saúde mental.',
     goal: 'Reconhecer as síndromes mais frequentes e conduzir os primeiros passos de cada caso.',
     tone: '#2c6b9e',
@@ -35,8 +34,7 @@ export const LEVELS = [
     code: 'N3',
     name: 'Especialidades',
     title: 'Especialidades clínicas',
-    semesters: [5, 6],
-    semesterLabel: '5º e 6º semestre',
+    paceLabel: 'Ritmo intermediário',
     description: 'Aprofundamento em nefrologia, neurologia, hematologia, reumatologia, endocrinologia e pediatria. Aqui o raciocínio clínico ganha precisão.',
     goal: 'Diferenciar diagnósticos, interpretar exames e escolher condutas com segurança.',
     tone: '#a84368',
@@ -46,9 +44,8 @@ export const LEVELS = [
     code: 'N4',
     name: 'Prática e urgências',
     title: 'Prática clínica e urgências',
-    semesters: [7, 8],
-    semesterLabel: '7º e 8º semestre',
-    description: 'Cirurgia, obstetrícia, urgências e situações de plantão. O nível que conecta a teoria ao atendimento real.',
+    paceLabel: 'Ritmo intenso',
+    description: 'Cirurgia, obstetrícia, urgências e situações de plantão. O nível que conecta a teoria ao atendimento real e às questões de maior incidência.',
     goal: 'Agir com prioridade e estabilizar o paciente nas situações que não podem esperar.',
     tone: '#c45a2b',
   },
@@ -56,14 +53,41 @@ export const LEVELS = [
     id: 5,
     code: 'N5',
     name: 'Alta complexidade',
-    title: 'Alta complexidade e reta final',
-    semesters: [9, 12],
-    semesterLabel: '9º ao 12º semestre',
-    description: 'Oncologia, trauma grave, medicina fetal, prematuridade e temas decisivos do internato. Revisão final com foco no que decide a prova.',
-    goal: 'Integrar tudo o que aprendeu e resolver os casos mais complexos do ENARE.',
+    title: 'Reta final e alta complexidade',
+    paceLabel: 'Reta final',
+    description: 'Oncologia, trauma grave, medicina fetal, prematuridade e temas decisivos do internato. Revisão final com foco no que mais cai no ENARE e nas principais provas.',
+    goal: 'Integrar tudo o que aprendeu e resolver os casos mais complexos da prova.',
     tone: '#7b5b8f',
   },
 ];
+
+export const STUDY_PACES = [
+  {
+    id: 'base',
+    label: 'Base sólida',
+    short: 'Base',
+    boost: -1,
+    description: 'Menos horas e mais tempo: priorizo fundamentos, incidência e consistência.',
+  },
+  {
+    id: 'equilibrado',
+    label: 'Ritmo equilibrado',
+    short: 'Equilibrado',
+    boost: 0,
+    description: 'Avanço constante, misturando base e temas de maior peso nas provas.',
+  },
+  {
+    id: 'avancado',
+    label: 'Quero algo mais avançado',
+    short: 'Avançado',
+    boost: 1,
+    description: 'Acelero a profundidade e entro nos temas de maior complexidade.',
+  },
+];
+
+export function normalizeStudyPace(value) {
+  return STUDY_PACES.some((pace) => pace.id === value) ? value : 'equilibrado';
+}
 
 /** Mapa explícito de cada um dos 90 temas para o seu nível. */
 export const TOPIC_LEVEL = {
@@ -171,25 +195,52 @@ export const TOPIC_LEVEL = {
 export const SEMESTERS = Array.from({ length: 12 }, (_, i) => ({
   value: i + 1,
   label: `${i + 1}º`,
-  level: semesterLevel(i + 1),
 }));
 
 export function normalizeSemester(value) {
   return Math.min(12, Math.max(1, Math.round(Number(value) || 1)));
 }
 
-/** Converte o semestre da faculdade no nível da trilha. */
-export function semesterLevel(value) {
-  const semester = normalizeSemester(value);
-  if (semester <= 2) return 1;
-  if (semester <= 4) return 2;
-  if (semester <= 6) return 3;
-  if (semester <= 8) return 4;
-  return 5;
-}
-
 export function semesterLabel(value) {
   return `${normalizeSemester(value)}º semestre`;
+}
+
+/**
+ * Recomenda um nível de referência a partir do ritmo — nunca do semestre.
+ * O aluno pode aceitar a sugestão ou escolher outro nível.
+ */
+export function recommendLevel(profile = {}) {
+  const dailyHours = Math.min(12, Math.max(1, Number(profile.dailyHours) || 3));
+  const studyDays = Array.isArray(profile.studyDays) && profile.studyDays.length
+    ? profile.studyDays
+    : [1, 2, 3, 4, 5, 6];
+  const weeklyHours = dailyHours * studyDays.length;
+  const pace = STUDY_PACES.find((item) => item.id === normalizeStudyPace(profile.studyPace)) || STUDY_PACES[1];
+  const phase = examPhase(profile.examDate);
+
+  let score = dailyHours <= 2 ? 1 : dailyHours <= 3 ? 2 : dailyHours <= 4 ? 3 : dailyHours <= 5 ? 4 : 5;
+  if (weeklyHours >= 20) score += 1;
+  else if (weeklyHours < 8) score -= 1;
+  score += pace.boost;
+  score += {
+    fundamentos: 0,
+    construcao: 0,
+    consolidacao: 1,
+    intensivo: 2,
+    prova: 3,
+    'sem-data': 0,
+  }[phase.id] || 0;
+
+  const levelId = Math.min(
+    LEVELS.length,
+    phase.days != null && phase.days <= 180 ? 5 : 4,
+    Math.max(1, score),
+  );
+  const level = levelById(levelId);
+  const days = daysUntil(profile.examDate);
+  const reason = `${dailyHours}h/dia em ${studyDays.length} dias (${weeklyHours}h/semana) · ritmo ${pace.short.toLowerCase()} · ${phase.label.toLowerCase()}${profile.examDate && Number.isFinite(days) && days >= 0 ? ` · ${days} dias até a prova` : ''}`;
+
+  return { levelId, level, score, dailyHours, studyDays: studyDays.length, weeklyHours, pace, phase, reason };
 }
 
 export function levelById(id) {
@@ -205,7 +256,7 @@ export function topicLevel(topicId) {
 }
 
 export function currentLevelId(user) {
-  return Number(user?.level) || semesterLevel(user?.semester);
+  return Math.min(LEVELS.length, Math.max(1, Number(user?.level) || 1));
 }
 
 export function currentLevel(user) {
@@ -256,31 +307,31 @@ export const LEVEL_STATUS_LABEL = {
   review: 'Revisão',
   base: 'Base',
   current: 'Seu nível',
-  ahead: 'À frente',
+  ahead: 'Livre',
 };
 
-/** Próximos temas: prioriza o nível atual, depois os seguintes. */
+/** Próximos temas: prioridade personalizada, sem bloqueio por nível. */
 export function nextTopics(curriculum, user, limit = 4) {
-  const current = currentLevelId(user);
-  const order = [
-    ...LEVELS.slice(current - 1).map((level) => level.id),
-    ...LEVELS.slice(0, current - 1).map((level) => level.id),
-  ];
-  const out = [];
-  for (const levelId of order) {
-    const pool = levelSubjects(curriculum, levelId)
-      .flatMap(({ area, topics }) => topics.map((t) => ({ t, a: area })))
-      .filter(({ t }) => topicStatus(user.progress?.[t.id], t.checklist.length) !== 'dominado')
-      .sort((x, y) => {
-        const px = user.progress?.[x.t.id] || {};
-        const py = user.progress?.[y.t.id] || {};
-        const startedX = (px.done || []).length > 0 ? 1 : 0;
-        const startedY = (py.done || []).length > 0 ? 1 : 0;
-        if (startedX !== startedY) return startedY - startedX;
-        return (y.t.weight * 2 + y.t.incidence) - (x.t.weight * 2 + x.t.incidence);
-      });
-    out.push(...pool);
-    if (out.length >= limit) break;
-  }
-  return out.slice(0, limit);
+  const attempts = user.attempts || [];
+  const difficultyGroups = Array.isArray(user.difficultyGroups) ? user.difficultyGroups : [];
+  const phase = examPhase(user.examDate);
+  const specialtyStats = new Map(
+    accuracyBySpecialty(curriculum, attempts).map((item) => [item.group, item]),
+  );
+  return curriculum.areas
+    .flatMap((area) => area.topics.map((topic) => ({ t: topic, a: area })))
+    .filter(({ t }) => topicStatus(user.progress?.[t.id], t.checklist.length) !== 'dominado')
+    .map(({ t, a }) => ({
+      t,
+      a,
+      priority: topicPriority(t, {
+        progress: user.progress,
+        attempts,
+        difficultyGroups,
+        specialtyStats,
+        phase,
+      }),
+    }))
+    .sort((x, y) => y.priority - x.priority)
+    .slice(0, limit);
 }

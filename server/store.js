@@ -9,14 +9,6 @@ const SEED_DIR = path.resolve('seed');
 
 const today = () => new Date().toISOString().slice(0, 10);
 
-function levelForSemester(semester) {
-  if (semester <= 2) return 1;
-  if (semester <= 4) return 2;
-  if (semester <= 6) return 3;
-  if (semester <= 8) return 4;
-  return 5;
-}
-
 export function defaultUser() {
   return {
     version: 1,
@@ -27,6 +19,8 @@ export function defaultUser() {
     startDate: today(),
     semester: 1,
     level: 1,
+    studyPace: 'equilibrado',
+    difficultyGroups: [],
     dailyHours: 3,
     studyDays: [1, 2, 3, 4, 5, 6],
     goalQuestions: 40,
@@ -99,7 +93,8 @@ export async function initStore() {
         ...defaultUser(),
         ...raw,
         semester,
-        level: levelForSemester(semester),
+        level: Math.min(5, Math.max(1, Math.round(Number(raw.level) || 1))),
+        studyPace: ['base', 'equilibrado', 'avancado'].includes(raw.studyPace) ? raw.studyPace : 'equilibrado',
         onboardingDone: false,
         profileVersion: 2,
       });
@@ -119,7 +114,9 @@ export async function getUser(account = 'davi') {
   const raw = await readKV(`user:${account}`, defaultUser());
   const user = { ...defaultUser(), ...raw };
   user.semester = Math.min(12, Math.max(1, Math.round(Number(user.semester) || 1)));
-  user.level = levelForSemester(user.semester);
+  user.level = Math.min(5, Math.max(1, Math.round(Number(user.level) || 1)));
+  user.studyPace = ['base', 'equilibrado', 'avancado'].includes(user.studyPace) ? user.studyPace : 'equilibrado';
+  if (!Array.isArray(user.difficultyGroups)) user.difficultyGroups = [];
   return user;
 }
 
@@ -142,7 +139,11 @@ export async function saveUser(account, incoming) {
   next.bookmarks = Array.isArray(next.bookmarks) ? [...new Set(next.bookmarks)] : [];
   next.studyDays = Array.isArray(next.studyDays) ? next.studyDays.filter((d) => Number.isInteger(d) && d >= 0 && d <= 6) : base.studyDays;
   next.semester = Math.min(12, Math.max(1, Math.round(Number(next.semester) || 1)));
-  next.level = levelForSemester(next.semester);
+  next.level = Math.min(5, Math.max(1, Math.round(Number(next.level) || 1)));
+  next.studyPace = ['base', 'equilibrado', 'avancado'].includes(next.studyPace) ? next.studyPace : 'equilibrado';
+  next.difficultyGroups = Array.isArray(next.difficultyGroups)
+    ? [...new Set(next.difficultyGroups.map((group) => String(group || '').trim()).filter(Boolean))].slice(0, 60)
+    : [];
   next.dailyHours = Math.min(16, Math.max(0.5, Number(next.dailyHours) || 3));
   next.goalQuestions = Math.min(400, Math.max(5, Number(next.goalQuestions) || 40));
   if (!next.progress || typeof next.progress !== 'object') next.progress = {};

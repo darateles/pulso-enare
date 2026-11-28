@@ -18,6 +18,8 @@ function blankUser() {
     startDate: iso(),
     semester: 1,
     level: 1,
+    studyPace: 'equilibrado',
+    difficultyGroups: [],
     dailyHours: 3,
     studyDays: [1, 2, 3, 4, 5, 6],
     goalQuestions: 40,

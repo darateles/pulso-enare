@@ -13,9 +13,9 @@ export function Logo({ compact = false }) {
   );
 }
 
-export function Button({ variant = 'solid', size = 'md', className = '', icon: Icon, children, ...props }) {
+export function Button({ variant = 'solid', size = 'md', className = '', icon: Icon, children, type = 'button', ...props }) {
   return (
-    <button className={`btn btn-${variant} btn-${size} ${className}`} {...props}>
+    <button type={type} className={`btn btn-${variant} btn-${size} ${className}`} {...props}>
       {Icon && <Icon size={size === 'sm' ? 15 : 17} aria-hidden="true" />}
       {children}
     </button>

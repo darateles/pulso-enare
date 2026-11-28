@@ -45,7 +45,7 @@ export default function Login() {
           </Field>
           <InlineError>{error}</InlineError>
           <Button type="submit" disabled={busy || !username || !password} icon={LogIn}>{busy ? 'Entrando…' : 'Entrar'}</Button>
-          <div className="login-hint"><strong>Primeiro acesso?</strong> Entre com o usuário e a senha combinados com o administrador. Na primeira vez, o Pulso pede seu semestre e monta a trilha.</div>
+          <div className="login-hint"><strong>Primeiro acesso?</strong> Entre com o usuário e a senha combinados com o administrador. Na primeira vez, o Pulso pede sua rotina e sugere um nível pelo seu ritmo.</div>
         </form>
       </div>
     </div>

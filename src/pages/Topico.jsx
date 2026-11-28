@@ -22,7 +22,7 @@ export default function Topico() {
           <div className="topic-head-chips">
             <Chip style={{ borderColor: area.color, color: area.color }}>{area.short}</Chip>
             <Chip tone="soft">{t.group}</Chip>
-            <Chip tone="neutral">Nível {level.id} · {level.semesterLabel}</Chip>
+            <Chip tone="neutral">Nível {level.id} · {level.paceLabel}</Chip>
             <Chip tone="accent">incidência {t.incidence}%</Chip>
             <div className="weight-dots">{[1,2,3,4,5].map((i) => <i key={i} className={i <= t.weight ? 'on' : ''} />)}</div>
           </div>

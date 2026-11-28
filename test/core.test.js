@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { parseQuestions, parseAnswerKey, guessTopic } from '../server/importer.js';
 import { generatePlan, planCounts } from '../src/planner.js';
+import { addDays, iso } from '../src/utils.js';
 import { readFile } from 'node:fs/promises';
 
 const SAMPLE = `Cirurgia Geral
@@ -60,4 +61,29 @@ test('planner cria semanas com sessões e simulado', async () => {
   for (const w of plan.weeks) {
     assert.equal(w.days.flatMap((d) => d.sessions).filter((s) => s.type === 'simulado').length, 1);
   }
+});
+
+test('planner personalizado ignora o nível de referência', async () => {
+  const curriculum = JSON.parse(await readFile(new URL('../seed/curriculum.json', import.meta.url), 'utf8'));
+  const base = {
+    startDate: iso(),
+    examDate: iso(addDays(new Date(), 120)),
+    dailyHours: 3,
+    studyDays: [1, 2, 3, 4, 5],
+    progress: {},
+    attempts: [],
+    difficultyGroups: ['Cardiologia', 'Nefrologia'],
+  };
+  const low = generatePlan({ ...base, level: 1 }, curriculum, 2);
+  const high = generatePlan({ ...base, level: 5 }, curriculum, 2);
+  const sequence = (plan) => plan.weeks
+    .flatMap((week) => week.days)
+    .flatMap((day) => day.sessions)
+    .map((session) => `${session.type}:${session.topicId || 'simulado'}`)
+    .join('|');
+  assert.equal(sequence(low), sequence(high));
+  assert.equal(low.mode, 'personalizado');
+  assert.deepEqual(low.difficultyGroups, ['Cardiologia', 'Nefrologia']);
+  assert.equal(low.referenceLevel, 1);
+  assert.equal(high.referenceLevel, 5);
 });

@@ -1987,3 +1987,41 @@ body { touch-action: pan-x pan-y; }
   .public-deck-actions .btn { flex: 1 1 auto; }
   .modal-lg { width: 100%; }
 }
+
+/* Nível por ritmo e planner personalizado */
+.profile-note { display: flex; gap: 9px; align-items: flex-start; background: var(--surface-2); border: 1px solid var(--line); border-radius: 11px; padding: 10px 12px; margin: 2px 0 16px; color: var(--muted); font-size: .75rem; line-height: 1.5; }
+.profile-note svg { flex-shrink: 0; color: var(--accent); margin-top: 1px; }
+.pace-picker { display: grid; gap: 7px; }
+.pace-picker button { border: 1px solid var(--line); background: var(--surface); border-radius: 11px; padding: 10px 12px; text-align: left; display: grid; gap: 2px; transition: border-color .15s ease, background-color .15s ease; }
+.pace-picker button strong { font-size: .8rem; }
+.pace-picker button span { font-size: .7rem; color: var(--muted); line-height: 1.4; }
+.pace-picker button:hover { border-color: var(--level-tone, var(--accent)); }
+.pace-picker button.active { border-color: var(--accent); background: var(--accent-wash); }
+.pace-picker button.active strong { color: var(--accent); }
+.level-preview.recommended { border-left-width: 4px; }
+.level-select-row { display: flex; align-items: flex-end; gap: 8px; margin-top: -4px; }
+.level-select-row .field { flex: 1; margin-bottom: 0; }
+.level-select-row .btn { margin-bottom: 0; flex-shrink: 0; }
+.trilha-profile-field { border-top: 1px solid var(--line); margin-top: 13px; padding-top: 13px; }
+.content-hub-filter { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 15px; margin-bottom: 13px; }
+.content-hub-filter p { margin: 2px 0 0; }
+.content-hub-filter-actions { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+.content-hub-filter-actions .group-select { margin: 0; }
+.plan-difficulty { margin-bottom: 13px; }
+.difficulty-selected { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 12px; }
+.difficulty-selected.empty { display: block; margin-bottom: 10px; }
+.difficulty-picker { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; max-height: 46vh; overflow: auto; margin: 13px -3px 14px; padding: 0 3px; }
+.difficulty-picker button { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--surface); border-radius: 9px; padding: 8px 9px; text-align: left; min-width: 0; }
+.difficulty-picker button:hover { border-color: var(--accent); }
+.difficulty-picker button.active { border-color: var(--accent); background: var(--accent-wash); }
+.difficulty-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.difficulty-copy { display: grid; gap: 1px; min-width: 0; }
+.difficulty-copy strong { font-size: .75rem; overflow-wrap: anywhere; }
+.difficulty-copy small { color: var(--muted); font-size: .62rem; }
+@media (max-width: 760px) {
+  .level-select-row { flex-direction: column; align-items: stretch; }
+  .level-select-row .btn { align-self: flex-start; }
+  .content-hub-filter { align-items: stretch; flex-direction: column; }
+  .content-hub-filter-actions { justify-content: space-between; }
+  .difficulty-picker { grid-template-columns: 1fr; }
+}

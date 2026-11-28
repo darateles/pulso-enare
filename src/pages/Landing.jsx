@@ -77,15 +77,15 @@ export default function Landing() {
 
         <section className="landing-section levels" id="niveis">
           <div className="landing-section-head">
-            <div><span className="eyebrow">Curso em níveis</span><h2>Do fundamento ao internato.</h2></div>
-            <p>Informe seu semestre e o Pulso monta a trilha do seu período, matéria por matéria.</p>
+            <div><span className="eyebrow">Curso em níveis</span><h2>Do fundamento à reta final.</h2></div>
+            <p>O nível é sugerido pelo seu ritmo, pelas horas de estudo e pela proximidade da prova — não pelo semestre. Todo o conteúdo fica liberado.</p>
           </div>
           <div className="landing-levels">
             {LEVELS.map((level) => (
               <article key={level.id} className="landing-level" style={{ '--level-tone': level.tone }}>
                 <span className="landing-level-code"><GraduationCap size={13} /> {level.code}</span>
                 <h3>{level.name}</h3>
-                <small>{level.semesterLabel}</small>
+                <small>{level.paceLabel}</small>
                 <p>{level.description}</p>
               </article>
             ))}
@@ -108,7 +108,7 @@ export default function Landing() {
           <div className="landing-section-head"><div><span className="eyebrow">Dúvidas</span><h2>Perguntas frequentes</h2></div></div>
           <details><summary>Posso escolher a data inicial do planner?</summary><p>Sim. A data fica nas configurações e o plano é refeito a partir dela.</p></details>
           <details><summary>Como são agendadas as revisões?</summary><p>Após concluir o checklist, você registra confiança e o sistema agenda D+1, D+7 ou D+30.</p></details>
-          <details><summary>Preciso de cartão para começar?</summary><p>Não. Entre com a conta liberada para você e comece pelo onboarding do semestre. Nenhuma cobrança é feita.</p></details>
+          <details><summary>Preciso de cartão para começar?</summary><p>Não. Entre com a conta liberada para você e faça o onboarding do seu ritmo. Nenhuma cobrança é feita.</p></details>
           <details><summary>Os dados ficam no navegador?</summary><p>O Pulso publicado salva em banco de nuvem, mas nunca saiu da sua conta. Você pode exportar backup em Ajustes.</p></details>
         </section>
 
