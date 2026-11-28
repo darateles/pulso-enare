@@ -14,6 +14,11 @@ const Ranking = lazy(() => import('./pages/Ranking.jsx'));
 const Planner = lazy(() => import('./pages/Planner.jsx'));
 const Conteudos = lazy(() => import('./pages/Conteudos.jsx'));
 const Topico = lazy(() => import('./pages/Topico.jsx'));
+const TopicoConteudo = lazy(() => import('./pages/TopicoConteudo.jsx'));
+const TopicoFlashcards = lazy(() => import('./pages/TopicoFlashcards.jsx'));
+const TopicoQuestoes = lazy(() => import('./pages/TopicoQuestoes.jsx'));
+const TopicoNotas = lazy(() => import('./pages/TopicoNotas.jsx'));
+const TopicoRevisao = lazy(() => import('./pages/TopicoRevisao.jsx'));
 const Questoes = lazy(() => import('./pages/Questoes.jsx'));
 const Simulado = lazy(() => import('./pages/Simulado.jsx'));
 const Importar = lazy(() => import('./pages/Importar.jsx'));
@@ -97,14 +102,22 @@ export default function App() {
             <Route path="ranking" element={<Ranking />} />
             <Route path="planner" element={<Planner />} />
             <Route path="conteudos" element={<Conteudos />} />
-            <Route path="conteudos/:topicId" element={<Topico />} />
+            <Route path="conteudos/:topicId" element={<Topico />}>
+              <Route index element={<TopicoConteudo />} />
+              <Route path="flashcards" element={<TopicoFlashcards />} />
+              <Route path="questoes" element={<TopicoQuestoes />} />
+              <Route path="notas" element={<TopicoNotas />} />
+              <Route path="revisao" element={<TopicoRevisao />} />
+            </Route>
             <Route path="questoes" element={<Questoes />} />
             <Route path="questoes/treino" element={<Questoes />} />
             <Route path="questoes/simulado" element={<Simulado />} />
             <Route path="questoes/importar" element={<Importar />} />
+            <Route path="flashcards" element={<Flashcards />} />
             <Route path="desempenho" element={<Desempenho />} />
             <Route path="caderno-erros" element={<CadernoErros />} />
-            <Route path="ajustes" element={<Ajustes />} />
+            <Route path="perfil" element={<Ajustes />} />
+            <Route path="ajustes" element={<Navigate to="/perfil" replace />} />
             <Route path="pulso" element={<Pulso />} />
             <Route path="pulso/focus" element={<Focus />} />
             <Route path="pulso/battle" element={<Battle />} />

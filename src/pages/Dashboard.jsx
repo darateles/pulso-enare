@@ -2,17 +2,17 @@ import React, { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight, CalendarDays, CheckCircle2, Circle, Clock3, Flame, GraduationCap, HeartPulse, Library,
-  ListChecks, Play, RefreshCw, Sparkles, TrendingUp, Trophy,
+  ListChecks, Play, RefreshCw, Sparkles, Trophy,
 } from 'lucide-react';
 import { Button, Card, Chip, Empty, PageHead, Progress, Ring, Stat } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
 import {
-  accuracyByArea, daysUntil, dueReviews, fmtDate, globalStats, greeting, iso, minutesLabel,
-  streak, weakTopics, WEEKDAYS, pct,
+  daysUntil, dueReviews, fmtDate, globalStats, greeting, iso, minutesLabel,
+  streak, WEEKDAYS, pct,
 } from '../utils.js';
 import { todaySessions } from '../planner.js';
 import { currentLevel, levelStats, nextTopics, semesterLabel } from '../trilha.js';
-import { SESSION_STAGE, STAGE_LABEL, STAGES, calibration, calibrationLabel } from '../metodo.js';
+import { SESSION_STAGE, STAGE_LABEL, STAGES } from '../metodo.js';
 import { dailyScore, rankingDate, rankingId } from '../ranking.js';
 
 export default function Dashboard() {
@@ -20,7 +20,6 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const stats = useMemo(() => globalStats(curriculum, user.progress), [curriculum, user.progress]);
   const due = useMemo(() => dueReviews(curriculum, user.progress), [curriculum, user.progress]);
-  const weak = useMemo(() => weakTopics(curriculum, user.attempts, user.progress, 3), [curriculum, user.attempts, user.progress]);
   const today = useMemo(() => todaySessions(user.plan), [user.plan]);
   const todayStages = useMemo(() => today.reduce((acc, session) => {
     const stage = SESSION_STAGE[session.type];
@@ -29,7 +28,6 @@ export default function Dashboard() {
   }, {}), [today]);
   const level = currentLevel(user);
   const levelData = useMemo(() => levelStats(curriculum, level.id, user.progress), [curriculum, level.id, user.progress]);
-  const cal = useMemo(() => calibration(user.progress, user.attempts), [user.progress, user.attempts]);
   const rank = useMemo(() => dailyScore(user, rankingDate()), [user]);
   const myRankingId = rankingId(account || 'davi');
   const attemptsToday = user.attempts.filter((a) => a.createdAt?.slice(0, 10) === iso());
@@ -46,7 +44,6 @@ export default function Dashboard() {
   }, [user.activity]);
   const weekMinutes = last7.reduce((s, d) => s + (d.a.minutes || 0), 0);
   const goalPct = pct(attemptsToday.length, user.goalQuestions);
-  const acc = accuracyByArea(curriculum, user.attempts).filter((a) => a.total >= 3).sort((a, b) => (a.pct ?? 100) - (b.pct ?? 100));
   const focus = useMemo(() => {
     const inLevel = nextTopics(curriculum, user, 3);
     if (inLevel.length) return inLevel;
@@ -207,27 +204,6 @@ export default function Dashboard() {
             )}
           </Card>
 
-          <div className="section-head spaced">
-            <div><span className="eyebrow">Recuperação ativa</span><h2>Onde você errou</h2></div>
-            {weak.length > 0 && <Link to="/caderno-erros" className="text-link">Abrir caderno <ArrowRight size={14} /></Link>}
-          </div>
-          {weak.length ? (
-            <div className="focus-list">
-              {weak.map(({ topic: t, area: a, wrong, total, pct: errorPct }) => (
-                <Link key={t.id} to={`/conteudos/${t.id}`} className="focus-item">
-                  <span className="focus-area" style={{ background: a.color }}>{a.short}</span>
-                  <div><strong>{t.title}</strong><span>{a.name} · {wrong} de {total} erros · {errorPct}%</span></div>
-                  <Chip tone="danger">{wrong} {wrong === 1 ? 'erro' : 'erros'}</Chip>
-                  <ArrowRight size={16} />
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <Card className="empty-inline">
-              <p className="muted-note">Nenhum erro registrado ainda. Resolva questões para o Pulso identificar seus pontos fracos.</p>
-              <Button size="sm" variant="soft" onClick={() => navigate('/questoes/treino?modo=rapido')} icon={Play}>Treinar agora</Button>
-            </Card>
-          )}
         </section>
 
         <aside>
@@ -244,32 +220,6 @@ export default function Dashboard() {
               </Link>
             )) : <p className="muted-note">Nada atrasado. Conclua checklists para programar novas revisões.</p>}
             {due.length > 0 && <Button variant="soft" size="sm" onClick={() => navigate('/conteudos?status=revisao')}>Revisar agora</Button>}
-          </Card>
-
-          <Card className="side-card">
-            <div className="section-head small">
-              <div><span className="eyebrow">Precisão</span><h2>Por área</h2></div>
-            </div>
-            {acc.length ? acc.slice(0, 4).map(({ area, pct: p }) => (
-              <div key={area.id} className="acc-row">
-                <span>{area.short}</span>
-                <Progress value={p} tone={p < 55 ? 'accent' : 'green'} />
-                <strong>{p}%</strong>
-              </div>
-            )) : <p className="muted-note">Resolva ao menos 3 questões por área para ver sua precisão.</p>}
-            <Link to="/desempenho" className="text-link">Ver desempenho <TrendingUp size={14} /></Link>
-          </Card>
-
-          <Card className="side-card">
-            <div className="section-head small">
-              <div><span className="eyebrow">Metacognição</span><h2>Calibração</h2></div>
-              <Chip tone={(cal.gap ?? 0) > 15 ? 'warning' : 'neutral'}>confiança × acerto</Chip>
-            </div>
-            <div className="calibration-grid">
-              <div><span>Confiança</span><strong>{cal.confidence != null ? `${cal.confidence}%` : '—'}</strong></div>
-              <div><span>Acerto real</span><strong>{cal.accuracy != null ? `${cal.accuracy}%` : '—'}</strong></div>
-            </div>
-            <p className="muted-note">{calibrationLabel(cal.gap)}</p>
           </Card>
 
           <Card className="side-card ranking-mini">

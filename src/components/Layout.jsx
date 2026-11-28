@@ -3,7 +3,7 @@ import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
   House, CalendarDays, ListChecks, Library, ChartNoAxesColumnIncreasing, NotebookPen,
   Settings, Search, Moon, Sun, Flame, Menu, X, ArrowRight, Layers, HeartPulse,
-  GraduationCap, ChevronRight, Trophy,
+  GraduationCap, ChevronRight, Trophy, Sparkles,
 } from 'lucide-react';
 import { Logo, Ring, Progress } from './ui.jsx';
 import { useStore } from '../store.jsx';
@@ -11,16 +11,17 @@ import { daysUntil, fmtDate, globalStats, normalize, streak, greeting, initials 
 import { currentLevel } from '../trilha.js';
 
 const NAV = [
-  { to: '/', label: 'Hoje', icon: House, end: true },
+  { group: 'Estudo', to: '/', label: 'Hoje', icon: House, end: true },
   { to: '/trilha', label: 'Trilha', icon: GraduationCap },
-  { to: '/ranking', label: 'Ranking', icon: Trophy },
   { to: '/planner', label: 'Planner', icon: CalendarDays },
   { to: '/conteudos', label: 'Conteúdos', icon: ListChecks },
   { to: '/questoes', label: 'Questões', icon: Library },
-  { to: '/pulso', label: 'Pulso Pro', icon: Layers },
-  { to: '/desempenho', label: 'Desempenho', icon: ChartNoAxesColumnIncreasing },
+  { to: '/flashcards', label: 'Flashcards', icon: Layers },
+  { to: '/ranking', label: 'Ranking', icon: Trophy },
+  { group: 'Progresso', to: '/desempenho', label: 'Desempenho', icon: ChartNoAxesColumnIncreasing },
   { to: '/caderno-erros', label: 'Caderno de erros', icon: NotebookPen },
-  { to: '/ajustes', label: 'Ajustes', icon: Settings },
+  { group: 'Ferramentas', to: '/pulso', label: 'Pulso Pro', icon: Sparkles },
+  { group: 'Conta', to: '/perfil', label: 'Perfil e ajustes', icon: Settings },
 ];
 
 export default function Layout() {
@@ -86,11 +87,14 @@ export default function Layout() {
         <Cardish count={count} examDate={user.examDate} />
 
         <nav className="side-nav" aria-label="Navegação principal">
-          {NAV.map(({ to, label, icon: Icon, end }) => (
-            <NavLink key={to} to={to} end={end} onClick={() => setDrawer(false)} className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-              <Icon size={18} />
-              <span>{label}</span>
-            </NavLink>
+          {NAV.map(({ group, to, label, icon: Icon, end }) => (
+            <React.Fragment key={to}>
+              {group && <div className="nav-group-label">{group}</div>}
+              <NavLink to={to} end={end} onClick={() => setDrawer(false)} className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+                <Icon size={18} />
+                <span>{label}</span>
+              </NavLink>
+            </React.Fragment>
           ))}
         </nav>
 
@@ -108,7 +112,7 @@ export default function Layout() {
           <small>{stats.mastered} de {stats.totalTopics} dominados</small>
         </div>
 
-        <NavLink to="/ajustes" className="side-user" onClick={() => setDrawer(false)}>
+        <NavLink to="/perfil" className="side-user" onClick={() => setDrawer(false)}>
           <span className="avatar">{initials(user.name)}</span>
           <span className="side-user-name">{user.name || 'Seu perfil'}</span>
         </NavLink>

@@ -1,32 +1,55 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Database, Download, GraduationCap, HardDrive, LogOut, Moon, RotateCcw, Save, Shield, Sun, Upload, UserRound,
+  CalendarDays, Database, Download, HardDrive, LogOut, Moon, RefreshCw, RotateCcw, Save,
+  Shield, Sun, Upload, UserRound,
 } from 'lucide-react';
 import { api, downloadBackup } from '../api.js';
 import { Button, Card, Field, InlineError, PageHead, Segmented } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
 import { WEEKDAYS } from '../utils.js';
 import { levelById, semesterLabel, semesterLevel } from '../trilha.js';
+import { generatePlan } from '../planner.js';
+import { rankingId } from '../ranking.js';
 
 export default function Ajustes() {
-  const { user, account, updateUser, setTheme, toast, refreshData, cancelPending, logout } = useStore();
+  const { user, curriculum, account, updateUser, setTheme, toast, refreshData, cancelPending, logout } = useStore();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: user.name, semester: user.semester || 1, examDate: user.examDate, dailyHours: user.dailyHours, studyDays: user.studyDays, goalQuestions: user.goalQuestions });
+  const [form, setForm] = useState({
+    name: user.name,
+    semester: user.semester || 1,
+    examDate: user.examDate,
+    startDate: user.startDate,
+    dailyHours: user.dailyHours,
+    studyDays: user.studyDays,
+    goalQuestions: user.goalQuestions,
+  });
   const [error, setError] = useState('');
   const [busy, setBusy] = useState('');
   const fileRef = useRef(null);
 
-  const save = () => {
+  const normalized = () => {
     const semester = Number(form.semester) || 1;
-    updateUser({
+    return {
       ...form,
       semester,
       level: semesterLevel(semester),
       name: form.name.trim() || 'Estudante',
+      startDate: form.startDate || user.startDate,
       studyDays: form.studyDays.length ? form.studyDays : [1, 2, 3, 4, 5],
-    });
-    toast('Ajustes salvos.');
+    };
+  };
+
+  const save = () => {
+    updateUser(normalized());
+    toast('Perfil e rotina salvos.');
+  };
+
+  const saveAndPlan = () => {
+    const next = normalized();
+    const plan = generatePlan({ ...user, ...next }, curriculum, 8);
+    updateUser({ ...next, plan });
+    toast('Rotina salva e plano de 8 semanas regerado.');
   };
 
   const toggleDay = (d) => setForm((f) => ({ ...f, studyDays: f.studyDays.includes(d) ? f.studyDays.filter((x) => x !== d) : [...f.studyDays, d].sort() }));
@@ -60,31 +83,50 @@ export default function Ajustes() {
 
   return (
     <>
-      <PageHead eyebrow="Preferências" title={<>Seu Pulso, do seu <em>jeito.</em></>} subtitle="Seu progresso fica salvo na sua conta. Exporte um backup antes de trocar de máquina ou fazer mudanças grandes." />
+      <PageHead
+        eyebrow="Conta e configurações"
+        title={<>Perfil e <em>ajustes.</em></>}
+        subtitle="Aqui você configura seu perfil, a rotina do planner e os ajustes do site. O planner só mostra o cronograma; a configuração fica concentrada nesta página."
+      />
 
       <InlineError>{error}</InlineError>
 
       <div className="settings-grid">
-        <Card>
-          <div className="section-head small"><div><span className="eyebrow">Perfil e rotina</span><h2>Configurações</h2></div><UserRound size={19} /></div>
-          <Field label="Nome"><input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></Field>
-          <div className="form-2">
+        <div className="settings-stack">
+          <Card>
+            <div className="section-head small"><div><span className="eyebrow">Perfil</span><h2>Sua conta</h2></div><UserRound size={19} /></div>
+            <Field label="Nome"><input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></Field>
             <Field label="Semestre da faculdade" hint={`Nível ${semesterLevel(form.semester)} · ${levelById(semesterLevel(form.semester)).name}`}>
               <select value={form.semester} onChange={(e) => setForm({ ...form, semester: Number(e.target.value) })}>
                 {Array.from({ length: 12 }, (_, i) => i + 1).map((s) => <option key={s} value={s}>{semesterLabel(s)}</option>)}
               </select>
             </Field>
-            <Field label="Data da prova"><input type="date" value={form.examDate} onChange={(e) => setForm({ ...form, examDate: e.target.value })} /></Field>
-          </div>
-          <div className="form-2">
-            <Field label="Meta de questões/dia"><input type="number" min={5} max={400} value={form.goalQuestions} onChange={(e) => setForm({ ...form, goalQuestions: Number(e.target.value) })} /></Field>
-            <Field label="Horas por dia"><select value={form.dailyHours} onChange={(e) => setForm({ ...form, dailyHours: Number(e.target.value) })}>{[1,2,3,4,5,6].map((h) => <option key={h} value={h}>{h}h</option>)}</select></Field>
-          </div>
-          <p className="muted-note"><GraduationCap size={14} /> Ao mudar o semestre, abra a Trilha e regenere o plano para aplicar o novo nível.</p>
-          <Field label="Dias de estudo"><div className="day-picker compact">{WEEKDAYS.map((d, i) => <button key={d} type="button" className={form.studyDays.includes(i) ? 'active' : ''} onClick={() => toggleDay(i)}>{d}</button>)}</div></Field>
-          <Button onClick={save} icon={Save}>Salvar ajustes</Button>
-          <div className="account-row"><span>Conta: <strong>{account}</strong></span><Button variant="ghost" size="sm" onClick={async () => { await logout(); navigate('/login'); }} icon={LogOut}>Sair</Button></div>
-        </Card>
+            <div className="profile-meta">
+              <div><span>Conta</span><strong>{account || 'local'}</strong></div>
+              <div><span>ID do ranking</span><strong>#{rankingId(account || 'davi')}</strong></div>
+            </div>
+            <Button onClick={save} icon={Save}>Salvar perfil</Button>
+            <div className="account-row"><span>Progresso salvo nesta conta</span><Button variant="ghost" size="sm" onClick={async () => { await logout(); navigate('/login'); }} icon={LogOut}>Sair</Button></div>
+          </Card>
+
+          <Card>
+            <div className="section-head small"><div><span className="eyebrow">Planner</span><h2>Rotina de estudo</h2></div><CalendarDays size={19} /></div>
+            <div className="form-2">
+              <Field label="Data da prova"><input type="date" value={form.examDate} onChange={(e) => setForm({ ...form, examDate: e.target.value })} /></Field>
+              <Field label="Início do plano"><input type="date" value={form.startDate} onChange={(e) => setForm({ ...form, startDate: e.target.value })} /></Field>
+            </div>
+            <div className="form-2">
+              <Field label="Meta de questões/dia"><input type="number" min={5} max={400} value={form.goalQuestions} onChange={(e) => setForm({ ...form, goalQuestions: Number(e.target.value) })} /></Field>
+              <Field label="Horas por dia"><select value={form.dailyHours} onChange={(e) => setForm({ ...form, dailyHours: Number(e.target.value) })}>{[1,2,3,4,5,6].map((h) => <option key={h} value={h}>{h}h</option>)}</select></Field>
+            </div>
+            <Field label="Dias de estudo"><div className="day-picker compact">{WEEKDAYS.map((d, i) => <button key={d} type="button" className={form.studyDays.includes(i) ? 'active' : ''} onClick={() => toggleDay(i)}>{d}</button>)}</div></Field>
+            <div className="plan-actions">
+              <Button onClick={save} icon={Save}>Salvar rotina</Button>
+              <Button variant="soft" onClick={saveAndPlan} icon={RefreshCw}>Salvar e regerar plano</Button>
+            </div>
+            <p className="muted-note">Ao regerar, as sessões futuras são recalculadas. Checklists, tentativas e histórico são mantidos.</p>
+          </Card>
+        </div>
 
         <div>
           <Card>

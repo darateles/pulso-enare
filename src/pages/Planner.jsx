@@ -1,12 +1,12 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, CalendarDays, CheckCircle2, Circle, Clock3, RefreshCw, Sparkles, Timer,
-  BookOpen, ListChecks, Repeat, Info, ChevronLeft, ChevronRight, GraduationCap,
+  CalendarDays, CheckCircle2, Circle, RefreshCw, Sparkles, Timer,
+  BookOpen, ListChecks, Repeat, Info, ChevronLeft, ChevronRight, GraduationCap, ArrowRight,
 } from 'lucide-react';
-import { Button, Card, Chip, Empty, Field, InlineError, Modal, PageHead, Progress } from '../components/ui.jsx';
+import { Button, Card, Chip, Empty, Modal, PageHead, Progress } from '../components/ui.jsx';
 import { useStore } from '../store.jsx';
-import { fmtDate, fmtLong, iso, minutesLabel, WEEKDAYS, WEEKDAYS_LONG, dueReviews, daysUntil } from '../utils.js';
+import { fmtDate, iso, minutesLabel, WEEKDAYS, dueReviews, daysUntil } from '../utils.js';
 import { generatePlan, planCounts } from '../planner.js';
 import { currentLevel } from '../trilha.js';
 import { SESSION_STAGE, STAGE_LABEL, STAGES, planStageCounts } from '../metodo.js';
@@ -15,10 +15,8 @@ const ICONS = { teoria: BookOpen, questoes: ListChecks, revisao: Repeat, simulad
 
 export default function Planner() {
   const { user, curriculum, updateUser, bumpActivity, toast } = useStore();
-  const [form, setForm] = useState({ dailyHours: user.dailyHours, studyDays: user.studyDays, startDate: user.startDate });
   const [confirm, setConfirm] = useState(false);
   const [offset, setOffset] = useState(0);
-  const [error, setError] = useState('');
   const counts = planCounts(user.plan);
   const stageCounts = useMemo(() => planStageCounts(user.plan), [user.plan]);
   const level = currentLevel(user);
@@ -29,20 +27,15 @@ export default function Planner() {
   const totalWeeks = Math.ceil(Math.max(1, daysUntil(user.examDate)) / 7);
 
   const build = () => {
-    if (!form.studyDays.length) {
-      setError('Escolha ao menos um dia de estudo.');
+    if (!user.studyDays?.length) {
+      toast('Defina ao menos um dia de estudo em Perfil e ajustes.', 'error');
       return;
     }
-    const plan = generatePlan({ ...user, ...form }, curriculum, 8);
-    updateUser({ ...form, plan, onboardingDone: true });
+    const plan = generatePlan(user, curriculum, 8);
+    updateUser({ plan, onboardingDone: true });
     setConfirm(false);
     setOffset(0);
-    setError('');
     toast(`Plano de 8 semanas gerado para o Nível ${level.id} · ${level.name}.`);
-  };
-
-  const toggleDay = (d) => {
-    setForm((f) => ({ ...f, studyDays: f.studyDays.includes(d) ? f.studyDays.filter((x) => x !== d) : [...f.studyDays, d].sort() }));
   };
 
   const toggleSession = (session) => {
@@ -75,23 +68,16 @@ export default function Planner() {
 
       <div className="planner-top">
         <Card className="plan-config">
-          <div className="section-head small"><div><span className="eyebrow">Configuração</span><h2>Capacidade semanal</h2></div></div>
-          <div className="config-grid">
-            <Field label="Horas por dia">
-              <select value={form.dailyHours} onChange={(e) => setForm({ ...form, dailyHours: Number(e.target.value) })}>
-                {[1, 2, 3, 4, 5, 6].map((h) => <option key={h} value={h}>{h} hora{h > 1 ? 's' : ''}</option>)}
-              </select>
-            </Field>
-            <Field label="Início">
-              <input type="date" value={form.startDate} onChange={(e) => setForm({ ...form, startDate: e.target.value })} />
-            </Field>
+          <div className="section-head small">
+            <div><span className="eyebrow">Sua rotina</span><h2>Capacidade semanal</h2></div>
+            <Link to="/perfil" className="text-link">Editar em Perfil e ajustes <ArrowRight size={14} /></Link>
           </div>
-          <Field label="Dias disponíveis">
-            <div className="day-picker compact">
-              {WEEKDAYS.map((d, i) => <button key={d} type="button" className={form.studyDays.includes(i) ? 'active' : ''} onClick={() => toggleDay(i)}>{d}</button>)}
-            </div>
-          </Field>
-          <InlineError>{error}</InlineError>
+          <div className="plan-routine">
+            <div><span>Horas/dia</span><strong>{user.dailyHours}h</strong></div>
+            <div><span>Início</span><strong>{fmtDate(user.startDate)}</strong></div>
+            <div><span>Dias</span><strong>{user.studyDays.length}/semana</strong></div>
+            <div><span>Meta</span><strong>{user.goalQuestions} questões</strong></div>
+          </div>
           <div className="plan-summary">
             <div><span>Nível da trilha</span><strong><Link to="/trilha" className="inline-icon"><GraduationCap size={13} /> {level.code} · {level.name}</Link></strong></div>
             <div><span>Fase sugerida</span><strong>{phase}</strong></div>

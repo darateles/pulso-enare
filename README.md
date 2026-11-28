@@ -7,13 +7,16 @@ Persistência em Turso (libSQL). Render Free pode levar alguns segundos no prime
 Plataforma com login individual para organizar a preparação ao ENARE com foco no que mais cai. Inclui:
 
 - **Trilha em níveis** (como um curso): 5 níveis ligados ao semestre da faculdade, 7 matérias e 90 temas. O onboarding pergunta o período e monta a trilha personalizada.
+- **Cada tema dividido em páginas próprias:** Conteúdo, Flashcards, Questões, Anotações e Revisão. A página de conteúdo não carrega o baralho, as questões e a revisão ao mesmo tempo.
 - **Mapa do edital** com 7 áreas ENAMED, 90 subtópicos agrupados por especialidade e orientação de estudo por tema.
 - **Guia de estudo + checklist de 7 etapas por subtópico**, com sequência, perguntas-guia, pegadinhas, fontes e baralho de flashcards do tema.
+- **Perfil e ajustes** concentra perfil, semestre, ID do ranking, rotina do planner, tema, backup e zona de risco. O planner apenas exibe o cronograma.
 - **Planner em ciclos** de 8 semanas: codificação de um tema, recuperação no próximo dia de estudo e revisões espaçadas nos intervalos seguintes, com simulados intercalados.
 - **Banco com 300 questões oficiais** do ENARE 2022, 2023 e 2024, com gabarito oficial, comentário e fonte.
 - **Importador** de provas por URL/PDF ou texto colado, com extração de gabarito e deduplicação.
 - **Geração de questões por IA** (opcional, via Venice).
 - **Simulado cronometrado**, caderno de erros, anotações, revisão espaçada e relatórios.
+- **Flashcards** com página própria na navegação principal.
 - Backup em JSON e persistência local ou Turso.
 
 ### Níveis da trilha
