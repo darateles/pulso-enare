@@ -24,9 +24,12 @@ if (import.meta.env.PROD && 'serviceWorker' in navigator) {
       });
     }).catch(() => {});
   });
+  // O primeiro install também dispara controllerchange. Só recarrega quando
+  // já havia um SW controlando a página, para não atrasar a primeira visita.
+  const hadController = Boolean(navigator.serviceWorker.controller);
   let reloaded = false;
   navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (reloaded) return;
+    if (!hadController || reloaded) return;
     reloaded = true;
     window.location.reload();
   });
