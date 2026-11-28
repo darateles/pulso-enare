@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   AlignCenter, AlignLeft, AlignRight, ArrowLeft, Bold, Check, Download, GitBranch,
@@ -25,14 +25,46 @@ export default function Blocks() {
   const [dragging, setDragging] = useState(null);
   const [modal, setModal] = useState(false);
   const [title, setTitle] = useState('');
-  const [text, setText] = useState('');
+  const [compact, setCompact] = useState(() => typeof window !== 'undefined' && window.innerWidth <= 700);
   const canvas = useRef(null);
+
+  useEffect(() => {
+    const onResize = () => setCompact(window.innerWidth <= 700);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  const compactWidth = () => Math.max(300, Math.min((typeof window !== 'undefined' ? window.innerWidth : 860) - 32, 560));
+
+  const reflow = (nodes) => {
+    if (!compact || !nodes.length) return nodes;
+    const width = compactWidth();
+    const nodeW = Math.min(180, width - 24);
+    return nodes.map((node, index) => ({
+      ...node,
+      x: Math.round((width - nodeW) / 2),
+      y: 16 + index * 92,
+      width: nodeW,
+      height: Math.max(64, nodeHeight(node)),
+    }));
+  };
+
+  useEffect(() => {
+    if (!compact) return;
+    setMap((current) => {
+      if (!current) return current;
+      const width = compactWidth();
+      const needs = current.nodes.some((node) => node.x + nodeWidth(node) > width || node.x < 0 || !node.width);
+      if (!needs) return current;
+      return { ...current, nodes: reflow(current.nodes) };
+    });
+  }, [compact]);
 
   const start = (template) => {
     setMap({
       id: crypto.randomUUID(),
       title: template?.title || 'Novo mapa',
-      nodes: (template?.nodes || []).map((node) => normalizeNode(structuredClone(node))),
+      nodes: reflow((template?.nodes || []).map((node) => normalizeNode(structuredClone(node)))),
       edges: structuredClone(template?.edges || []),
       createdAt: new Date().toISOString(),
     });
@@ -41,21 +73,24 @@ export default function Blocks() {
   };
 
   const openSaved = (m) => {
-    setMap({ ...structuredClone(m), nodes: (m.nodes || []).map((node) => normalizeNode(structuredClone(node))) });
+    setMap({ ...structuredClone(m), nodes: reflow((m.nodes || []).map((node) => normalizeNode(structuredClone(node)))) });
     setTitle(m.title);
     setSelected(null);
   };
 
   const addNode = () => {
     if (!map) return;
-    const width = canvas.current?.clientWidth || 860;
+    const width = compact ? compactWidth() : (canvas.current?.clientWidth || 860);
     const height = canvas.current?.clientHeight || 540;
+    const nodeW = compact ? Math.min(180, width - 24) : 160;
     const n = {
       ...NODE_DEFAULTS,
       id: crypto.randomUUID(),
       text: 'Novo bloco',
-      x: Math.max(10, Math.round(60 + Math.random() * Math.max(1, width - 240))),
-      y: Math.max(10, Math.round(60 + Math.random() * Math.max(1, height - 140))),
+      width: nodeW,
+      height: compact ? 64 : 60,
+      x: compact ? Math.round((width - nodeW) / 2) : Math.max(10, Math.round(60 + Math.random() * Math.max(1, width - 240))),
+      y: compact ? 16 + map.nodes.length * 92 : Math.max(10, Math.round(60 + Math.random() * Math.max(1, height - 140))),
     };
     setMap({ ...map, nodes: [...map.nodes, n] });
     setSelected(n.id);
@@ -161,6 +196,9 @@ export default function Blocks() {
   };
 
   const selectedNode = map?.nodes.find((node) => node.id === selected) || null;
+  const canvasHeight = compact && map
+    ? Math.max(540, ...map.nodes.map((node) => node.y + nodeHeight(node) + 24))
+    : 540;
 
   if (!map) {
     return (
@@ -193,6 +231,7 @@ export default function Blocks() {
         <div
           className="blocks-canvas"
           ref={canvas}
+          style={{ height: `${canvasHeight}px` }}
           onPointerDown={(e) => { if (e.target === e.currentTarget) setSelected(null); }}
           onPointerMove={onPointerMove}
           onPointerUp={() => setDragging(null)}

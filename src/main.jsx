@@ -5,6 +5,11 @@ import App from './App.jsx';
 import { StoreProvider } from './store.jsx';
 import './styles.css';
 
+// O app usa gestos próprios no mapa mental; evita o zoom de gesto no iOS.
+for (const eventName of ['gesturestart', 'gesturechange', 'gestureend']) {
+  document.addEventListener(eventName, (event) => event.preventDefault(), { passive: false });
+}
+
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').then((reg) => {
