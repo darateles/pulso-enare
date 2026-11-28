@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { CheckCircle2, Eye, Image as ImageIcon, Layers, Sparkles, ThumbsDown, ThumbsUp } from 'lucide-react';
+import { CheckCircle2, Eye, Image as ImageIcon, Layers, Sparkles, ThumbsDown, ThumbsUp, Users } from 'lucide-react';
 import { Button, Card, Chip, Empty, PageHead, Segmented } from '../../components/ui.jsx';
 import ClozeText from '../../components/ClozeText.jsx';
 import { buildClozeCards } from '../../cloze.js';
@@ -77,16 +77,21 @@ export default function Flashcards() {
 
   if (!user.flashcards.length) {
     return (
-      <><PageHead eyebrow="Flashcards" title="Flashcards" subtitle="Nenhum cartão ainda. Importe do Anki, envie imagens ou use os decks prontos." actions={<div className="page-actions"><Button variant="soft" onClick={clozeStarter} icon={Layers}>Deck interativo</Button><Button variant="soft" onClick={imageStarter} icon={ImageIcon}>Deck com imagens</Button><Link to="/pulso/import" className="btn btn-ghost">Importar</Link></div>} />
-        <Card><Empty icon={Layers} title="Nenhum cartão" text="Crie um deck inicial, use lacunas médicas ou importe seu material." action={<div className="empty-actions"><Button onClick={starter} icon={Sparkles}>Deck inicial</Button><Button variant="soft" onClick={clozeStarter} icon={Layers}>Deck interativo</Button><Button variant="soft" onClick={imageStarter} icon={ImageIcon}>Deck com imagens</Button></div>} /></Card>
+      <><PageHead eyebrow="Flashcards" title="Flashcards" subtitle="Nenhum cartão ainda. Importe do Anki, envie imagens ou use os decks prontos." actions={<div className="page-actions"><Button variant="soft" onClick={clozeStarter} icon={Layers}>Deck interativo</Button><Button variant="soft" onClick={imageStarter} icon={ImageIcon}>Deck com imagens</Button><Link to="/flashcards/publicos" className="btn btn-ghost">Públicos</Link><Link to="/pulso/import" className="btn btn-ghost">Importar</Link></div>} />
+        <Card><Empty icon={Layers} title="Nenhum cartão" text="Crie um deck inicial, use lacunas médicas ou importe seu material." action={<div className="empty-actions"><Button onClick={starter} icon={Sparkles}>Deck inicial</Button><Button variant="soft" onClick={clozeStarter} icon={Layers}>Deck interativo</Button><Button variant="soft" onClick={imageStarter} icon={ImageIcon}>Deck com imagens</Button><Link to="/flashcards/publicos" className="btn btn-ghost">Flashcards públicos</Link></div>} /></Card>
       </>
     );
   }
 
   return (
     <>
-      <PageHead eyebrow="Flashcards" title="Flashcards" subtitle="Repetição espaçada com autoavaliação. Cartões vencidos aparecem primeiro." actions={<div className="page-actions"><Button variant="soft" onClick={clozeStarter} icon={Layers}>Deck interativo</Button><Button variant="soft" onClick={imageStarter} icon={ImageIcon}>Deck com imagens</Button><Link to="/pulso/import" className="btn btn-ghost">Importar mais</Link></div>} />
-      <div className="radar-toolbar"><Segmented options={[{ value: 'todos', label: `Todos (${user.flashcards.length})` }, ...decks.map((d) => ({ value: d, label: d }))]} value={deck} onChange={(v) => { setDeck(v); setI(0); setRevealed(false); setSession(false); }} label="Deck" /><span className="filter-count">{due.length} vencidos</span></div>
+      <PageHead eyebrow="Flashcards" title="Flashcards" subtitle="Repetição espaçada com autoavaliação. Cartões vencidos aparecem primeiro." actions={<div className="page-actions"><Button variant="soft" onClick={clozeStarter} icon={Layers}>Deck interativo</Button><Button variant="soft" onClick={imageStarter} icon={ImageIcon}>Deck com imagens</Button><Link to="/flashcards/publicos" className="btn btn-ghost">Públicos</Link><Link to="/pulso/import" className="btn btn-ghost">Importar mais</Link></div>} />
+      <Card className="public-deck-callout">
+        <span className="public-deck-intro-icon"><Users size={19} /></span>
+        <div><strong>Flashcards públicos</strong><span>Importe decks compartilhados por outros alunos ou publique o seu.</span></div>
+        <Link to="/flashcards/publicos" className="btn btn-ghost btn-sm">Abrir biblioteca</Link>
+      </Card>
+      <div className="radar-toolbar"><Segmented options={[{ value: 'todos', label: `Todos (${user.flashcards.length})` }, ...decks.map((d) => ({ value: d, label: d }))]} value={deck} onChange={(v) => { setDeck(v); setI(0); setRevealed(false); setSession(false); }} label="Deck" /><span className="filter-count">{due.length} vencidos</span>{deck !== 'todos' && <Link to={`/flashcards/publicos?deck=${encodeURIComponent(deck)}`} className="text-link">Publicar este deck</Link>}</div>
       {!session ? (
         <Card className="flash-start"><Layers size={26} /><h2>{due.length} cartões para revisar</h2><p>Sessão curta. Revele apenas depois de tentar lembrar.</p><Button onClick={startSession} disabled={!due.length}>Iniciar revisão</Button></Card>
       ) : card ? (

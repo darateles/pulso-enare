@@ -45,6 +45,11 @@ export const api = {
   radarDelete: (id) => request(`/api/radar/${id}`, { method: 'DELETE' }),
   radarCheck: () => request('/api/radar/check', { method: 'POST', body: '{}' }),
   importAnki: (file) => request('/api/import/anki', { method: 'POST', body: JSON.stringify({ file }) }),
+  publicDecks: () => request('/api/flashcards/public'),
+  publicDeck: (id) => request(`/api/flashcards/public/${id}`),
+  publishPublicDeck: (payload) => request('/api/flashcards/public', { method: 'POST', body: JSON.stringify(payload) }),
+  deletePublicDeck: (id) => request(`/api/flashcards/public/${id}`, { method: 'DELETE' }),
+  importPublicDeck: (id) => request(`/api/flashcards/public/${id}/import`, { method: 'POST', body: '{}' }),
 };
 
 export async function downloadBackup() {

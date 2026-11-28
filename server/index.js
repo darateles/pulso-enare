@@ -19,6 +19,9 @@ import {
   createBattle, getBattle, getBattleByCode, joinBattle, addBot, startBattle, answerBattle,
   finishBattle, publicBattle, getArenas, joinArena, submitArena, getArena, arenaPublic,
 } from './social.js';
+import {
+  getPublicDeck, listPublicDecks, publishPublicDeck, removePublicDeck, takePublicDeck,
+} from './publicDecks.js';
 import { rankingDate, rankingEntry, rankingId, sortRanking } from '../src/ranking.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -183,6 +186,86 @@ app.get('/api/bootstrap', async (req, res, next) => {
       curriculum: { exam: curriculum.exam, areas: curriculum.areas },
       meta: { totalQuestions: count.length, account: req.pulsoUser },
     });
+  } catch (err) { next(err); }
+});
+
+/* ---------------- Flashcards públicos ---------------- */
+app.get('/api/flashcards/public', async (req, res, next) => {
+  try {
+    ok(res, { decks: await listPublicDecks(req.pulsoUser) });
+  } catch (err) { next(err); }
+});
+
+app.get('/api/flashcards/public/:id', async (req, res, next) => {
+  try {
+    ok(res, { deck: await getPublicDeck(req.pulsoUser, req.params.id) });
+  } catch (err) { next(err); }
+});
+
+app.post('/api/flashcards/public', async (req, res, next) => {
+  try {
+    const { deck: deckName, title, description } = req.body || {};
+    const user = await getUser(req.pulsoUser);
+    const cards = (user.flashcards || []).filter((card) => card.deck === deckName);
+    if (!cards.length) return res.status(400).json({ error: 'Escolha um deck seu com pelo menos um cartão.' });
+    const deck = await publishPublicDeck({
+      account: req.pulsoUser,
+      authorName: user.name,
+      title: title || deckName,
+      description,
+      cards,
+    });
+    ok(res, { deck });
+  } catch (err) { next(err); }
+});
+
+app.delete('/api/flashcards/public/:id', async (req, res, next) => {
+  try {
+    ok(res, await removePublicDeck(req.pulsoUser, req.params.id));
+  } catch (err) { next(err); }
+});
+
+app.post('/api/flashcards/public/:id/import', async (req, res, next) => {
+  try {
+    const user = await getUser(req.pulsoUser);
+    const alreadyImported = (user.flashcards || []).some((card) => card.sharedFrom?.id === req.params.id);
+    const deck = await takePublicDeck(req.pulsoUser, req.params.id, { countImport: !alreadyImported });
+    const createdAt = new Date().toISOString();
+    const cards = deck.cards.map((card, index) => ({
+      ...card,
+      id: `shared-${deck.id}-${index + 1}`,
+      deck: deck.title,
+      sharedFrom: {
+        id: deck.id,
+        title: deck.title,
+        author: deck.authorName,
+        authorId: deck.authorId,
+      },
+      createdAt,
+    }));
+    ok(res, { deck, cards });
+  } catch (err) { next(err); }
+});
+
+app.get('/api/flashcards/public/:id/export', async (req, res, next) => {
+  try {
+    const deck = await getPublicDeck(req.pulsoUser, req.params.id);
+    const safeName = String(deck.title || 'flashcards').replace(/[^\w\-]+/g, '-').toLowerCase();
+    res.setHeader('Content-Disposition', `attachment; filename="pulso-${safeName || 'flashcards'}.json"`);
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.send(JSON.stringify({
+      app: 'pulso',
+      version: 1,
+      type: 'flashcards',
+      exportedAt: new Date().toISOString(),
+      deck: {
+        title: deck.title,
+        description: deck.description,
+        authorName: deck.authorName,
+        authorId: deck.authorId,
+        cards: deck.cards,
+      },
+    }, null, 2));
   } catch (err) { next(err); }
 });
 
@@ -645,7 +728,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use((err, _req, res, _next) => {
   console.error(err);
   const message = err.name === 'TimeoutError' ? 'A fonte demorou demais para responder.' : (err.message || 'Erro interno.');
-  res.status(500).json({ error: message });
+  res.status(Number(err.status) || 500).json({ error: message });
 });
 
 await initStore();

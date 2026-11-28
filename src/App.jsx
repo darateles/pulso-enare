@@ -43,6 +43,7 @@ const Mentoria = lazy(() => import('./pages/pulso/Mentoria.jsx'));
 const Wrapped = lazy(() => import('./pages/pulso/Wrapped.jsx'));
 const ImportarPulso = lazy(() => import('./pages/pulso/Importar.jsx'));
 const Flashcards = lazy(() => import('./pages/pulso/Flashcards.jsx'));
+const FlashcardsPublicos = lazy(() => import('./pages/FlashcardsPublicos.jsx'));
 const Connect = lazy(() => import('./pages/pulso/Connect.jsx'));
 const Offline = lazy(() => import('./pages/pulso/Offline.jsx'));
 
@@ -113,6 +114,7 @@ export default function App() {
             <Route path="questoes/simulado" element={<Simulado />} />
             <Route path="questoes/importar" element={<Importar />} />
             <Route path="flashcards" element={<Flashcards />} />
+            <Route path="flashcards/publicos" element={<FlashcardsPublicos />} />
             <Route path="mapas" element={<Blocks />} />
             <Route path="desempenho" element={<Desempenho />} />
             <Route path="caderno-erros" element={<CadernoErros />} />
@@ -136,6 +138,7 @@ export default function App() {
             <Route path="pulso/wrapped" element={<Wrapped />} />
             <Route path="pulso/import" element={<ImportarPulso />} />
             <Route path="pulso/flashcards" element={<Flashcards />} />
+            <Route path="pulso/flashcards/publicos" element={<FlashcardsPublicos />} />
             <Route path="pulso/connect" element={<Connect />} />
             <Route path="pulso/offline" element={<Offline />} />
             <Route path="login" element={<Navigate to="/" replace />} />
