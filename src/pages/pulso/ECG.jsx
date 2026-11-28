@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Activity, ArrowRight, CheckCircle2, ChevronRight, HeartPulse, Lock, RotateCcw, XCircle } from 'lucide-react';
 import ecg from '../../../seed/ecg.json';
 import { Button, Card, Chip, Empty, PageHead, Progress, Segmented } from '../../components/ui.jsx';
+import { answerKey, answerText, isCorrectAnswer } from '../../quiz.js';
 import { useStore } from '../../store.jsx';
 import ECGStrip from '../../components/ECGStrip.jsx';
 
@@ -22,11 +23,13 @@ export default function ECG() {
   };
   const cases = useMemo(() => ecg.cases.filter((c) => c.level === level), [level]);
   const progress = (levelDone(1) + levelDone(2) + levelDone(3)) / ecg.cases.length * 100;
+  const correctKey = open ? answerKey(open.answer, open.options) : null;
+  const correctText = open ? answerText(open.answer, open.options) : '';
 
   const openCase = (c) => { setOpen(c); setSelected(null); setRevealed(false); };
   const answer = () => {
     setRevealed(true);
-    const correct = selected === open.answer;
+    const correct = isCorrectAnswer(open.answer, open.options, selected);
     if (correct) toast('Traçado correto.');
     updateUser((prev) => ({ ...prev, ecgProgress: { ...prev.ecgProgress, [open.id]: { correct, seen: true, at: new Date().toISOString() } } }));
   };
@@ -62,13 +65,13 @@ export default function ECG() {
               {open.options.map((o, i) => {
                 const k = 'ABCDE'[i];
                 let cls = selected === k ? 'selected' : '';
-                if (revealed && k === open.answer) cls = 'correct';
+                if (revealed && k === correctKey) cls = 'correct';
                 else if (revealed && k === selected) cls = 'wrong';
-                return <button key={o} className={`q-option ${cls}`} disabled={revealed} onClick={() => setSelected(k)}><span className="q-key">{k}</span><span>{o}</span>{revealed && k === open.answer && <CheckCircle2 size={18} />}{revealed && k === selected && k !== open.answer && <XCircle size={18} />}</button>;
+                return <button key={o} className={`q-option ${cls}`} disabled={revealed} onClick={() => setSelected(k)}><span className="q-key">{k}</span><span>{o}</span>{revealed && k === correctKey && <CheckCircle2 size={18} />}{revealed && k === selected && k !== correctKey && <XCircle size={18} />}</button>;
               })}
             </div>
             {!revealed ? <Button onClick={answer} disabled={!selected}>Confirmar diagnóstico</Button> : (
-              <div className="q-feedback neutral"><div className="q-feedback-head">{selected === open.answer ? 'Acertou' : `Correta: ${open.answer}`}</div><p>{open.explanation}</p><div className="q-feedback-actions"><Button size="sm" variant="ghost" onClick={() => { setRevealed(false); setSelected(null); }} icon={RotateCcw}>Refazer</Button><Button size="sm" onClick={() => { setOpen(null); setSelected(null); setRevealed(false); }}>Próximo caso</Button></div></div>
+              <div className="q-feedback neutral"><div className="q-feedback-head">{selected === correctKey ? 'Acertou' : `Correta: ${correctText}`}</div><p>{open.explanation}</p><div className="q-feedback-actions"><Button size="sm" variant="ghost" onClick={() => { setRevealed(false); setSelected(null); }} icon={RotateCcw}>Refazer</Button><Button size="sm" onClick={() => { setOpen(null); setSelected(null); setRevealed(false); }}>Próximo caso</Button></div></div>
             )}
             <p className="muted-note">Traçado esquemático para treino, não substitui ECG real.</p>
           </Card>
