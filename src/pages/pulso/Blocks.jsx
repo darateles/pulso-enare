@@ -1,9 +1,21 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Check, Copy, Download, GitBranch, GripVertical, Network, Plus, Save, Trash2, X } from 'lucide-react';
+import {
+  AlignCenter, AlignLeft, AlignRight, ArrowLeft, Bold, Check, Download, GitBranch,
+  GripVertical, Italic, Network, Plus, Save, Trash2, X,
+} from 'lucide-react';
 import blocks from '../../../seed/blocks.json';
 import { Button, Card, Chip, Empty, Field, Modal, PageHead } from '../../components/ui.jsx';
 import { useStore } from '../../store.jsx';
+
+const BG_COLORS = ['#ffffff', '#e3f2ec', '#dbeafe', '#f7e2df', '#f8ecd2', '#ede7f6', '#113e35', '#1d312c'];
+const FONT_COLORS = ['#1d312c', '#174d40', '#2c6b9e', '#a84328', '#a84368', '#8a601d', '#ffffff'];
+const NODE_DEFAULTS = { width: 160, height: 60, bg: '#ffffff', color: '#1d312c', fontSize: 12, bold: false, italic: false, align: 'left' };
+
+const nodeWidth = (node) => Number(node?.width) || NODE_DEFAULTS.width;
+const nodeHeight = (node) => Number(node?.height) || NODE_DEFAULTS.height;
+const normalizeNode = (node) => ({ ...NODE_DEFAULTS, ...node });
+const escapeXml = (value) => String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 export default function Blocks() {
   const { user, updateUser, toast } = useStore();
@@ -17,28 +29,50 @@ export default function Blocks() {
   const canvas = useRef(null);
 
   const start = (template) => {
-    setMap({ id: crypto.randomUUID(), title: template?.title || 'Novo mapa', nodes: structuredClone(template?.nodes || []), edges: structuredClone(template?.edges || []), createdAt: new Date().toISOString() });
-    setSelected(null); setTitle(template?.title || 'Novo mapa');
+    setMap({
+      id: crypto.randomUUID(),
+      title: template?.title || 'Novo mapa',
+      nodes: (template?.nodes || []).map((node) => normalizeNode(structuredClone(node))),
+      edges: structuredClone(template?.edges || []),
+      createdAt: new Date().toISOString(),
+    });
+    setSelected(null);
+    setTitle(template?.title || 'Novo mapa');
   };
 
-  const openSaved = (m) => { setMap(structuredClone(m)); setTitle(m.title); setSelected(null); };
+  const openSaved = (m) => {
+    setMap({ ...structuredClone(m), nodes: (m.nodes || []).map((node) => normalizeNode(structuredClone(node))) });
+    setTitle(m.title);
+    setSelected(null);
+  };
 
   const addNode = () => {
     if (!map) return;
     const width = canvas.current?.clientWidth || 860;
     const height = canvas.current?.clientHeight || 540;
     const n = {
+      ...NODE_DEFAULTS,
       id: crypto.randomUUID(),
       text: 'Novo bloco',
       x: Math.max(10, Math.round(60 + Math.random() * Math.max(1, width - 240))),
       y: Math.max(10, Math.round(60 + Math.random() * Math.max(1, height - 140))),
-      color: 'green',
     };
     setMap({ ...map, nodes: [...map.nodes, n] });
     setSelected(n.id);
   };
 
-  const updateNode = (id, patch) => setMap((m) => ({ ...m, nodes: m.nodes.map((n) => n.id === id ? { ...n, ...patch } : n) }));
+  const updateNode = (id, patch) => setMap((m) => ({
+    ...m,
+    nodes: m.nodes.map((n) => {
+      if (n.id !== id) return n;
+      const next = { ...n, ...patch };
+      const w = nodeWidth(next);
+      const h = nodeHeight(next);
+      const maxX = Math.max(0, (canvas.current?.clientWidth || 860) - w);
+      const maxY = Math.max(0, (canvas.current?.clientHeight || 540) - h);
+      return { ...next, x: Math.max(0, Math.min(maxX, Number(next.x) || 0)), y: Math.max(0, Math.min(maxY, Number(next.y) || 0)) };
+    }),
+  }));
 
   const connectTo = (targetId) => {
     if (!selected || selected === targetId) return;
@@ -71,8 +105,24 @@ export default function Blocks() {
 
   const exportSvg = () => {
     if (!map) return;
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="860" height="560"><rect width="100%" height="100%" fill="#f4f0e7"/>${map.edges.map((e) => { const a = map.nodes.find((n) => n.id === e.from), b = map.nodes.find((n) => n.id === e.to); return a && b ? `<line x1="${a.x + 70}" y1="${a.y + 25}" x2="${b.x + 70}" y2="${b.y + 25}" stroke="#c94a21" stroke-width="2"/>` : ''; }).join('')}${map.nodes.map((n) => `<g><rect x="${n.x}" y="${n.y}" width="160" height="60" rx="10" fill="#fffdf8" stroke="#c94a21"/><foreignObject x="${n.x + 8}" y="${n.y + 8}" width="144" height="44"><div xmlns="http://www.w3.org/1999/xhtml" style="font:600 12px sans-serif;color:#162521">${n.text.replace(/</g, '&lt;')}</div></foreignObject></g>`).join('')}</svg>`;
-    const blob = new Blob([svg], { type: 'image/svg+xml' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${title || 'mapa'}.svg`; a.click();
+    const edges = map.edges.map((edge) => {
+      const a = map.nodes.find((n) => n.id === edge.from);
+      const b = map.nodes.find((n) => n.id === edge.to);
+      if (!a || !b) return '';
+      return `<line x1="${a.x + nodeWidth(a) / 2}" y1="${a.y + nodeHeight(a) / 2}" x2="${b.x + nodeWidth(b) / 2}" y2="${b.y + nodeHeight(b) / 2}" stroke="#c94a21" stroke-width="2"/>`;
+    }).join('');
+    const nodes = map.nodes.map((node) => {
+      const width = nodeWidth(node);
+      const height = nodeHeight(node);
+      const font = `${node.italic ? 'italic ' : ''}${node.bold ? 700 : 600} ${node.fontSize || 12}px sans-serif`;
+      return `<g><rect x="${node.x}" y="${node.y}" width="${width}" height="${height}" rx="10" fill="${node.bg || '#ffffff'}" stroke="#c94a21"/><foreignObject x="${node.x + 8}" y="${node.y + 8}" width="${width - 16}" height="${height - 16}"><div xmlns="http://www.w3.org/1999/xhtml" style="font:${font};color:${node.color || '#1d312c'};text-align:${node.align || 'left'};padding:4px;box-sizing:border-box;width:100%;height:100%">${escapeXml(node.text)}</div></foreignObject></g>`;
+    }).join('');
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="860" height="560"><rect width="100%" height="100%" fill="#f4f0e7"/>${edges}${nodes}</svg>`;
+    const blob = new Blob([svg], { type: 'image/svg+xml' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `${title || 'mapa'}.svg`;
+    link.click();
   };
 
   const pos = (e) => {
@@ -101,13 +151,16 @@ export default function Blocks() {
   const onPointerMove = (e) => {
     if (!dragging || !canvas.current) return;
     const p = pos(e);
-    const maxX = Math.max(0, canvas.current.clientWidth - 160);
-    const maxY = Math.max(0, canvas.current.clientHeight - 60);
+    const node = map.nodes.find((n) => n.id === dragging.id);
+    const maxX = Math.max(0, canvas.current.clientWidth - nodeWidth(node));
+    const maxY = Math.max(0, canvas.current.clientHeight - nodeHeight(node));
     updateNode(dragging.id, {
       x: Math.max(0, Math.min(maxX, p.x - dragging.dx)),
       y: Math.max(0, Math.min(maxY, p.y - dragging.dy)),
     });
   };
+
+  const selectedNode = map?.nodes.find((node) => node.id === selected) || null;
 
   if (!map) {
     return (
@@ -149,16 +202,29 @@ export default function Blocks() {
             {map.edges.map((e, i) => {
               const a = map.nodes.find((n) => n.id === e.from); const b = map.nodes.find((n) => n.id === e.to);
               if (!a || !b) return null;
-              return <line key={i} x1={a.x + 70} y1={a.y + 30} x2={b.x + 70} y2={b.y + 30} />;
+              return <line key={i} x1={a.x + nodeWidth(a) / 2} y1={a.y + nodeHeight(a) / 2} x2={b.x + nodeWidth(b) / 2} y2={b.y + nodeHeight(b) / 2} />;
             })}
           </svg>
           {map.nodes.map((n) => (
-            <div key={n.id} className={`block-node ${selected === n.id ? 'selected' : ''} ${connect && selected === n.id ? 'connecting' : ''}`} style={{ left: n.x, top: n.y }} onPointerDown={(e) => onPointerDown(e, n)}>
+            <div
+              key={n.id}
+              className={`block-node ${selected === n.id ? 'selected' : ''} ${connect && selected === n.id ? 'connecting' : ''}`}
+              style={{ left: n.x, top: n.y, width: nodeWidth(n), height: nodeHeight(n), background: n.bg || NODE_DEFAULTS.bg }}
+              onPointerDown={(e) => onPointerDown(e, n)}
+            >
               <button type="button" className="block-drag" onPointerDown={(e) => { e.stopPropagation(); onPointerDown(e, n); }} aria-label="Mover bloco"><GripVertical size={12} /></button>
               <textarea
                 value={n.text}
-                style={connect ? { pointerEvents: 'none' } : undefined}
+                style={{
+                  ...(connect ? { pointerEvents: 'none' } : {}),
+                  color: n.color || NODE_DEFAULTS.color,
+                  fontSize: `${n.fontSize || NODE_DEFAULTS.fontSize}px`,
+                  fontWeight: n.bold ? 700 : 500,
+                  fontStyle: n.italic ? 'italic' : 'normal',
+                  textAlign: n.align || 'left',
+                }}
                 onPointerDown={(e) => e.stopPropagation()}
+                onFocus={() => setSelected(n.id)}
                 onChange={(e) => updateNode(n.id, { text: e.target.value })}
               />
               <button className="block-del" onPointerDown={(e) => e.stopPropagation()} onClick={(e) => { e.stopPropagation(); removeNode(n.id); }} aria-label="Excluir bloco"><X size={12} /></button>
@@ -166,7 +232,58 @@ export default function Blocks() {
           ))}
         </div>
       </div>
-      <p className="blocks-hint">{connect ? 'Clique na origem e depois no destino. Em telas pequenas, deslize o quadro para navegar.' : 'Arraste os blocos. Clique para editar. Use Conectar para ligar ideias. Em telas pequenas, deslize o quadro.'}</p>
+      <p className="blocks-hint">{connect ? 'Clique na origem e depois no destino. Em telas pequenas, deslize o quadro para navegar.' : 'Arraste pela alça superior. Clique no texto para editar. Selecione um bloco para ajustar tamanho, cor e fonte.'}</p>
+
+      {selectedNode && (
+        <Card className="blocks-inspector">
+          <div className="section-head small">
+            <div><span className="eyebrow">Bloco selecionado</span><h3>Formatação</h3></div>
+            <div className="inspector-actions">
+              <Button size="sm" variant="ghost" onClick={() => updateNode(selectedNode.id, { width: 160, height: 60, bg: '#ffffff', color: '#1d312c', fontSize: 12, bold: false, italic: false, align: 'left' })}>Restaurar</Button>
+              <Button size="sm" variant="ghost" onClick={() => removeNode(selectedNode.id)} icon={Trash2}>Excluir bloco</Button>
+            </div>
+          </div>
+          <div className="inspector-grid">
+            <div className="inspector-field">
+              <span>Largura</span>
+              <div className="inspector-range"><input type="range" min="120" max="360" value={nodeWidth(selectedNode)} onChange={(e) => updateNode(selectedNode.id, { width: Number(e.target.value) })} /><b>{nodeWidth(selectedNode)}px</b></div>
+            </div>
+            <div className="inspector-field">
+              <span>Altura</span>
+              <div className="inspector-range"><input type="range" min="50" max="240" value={nodeHeight(selectedNode)} onChange={(e) => updateNode(selectedNode.id, { height: Number(e.target.value) })} /><b>{nodeHeight(selectedNode)}px</b></div>
+            </div>
+            <div className="inspector-field">
+              <span>Tamanho da fonte</span>
+              <div className="inspector-range"><input type="range" min="10" max="24" value={selectedNode.fontSize || 12} onChange={(e) => updateNode(selectedNode.id, { fontSize: Number(e.target.value) })} /><b>{selectedNode.fontSize || 12}px</b></div>
+            </div>
+            <div className="inspector-field">
+              <span>Cor do bloco</span>
+              <div className="color-swatches">
+                {BG_COLORS.map((color) => <button key={color} type="button" className={`color-swatch ${(selectedNode.bg || NODE_DEFAULTS.bg) === color ? 'active' : ''}`} style={{ background: color }} onClick={() => updateNode(selectedNode.id, { bg: color })} aria-label={`Fundo ${color}`} />)}
+                <input className="color-input" type="color" value={selectedNode.bg || NODE_DEFAULTS.bg} onChange={(e) => updateNode(selectedNode.id, { bg: e.target.value })} aria-label="Cor personalizada do bloco" />
+              </div>
+            </div>
+            <div className="inspector-field">
+              <span>Cor da fonte</span>
+              <div className="color-swatches">
+                {FONT_COLORS.map((color) => <button key={color} type="button" className={`color-swatch ${(selectedNode.color || NODE_DEFAULTS.color) === color ? 'active' : ''}`} style={{ background: color }} onClick={() => updateNode(selectedNode.id, { color })} aria-label={`Fonte ${color}`} />)}
+                <input className="color-input" type="color" value={selectedNode.color || NODE_DEFAULTS.color} onChange={(e) => updateNode(selectedNode.id, { color: e.target.value })} aria-label="Cor personalizada da fonte" />
+              </div>
+            </div>
+            <div className="inspector-field">
+              <span>Estilo e alinhamento</span>
+              <div className="font-actions">
+                <button type="button" className={selectedNode.bold ? 'active' : ''} onClick={() => updateNode(selectedNode.id, { bold: !selectedNode.bold })} aria-label="Negrito"><Bold size={14} /></button>
+                <button type="button" className={selectedNode.italic ? 'active' : ''} onClick={() => updateNode(selectedNode.id, { italic: !selectedNode.italic })} aria-label="Itálico"><Italic size={14} /></button>
+                {[['left', AlignLeft], ['center', AlignCenter], ['right', AlignRight]].map(([align, Icon]) => (
+                  <button key={align} type="button" className={(selectedNode.align || 'left') === align ? 'active' : ''} onClick={() => updateNode(selectedNode.id, { align })} aria-label={`Alinhar ${align}`}><Icon size={14} /></button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Card>
+      )}
+
       <Modal open={modal} onClose={() => setModal(false)} title="Salvar mapa">
         <Field label="Título do mapa"><input value={title} onChange={(e) => setTitle(e.target.value)} /></Field>
         <div className="modal-actions"><Button variant="ghost" onClick={() => setModal(false)}>Cancelar</Button><Button onClick={saveMap} icon={Check}>Salvar</Button></div>
